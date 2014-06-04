@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604B193FB48F00EB9920 /* AppDelegate.swift */; };
+		B5AA604E193FB48F00EB9920 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5AA604D193FB48F00EB9920 /* GameScene.sks */; };
+		B5AA6050193FB48F00EB9920 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604F193FB48F00EB9920 /* GameScene.swift */; };
+		B5AA6052193FB48F00EB9920 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6051193FB48F00EB9920 /* GameViewController.swift */; };
+		B5AA6055193FB48F00EB9920 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5AA6053193FB48F00EB9920 /* Main.storyboard */; };
+		B5AA6057193FB48F00EB9920 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AA6056193FB48F00EB9920 /* Images.xcassets */; };
+		B5AA6063193FB48F00EB9920 /* SpacequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6062193FB48F00EB9920 /* SpacequestTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B5AA605D193FB48F00EB9920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5AA603E193FB48E00EB9920 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5AA6045193FB48E00EB9920;
+			remoteInfo = Spacequest;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B5AA6046193FB48F00EB9920 /* Spacequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spacequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5AA604A193FB48F00EB9920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5AA604B193FB48F00EB9920 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5AA604D193FB48F00EB9920 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		B5AA604F193FB48F00EB9920 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		B5AA6051193FB48F00EB9920 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		B5AA6054193FB48F00EB9920 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B5AA6056193FB48F00EB9920 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B5AA605C193FB48F00EB9920 /* SpacequestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpacequestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5AA6061193FB48F00EB9920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5AA6062193FB48F00EB9920 /* SpacequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacequestTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B5AA6043193FB48E00EB9920 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5AA6059193FB48F00EB9920 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B5AA603D193FB48E00EB9920 = {
+			isa = PBXGroup;
+			children = (
+				B5AA6048193FB48F00EB9920 /* Spacequest */,
+				B5AA605F193FB48F00EB9920 /* SpacequestTests */,
+				B5AA6047193FB48F00EB9920 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B5AA6047193FB48F00EB9920 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B5AA6046193FB48F00EB9920 /* Spacequest.app */,
+				B5AA605C193FB48F00EB9920 /* SpacequestTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B5AA6048193FB48F00EB9920 /* Spacequest */ = {
+			isa = PBXGroup;
+			children = (
+				B5AA604B193FB48F00EB9920 /* AppDelegate.swift */,
+				B5AA604D193FB48F00EB9920 /* GameScene.sks */,
+				B5AA604F193FB48F00EB9920 /* GameScene.swift */,
+				B5AA6051193FB48F00EB9920 /* GameViewController.swift */,
+				B5AA6053193FB48F00EB9920 /* Main.storyboard */,
+				B5AA6056193FB48F00EB9920 /* Images.xcassets */,
+				B5AA6049193FB48F00EB9920 /* Supporting Files */,
+			);
+			path = Spacequest;
+			sourceTree = "<group>";
+		};
+		B5AA6049193FB48F00EB9920 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B5AA604A193FB48F00EB9920 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B5AA605F193FB48F00EB9920 /* SpacequestTests */ = {
+			isa = PBXGroup;
+			children = (
+				B5AA6062193FB48F00EB9920 /* SpacequestTests.swift */,
+				B5AA6060193FB48F00EB9920 /* Supporting Files */,
+			);
+			path = SpacequestTests;
+			sourceTree = "<group>";
+		};
+		B5AA6060193FB48F00EB9920 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B5AA6061193FB48F00EB9920 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B5AA6045193FB48E00EB9920 /* Spacequest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5AA6066193FB48F00EB9920 /* Build configuration list for PBXNativeTarget "Spacequest" */;
+			buildPhases = (
+				B5AA6042193FB48E00EB9920 /* Sources */,
+				B5AA6043193FB48E00EB9920 /* Frameworks */,
+				B5AA6044193FB48E00EB9920 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Spacequest;
+			productName = Spacequest;
+			productReference = B5AA6046193FB48F00EB9920 /* Spacequest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B5AA605B193FB48F00EB9920 /* SpacequestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5AA6069193FB48F00EB9920 /* Build configuration list for PBXNativeTarget "SpacequestTests" */;
+			buildPhases = (
+				B5AA6058193FB48F00EB9920 /* Sources */,
+				B5AA6059193FB48F00EB9920 /* Frameworks */,
+				B5AA605A193FB48F00EB9920 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5AA605E193FB48F00EB9920 /* PBXTargetDependency */,
+			);
+			name = SpacequestTests;
+			productName = SpacequestTests;
+			productReference = B5AA605C193FB48F00EB9920 /* SpacequestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B5AA603E193FB48E00EB9920 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Rafal Sroka";
+				TargetAttributes = {
+					B5AA6045193FB48E00EB9920 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					B5AA605B193FB48F00EB9920 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = B5AA6045193FB48E00EB9920;
+					};
+				};
+			};
+			buildConfigurationList = B5AA6041193FB48E00EB9920 /* Build configuration list for PBXProject "Spacequest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B5AA603D193FB48E00EB9920;
+			productRefGroup = B5AA6047193FB48F00EB9920 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B5AA6045193FB48E00EB9920 /* Spacequest */,
+				B5AA605B193FB48F00EB9920 /* SpacequestTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B5AA6044193FB48E00EB9920 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5AA6057193FB48F00EB9920 /* Images.xcassets in Resources */,
+				B5AA604E193FB48F00EB9920 /* GameScene.sks in Resources */,
+				B5AA6055193FB48F00EB9920 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5AA605A193FB48F00EB9920 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B5AA6042193FB48E00EB9920 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5AA6050193FB48F00EB9920 /* GameScene.swift in Sources */,
+				B5AA6052193FB48F00EB9920 /* GameViewController.swift in Sources */,
+				B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5AA6058193FB48F00EB9920 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5AA6063193FB48F00EB9920 /* SpacequestTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B5AA605E193FB48F00EB9920 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5AA6045193FB48E00EB9920 /* Spacequest */;
+			targetProxy = B5AA605D193FB48F00EB9920 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B5AA6053193FB48F00EB9920 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5AA6054193FB48F00EB9920 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B5AA6064193FB48F00EB9920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B5AA6065193FB48F00EB9920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B5AA6067193FB48F00EB9920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = Spacequest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B5AA6068193FB48F00EB9920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = Spacequest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B5AA606A193FB48F00EB9920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Spacequest.app/Spacequest";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SpacequestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		B5AA606B193FB48F00EB9920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Spacequest.app/Spacequest";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SpacequestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B5AA6041193FB48E00EB9920 /* Build configuration list for PBXProject "Spacequest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5AA6064193FB48F00EB9920 /* Debug */,
+				B5AA6065193FB48F00EB9920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5AA6066193FB48F00EB9920 /* Build configuration list for PBXNativeTarget "Spacequest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5AA6067193FB48F00EB9920 /* Debug */,
+				B5AA6068193FB48F00EB9920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B5AA6069193FB48F00EB9920 /* Build configuration list for PBXNativeTarget "SpacequestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5AA606A193FB48F00EB9920 /* Debug */,
+				B5AA606B193FB48F00EB9920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B5AA603E193FB48E00EB9920 /* Project object */;
+}
