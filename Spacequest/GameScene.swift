@@ -1,45 +1,90 @@
-//
-//  GameScene.swift
-//  Spacequest
-//
-//  Created by Rafal Sroka on 04/06/14.
-//  Copyright (c) 2014 Rafal Sroka. All rights reserved.
-//
-
 import SpriteKit
 
+
 class GameScene: SKScene {
-    override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 65;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+    
+    var background: BackgroundNode
+    var playerSpaceship: PlayerSpaceship
+    
+    init(size: CGSize) {
         
-        self.addChild(myLabel)
+        background = BackgroundNode(size: size)
+        playerSpaceship = PlayerSpaceship()
+        
+        super.init(size: size)
+        
+        background.configureInScene(self)
+        configurePlayerSpaceship()
+        configurePhysics()
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        /* Called when a touch begins */
-        
-        for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
-        }
+    override func didMoveToView(view: SKView) {
+    
     }
+
    
     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+
+    
+    
+    }
+    
+    
+    func launchEnemySpaceship() {
+    
+        var enemySpaceship = EnemySpaceship(health: 20)
+        
+        // Determine where to spawn the enemy along the Y axis.
+        let minY = enemySpaceship.size.height/2 + 220.0
+        let maxY = frame.size.height - enemySpaceship.size.height/2 - 50.0
+        let rangeY = maxY - minY
+        let randomY: UInt32 = arc4random_uniform(UInt32(rangeY)) + UInt32(minY)
+            //+ (Float)
+        
+        // Set position of the enemy to be slightly off-screen along the right edge,
+        // and along a random position along the Y axis.
+        enemySpaceship.position = CGPoint(x: frame.size.width + enemySpaceship.size.width/2, y: CGFloat(randomY))
+        
+        self.addChild(enemySpaceship)
+        
+        // Determine speed of the enemy.
+        let enemyFlightDuration = 5.0
+        let moveAction = SKAction.moveToX(-enemySpaceship.size.width/2, duration: enemyFlightDuration)
+        
+        enemySpaceship.runAction(SKAction.sequence([moveAction, SKAction.removeFromParent()]))
     }
 }
+
+
+/**
+ Configuration.
+*/
+extension GameScene {
+    
+    func configurePhysics() {
+        
+        physicsWorld.gravity = CGVectorMake(0,0);
+        physicsWorld.contactDelegate = self;
+    }
+
+    
+    func configurePlayerSpaceship() {
+        
+        playerSpaceship.position = CGPoint(x: playerSpaceship.size.width/2 + 30.0, y: self.frame.size.height/2 + 40.0);
+        
+        playerSpaceship.health = 100
+        self.addChild(playerSpaceship)
+    }
+}
+
+
+/**
+ Collisions.
+*/
+extension GameScene : SKPhysicsContactDelegate {
+    
+    func didBeginContact(contact: SKPhysicsContact!) {
+        
+    }
+}
+
