@@ -39,7 +39,6 @@ class GameScene: SKScene {
         let maxY = frame.size.height - enemySpaceship.size.height/2 - 50.0
         let rangeY = maxY - minY
         let randomY: UInt32 = arc4random_uniform(UInt32(rangeY)) + UInt32(minY)
-            //+ (Float)
         
         // Set position of the enemy to be slightly off-screen along the right edge,
         // and along a random position along the Y axis.

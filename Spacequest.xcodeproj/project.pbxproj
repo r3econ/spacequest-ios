@@ -23,6 +23,8 @@
 		B511888B1942586A00FF8D13 /* enemy_spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = B51188871942586A00FF8D13 /* enemy_spaceship.png */; };
 		B5175C4E1943A430005AECAA /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5175C4D1943A430005AECAA /* Joystick.swift */; };
 		B5175C4F1943A430005AECAA /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5175C4D1943A430005AECAA /* Joystick.swift */; };
+		B5175C511943B51F005AECAA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5175C501943B51F005AECAA /* Button.swift */; };
+		B5175C521943B51F005AECAA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5175C501943B51F005AECAA /* Button.swift */; };
 		B53E78DB194105BA000CB230 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E78DA194105BA000CB230 /* Constants.swift */; };
 		B53E78DC194105BA000CB230 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E78DA194105BA000CB230 /* Constants.swift */; };
 		B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604B193FB48F00EB9920 /* AppDelegate.swift */; };
@@ -62,6 +64,7 @@
 		B51188861942586A00FF8D13 /* enemy_spaceship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy_spaceship@2x.png"; sourceTree = "<group>"; };
 		B51188871942586A00FF8D13 /* enemy_spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_spaceship.png; sourceTree = "<group>"; };
 		B5175C4D1943A430005AECAA /* Joystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
+		B5175C501943B51F005AECAA /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		B53E78DA194105BA000CB230 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B5AA6046193FB48F00EB9920 /* Spacequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spacequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AA604A193FB48F00EB9920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -134,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				B5175C4D1943A430005AECAA /* Joystick.swift */,
+				B5175C501943B51F005AECAA /* Button.swift */,
 			);
 			name = Joystick;
 			sourceTree = "<group>";
@@ -374,6 +378,7 @@
 				B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */,
 				B5AA607A193FC34300EB9920 /* HealthProtocol.swift in Sources */,
 				B5175C4E1943A430005AECAA /* Joystick.swift in Sources */,
+				B5175C511943B51F005AECAA /* Button.swift in Sources */,
 				B5AA607E193FCA8D00EB9920 /* Missile.swift in Sources */,
 				B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */,
 				B5AA6072193FB9F200EB9920 /* Spaceship.swift in Sources */,
@@ -390,6 +395,7 @@
 				B5AA607B193FC34300EB9920 /* HealthProtocol.swift in Sources */,
 				B53E78DC194105BA000CB230 /* Constants.swift in Sources */,
 				B5AA6077193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */,
+				B5175C521943B51F005AECAA /* Button.swift in Sources */,
 				B5AA6063193FB48F00EB9920 /* SpacequestTests.swift in Sources */,
 				B511887619422EF200FF8D13 /* EnemySpaceship.swift in Sources */,
 				B5AA607F193FCA8D00EB9920 /* Missile.swift in Sources */,

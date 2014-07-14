@@ -59,6 +59,17 @@ extension Joystick {
     override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!) {
         
         reset()
+        
+        UIView.animateWithDuration(0.2,
+            animations:
+            {
+                // your code.
+            },
+            completion:
+            {
+                (completed: Bool) in
+                // your code.
+            })
     }
     
     
@@ -72,7 +83,9 @@ extension Joystick {
         
         var location = touch.locationInNode(self)
         
-        if pow(location.x - position.x, 2) + pow(location.y - position.y, 2) > joystickRadius {
+        var distance = pow(location.x - position.x, 2) + pow(location.y - position.y, 2)
+        
+        if distance > joystickRadius {
             
             var angle = atan2f(CFloat(location.y - position.y), CFloat(location.x - position.x))
             

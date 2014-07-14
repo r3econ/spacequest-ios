@@ -38,11 +38,11 @@ class EnemySpaceship: Spaceship {
         
         scene.addChild(missile)
         
-        var velocity = 600.0
+        var velocity: CGFloat = 600.0
         var moveDuration = scene.size.width / velocity
         var missileEndPosition = CGPoint(x: -0.1 * scene.size.width, y: position.y)
         
-        var moveAction = SKAction.moveTo(missileEndPosition, duration: moveDuration)
+        var moveAction = SKAction.moveTo(missileEndPosition, duration: NSTimeInterval(moveDuration))
         var removeAction = SKAction.removeFromParent()
         
         missile.runAction(SKAction.sequence([moveAction, removeAction]))
