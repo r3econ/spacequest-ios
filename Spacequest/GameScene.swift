@@ -12,7 +12,7 @@ class GameScene: SKScene {
     {
         background = BackgroundNode(size: size)
         playerSpaceship = PlayerSpaceship()
-        joystick = Joystick(maximumRadius: 100.0,
+        joystick = Joystick(maximumRadius: 40.0,
             stickImageNamed: "joystick_stick",
             baseImageNamed: "joystick_base");
         

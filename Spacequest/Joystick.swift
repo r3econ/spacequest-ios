@@ -71,20 +71,31 @@ extension Joystick
     func updateWithTouch(touch: UITouch)
     {
         var location = touch.locationInNode(self)
-        var distance = pow(CDouble(location.x - position.x), 2) + pow(CDouble(location.y - position.y), 2)
+        println("location: \(location)")
         
-        if distance > CDouble(joystickRadius)
+        var distance = CGFloat(sqrt(pow(CDouble(location.x), 2) + pow(CDouble(location.y), 2)))
+        
+        
+        if distance < joystickRadius
         {
-            var angle = atan2f(CFloat(location.y - position.y), CFloat(location.x - position.x))
+            //var angle = atan2f(CFloat(location.y - position.y), CFloat(location.x - position.x))
             
-            location.x = position.x + joystickRadius * CGFloat(cosf(angle))
-            location.y = position.y + joystickRadius * CGFloat(sinf(angle))
+            //location.x = joystickRadius * CGFloat(cosf(angle))
+            //location.y = joystickRadius * CGFloat(sinf(angle))
+            
+            
+            //x = (location.x) / joystickRadius
+            //y = (location.y) / joystickRadius
+        }
+        else
+        {
+            var normalizedTranslationVector = CGPoint(x: location.x / distance, y: location.y / distance)
+            
+            location = CGPoint(x: normalizedTranslationVector.x * joystickRadius,
+                y: normalizedTranslationVector.y * joystickRadius)
         }
         
         stickNode.position = location
-        
-        x = (location.x - position.x) / joystickRadius
-        y = (location.y - position.y) / joystickRadius
     }
     
     
