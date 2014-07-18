@@ -6,21 +6,32 @@ class GameScene: SKScene
     var background: BackgroundNode
     var playerSpaceship: PlayerSpaceship
     var joystick: Joystick
-    //var fireButton: Button
+    var fireButton: Button
     
     init(size: CGSize)
     {
+        // Background.
         background = BackgroundNode(size: size)
+        
+        // Spaceships.
         playerSpaceship = PlayerSpaceship()
-        joystick = Joystick(maximumRadius: 40.0,
+        
+        // Joystick.
+        joystick = Joystick(
+            maximumRadius: 40.0,
             stickImageNamed: "joystick_stick",
             baseImageNamed: "joystick_base");
+        
+        fireButton = Button(
+            normalImageNamed: "fire_button_normal",
+            selectedImageNamed: "fire_button_selected")
         
         super.init(size: size)
         
         //background.configureInScene(self)
         configurePlayerSpaceship()
         configureJoystick()
+        configureButtons()
         configurePhysics()
     }
     
@@ -75,7 +86,9 @@ extension GameScene
     
     func configurePlayerSpaceship()
     {
-        playerSpaceship.position = CGPoint(x: playerSpaceship.size.width/2 + 30.0, y: self.frame.size.height/2 + 40.0);
+        playerSpaceship.position = CGPoint(
+            x: playerSpaceship.size.width/2 + 30.0,
+            y: CGRectGetHeight(self.frame)/2 + 40.0);
         
         playerSpaceship.health = 100
         self.addChild(playerSpaceship)
@@ -84,9 +97,11 @@ extension GameScene
     
     func configureJoystick()
     {
-        joystick.position = CGPoint(x: CGRectGetMaxX(joystick.frame) + 10.0, y: CGRectGetHeight(joystick.frame)/2 + 10.0);
+        joystick.position = CGPoint(
+            x: CGRectGetMaxX(joystick.frame) + 10.0,
+            y: CGRectGetHeight(joystick.frame)/2 + 10.0);
         
-        joystick.updateBlock =
+        joystick.updateHandler =
         {
             (var translation: CGPoint) -> () in
             
@@ -94,6 +109,23 @@ extension GameScene
         }
         
         self.addChild(joystick)
+    }
+    
+    
+    func configureButtons()
+    {
+        fireButton.position = CGPoint(
+            x: CGRectGetWidth(self.frame) - CGRectGetWidth(fireButton.frame) - 10.0,
+            y: CGRectGetHeight(fireButton.frame)/2 + 40.0);
+        
+        fireButton.touchUpInsideEventHandler =
+        {
+            () -> () in
+            
+            println("fire")
+        }
+        
+        self.addChild(fireButton)
     }
     
     

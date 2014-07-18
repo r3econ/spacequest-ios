@@ -1,16 +1,58 @@
 import SpriteKit
 
 
+typealias TouchUpInsideEventHandler = () -> ()
+typealias TouchDownEventHandler = () -> ()
+typealias ContinousTouchDownEventHandler = () -> ()
+
+
 class Button: SKSpriteNode
 {
-    var touchUpInsideAction: ()?
-    var touchDownAction: ()?
-    var touchUpAction: ()?
-    var textureNormal: SKTexture?
+    var touchUpInsideEventHandler: TouchUpInsideEventHandler?
+    var continousTouchDownEventHandler: ContinousTouchDownEventHandler?
+    var touchDownEventHandler: TouchDownEventHandler?
+    var textureNormal: SKTexture
     var textureSelected: SKTexture?
     var textureDisabled: SKTexture?
     var titleLabelNode: SKLabelNode?
     
+    
+    // Initializers.
+    init(textureNormal: SKTexture!, textureSelected: SKTexture!, textureDisabled: SKTexture!)
+    {
+        self.textureNormal = textureNormal
+        self.textureSelected = textureSelected
+        self.textureDisabled = textureDisabled
+        
+        super.init(texture: textureNormal, color: nil, size: textureNormal.size())
+        
+        isEnabled = true
+        isSelected = false
+        self.userInteractionEnabled = true
+    }
+    
+    
+    convenience init(textureNormal: SKTexture, textureSelected: SKTexture!)
+    {
+        self.init(textureNormal:textureNormal, textureSelected:textureSelected, textureDisabled:nil)
+    }
+    
+    
+    convenience init(normalImageNamed: String, selectedImageNamed: String!, disabledImageNamed: String!)
+    {
+        var textureNormal = SKTexture(imageNamed: normalImageNamed)
+        var textureSelected = SKTexture(imageNamed: selectedImageNamed)
+        
+        self.init(textureNormal:textureNormal, textureSelected:textureSelected, textureDisabled:nil)
+    }
+    
+    
+    convenience init(normalImageNamed: String, selectedImageNamed: String!)
+    {
+        self.init(normalImageNamed: normalImageNamed, selectedImageNamed: selectedImageNamed, disabledImageNamed: nil)
+    }
+    
+    // Computed properties.
     var title: String?
     {
     set
@@ -52,6 +94,7 @@ class Button: SKSpriteNode
     
     set
     {
+        self.isEnabled = newValue
         self.texture = newValue ? textureNormal : textureDisabled
     }
     
@@ -59,40 +102,6 @@ class Button: SKSpriteNode
     {
         return self.isEnabled
     }
-    }
-
-    
-    init(textureNormal: SKTexture!, textureSelected: SKTexture!, textureDisabled: SKTexture!)
-    {
-        self.textureNormal = textureNormal
-        self.textureSelected = textureSelected
-        self.textureDisabled = textureDisabled
-        
-        super.init(texture: textureNormal, color: nil, size: CGSizeZero)
-        
-        isEnabled = true
-        isSelected = false
-    }
-    
-    
-    convenience init(textureNormal: SKTexture!, textureSelected: SKTexture!)
-    {
-        self.init(textureNormal:textureNormal, textureSelected:textureSelected, textureDisabled:nil)
-    }
-    
-    
-    convenience init(normalImageNamed: String!, selectedImageNamed: String!, disabledImageNamed: String!)
-    {
-        var textureNormal = SKTexture(imageNamed: normalImageNamed)
-        var textureSelected = SKTexture(imageNamed: selectedImageNamed)
-        
-        self.init(textureNormal:textureNormal, textureSelected:textureSelected, textureDisabled:nil)
-    }
-    
-    
-    convenience init(normalImageNamed: String!, selectedImageNamed: String!)
-    {
-        self.init(normalImageNamed: normalImageNamed, selectedImageNamed: selectedImageNamed, disabledImageNamed: nil)
     }
 }
 
@@ -104,11 +113,11 @@ extension Button
 {
     override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!)
     {
-        if isEnabled
+        if self.isEnabled
         {
-            if touchDownAction
+            if touchDownEventHandler
             {
-                touchDownAction!
+                touchDownEventHandler!()
             }
             
             self.isSelected = true
@@ -137,15 +146,10 @@ extension Button
             
             if CGRectContainsPoint(frame, location)
             {
-                if touchUpInsideAction
+                if touchUpInsideEventHandler
                 {
-                    touchUpInsideAction!
+                    touchUpInsideEventHandler!()
                 }
-            }
-            
-            if touchUpAction
-            {
-                touchUpAction!
             }
             
             self.isSelected = false

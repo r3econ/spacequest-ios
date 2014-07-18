@@ -7,7 +7,7 @@ let kDefaultJoystickUpdateTimeInterval: NSTimeInterval = 1/40.0
 
 class Joystick: SKSpriteNode
 {
-    var updateBlock: JoystickTranslationUpdateHandler?
+    var updateHandler: JoystickTranslationUpdateHandler?
     var joystickRadius: CGFloat
     var stickNode: SKSpriteNode
     var isTouchedDown: Bool
@@ -111,9 +111,9 @@ extension Joystick
     
     func handleJoystickTranslationUpdate()
     {
-        if isTouchedDown && updateBlock
+        if isTouchedDown && updateHandler
         {
-            updateBlock!(currentJoystickTranslation)
+            updateHandler!(currentJoystickTranslation)
         }
     }
     
