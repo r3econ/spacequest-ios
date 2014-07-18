@@ -3,10 +3,12 @@ import SpriteKit
 
 class Missile: SKSpriteNode {
    
-    init() {
+    init()
+    {
+        super.init(texture: SKTexture(imageNamed:ImageName.Missile.toRaw()),
+            color: nil,
+            size: CGSizeZero)
         
-        super.init(imageNamed:ImageName.Missile.toRaw())
-
         name = "Missile"
         physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
         physicsBody.usesPreciseCollisionDetection = true

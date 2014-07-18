@@ -1,8 +1,8 @@
 import SpriteKit
 
 
-class Button: SKSpriteNode {
-   
+class Button: SKSpriteNode
+{
     var touchUpInsideAction: ()?
     var touchDownAction: ()?
     var touchUpAction: ()?
@@ -11,12 +11,12 @@ class Button: SKSpriteNode {
     var textureDisabled: SKTexture?
     var titleLabelNode: SKLabelNode?
     
-    var title: String? {
-    
-    set {
-        
-        if !titleLabelNode {
-            
+    var title: String?
+    {
+    set
+    {
+        if !titleLabelNode
+        {
             titleLabelNode = SKLabelNode()
             titleLabelNode!.horizontalAlignmentMode = .Center
             titleLabelNode!.verticalAlignmentMode = .Center
@@ -27,59 +27,62 @@ class Button: SKSpriteNode {
         titleLabelNode!.text = title
     }
     
-    get {
+    get
+    {
         return self.title
     }
     }
 
-    var isSelected: Bool {
+    var isSelected: Bool
+    {
     
-    set {
-        
+    set
+    {
         self.texture = newValue ? textureSelected : textureNormal
     }
     
-    get {
-        
+    get
+    {
         return self.isSelected
     }
     }
     
-    var isEnabled: Bool {
+    var isEnabled: Bool
+    {
     
-    set {
-        
+    set
+    {
         self.texture = newValue ? textureNormal : textureDisabled
     }
     
-    get {
-        
+    get
+    {
         return self.isEnabled
     }
     }
 
     
-    init(textureNormal: SKTexture!, textureSelected: SKTexture!, textureDisabled: SKTexture!) {
-        
+    init(textureNormal: SKTexture!, textureSelected: SKTexture!, textureDisabled: SKTexture!)
+    {
         self.textureNormal = textureNormal
         self.textureSelected = textureSelected
         self.textureDisabled = textureDisabled
         
-        super.init(texture: textureNormal)
+        super.init(texture: textureNormal, color: nil, size: CGSizeZero)
         
         isEnabled = true
         isSelected = false
     }
     
     
-    convenience init(textureNormal: SKTexture!, textureSelected: SKTexture!) {
-        
+    convenience init(textureNormal: SKTexture!, textureSelected: SKTexture!)
+    {
         self.init(textureNormal:textureNormal, textureSelected:textureSelected, textureDisabled:nil)
     }
     
     
-    convenience init(normalImageNamed: String!, selectedImageNamed: String!, disabledImageNamed: String!) {
-        
+    convenience init(normalImageNamed: String!, selectedImageNamed: String!, disabledImageNamed: String!)
+    {
         var textureNormal = SKTexture(imageNamed: normalImageNamed)
         var textureSelected = SKTexture(imageNamed: selectedImageNamed)
         
@@ -87,8 +90,8 @@ class Button: SKSpriteNode {
     }
     
     
-    convenience init(normalImageNamed: String!, selectedImageNamed: String!) {
-        
+    convenience init(normalImageNamed: String!, selectedImageNamed: String!)
+    {
         self.init(normalImageNamed: normalImageNamed, selectedImageNamed: selectedImageNamed, disabledImageNamed: nil)
     }
 }
@@ -97,15 +100,14 @@ class Button: SKSpriteNode {
 /**
 Touches
 */
-extension Button {
-    
-    
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
-        
-        if isEnabled {
-
-            if touchDownAction {
-                
+extension Button
+{
+    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!)
+    {
+        if isEnabled
+        {
+            if touchDownAction
+            {
                 touchDownAction!
             }
             
@@ -114,10 +116,10 @@ extension Button {
     }
     
     
-    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!) {
-        
-        if isEnabled {
-
+    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!)
+    {
+        if isEnabled
+        {
             var touch : AnyObject! = touches.anyObject()
             var location = touch.locationInNode(self)
             
@@ -126,23 +128,23 @@ extension Button {
     }
     
     
-    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!) {
-        
-        if isEnabled {
-
+    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)
+    {
+        if isEnabled
+        {
             var touch : AnyObject! = touches.anyObject()
             var location = touch.locationInNode(self)
             
-            if CGRectContainsPoint(frame, location) {
-            
-                if touchUpInsideAction {
-                    
+            if CGRectContainsPoint(frame, location)
+            {
+                if touchUpInsideAction
+                {
                     touchUpInsideAction!
                 }
             }
             
-            if touchUpAction {
-                
+            if touchUpAction
+            {
                 touchUpAction!
             }
             
@@ -151,10 +153,10 @@ extension Button {
     }
     
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
-        
-        if isEnabled {
-
+    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!)
+    {
+        if isEnabled
+        {
             self.isSelected = false
         }
     }

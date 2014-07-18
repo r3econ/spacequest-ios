@@ -1,8 +1,8 @@
 import SpriteKit
 
 
-class Joystick: SKNode {
-    
+class Joystick: SKNode
+{
     var x: CGFloat = 0.0
     var y: CGFloat = 0.0
     
@@ -11,13 +11,13 @@ class Joystick: SKNode {
     var stickNode: SKSpriteNode
     var baseNode: SKSpriteNode?
     
-    init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String?) {
-        
+    init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String?)
+    {
         joystickRadius = maximumRadius
         stickNode = SKSpriteNode(imageNamed: stickImageNamed);
         
-        if baseImageNamed {
-            
+        if baseImageNamed
+        {
             baseNode = SKSpriteNode(imageNamed: baseImageNamed!)
         }
         
@@ -31,33 +31,32 @@ class Joystick: SKNode {
 /**
  Touches
 */
-extension Joystick {
-    
-    
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
-        
+extension Joystick
+{
+    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!)
+    {
         var touch : AnyObject! = touches.anyObject()
         
-        if touch {
-            
+        if touch
+        {
             updateWithTouch(touch as UITouch)
         }
     }
     
     
-    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!) {
-        
+    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!)
+    {
         var touch : AnyObject! = touches.anyObject()
         
-        if touch {
-            
+        if touch
+        {
             updateWithTouch(touch as UITouch)
         }
     }
     
     
-    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!) {
-        
+    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)
+    {
         reset()
         
         UIView.animateWithDuration(0.2,
@@ -73,20 +72,20 @@ extension Joystick {
     }
     
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
-        
+    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!)
+    {
         reset()
     }
     
     
-    func updateWithTouch(touch: UITouch) {
-        
+    func updateWithTouch(touch: UITouch)
+    {
         var location = touch.locationInNode(self)
         
-        var distance = pow(location.x - position.x, 2) + pow(location.y - position.y, 2)
+        var distance = pow(CDouble(location.x - position.x), 2) + pow(CDouble(location.y - position.y), 2)
         
-        if distance > joystickRadius {
-            
+        if distance > CDouble(joystickRadius)
+        {
             var angle = atan2f(CFloat(location.y - position.y), CFloat(location.x - position.x))
             
             location.x = position.x + joystickRadius * CGFloat(cosf(angle))
@@ -100,8 +99,8 @@ extension Joystick {
     }
     
     
-    func reset() {
-        
+    func reset()
+    {
         stickNode.position = CGPointZero
         
         x = 0.0
