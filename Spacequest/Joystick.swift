@@ -73,22 +73,21 @@ extension Joystick
         var location = touch.locationInNode(self)
         let distance = CGFloat(sqrt(pow(CDouble(location.x), 2) + pow(CDouble(location.y), 2)))
         
-        if distance < joystickRadius
-        {
-            if updateBlock
-            {
-                let angle = atan2f(CFloat(location.y), CFloat(location.x))
-                let translation = CGPoint(x: joystickRadius * CGFloat(cosf(angle)), y: joystickRadius * CGFloat(sinf(angle)))
-                
-                updateBlock!(translation)
-            }
-        }
-        else
+        if distance >= joystickRadius
         {
             var normalizedTranslationVector = CGPoint(x: location.x / distance, y: location.y / distance)
             
             location = CGPoint(x: normalizedTranslationVector.x * joystickRadius,
                 y: normalizedTranslationVector.y * joystickRadius)
+        }
+        
+        if updateBlock
+        {
+            let translation = CGPoint(
+                x: location.x/joystickRadius,
+                y: location.y/joystickRadius)
+            
+            updateBlock!(translation)
         }
         
         stickNode.position = location

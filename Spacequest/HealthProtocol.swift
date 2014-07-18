@@ -1,6 +1,6 @@
 import UIKit
 
-protocol HealthProtocol {
-   
+protocol HealthProtocol
+{
     var health: Int { get set }
 }

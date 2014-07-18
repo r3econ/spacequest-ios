@@ -1,8 +1,8 @@
 import SpriteKit
 
 
-class GameScene: SKScene {
-    
+class GameScene: SKScene
+{
     var background: BackgroundNode
     var playerSpaceship: PlayerSpaceship
     var joystick: Joystick
@@ -24,15 +24,15 @@ class GameScene: SKScene {
         configurePhysics()
     }
     
-    override func didMoveToView(view: SKView) {
+    override func didMoveToView(view: SKView)
+    {
     
     }
 
    
-    override func update(currentTime: CFTimeInterval) {
+    override func update(currentTime: CFTimeInterval)
+    {
 
-    
-    
     }
     
     
@@ -64,17 +64,17 @@ class GameScene: SKScene {
 /**
  Configuration.
 */
-extension GameScene {
-    
-    func configurePhysics() {
-        
+extension GameScene
+{
+    func configurePhysics()
+    {
         physicsWorld.gravity = CGVectorMake(0,0);
         physicsWorld.contactDelegate = self;
     }
 
     
-    func configurePlayerSpaceship() {
-        
+    func configurePlayerSpaceship()
+    {
         playerSpaceship.position = CGPoint(x: playerSpaceship.size.width/2 + 30.0, y: self.frame.size.height/2 + 40.0);
         
         playerSpaceship.health = 100
@@ -82,11 +82,27 @@ extension GameScene {
     }
     
     
-    func configureJoystick() {
-        
+    func configureJoystick()
+    {
         joystick.position = CGPoint(x: CGRectGetMaxX(joystick.frame) + 10.0, y: CGRectGetHeight(joystick.frame)/2 + 10.0);
         
+        joystick.updateBlock =
+        {
+            (var translation: CGPoint) -> () in
+            
+            self.updatePlayerSpaceshipPositionWithJoystickTranslation(translation);
+        }
+        
         self.addChild(joystick)
+    }
+    
+    
+    func updatePlayerSpaceshipPositionWithJoystickTranslation(var translation: CGPoint)
+    {
+        let translationConstant: CGFloat = 10.0
+        
+        playerSpaceship.position.x += translationConstant * translation.x
+        playerSpaceship.position.y += translationConstant * translation.y
     }
 }
 
@@ -94,9 +110,10 @@ extension GameScene {
 /**
  Collisions.
 */
-extension GameScene : SKPhysicsContactDelegate {
-    
-    func didBeginContact(contact: SKPhysicsContact!) {
+extension GameScene : SKPhysicsContactDelegate
+{
+    func didBeginContact(contact: SKPhysicsContact!)
+    {
         
     }
 }
