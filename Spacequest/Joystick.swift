@@ -2,6 +2,7 @@ import SpriteKit
 
 
 typealias JoystickTranslationUpdateHandler = (CGPoint) -> ()
+let kDefaultJoystickUpdateTimeInterval: NSTimeInterval = 1/40.0
 
 
 class Joystick: SKSpriteNode
@@ -9,16 +10,31 @@ class Joystick: SKSpriteNode
     var updateBlock: JoystickTranslationUpdateHandler?
     var joystickRadius: CGFloat
     var stickNode: SKSpriteNode
+    var isTouchedDown: Bool
+    var currentJoystickTranslation: CGPoint
+    var updateTimer: NSTimer?
     
     init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String)
     {
+        currentJoystickTranslation = CGPointZero
+        isTouchedDown = false
         joystickRadius = maximumRadius
         stickNode = SKSpriteNode(imageNamed: stickImageNamed);
+        
         let baseTexture  = SKTexture(imageNamed: baseImageNamed)
         
         super.init(texture: baseTexture,
             color: UIColor.whiteColor(),
             size: baseTexture.size())
+        
+        // Create a timer that will call method that will notify about
+        // Joystick movements.
+        updateTimer = NSTimer.scheduledTimerWithTimeInterval(
+            kDefaultJoystickUpdateTimeInterval,
+            target: self,
+            selector: Selector("handleJoystickTranslationUpdate"),
+            userInfo: nil,
+            repeats: true)
         
         // Configure and add stick node.
         stickNode.position = CGPointZero
@@ -40,6 +56,7 @@ extension Joystick
         
         if touch
         {
+            isTouchedDown = true
             updateWithTouch(touch as UITouch)
         }
     }
@@ -51,6 +68,7 @@ extension Joystick
         
         if touch
         {
+            isTouchedDown = true
             updateWithTouch(touch as UITouch)
         }
     }
@@ -58,12 +76,14 @@ extension Joystick
     
     override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)
     {
+        isTouchedDown = false
         reset()
     }
     
     
     override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!)
     {
+        isTouchedDown = false
         reset()
     }
     
@@ -81,16 +101,20 @@ extension Joystick
                 y: normalizedTranslationVector.y * joystickRadius)
         }
         
-        if updateBlock
-        {
-            let translation = CGPoint(
-                x: location.x/joystickRadius,
-                y: location.y/joystickRadius)
-            
-            updateBlock!(translation)
-        }
+        // Calculate joystick translation.
+        currentJoystickTranslation.x = location.x/joystickRadius
+        currentJoystickTranslation.y = location.y/joystickRadius
         
         stickNode.position = location
+    }
+    
+    
+    func handleJoystickTranslationUpdate()
+    {
+        if isTouchedDown && updateBlock
+        {
+            updateBlock!(currentJoystickTranslation)
+        }
     }
     
     
