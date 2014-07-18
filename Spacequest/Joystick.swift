@@ -1,12 +1,12 @@
 import SpriteKit
 
 
+typealias JoystickTranslationUpdateHandler = (CGPoint) -> ()
+
+
 class Joystick: SKSpriteNode
 {
-    var x: CGFloat = 0.0
-    var y: CGFloat = 0.0
-    
-    
+    var updateBlock: JoystickTranslationUpdateHandler?
     var joystickRadius: CGFloat
     var stickNode: SKSpriteNode
     
@@ -71,21 +71,17 @@ extension Joystick
     func updateWithTouch(touch: UITouch)
     {
         var location = touch.locationInNode(self)
-        println("location: \(location)")
-        
-        var distance = CGFloat(sqrt(pow(CDouble(location.x), 2) + pow(CDouble(location.y), 2)))
-        
+        let distance = CGFloat(sqrt(pow(CDouble(location.x), 2) + pow(CDouble(location.y), 2)))
         
         if distance < joystickRadius
         {
-            //var angle = atan2f(CFloat(location.y - position.y), CFloat(location.x - position.x))
-            
-            //location.x = joystickRadius * CGFloat(cosf(angle))
-            //location.y = joystickRadius * CGFloat(sinf(angle))
-            
-            
-            //x = (location.x) / joystickRadius
-            //y = (location.y) / joystickRadius
+            if updateBlock
+            {
+                let angle = atan2f(CFloat(location.y), CFloat(location.x))
+                let translation = CGPoint(x: joystickRadius * CGFloat(cosf(angle)), y: joystickRadius * CGFloat(sinf(angle)))
+                
+                updateBlock!(translation)
+            }
         }
         else
         {
@@ -102,8 +98,5 @@ extension Joystick
     func reset()
     {
         stickNode.position = CGPointZero
-        
-        x = 0.0
-        y = 0.0
     }
 }
