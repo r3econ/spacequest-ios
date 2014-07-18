@@ -5,16 +5,22 @@ class GameScene: SKScene {
     
     var background: BackgroundNode
     var playerSpaceship: PlayerSpaceship
+    var joystick: Joystick
+    //var fireButton: Button
     
-    init(size: CGSize) {
-        
+    init(size: CGSize)
+    {
         background = BackgroundNode(size: size)
         playerSpaceship = PlayerSpaceship()
+        joystick = Joystick(maximumRadius: 100.0,
+            stickImageNamed: "joystick_stick",
+            baseImageNamed: "joystick_base");
         
         super.init(size: size)
         
         //background.configureInScene(self)
         configurePlayerSpaceship()
+        configureJoystick()
         configurePhysics()
     }
     
@@ -73,6 +79,14 @@ extension GameScene {
         
         playerSpaceship.health = 100
         self.addChild(playerSpaceship)
+    }
+    
+    
+    func configureJoystick() {
+        
+        joystick.position = CGPoint(x: CGRectGetMaxX(joystick.frame) + 10.0, y: CGRectGetHeight(joystick.frame)/2 + 10.0);
+        
+        self.addChild(joystick)
     }
 }
 

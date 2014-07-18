@@ -1,7 +1,7 @@
 import SpriteKit
 
 
-class Joystick: SKNode
+class Joystick: SKSpriteNode
 {
     var x: CGFloat = 0.0
     var y: CGFloat = 0.0
@@ -9,19 +9,20 @@ class Joystick: SKNode
     
     var joystickRadius: CGFloat
     var stickNode: SKSpriteNode
-    var baseNode: SKSpriteNode?
     
-    init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String?)
+    init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String)
     {
         joystickRadius = maximumRadius
         stickNode = SKSpriteNode(imageNamed: stickImageNamed);
+        let baseTexture  = SKTexture(imageNamed: baseImageNamed)
         
-        if baseImageNamed
-        {
-            baseNode = SKSpriteNode(imageNamed: baseImageNamed!)
-        }
+        super.init(texture: baseTexture,
+            color: UIColor.whiteColor(),
+            size: baseTexture.size())
         
-        super.init()
+        // Configure and add stick node.
+        stickNode.position = CGPointZero
+        self.addChild(stickNode);
         
         userInteractionEnabled = true
     }
@@ -58,17 +59,6 @@ extension Joystick
     override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)
     {
         reset()
-        
-        UIView.animateWithDuration(0.2,
-            animations:
-            {
-                // your code.
-            },
-            completion:
-            {
-                (completed: Bool) in
-                // your code.
-            })
     }
     
     
@@ -81,7 +71,6 @@ extension Joystick
     func updateWithTouch(touch: UITouch)
     {
         var location = touch.locationInNode(self)
-        
         var distance = pow(CDouble(location.x - position.x), 2) + pow(CDouble(location.y - position.y), 2)
         
         if distance > CDouble(joystickRadius)
