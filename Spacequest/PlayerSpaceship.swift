@@ -2,16 +2,18 @@ import CoreGraphics
 import SpriteKit
 
 
-class PlayerSpaceship: Spaceship {
-   
-    
-    init() {
-        super.init(texture: SKTexture(imageNamed: ImageName.PlayerSpaceship.toRaw()), color: nil, size: CGSize(width: 115, height: 90))
+class PlayerSpaceship: Spaceship
+{
+    init()
+    {
+        super.init(texture: SKTexture(imageNamed: ImageName.PlayerSpaceship.toRaw()),
+            color: nil,
+            size: CGSize(width: 64, height: 50))
     }
     
     
-    func launchMissile() {
-        
+    func launchMissile()
+    {
         var missile = Missile.playerMissile()
         
         missile.position = CGPoint(x: position.x + 80.0, y: position.y)
