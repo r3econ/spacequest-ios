@@ -43,6 +43,7 @@
 		B5AA607B193FC34300EB9920 /* HealthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6079193FC34300EB9920 /* HealthProtocol.swift */; };
 		B5AA607E193FCA8D00EB9920 /* Missile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA607D193FCA8D00EB9920 /* Missile.swift */; };
 		B5AA607F193FCA8D00EB9920 /* Missile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA607D193FCA8D00EB9920 /* Missile.swift */; };
+		B5CD264D1979438A00A98A95 /* LifeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD264C1979438A00A98A95 /* LifeIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		B5AA6075193FBA1400EB9920 /* PlayerSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSpaceship.swift; sourceTree = "<group>"; };
 		B5AA6079193FC34300EB9920 /* HealthProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthProtocol.swift; sourceTree = "<group>"; };
 		B5AA607D193FCA8D00EB9920 /* Missile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Missile.swift; sourceTree = "<group>"; };
+		B5CD264C1979438A00A98A95 /* LifeIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,8 @@
 		B5175C4B1943A405005AECAA /* HUD */ = {
 			isa = PBXGroup;
 			children = (
+				B5CD264B1979435900A98A95 /* Life Indicator */,
+				B5CD264A1979435000A98A95 /* Button */,
 				B5175C4C1943A410005AECAA /* Joystick */,
 			);
 			name = HUD;
@@ -137,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				B5175C4D1943A430005AECAA /* Joystick.swift */,
-				B5175C501943B51F005AECAA /* Button.swift */,
 			);
 			name = Joystick;
 			sourceTree = "<group>";
@@ -258,6 +261,22 @@
 				B5AA607D193FCA8D00EB9920 /* Missile.swift */,
 			);
 			name = Missiles;
+			sourceTree = "<group>";
+		};
+		B5CD264A1979435000A98A95 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				B5175C501943B51F005AECAA /* Button.swift */,
+			);
+			name = Button;
+			sourceTree = "<group>";
+		};
+		B5CD264B1979435900A98A95 /* Life Indicator */ = {
+			isa = PBXGroup;
+			children = (
+				B5CD264C1979438A00A98A95 /* LifeIndicator.swift */,
+			);
+			name = "Life Indicator";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +400,7 @@
 				B5175C511943B51F005AECAA /* Button.swift in Sources */,
 				B5AA607E193FCA8D00EB9920 /* Missile.swift in Sources */,
 				B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */,
+				B5CD264D1979438A00A98A95 /* LifeIndicator.swift in Sources */,
 				B5AA6072193FB9F200EB9920 /* Spaceship.swift in Sources */,
 				B53E78DB194105BA000CB230 /* Constants.swift in Sources */,
 			);
