@@ -15,6 +15,8 @@ class Button: SKSpriteNode
     var textureSelected: SKTexture?
     var textureDisabled: SKTexture?
     var titleLabelNode: SKLabelNode?
+    var isSelected: Bool
+    var isEnabled: Bool
     
     
     // Initializers.
@@ -23,11 +25,12 @@ class Button: SKSpriteNode
         self.textureNormal = textureNormal
         self.textureSelected = textureSelected
         self.textureDisabled = textureDisabled
+        self.isEnabled = true
+        self.isSelected = false
         
         super.init(texture: textureNormal, color: nil, size: textureNormal.size())
         
-        isEnabled = true
-        isSelected = false
+
         self.userInteractionEnabled = true
     }
     
@@ -74,12 +77,13 @@ class Button: SKSpriteNode
         return self.title
     }
     }
-
-    var isSelected: Bool
+    
+    var selected: Bool
     {
     
     set
     {
+        self.isSelected = newValue
         self.texture = newValue ? textureSelected : textureNormal
     }
     
@@ -89,7 +93,8 @@ class Button: SKSpriteNode
     }
     }
     
-    var isEnabled: Bool
+    var enabled: Bool
+    
     {
     
     set
@@ -102,6 +107,7 @@ class Button: SKSpriteNode
     {
         return self.isEnabled
     }
+    
     }
 }
 
