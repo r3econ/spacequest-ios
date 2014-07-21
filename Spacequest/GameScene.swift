@@ -7,7 +7,8 @@ class GameScene: SKScene
     var playerSpaceship: PlayerSpaceship
     var joystick: Joystick
     var fireButton: Button
-    
+    var launchEnemyTimer: NSTimer?
+
     init(size: CGSize)
     {
         // Background.
@@ -37,13 +38,57 @@ class GameScene: SKScene
     
     override func didMoveToView(view: SKView)
     {
-    
+        startLaunchingEnemySpaceships()
     }
 
    
     override func update(currentTime: CFTimeInterval)
     {
 
+    }
+}
+
+
+/**
+Managing enemies.
+*/
+extension GameScene
+{
+    func startLaunchingEnemySpaceships()
+    {
+        scheduleEnemySpaceshipLaunch()
+    }
+    
+    
+    func stopLaunchingEnemySpaceships()
+    {
+        if launchEnemyTimer
+        {
+            launchEnemyTimer!.invalidate()
+        }
+    }
+    
+    
+    func scheduleEnemySpaceshipLaunch()
+    {
+        let randomTimeInterval = NSTimeInterval(arc4random_uniform(3) + 1)
+
+        launchEnemyTimer = NSTimer.scheduledTimerWithTimeInterval(
+            randomTimeInterval,
+            target: self,
+            selector: Selector("launchEnemyTimerFireMethod"),
+            userInfo: nil,
+            repeats: false)
+    }
+    
+    
+    func launchEnemyTimerFireMethod()
+    {
+        // Launch an enemy.
+        launchEnemySpaceship()
+        
+        // Schedule launch of the next one.
+        scheduleEnemySpaceshipLaunch()
     }
     
     
@@ -60,11 +105,12 @@ class GameScene: SKScene
         // Set position of the enemy to be slightly off-screen along the right edge,
         // and along a random position along the Y axis.
         enemySpaceship.position = CGPoint(x: frame.size.width + enemySpaceship.size.width/2, y: CGFloat(randomY))
-        
+        enemySpaceship.zPosition = self.playerSpaceship.zPosition
+            
         self.addChild(enemySpaceship)
         
         // Determine speed of the enemy.
-        let enemyFlightDuration = 5.0
+        let enemyFlightDuration = 4.0
         let moveAction = SKAction.moveToX(-enemySpaceship.size.width/2, duration: enemyFlightDuration)
         
         enemySpaceship.runAction(SKAction.sequence([moveAction, SKAction.removeFromParent()]))
@@ -144,13 +190,98 @@ extension GameScene
 
 
 /**
- Collisions.
+ Collision Detection.
 */
 extension GameScene : SKPhysicsContactDelegate
 {
     func didBeginContact(contact: SKPhysicsContact!)
     {
+        var collisionType: CollisionType? = collisionTypeWithContact(contact)
         
+        if !collisionType
+        {
+            return
+        }
+        
+        switch collisionType! {
+            
+        case .PlayerMissileEnemySpaceship:
+            
+            // Get the enemy node.
+            let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship ?
+                contact.bodyA.node as EnemySpaceship :
+                contact.bodyB.node as EnemySpaceship
+
+            // Handle collision.
+            handlePlayerMissileEnemySpaceshipsCollision(enemy)
+            
+        case .PlayerSpaceshipEnemySpaceship:
+            
+            // Get the enemy node.
+            let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship ?
+                contact.bodyA.node as EnemySpaceship :
+                contact.bodyB.node as EnemySpaceship
+            
+            // Handle collision.
+            handlePlayerEnemySpaceshipsCollision(enemy)
+            
+        case .EnemyMissilePlayerSpaceship:
+            
+            // Get the enemy node.
+            let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship ?
+                contact.bodyA.node as EnemySpaceship :
+                contact.bodyB.node as EnemySpaceship
+            
+            // Handle collision.
+            handlePlayerSpaceshipEnemyMissileCollision(enemy)
+        }
+    }
+    
+    
+    func collisionTypeWithContact(contact: SKPhysicsContact!) -> (collisionType: CollisionType?)
+    {
+        let categoryBitmaskBodyA = CategoryBitmask.fromRaw(contact.bodyA.categoryBitMask)
+        let categoryBitmaskBodyB = CategoryBitmask.fromRaw(contact.bodyB.categoryBitMask)
+
+        // Player missile - enemy spaceship.
+        if categoryBitmaskBodyA == CategoryBitmask.EnemySpaceship &&
+            categoryBitmaskBodyB == CategoryBitmask.PlayerMissile ||
+            categoryBitmaskBodyB == CategoryBitmask.EnemySpaceship &&
+            categoryBitmaskBodyA == CategoryBitmask.PlayerMissile
+        {
+            return CollisionType.PlayerMissileEnemySpaceship
+        }
+        
+        return nil
     }
 }
 
+
+/**
+Collision Handling.
+*/
+extension GameScene
+{
+    func destroyEnemy(enemy: EnemySpaceship!)
+    {
+        
+    }
+    
+    
+    func handlePlayerEnemySpaceshipsCollision(enemy: EnemySpaceship!)
+    {
+        
+    }
+    
+    
+    func handlePlayerMissileEnemySpaceshipsCollision(enemy: EnemySpaceship!)
+    {
+        
+    }
+    
+    
+    func handlePlayerSpaceshipEnemyMissileCollision(enemy: EnemySpaceship!)
+    {
+        
+    }
+}
