@@ -29,7 +29,7 @@ class GameScene: SKScene
         
         super.init(size: size)
         
-        background.configureInScene(self)
+        //background.configureInScene(self)
         configurePlayerSpaceship()
         configureJoystick()
         configureButtons()
@@ -264,7 +264,21 @@ extension GameScene
 {
     func destroyEnemy(enemy: EnemySpaceship!)
     {
+        let explosionEmitter = SKEmitterNode(fileNamed: "Explosion")
+        explosionEmitter.position.x = enemy.position.x - enemy.size.width/2
+        explosionEmitter.position.y = enemy.position.y
+        explosionEmitter.zPosition = enemy.zPosition + 1
         
+        self.addChild(explosionEmitter)
+        
+        // Show the explosion.
+        explosionEmitter.runAction(SKAction.sequence([SKAction.waitForDuration(5), SKAction.removeFromParent()]))
+    
+        // Fade out the enemy and remove it.
+        enemy.runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.1), SKAction.removeFromParent()]))
+
+        
+        //scene.runAction(SKAction.playSoundFileNamed(SoundName.MissileLaunch.toRaw(), waitForCompletion: false))
     }
     
     
@@ -276,7 +290,7 @@ extension GameScene
     
     func handlePlayerMissileEnemySpaceshipsCollision(enemy: EnemySpaceship!)
     {
-        
+        destroyEnemy(enemy)
     }
     
     
