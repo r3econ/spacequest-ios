@@ -147,15 +147,9 @@ extension Button
     {
         if isEnabled
         {
-            var touch : AnyObject! = touches.anyObject()
-            var location = touch.locationInNode(self)
-            
-            if CGRectContainsPoint(frame, location)
+            if touchUpInsideEventHandler
             {
-                if touchUpInsideEventHandler
-                {
-                    touchUpInsideEventHandler!()
-                }
+                touchUpInsideEventHandler!()
             }
             
             self.isSelected = false
