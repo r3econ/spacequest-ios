@@ -47,13 +47,13 @@ class GameScene: SKScene
     }
     
     
-    func launchEnemySpaceship() {
-    
+    func launchEnemySpaceship()
+    {
         var enemySpaceship = EnemySpaceship(health: 20)
         
         // Determine where to spawn the enemy along the Y axis.
-        let minY = enemySpaceship.size.height/2 + 220.0
-        let maxY = frame.size.height - enemySpaceship.size.height/2 - 50.0
+        let minY = enemySpaceship.size.height;
+        let maxY = CGRectGetHeight(self.frame) - enemySpaceship.size.height
         let rangeY = maxY - minY
         let randomY: UInt32 = arc4random_uniform(UInt32(rangeY)) + UInt32(minY)
         
@@ -123,6 +123,8 @@ extension GameScene
             () -> () in
             
             println("fire")
+            
+            self.launchEnemySpaceship()
         }
         
         self.addChild(fireButton)

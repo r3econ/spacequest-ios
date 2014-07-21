@@ -9,7 +9,7 @@ class EnemySpaceship: Spaceship {
     
     init(health: Int) {
         
-        super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.toRaw()), color: nil, size: CGSize(width: 53, height: 45))
+        super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.toRaw()), color: nil, size: CGSize(width: 36, height: 31))
         
         self.health = health
     }
