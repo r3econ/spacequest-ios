@@ -4,6 +4,8 @@ import SpriteKit
 
 class PlayerSpaceship: Spaceship
 {
+    var engineBurstEmitter: SKEmitterNode?
+    
     init()
     {
         let size = CGSize(width: 64, height: 50)
@@ -28,6 +30,17 @@ class PlayerSpaceship: Spaceship
         self.physicsBody.contactTestBitMask =
             CategoryBitmask.EnemySpaceship.toRaw() |
             CategoryBitmask.EnemyMissile.toRaw()
+        
+        configureEngineBurstEmitter()
+    }
+    
+    
+    func configureEngineBurstEmitter()
+    {
+        engineBurstEmitter = SKEmitterNode(fileNamed: "PlayerSpaceshipEngineBurst")
+        engineBurstEmitter!.position = CGPoint(x: -self.size.width/2 - 5.0, y: 0.0)
+        
+        self.addChild(engineBurstEmitter)
     }
     
     

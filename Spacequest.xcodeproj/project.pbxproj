@@ -32,6 +32,8 @@
 		B5972FE5197D3A150061D79C /* missile_launch.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE4197D3A150061D79C /* missile_launch.wav */; };
 		B5972FEA197D3E130061D79C /* background_gradient_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE8197D3E130061D79C /* background_gradient_iphone.png */; };
 		B5972FEB197D3E130061D79C /* background_gradient_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE9197D3E130061D79C /* background_gradient_iphone@2x.png */; };
+		B5972FEF197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */; };
+		B5972FF0197D65D90061D79C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FEE197D65D90061D79C /* spark.png */; };
 		B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604B193FB48F00EB9920 /* AppDelegate.swift */; };
 		B5AA6050193FB48F00EB9920 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604F193FB48F00EB9920 /* GameScene.swift */; };
 		B5AA6052193FB48F00EB9920 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6051193FB48F00EB9920 /* GameViewController.swift */; };
@@ -85,6 +87,8 @@
 		B5972FE4197D3A150061D79C /* missile_launch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = missile_launch.wav; sourceTree = "<group>"; };
 		B5972FE8197D3E130061D79C /* background_gradient_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_gradient_iphone.png; sourceTree = "<group>"; };
 		B5972FE9197D3E130061D79C /* background_gradient_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_gradient_iphone@2x.png"; sourceTree = "<group>"; };
+		B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerSpaceshipEngineBurst.sks; sourceTree = "<group>"; };
+		B5972FEE197D65D90061D79C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		B5AA6046193FB48F00EB9920 /* Spacequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spacequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AA604A193FB48F00EB9920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5AA604B193FB48F00EB9920 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -213,6 +217,15 @@
 			name = Sounds;
 			sourceTree = "<group>";
 		};
+		B5972FEC197D65A10061D79C /* Emiters */ = {
+			isa = PBXGroup;
+			children = (
+				B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */,
+				B5972FEE197D65D90061D79C /* spark.png */,
+			);
+			name = Emiters;
+			sourceTree = "<group>";
+		};
 		B5AA603D193FB48E00EB9920 = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +299,7 @@
 		B5AA6070193FB87B00EB9920 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B5972FEC197D65A10061D79C /* Emiters */,
 				B5972FE7197D3A210061D79C /* Sounds */,
 				B5972FE6197D3A170061D79C /* Images */,
 			);
@@ -428,9 +442,11 @@
 				B5AD30891979779A009769CB /* fire_button_normal.png in Resources */,
 				B5972FEB197D3E130061D79C /* background_gradient_iphone@2x.png in Resources */,
 				B5972FE2197D23710061D79C /* player_missile.png in Resources */,
+				B5972FF0197D65D90061D79C /* spark.png in Resources */,
 				B5AD30881979779A009769CB /* fire_button_normal@2x.png in Resources */,
 				B5972FE5197D3A150061D79C /* missile_launch.wav in Resources */,
 				B5D80FF019794FB800859CC0 /* joystick_base@2x.png in Resources */,
+				B5972FEF197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks in Resources */,
 				B5D80FEF19794FB800859CC0 /* joystick_base.png in Resources */,
 				B5D80FF119794FB800859CC0 /* joystick_stick.png in Resources */,
 				B5118884194253C600FF8D13 /* player_spaceship.png in Resources */,
