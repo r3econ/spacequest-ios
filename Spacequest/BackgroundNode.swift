@@ -6,7 +6,14 @@ class BackgroundNode: SKEffectNode
     
     init(size: CGSize)
     {
-        backgroundGradient = SKSpriteNode(imageNamed: ImageName.BackgroundGradient.toRaw())
+        var backgroundImageName = ImageName.BackgroundGradientPad
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
+        {
+            backgroundImageName = ImageName.BackgroundGradientPhone
+        }
+        
+        backgroundGradient = SKSpriteNode(imageNamed: backgroundImageName.toRaw())
         backgroundGradient.size = size
         
         super.init()

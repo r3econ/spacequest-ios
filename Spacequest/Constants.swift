@@ -1,6 +1,6 @@
 
-enum CategoryBitmask: UInt32 {
-    
+enum CategoryBitmask: UInt32
+{
     case PlayerSpaceship =  0
     case EnemySpaceship =   0b10
     case PlayerMissile =    0b100
@@ -9,18 +9,19 @@ enum CategoryBitmask: UInt32 {
 }
 
 
-enum ImageName: String {
-    
+enum ImageName: String
+{
     case PlayerSpaceship = "player_spaceship"
     case EnemySpaceship = "enemy_spaceship"
     case Missile = "player_missile"
     case Lifebar = "lifebar"
-    case BackgroundGradient = "background_gradient"
+    case BackgroundGradientPad = "background_gradient_ipad"
+    case BackgroundGradientPhone = "background_gradient_iphone"
     case BackgroundCosmicDust = "background_cosmic_dust"
 }
 
 
-enum SoundName: String {
-    
+enum SoundName: String
+{
     case MissileLaunch = "missile_launch.wav"
 }

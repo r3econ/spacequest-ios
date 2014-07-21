@@ -28,7 +28,7 @@ class GameScene: SKScene
         
         super.init(size: size)
         
-        //background.configureInScene(self)
+        background.configureInScene(self)
         configurePlayerSpaceship()
         configureJoystick()
         configureButtons()
