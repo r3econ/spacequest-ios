@@ -27,6 +27,9 @@
 		B5175C521943B51F005AECAA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5175C501943B51F005AECAA /* Button.swift */; };
 		B53E78DB194105BA000CB230 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E78DA194105BA000CB230 /* Constants.swift */; };
 		B53E78DC194105BA000CB230 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E78DA194105BA000CB230 /* Constants.swift */; };
+		B5972FE2197D23710061D79C /* player_missile.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE0197D23710061D79C /* player_missile.png */; };
+		B5972FE3197D23710061D79C /* player_missile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE1197D23710061D79C /* player_missile@2x.png */; };
+		B5972FE5197D3A150061D79C /* missile_launch.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE4197D3A150061D79C /* missile_launch.wav */; };
 		B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604B193FB48F00EB9920 /* AppDelegate.swift */; };
 		B5AA6050193FB48F00EB9920 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604F193FB48F00EB9920 /* GameScene.swift */; };
 		B5AA6052193FB48F00EB9920 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6051193FB48F00EB9920 /* GameViewController.swift */; };
@@ -75,6 +78,9 @@
 		B5175C4D1943A430005AECAA /* Joystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		B5175C501943B51F005AECAA /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		B53E78DA194105BA000CB230 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B5972FE0197D23710061D79C /* player_missile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_missile.png; sourceTree = "<group>"; };
+		B5972FE1197D23710061D79C /* player_missile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_missile@2x.png"; sourceTree = "<group>"; };
+		B5972FE4197D3A150061D79C /* missile_launch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = missile_launch.wav; sourceTree = "<group>"; };
 		B5AA6046193FB48F00EB9920 /* Spacequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spacequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AA604A193FB48F00EB9920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5AA604B193FB48F00EB9920 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +175,38 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		B5972FE6197D3A170061D79C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B5972FE0197D23710061D79C /* player_missile.png */,
+				B5972FE1197D23710061D79C /* player_missile@2x.png */,
+				B5AD308A19797806009769CB /* fire_button_selected@2x.png */,
+				B5AD308B19797806009769CB /* fire_button_selected.png */,
+				B5AD30861979779A009769CB /* fire_button_normal@2x.png */,
+				B5AD30871979779A009769CB /* fire_button_normal.png */,
+				B5D80FED19794FB800859CC0 /* joystick_stick.png */,
+				B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */,
+				B5D80FEB19794FB800859CC0 /* joystick_base.png */,
+				B5D80FEC19794FB800859CC0 /* joystick_base@2x.png */,
+				B51188861942586A00FF8D13 /* enemy_spaceship@2x.png */,
+				B51188871942586A00FF8D13 /* enemy_spaceship.png */,
+				B5118881194253C600FF8D13 /* player_spaceship.png */,
+				B5118880194253C600FF8D13 /* player_spaceship@2x.png */,
+				B511887B1942527600FF8D13 /* background_gradient.png */,
+				B511887A1942527600FF8D13 /* background_gradient@2x.png */,
+				B5AA6056193FB48F00EB9920 /* Images.xcassets */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		B5972FE7197D3A210061D79C /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				B5972FE4197D3A150061D79C /* missile_launch.wav */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		B5AA603D193FB48E00EB9920 = {
 			isa = PBXGroup;
 			children = (
@@ -242,21 +280,8 @@
 		B5AA6070193FB87B00EB9920 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B5AD308A19797806009769CB /* fire_button_selected@2x.png */,
-				B5AD308B19797806009769CB /* fire_button_selected.png */,
-				B5AD30861979779A009769CB /* fire_button_normal@2x.png */,
-				B5AD30871979779A009769CB /* fire_button_normal.png */,
-				B5D80FED19794FB800859CC0 /* joystick_stick.png */,
-				B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */,
-				B5D80FEB19794FB800859CC0 /* joystick_base.png */,
-				B5D80FEC19794FB800859CC0 /* joystick_base@2x.png */,
-				B51188861942586A00FF8D13 /* enemy_spaceship@2x.png */,
-				B51188871942586A00FF8D13 /* enemy_spaceship.png */,
-				B5118881194253C600FF8D13 /* player_spaceship.png */,
-				B5118880194253C600FF8D13 /* player_spaceship@2x.png */,
-				B511887B1942527600FF8D13 /* background_gradient.png */,
-				B511887A1942527600FF8D13 /* background_gradient@2x.png */,
-				B5AA6056193FB48F00EB9920 /* Images.xcassets */,
+				B5972FE7197D3A210061D79C /* Sounds */,
+				B5972FE6197D3A170061D79C /* Images */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -385,6 +410,7 @@
 			files = (
 				B511887C1942527600FF8D13 /* background_gradient@2x.png in Resources */,
 				B51188881942586A00FF8D13 /* enemy_spaceship@2x.png in Resources */,
+				B5972FE3197D23710061D79C /* player_missile@2x.png in Resources */,
 				B5118882194253C600FF8D13 /* player_spaceship@2x.png in Resources */,
 				B511888A1942586A00FF8D13 /* enemy_spaceship.png in Resources */,
 				B5AD308D19797806009769CB /* fire_button_selected.png in Resources */,
@@ -393,7 +419,9 @@
 				B5D80FEE19794FB800859CC0 /* joystick_stick@2x.png in Resources */,
 				B511887E1942527600FF8D13 /* background_gradient.png in Resources */,
 				B5AD30891979779A009769CB /* fire_button_normal.png in Resources */,
+				B5972FE2197D23710061D79C /* player_missile.png in Resources */,
 				B5AD30881979779A009769CB /* fire_button_normal@2x.png in Resources */,
+				B5972FE5197D3A150061D79C /* missile_launch.wav in Resources */,
 				B5D80FF019794FB800859CC0 /* joystick_base@2x.png in Resources */,
 				B5D80FEF19794FB800859CC0 /* joystick_base.png in Resources */,
 				B5D80FF119794FB800859CC0 /* joystick_stick.png in Resources */,

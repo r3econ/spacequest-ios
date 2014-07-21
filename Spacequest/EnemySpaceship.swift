@@ -1,24 +1,23 @@
 import SpriteKit
 
 
-class EnemySpaceship: Spaceship {
-   
-    
+class EnemySpaceship: Spaceship
+{
     var missileLaunchTimer: NSTimer?
     
     
-    init(health: Int) {
-        
+    init(health: Int)
+    {
         super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.toRaw()), color: nil, size: CGSize(width: 36, height: 31))
         
         self.health = health
     }
     
     
-    func scheduleRandomMissileLaunch() {
-        
-        if missileLaunchTimer {
-            
+    func scheduleRandomMissileLaunch()
+    {
+        if missileLaunchTimer
+        {
             missileLaunchTimer!.invalidate()
         }
         
@@ -29,8 +28,8 @@ class EnemySpaceship: Spaceship {
     }
     
     
-    func launchMissile() {
-        
+    func launchMissile()
+    {
         var missile = Missile.enemyMissile()
         
         missile.position = position
@@ -51,10 +50,10 @@ class EnemySpaceship: Spaceship {
     }
     
     
-    deinit {
-
-        if missileLaunchTimer {
-            
+    deinit
+    {
+        if missileLaunchTimer
+        {
             missileLaunchTimer!.invalidate()
         }
     }

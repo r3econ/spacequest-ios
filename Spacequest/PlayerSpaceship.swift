@@ -6,9 +6,27 @@ class PlayerSpaceship: Spaceship
 {
     init()
     {
+        let size = CGSize(width: 64, height: 50)
+        
         super.init(texture: SKTexture(imageNamed: ImageName.PlayerSpaceship.toRaw()),
             color: nil,
-            size: CGSize(width: 64, height: 50))
+            size: size)
+
+        name = NSStringFromClass(PlayerSpaceship.self)
+        
+        // Collisions.
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        self.physicsBody.usesPreciseCollisionDetection = true
+
+        self.physicsBody.categoryBitMask = CategoryBitmask.PlayerSpaceship.toRaw()
+        self.physicsBody.collisionBitMask =
+            CategoryBitmask.EnemySpaceship.toRaw() |
+            CategoryBitmask.EnemyMissile.toRaw() |
+            CategoryBitmask.ScreenBounds.toRaw()
+        
+        self.physicsBody.contactTestBitMask =
+            CategoryBitmask.EnemySpaceship.toRaw() |
+            CategoryBitmask.EnemyMissile.toRaw()
     }
     
     
@@ -16,8 +34,8 @@ class PlayerSpaceship: Spaceship
     {
         var missile = Missile.playerMissile()
         
-        missile.position = CGPoint(x: position.x + 80.0, y: position.y)
-        missile.zPosition = zPosition - 1
+        missile.position = CGPoint(x: CGRectGetMaxX(self.frame) + 10.0, y: position.y)
+        missile.zPosition = self.zPosition - 1
     
         scene.addChild(missile)
         

@@ -13,6 +13,7 @@ class GameViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
+        skView.showsPhysics = true
         
         var gameScene = GameScene(size: skView.frame.size)
         

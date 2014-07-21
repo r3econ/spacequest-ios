@@ -79,8 +79,12 @@ extension GameScene
 {
     func configurePhysics()
     {
-        physicsWorld.gravity = CGVectorMake(0,0);
-        physicsWorld.contactDelegate = self;
+        self.physicsWorld.gravity = CGVectorMake(0,0);
+        self.physicsWorld.contactDelegate = self;
+        
+        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        self.physicsBody.categoryBitMask = CategoryBitmask.ScreenBounds.toRaw()
+        self.physicsBody.collisionBitMask = CategoryBitmask.PlayerSpaceship.toRaw()
     }
 
     
@@ -121,10 +125,8 @@ extension GameScene
         fireButton.touchUpInsideEventHandler =
         {
             () -> () in
-            
-            println("fire")
-            
-            self.launchEnemySpaceship()
+                        
+            self.playerSpaceship.launchMissile()
         }
         
         self.addChild(fireButton)

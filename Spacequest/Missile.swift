@@ -1,23 +1,24 @@
 import SpriteKit
 
 
-class Missile: SKSpriteNode {
-   
+class Missile: SKSpriteNode
+{
     init()
     {
+        var size = CGSizeMake(10.0, 10.0)
         super.init(texture: SKTexture(imageNamed:ImageName.Missile.toRaw()),
             color: nil,
-            size: CGSizeZero)
+            size: size)
         
-        name = "Missile"
-        physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+        name = NSStringFromClass(Missile.self)
+
+        physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody.usesPreciseCollisionDetection = true
-        physicsBody.collisionBitMask = 0
     }
     
     
-    class func enemyMissile() -> Missile {
-        
+    class func enemyMissile() -> Missile
+    {
         var missile = Missile()
         
         missile.physicsBody.categoryBitMask = CategoryBitmask.EnemyMissile.toRaw()
@@ -27,8 +28,8 @@ class Missile: SKSpriteNode {
     }
     
     
-    class func playerMissile() -> Missile {
-        
+    class func playerMissile() -> Missile
+    {
         var missile = Missile()
         
         missile.physicsBody.categoryBitMask = CategoryBitmask.PlayerMissile.toRaw()
