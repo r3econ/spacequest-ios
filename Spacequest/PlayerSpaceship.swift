@@ -17,6 +17,7 @@ class PlayerSpaceship: Spaceship
         // Collisions.
         self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
         self.physicsBody.usesPreciseCollisionDetection = true
+        self.physicsBody.allowsRotation = false
 
         self.physicsBody.categoryBitMask = CategoryBitmask.PlayerSpaceship.toRaw()
         self.physicsBody.collisionBitMask =

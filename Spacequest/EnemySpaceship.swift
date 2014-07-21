@@ -8,9 +8,23 @@ class EnemySpaceship: Spaceship
     
     init(health: Int)
     {
-        super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.toRaw()), color: nil, size: CGSize(width: 36, height: 31))
+        let size = CGSize(width: 36, height: 31)
+        super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.toRaw()), color: nil, size: size)
         
         self.health = health
+        
+        // Collisions.
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        self.physicsBody.usesPreciseCollisionDetection = true
+        self.physicsBody.categoryBitMask = CategoryBitmask.EnemySpaceship.toRaw()
+        self.physicsBody.collisionBitMask =
+            CategoryBitmask.EnemySpaceship.toRaw() |
+            CategoryBitmask.PlayerMissile.toRaw() |
+            CategoryBitmask.PlayerSpaceship.toRaw()
+        
+        self.physicsBody.contactTestBitMask =
+            CategoryBitmask.PlayerSpaceship.toRaw() |
+            CategoryBitmask.PlayerMissile.toRaw()
     }
     
     
