@@ -3,7 +3,8 @@ import SpriteKit
 class BackgroundNode: SKEffectNode
 {
     var backgroundGradient: SKSpriteNode
-    
+    var stardustEmitter: SKEmitterNode?
+
     init(size: CGSize)
     {
         var backgroundImageName = ImageName.BackgroundGradientPad
@@ -19,6 +20,8 @@ class BackgroundNode: SKEffectNode
         super.init()
         
         self.addChild(backgroundGradient)
+        
+        configureStarDustEmitter()
     }
     
     
@@ -28,5 +31,14 @@ class BackgroundNode: SKEffectNode
         zPosition = -1000
         
         scene.addChild(self)
+    }
+    
+    
+    func configureStarDustEmitter()
+    {
+        stardustEmitter = SKEmitterNode(fileNamed: "StarDustParticle")
+        stardustEmitter!.position = CGPoint(x: backgroundGradient.size.width/2 + 5.0, y: 0.0)
+        
+        self.addChild(stardustEmitter)
     }
 }
