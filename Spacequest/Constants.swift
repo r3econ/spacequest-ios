@@ -15,6 +15,7 @@ enum ImageName: String
 enum SoundName: String
 {
     case MissileLaunch = "missile_launch.wav"
+    case Explosion = "explosion.wav"
 }
 
 

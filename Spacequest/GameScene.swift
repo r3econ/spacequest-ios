@@ -29,7 +29,7 @@ class GameScene: SKScene
         
         super.init(size: size)
         
-        //background.configureInScene(self)
+        background.configureInScene(self)
         configurePlayerSpaceship()
         configureJoystick()
         configureButtons()
@@ -277,8 +277,8 @@ extension GameScene
         // Fade out the enemy and remove it.
         enemy.runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.1), SKAction.removeFromParent()]))
 
-        
-        //scene.runAction(SKAction.playSoundFileNamed(SoundName.MissileLaunch.toRaw(), waitForCompletion: false))
+        // Play explosion sound.
+        scene.runAction(SKAction.playSoundFileNamed(SoundName.Explosion.toRaw(), waitForCompletion: false))
     }
     
     

@@ -29,6 +29,7 @@
 		B53E78DC194105BA000CB230 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E78DA194105BA000CB230 /* Constants.swift */; };
 		B56B0264197D6A35009DBE84 /* StarDustParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B56B0263197D6A35009DBE84 /* StarDustParticle.sks */; };
 		B5828640197D71EA006D4E4E /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = B582863F197D71EA006D4E4E /* Explosion.sks */; };
+		B59322B1197D788F002D51AC /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59322B0197D788F002D51AC /* explosion.wav */; };
 		B5972FE2197D23710061D79C /* player_missile.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE0197D23710061D79C /* player_missile.png */; };
 		B5972FE3197D23710061D79C /* player_missile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE1197D23710061D79C /* player_missile@2x.png */; };
 		B5972FE5197D3A150061D79C /* missile_launch.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE4197D3A150061D79C /* missile_launch.wav */; };
@@ -86,6 +87,7 @@
 		B53E78DA194105BA000CB230 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B56B0263197D6A35009DBE84 /* StarDustParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarDustParticle.sks; sourceTree = "<group>"; };
 		B582863F197D71EA006D4E4E /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
+		B59322B0197D788F002D51AC /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
 		B5972FE0197D23710061D79C /* player_missile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_missile.png; sourceTree = "<group>"; };
 		B5972FE1197D23710061D79C /* player_missile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_missile@2x.png"; sourceTree = "<group>"; };
 		B5972FE4197D3A150061D79C /* missile_launch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = missile_launch.wav; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		B5972FE7197D3A210061D79C /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				B59322B0197D788F002D51AC /* explosion.wav */,
 				B5972FE4197D3A150061D79C /* missile_launch.wav */,
 			);
 			name = Sounds;
@@ -454,6 +457,7 @@
 				B5AD30881979779A009769CB /* fire_button_normal@2x.png in Resources */,
 				B5972FE5197D3A150061D79C /* missile_launch.wav in Resources */,
 				B5D80FF019794FB800859CC0 /* joystick_base@2x.png in Resources */,
+				B59322B1197D788F002D51AC /* explosion.wav in Resources */,
 				B5972FEF197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks in Resources */,
 				B5D80FEF19794FB800859CC0 /* joystick_base.png in Resources */,
 				B5D80FF119794FB800859CC0 /* joystick_stick.png in Resources */,
