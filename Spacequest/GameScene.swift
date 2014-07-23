@@ -29,7 +29,12 @@ class GameScene: SKScene
         
         super.init(size: size)
         
-        background.configureInScene(self)
+        // Switch off the background when running on simulator for performance reasons.
+        if UIDevice.currentDevice().model != "iPhone Simulator"
+        {
+            background.configureInScene(self)
+        }
+        
         configurePlayerSpaceship()
         configureJoystick()
         configureButtons()
@@ -251,6 +256,14 @@ extension GameScene : SKPhysicsContactDelegate
         {
             return CollisionType.PlayerMissileEnemySpaceship
         }
+        // Player spaceship - enemy spaceship.
+        else if categoryBitmaskBodyA == CategoryBitmask.EnemySpaceship &&
+            categoryBitmaskBodyB == CategoryBitmask.PlayerSpaceship ||
+            categoryBitmaskBodyB == CategoryBitmask.EnemySpaceship &&
+            categoryBitmaskBodyA == CategoryBitmask.PlayerSpaceship
+        {
+            return CollisionType.PlayerSpaceshipEnemySpaceship
+        }
         
         return nil
     }
@@ -282,9 +295,12 @@ extension GameScene
     }
     
     
+    /**
+     Handle collision between player spaceship and the enemy spaceship.
+    */
     func handlePlayerEnemySpaceshipsCollision(enemy: EnemySpaceship!)
     {
-        
+        destroyEnemy(enemy)
     }
     
     
