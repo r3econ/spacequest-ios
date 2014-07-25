@@ -39,6 +39,10 @@
 		B5972FF0197D65D90061D79C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FEE197D65D90061D79C /* spark.png */; };
 		B5A9050B198297AD00862E2C /* GamePausedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9050A198297AD00862E2C /* GamePausedScene.swift */; };
 		B5A9050C198297AD00862E2C /* GamePausedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9050A198297AD00862E2C /* GamePausedScene.swift */; };
+		B5A9050F1982AC2200862E2C /* menu_button_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A9050D1982AC2200862E2C /* menu_button_normal@2x.png */; };
+		B5A905101982AC2200862E2C /* menu_button_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A9050D1982AC2200862E2C /* menu_button_normal@2x.png */; };
+		B5A905111982AC2200862E2C /* menu_button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A9050E1982AC2200862E2C /* menu_button_normal.png */; };
+		B5A905121982AC2200862E2C /* menu_button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A9050E1982AC2200862E2C /* menu_button_normal.png */; };
 		B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604B193FB48F00EB9920 /* AppDelegate.swift */; };
 		B5AA6050193FB48F00EB9920 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604F193FB48F00EB9920 /* GameScene.swift */; };
 		B5AA6052193FB48F00EB9920 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6051193FB48F00EB9920 /* GameViewController.swift */; };
@@ -98,6 +102,8 @@
 		B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerSpaceshipEngineBurst.sks; sourceTree = "<group>"; };
 		B5972FEE197D65D90061D79C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		B5A9050A198297AD00862E2C /* GamePausedScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePausedScene.swift; sourceTree = "<group>"; };
+		B5A9050D1982AC2200862E2C /* menu_button_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_button_normal@2x.png"; sourceTree = "<group>"; };
+		B5A9050E1982AC2200862E2C /* menu_button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button_normal.png; sourceTree = "<group>"; };
 		B5AA6046193FB48F00EB9920 /* Spacequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spacequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AA604A193FB48F00EB9920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5AA604B193FB48F00EB9920 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +202,8 @@
 		B5972FE6197D3A170061D79C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B5A9050D1982AC2200862E2C /* menu_button_normal@2x.png */,
+				B5A9050E1982AC2200862E2C /* menu_button_normal.png */,
 				B5972FE0197D23710061D79C /* player_missile.png */,
 				B5972FE1197D23710061D79C /* player_missile@2x.png */,
 				B5AD308A19797806009769CB /* fire_button_selected@2x.png */,
@@ -443,6 +451,7 @@
 			files = (
 				B511887C1942527600FF8D13 /* background_gradient_ipad@2x.png in Resources */,
 				B51188881942586A00FF8D13 /* enemy_spaceship@2x.png in Resources */,
+				B5A9050F1982AC2200862E2C /* menu_button_normal@2x.png in Resources */,
 				B5972FE3197D23710061D79C /* player_missile@2x.png in Resources */,
 				B5118882194253C600FF8D13 /* player_spaceship@2x.png in Resources */,
 				B5972FEA197D3E130061D79C /* background_gradient_iphone.png in Resources */,
@@ -453,6 +462,7 @@
 				B56B0264197D6A35009DBE84 /* StarDustParticle.sks in Resources */,
 				B5D80FEE19794FB800859CC0 /* joystick_stick@2x.png in Resources */,
 				B511887E1942527600FF8D13 /* background_gradient_ipad.png in Resources */,
+				B5A905111982AC2200862E2C /* menu_button_normal.png in Resources */,
 				B5828640197D71EA006D4E4E /* Explosion.sks in Resources */,
 				B5AD30891979779A009769CB /* fire_button_normal.png in Resources */,
 				B5972FEB197D3E130061D79C /* background_gradient_iphone@2x.png in Resources */,
@@ -475,7 +485,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B511887D1942527600FF8D13 /* background_gradient_ipad@2x.png in Resources */,
+				B5A905121982AC2200862E2C /* menu_button_normal.png in Resources */,
 				B51188891942586A00FF8D13 /* enemy_spaceship@2x.png in Resources */,
+				B5A905101982AC2200862E2C /* menu_button_normal@2x.png in Resources */,
 				B511887F1942527600FF8D13 /* background_gradient_ipad.png in Resources */,
 				B5118883194253C600FF8D13 /* player_spaceship@2x.png in Resources */,
 				B5118885194253C600FF8D13 /* player_spaceship.png in Resources */,

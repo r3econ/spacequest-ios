@@ -17,7 +17,23 @@ class Button: SKSpriteNode
     var titleLabelNode: SKLabelNode?
     var isSelected: Bool
     var isEnabled: Bool
-    
+    var title: String
+    {
+    set {
+        
+        if !titleLabelNode
+        {
+            titleLabelNode = SKLabelNode()
+            titleLabelNode!.position = CGPoint(
+                x: CGRectGetMidX(self.frame),
+                y: CGRectGetMidY(self.frame))
+        }
+        
+        titleLabelNode!.text = newValue
+
+        
+    }
+    }
     
     // Initializers.
     init(textureNormal: SKTexture!, textureSelected: SKTexture!, textureDisabled: SKTexture!)
