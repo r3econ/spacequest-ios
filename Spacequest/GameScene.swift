@@ -1,44 +1,31 @@
 import SpriteKit
 
 
+let kHUDControlMargin = 20.0
+
+
 class GameScene: SKScene
 {
-    var background: BackgroundNode
-    var playerSpaceship: PlayerSpaceship
-    var joystick: Joystick
-    var fireButton: Button
+    var background: BackgroundNode?
+    var playerSpaceship: PlayerSpaceship?
+    var joystick: Joystick?
+    var fireButton: Button?
+    var pauseButton: Button?
     var launchEnemyTimer: NSTimer?
 
     init(size: CGSize)
     {
-        // Background.
-        background = BackgroundNode(size: size)
-        
-        // Spaceships.
-        playerSpaceship = PlayerSpaceship()
-        
-        // Joystick.
-        joystick = Joystick(
-            maximumRadius: 40.0,
-            stickImageNamed: "joystick_stick",
-            baseImageNamed: "joystick_base");
-        
-        fireButton = Button(
-            normalImageNamed: "fire_button_normal",
-            selectedImageNamed: "fire_button_selected")
-        
         super.init(size: size)
-        
+
         // Switch off the background when running on simulator for performance reasons.
         if UIDevice.currentDevice().model != "iPhone Simulator"
         {
-            background.configureInScene(self)
+            configureBackground()
         }
         
         configurePlayerSpaceship()
-        configureJoystick()
-        configureButtons()
         configurePhysics()
+        configureHUD()
     }
     
     override func didMoveToView(view: SKView)
@@ -110,7 +97,7 @@ extension GameScene
         // Set position of the enemy to be slightly off-screen along the right edge,
         // and along a random position along the Y axis.
         enemySpaceship.position = CGPoint(x: frame.size.width + enemySpaceship.size.width/2, y: CGFloat(randomY))
-        enemySpaceship.zPosition = self.playerSpaceship.zPosition
+        enemySpaceship.zPosition = self.playerSpaceship!.zPosition
             
         self.addChild(enemySpaceship)
         
@@ -137,50 +124,95 @@ extension GameScene
         self.physicsBody.categoryBitMask = CategoryBitmask.ScreenBounds.toRaw()
         self.physicsBody.collisionBitMask = CategoryBitmask.PlayerSpaceship.toRaw()
     }
-
+    
     
     func configurePlayerSpaceship()
     {
-        playerSpaceship.position = CGPoint(
-            x: playerSpaceship.size.width/2 + 30.0,
+        playerSpaceship = PlayerSpaceship()
+        
+        playerSpaceship!.position = CGPoint(
+            x: playerSpaceship!.size.width/2 + 30.0,
             y: CGRectGetHeight(self.frame)/2 + 40.0);
         
-        playerSpaceship.health = 100
+        playerSpaceship!.health = 100
         self.addChild(playerSpaceship)
     }
     
     
     func configureJoystick()
     {
-        joystick.position = CGPoint(
-            x: CGRectGetMaxX(joystick.frame) + 10.0,
-            y: CGRectGetHeight(joystick.frame)/2 + 10.0);
+        joystick = Joystick(
+            maximumRadius: 40.0,
+            stickImageNamed: "joystick_stick",
+            baseImageNamed: "joystick_base");
         
-        joystick.updateHandler =
-        {
-            (var translation: CGPoint) -> () in
-            
-            self.updatePlayerSpaceshipPositionWithJoystickTranslation(translation);
+        joystick!.position = CGPoint(
+            x: CGRectGetMaxX(joystick!.frame) + kHUDControlMargin,
+            y: CGRectGetHeight(joystick!.frame)/2 + kHUDControlMargin);
+        
+        joystick!.updateHandler =
+            {
+                (var translation: CGPoint) -> () in
+                
+                self.updatePlayerSpaceshipPositionWithJoystickTranslation(translation);
         }
         
-        self.addChild(joystick)
+        self.addChild(joystick!)
     }
     
     
-    func configureButtons()
+    func configureFireButton()
     {
-        fireButton.position = CGPoint(
-            x: CGRectGetWidth(self.frame) - CGRectGetWidth(fireButton.frame) - 10.0,
-            y: CGRectGetHeight(fireButton.frame)/2 + 40.0);
+        fireButton = Button(
+            normalImageNamed: "fire_button_normal",
+            selectedImageNamed: "fire_button_selected")
         
-        fireButton.touchUpInsideEventHandler =
+        fireButton!.position = CGPoint(
+            x: CGRectGetWidth(self.frame) - CGRectGetWidth(fireButton!.frame) - kHUDControlMargin,
+            y: CGRectGetHeight(fireButton!.frame)/2 + 40.0);
+        
+        fireButton!.touchUpInsideEventHandler =
         {
             () -> () in
                         
-            self.playerSpaceship.launchMissile()
+            self.playerSpaceship!.launchMissile()
         }
         
-        self.addChild(fireButton)
+        self.addChild(fireButton!)
+    }
+    
+    
+    func configurePauseButton()
+    {
+        pauseButton = Button(
+            normalImageNamed: "fire_button_normal",
+            selectedImageNamed: "fire_button_selected")
+        
+        pauseButton!.position = CGPoint(
+            x: CGRectGetWidth(self.frame) - CGRectGetWidth(pauseButton!.frame)/2 - kHUDControlMargin,
+            y: CGRectGetHeight(self.frame) - CGRectGetHeight(pauseButton!.frame)/2 - kHUDControlMargin);
+        
+        pauseButton!.touchUpInsideEventHandler =
+            {
+                () -> () in
+                
+                self.showGamePausedScene()
+        }
+        
+        self.addChild(pauseButton)
+    }
+    
+    
+    func configureLifeIndicator()
+    {
+
+    }
+    
+    
+    func configureBackground()
+    {
+        background = BackgroundNode(size: self.size)
+        background!.configureInScene(self)
     }
     
     
@@ -188,8 +220,17 @@ extension GameScene
     {
         let translationConstant: CGFloat = 10.0
         
-        playerSpaceship.position.x += translationConstant * translation.x
-        playerSpaceship.position.y += translationConstant * translation.y
+        playerSpaceship!.position.x += translationConstant * translation.x
+        playerSpaceship!.position.y += translationConstant * translation.y
+    }
+    
+    
+    func configureHUD()
+    {
+        configureJoystick()
+        configureFireButton()
+        configureLifeIndicator()
+        configurePauseButton()
     }
 }
 
@@ -311,6 +352,25 @@ extension GameScene
     
     
     func handlePlayerSpaceshipEnemyMissileCollision(enemy: EnemySpaceship!)
+    {
+        
+    }
+}
+
+
+/**
+Showing Scenes.
+*/
+extension GameScene
+{
+    func showGamePausedScene()
+    {
+        self.view.presentScene(GamePausedScene(size:self.size),
+            transition: SKTransition.crossFadeWithDuration(0.2))
+    }
+    
+    
+    func showGameOverScene()
     {
         
     }
