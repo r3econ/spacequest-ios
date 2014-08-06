@@ -5,6 +5,7 @@ class GamePausedScene: SKScene
 {
     var resumeButton: Button?
     var restartButton: Button?
+    var titleNode: SKSpriteNode?
     var buttons: [Button]?
 
     
@@ -14,26 +15,35 @@ class GamePausedScene: SKScene
         
         self.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
         
+        configureTitle()
         configureButtons()
     }
-    
-    
+}
+
+
+/**
+ Buttons & Title.
+*/
+extension GamePausedScene
+{
     func configureButtons()
     {
         // Resume button.
         resumeButton = Button(
             normalImageNamed: "menu_button_normal",
             selectedImageNamed: "menu_button_normal")
-
+        
         resumeButton!.title = NSLocalizedString("resume", comment: "")
+        resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
         
         // Restart button.
         restartButton = Button(
             normalImageNamed: "menu_button_normal",
             selectedImageNamed: "menu_button_normal")
-
-        restartButton!.title = NSLocalizedString("restart", comment: "")
         
+        restartButton!.title = NSLocalizedString("restart", comment: "")
+        restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
+
         buttons = [resumeButton!, restartButton!]
         let verticalPadding = 20.0
         var totalButtonsHeight = 0.0
@@ -47,7 +57,7 @@ class GamePausedScene: SKScene
         
         // Calculate origin of first button.
         var buttonOriginY = CGRectGetHeight(self.frame) / 2 + totalButtonsHeight / 2
-
+        
         // Place buttons in the scene.
         for (index, button) in enumerate(buttons!)
         {
@@ -59,5 +69,36 @@ class GamePausedScene: SKScene
             
             buttonOriginY -= button.size.height + verticalPadding
         }
+    }
+    
+    
+    func resumeButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler
+    {
+        let handler =
+        {
+            () -> () in
+
+            
+        }
+       
+        return handler
+    }
+    
+    
+    func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler
+    {
+        let handler =
+        {
+            () -> () in
+            
+        }
+        
+        return handler
+    }
+    
+    
+    func configureTitle()
+    {
+        
     }
 }

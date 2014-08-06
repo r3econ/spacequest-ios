@@ -151,7 +151,7 @@ extension GameScene
             y: CGRectGetHeight(joystick!.frame)/2 + kHUDControlMargin);
         
         joystick!.updateHandler =
-            {
+        {
                 (var translation: CGPoint) -> () in
                 
                 self.updatePlayerSpaceshipPositionWithJoystickTranslation(translation);
