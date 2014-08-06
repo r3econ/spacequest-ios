@@ -1,6 +1,12 @@
 import SpriteKit
 
 
+protocol GameSceneDelegate
+{
+    func gameSceneDidTapMainMenuButton(gameScene:GameScene)
+}
+
+
 let kHUDControlMargin = 20.0
 
 
@@ -10,8 +16,9 @@ class GameScene: SKScene
     var playerSpaceship: PlayerSpaceship?
     var joystick: Joystick?
     var fireButton: Button?
-    var pauseButton: Button?
+    var menuButton: Button?
     var launchEnemyTimer: NSTimer?
+    var gameSceneDelegate: GameSceneDelegate?
 
     init(size: CGSize)
     {
@@ -30,13 +37,33 @@ class GameScene: SKScene
     
     override func didMoveToView(view: SKView)
     {
-        startLaunchingEnemySpaceships()
+
     }
 
    
     override func update(currentTime: CFTimeInterval)
     {
 
+    }
+    
+    
+    override var paused: Bool
+    {
+    didSet
+    {
+        // Control launching of the enemies.
+        if paused != oldValue
+        {
+            if paused
+            {
+                stopLaunchingEnemySpaceships()
+            }
+            else
+            {
+                startLaunchingEnemySpaceships()
+            }
+        }
+    }
     }
 }
 
@@ -176,30 +203,32 @@ extension GameScene
             () -> () in
                         
             self.playerSpaceship!.launchMissile()
+            return
         }
         
         self.addChild(fireButton!)
     }
     
     
-    func configurePauseButton()
+    func configuremenuButton()
     {
-        pauseButton = Button(
+        menuButton = Button(
             normalImageNamed: "fire_button_normal",
             selectedImageNamed: "fire_button_selected")
         
-        pauseButton!.position = CGPoint(
-            x: CGRectGetWidth(self.frame) - CGRectGetWidth(pauseButton!.frame)/2 - kHUDControlMargin,
-            y: CGRectGetHeight(self.frame) - CGRectGetHeight(pauseButton!.frame)/2 - kHUDControlMargin);
+        menuButton!.position = CGPoint(
+            x: CGRectGetWidth(self.frame) - CGRectGetWidth(menuButton!.frame)/2 - kHUDControlMargin,
+            y: CGRectGetHeight(self.frame) - CGRectGetHeight(menuButton!.frame)/2 - kHUDControlMargin);
         
-        pauseButton!.touchUpInsideEventHandler =
-            {
+        menuButton!.touchUpInsideEventHandler =
+        {
                 () -> () in
                 
-                self.showMainMenuScene()
+                self.gameSceneDelegate?.gameSceneDidTapMainMenuButton(self)
+                return
         }
         
-        self.addChild(pauseButton)
+        self.addChild(menuButton)
     }
     
     
@@ -230,7 +259,7 @@ extension GameScene
         configureJoystick()
         configureFireButton()
         configureLifeIndicator()
-        configurePauseButton()
+        configuremenuButton()
     }
 }
 
@@ -352,25 +381,6 @@ extension GameScene
     
     
     func handlePlayerSpaceshipEnemyMissileCollision(enemy: EnemySpaceship!)
-    {
-        
-    }
-}
-
-
-/**
-Showing Scenes.
-*/
-extension GameScene
-{
-    func showMainMenuScene()
-    {
-        self.view.presentScene(MainMenuScene(size:self.size),
-            transition: SKTransition.crossFadeWithDuration(0.2))
-    }
-    
-    
-    func showGameOverScene()
     {
         
     }

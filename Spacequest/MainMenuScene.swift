@@ -1,12 +1,20 @@
 import SpriteKit
 
 
+protocol MainMenuSceneDelegate
+{
+    func mainMenuSceneDidTapResumeButton(mainMenuScene:MainMenuScene)
+    func mainMenuSceneDidTapRestartButton(mainMenuScene:MainMenuScene)
+}
+
+
 class MainMenuScene: SKScene
 {
     var resumeButton: Button?
     var restartButton: Button?
     var titleNode: SKSpriteNode?
     var buttons: [Button]?
+    var mainMenuSceneDelegate: MainMenuSceneDelegate?
 
     
     init(size: CGSize)
@@ -78,7 +86,8 @@ extension MainMenuScene
         {
             () -> () in
 
-            
+            self.mainMenuSceneDelegate?.mainMenuSceneDidTapResumeButton(self)
+            return
         }
        
         return handler
@@ -91,6 +100,8 @@ extension MainMenuScene
         {
             () -> () in
             
+            self.mainMenuSceneDelegate?.mainMenuSceneDidTapRestartButton(self)
+            return
         }
         
         return handler
