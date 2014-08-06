@@ -17,23 +17,6 @@ class Button: SKSpriteNode
     var titleLabelNode: SKLabelNode?
     var isSelected: Bool
     var isEnabled: Bool
-    var title: String
-    {
-    set {
-        
-        if !titleLabelNode
-        {
-            titleLabelNode = SKLabelNode()
-            titleLabelNode!.position = CGPoint(
-                x: CGRectGetMidX(self.frame),
-                y: CGRectGetMidY(self.frame))
-        }
-        
-        titleLabelNode!.text = newValue
-
-        
-    }
-    }
     
     // Initializers.
     init(textureNormal: SKTexture!, textureSelected: SKTexture!, textureDisabled: SKTexture!)
@@ -71,6 +54,7 @@ class Button: SKSpriteNode
         self.init(normalImageNamed: normalImageNamed, selectedImageNamed: selectedImageNamed, disabledImageNamed: nil)
     }
     
+
     // Computed properties.
     var title: String?
     {
@@ -85,12 +69,17 @@ class Button: SKSpriteNode
             self.addChild(titleLabelNode)
         }
         
-        titleLabelNode!.text = title
+        titleLabelNode!.text = newValue
     }
     
     get
     {
-        return self.title
+        if titleLabelNode
+        {
+            return titleLabelNode!.text
+        }
+        
+        return nil
     }
     }
     
