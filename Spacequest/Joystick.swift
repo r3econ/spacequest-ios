@@ -5,27 +5,29 @@ typealias JoystickTranslationUpdateHandler = (CGPoint) -> ()
 let kDefaultJoystickUpdateTimeInterval: NSTimeInterval = 1/40.0
 
 
-class Joystick: SKSpriteNode
+class Joystick: SKNode
 {
     var updateHandler: JoystickTranslationUpdateHandler?
     var joystickRadius: CGFloat
     var stickNode: SKSpriteNode
+    var baseNode: SKSpriteNode?
     var isTouchedDown: Bool
     var currentJoystickTranslation: CGPoint
     var updateTimer: NSTimer?
     
-    init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String)
+    init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String?)
     {
         currentJoystickTranslation = CGPointZero
         isTouchedDown = false
         joystickRadius = maximumRadius
         stickNode = SKSpriteNode(imageNamed: stickImageNamed);
         
-        let baseTexture  = SKTexture(imageNamed: baseImageNamed)
+        if baseImageNamed
+        {
+            baseNode = SKSpriteNode(imageNamed: baseImageNamed);
+        }
         
-        super.init(texture: baseTexture,
-            color: UIColor.whiteColor(),
-            size: baseTexture.size())
+        super.init()
         
         // Create a timer that will call method that will notify about
         // Joystick movements.
@@ -36,11 +38,28 @@ class Joystick: SKSpriteNode
             userInfo: nil,
             repeats: true)
         
-        // Configure and add stick node.
+        // Configure and add stick & base nodes.
+        if baseNode
+        {
+            baseNode!.position = CGPointZero
+            self.addChild(baseNode);
+        }
+        
         stickNode.position = CGPointZero
         self.addChild(stickNode);
         
         userInteractionEnabled = true
+    }
+    
+    
+    var size: CGSize
+    {
+    get
+    {
+        return CGSize(
+            width: joystickRadius + stickNode.size.width/2,
+            height: joystickRadius + stickNode.size.height/2)
+    }
     }
 }
 

@@ -168,9 +168,16 @@ extension GameScene
             stickImageNamed: "joystick_stick",
             baseImageNamed: "joystick_base");
         
+        /*
         joystick!.position = CGPoint(
             x: CGRectGetMaxX(joystick!.frame) + kHUDControlMargin,
             y: CGRectGetHeight(joystick!.frame)/2 + kHUDControlMargin);
+        */
+        
+        joystick!.position = CGPoint(
+            x: joystick!.size.width,
+            y: joystick!.size.height);
+        
         
         joystick!.updateHandler =
         {
