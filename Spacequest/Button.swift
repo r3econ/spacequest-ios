@@ -83,6 +83,35 @@ class Button: SKSpriteNode
     }
     }
     
+    
+    var font: UIFont?
+    {
+    set
+    {
+        if !titleLabelNode
+        {
+            titleLabelNode = SKLabelNode()
+            titleLabelNode!.horizontalAlignmentMode = .Center
+            titleLabelNode!.verticalAlignmentMode = .Center
+            
+            self.addChild(titleLabelNode)
+        }
+        
+        titleLabelNode!.fontName = newValue!.fontName
+        titleLabelNode!.fontSize = newValue!.pointSize
+    }
+    
+    get
+    {
+        if titleLabelNode
+        {
+            return UIFont(name: titleLabelNode!.fontName, size: titleLabelNode!.fontSize)
+        }
+        
+        return nil
+    }
+    }
+    
     var selected: Bool
     {
     

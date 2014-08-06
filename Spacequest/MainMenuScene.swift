@@ -41,6 +41,7 @@ extension MainMenuScene
             normalImageNamed: "menu_button_normal",
             selectedImageNamed: "menu_button_normal")
         
+        resumeButton!.font = UIFont(name: "GillSans", size: 24.0)
         resumeButton!.title = NSLocalizedString("resume", comment: "")
         resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
         
@@ -49,6 +50,7 @@ extension MainMenuScene
             normalImageNamed: "menu_button_normal",
             selectedImageNamed: "menu_button_normal")
         
+        restartButton!.font = UIFont(name: "GillSans", size: 24.0)
         restartButton!.title = NSLocalizedString("restart", comment: "")
         restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
 
