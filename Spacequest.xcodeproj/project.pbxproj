@@ -37,8 +37,8 @@
 		B5972FEB197D3E130061D79C /* background_gradient_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE9197D3E130061D79C /* background_gradient_iphone@2x.png */; };
 		B5972FEF197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */; };
 		B5972FF0197D65D90061D79C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FEE197D65D90061D79C /* spark.png */; };
-		B5A9050B198297AD00862E2C /* GamePausedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9050A198297AD00862E2C /* GamePausedScene.swift */; };
-		B5A9050C198297AD00862E2C /* GamePausedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9050A198297AD00862E2C /* GamePausedScene.swift */; };
+		B5A9050B198297AD00862E2C /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9050A198297AD00862E2C /* MainMenuScene.swift */; };
+		B5A9050C198297AD00862E2C /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9050A198297AD00862E2C /* MainMenuScene.swift */; };
 		B5A9050F1982AC2200862E2C /* menu_button_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A9050D1982AC2200862E2C /* menu_button_normal@2x.png */; };
 		B5A905101982AC2200862E2C /* menu_button_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A9050D1982AC2200862E2C /* menu_button_normal@2x.png */; };
 		B5A905111982AC2200862E2C /* menu_button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A9050E1982AC2200862E2C /* menu_button_normal.png */; };
@@ -101,7 +101,7 @@
 		B5972FE9197D3E130061D79C /* background_gradient_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_gradient_iphone@2x.png"; sourceTree = "<group>"; };
 		B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerSpaceshipEngineBurst.sks; sourceTree = "<group>"; };
 		B5972FEE197D65D90061D79C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
-		B5A9050A198297AD00862E2C /* GamePausedScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePausedScene.swift; sourceTree = "<group>"; };
+		B5A9050A198297AD00862E2C /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		B5A9050D1982AC2200862E2C /* menu_button_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_button_normal@2x.png"; sourceTree = "<group>"; };
 		B5A9050E1982AC2200862E2C /* menu_button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button_normal.png; sourceTree = "<group>"; };
 		B5AA6046193FB48F00EB9920 /* Spacequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spacequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				B5AA604F193FB48F00EB9920 /* GameScene.swift */,
-				B5A9050A198297AD00862E2C /* GamePausedScene.swift */,
+				B5A9050A198297AD00862E2C /* MainMenuScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -506,7 +506,7 @@
 				B5AA606E193FB82300EB9920 /* BackgroundNode.swift in Sources */,
 				B5AA6052193FB48F00EB9920 /* GameViewController.swift in Sources */,
 				B5AA6076193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */,
-				B5A9050B198297AD00862E2C /* GamePausedScene.swift in Sources */,
+				B5A9050B198297AD00862E2C /* MainMenuScene.swift in Sources */,
 				B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */,
 				B5AA607A193FC34300EB9920 /* HealthProtocol.swift in Sources */,
 				B5175C4E1943A430005AECAA /* Joystick.swift in Sources */,
@@ -526,7 +526,7 @@
 				B5175C4F1943A430005AECAA /* Joystick.swift in Sources */,
 				B5AA6073193FB9F200EB9920 /* Spaceship.swift in Sources */,
 				B5AA607B193FC34300EB9920 /* HealthProtocol.swift in Sources */,
-				B5A9050C198297AD00862E2C /* GamePausedScene.swift in Sources */,
+				B5A9050C198297AD00862E2C /* MainMenuScene.swift in Sources */,
 				B53E78DC194105BA000CB230 /* Constants.swift in Sources */,
 				B5AA6077193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */,
 				B5175C521943B51F005AECAA /* Button.swift in Sources */,

@@ -196,7 +196,7 @@ extension GameScene
             {
                 () -> () in
                 
-                self.showGamePausedScene()
+                self.showMainMenuScene()
         }
         
         self.addChild(pauseButton)
@@ -363,9 +363,9 @@ Showing Scenes.
 */
 extension GameScene
 {
-    func showGamePausedScene()
+    func showMainMenuScene()
     {
-        self.view.presentScene(GamePausedScene(size:self.size),
+        self.view.presentScene(MainMenuScene(size:self.size),
             transition: SKTransition.crossFadeWithDuration(0.2))
     }
     

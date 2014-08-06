@@ -1,7 +1,7 @@
 import SpriteKit
 
 
-class GamePausedScene: SKScene
+class MainMenuScene: SKScene
 {
     var resumeButton: Button?
     var restartButton: Button?
@@ -24,7 +24,7 @@ class GamePausedScene: SKScene
 /**
  Buttons & Title.
 */
-extension GamePausedScene
+extension MainMenuScene
 {
     func configureButtons()
     {
