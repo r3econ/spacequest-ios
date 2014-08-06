@@ -4,6 +4,7 @@ import SpriteKit
 class GamePausedScene: SKScene
 {
     var resumeButton: Button?
+    var restartButton: Button?
     var buttons: [Button]?
 
     
@@ -19,15 +20,31 @@ class GamePausedScene: SKScene
     
     func configureButtons()
     {
+        // Resume button.
+        resumeButton = Button(
+            normalImageNamed: "menu_button_normal",
+            selectedImageNamed: "menu_button_normal")
+
+        resumeButton!.title = NSLocalizedString("resume", comment: "")
+        
+        // Restart button.
+        
+        buttons = [resumeButton!, restartButton!]
         resumeButton = Button(
             normalImageNamed: "menu_button_normal",
             selectedImageNamed: "menu_button_normal")
         resumeButton!.position = CGPoint(
             x: CGRectGetWidth(self.frame)/2,
             y: CGRectGetHeight(self.frame)/2)
-        resumeButton!.titleLabelNode
-        buttons = [resumeButton!]
+        resumeButton!.title = NSLocalizedString("resume", comment: "")
         
-        self.addChild(resumeButton)
+        for (index, button) in enumerate(buttons)
+        {
+            button!.position = CGPoint(
+                x: CGRectGetWidth(self.frame)/2,
+                y: CGRectGetHeight(self.frame)/2)
+            
+            self.addChild(button)
+        }
     }
 }
