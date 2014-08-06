@@ -24,12 +24,7 @@ class GameScene: SKScene
     {
         super.init(size: size)
 
-        // Switch off the background when running on simulator for performance reasons.
-        if UIDevice.currentDevice().model != "iPhone Simulator"
-        {
-            configureBackground()
-        }
-        
+        configureBackground()
         configurePlayerSpaceship()
         configurePhysics()
         configureHUD()
