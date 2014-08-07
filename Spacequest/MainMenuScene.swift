@@ -58,8 +58,8 @@ extension MainMenuScene
         restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
 
         buttons = [resumeButton!, restartButton!]
-        let horizontalPadding = 20.0
-        var totalButtonsWidth = 0.0
+        let horizontalPadding: CGFloat = 20.0
+        var totalButtonsWidth: CGFloat = 0.0
         
         // Calculate total width of the buttons area.
         for (index, button) in enumerate(buttons!)
@@ -69,7 +69,7 @@ extension MainMenuScene
         }
         
         // Calculate origin of first button.
-        var buttonOriginX = CGRectGetWidth(self.frame) / 2 + totalButtonsWidth / 2
+        var buttonOriginX = CGRectGetWidth(self.frame) / 2.0 + totalButtonsWidth / 2.0
         
         // Place buttons in the scene.
         for (index, button) in enumerate(buttons!)
@@ -82,7 +82,7 @@ extension MainMenuScene
             
             buttonOriginX -= button.size.width + horizontalPadding
             
-            let rotateAction = SKAction.rotateByAngle(M_PI/180 * 5, duration: 2.0)
+            let rotateAction = SKAction.rotateByAngle(CGFloat(M_PI/180.0 * 5.0), duration: 2.0)
             let sequence = SKAction.sequence([rotateAction, rotateAction.reversedAction()])
             
             button.runAction(SKAction.repeatActionForever(sequence))
