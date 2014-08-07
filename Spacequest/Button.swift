@@ -160,7 +160,7 @@ extension Button
                 touchDownEventHandler!()
             }
             
-            self.isSelected = true
+            self.selected = true
         }
     }
     
@@ -172,7 +172,7 @@ extension Button
             var touch : AnyObject! = touches.anyObject()
             var location = touch.locationInNode(self)
             
-            self.isSelected = CGRectContainsPoint(frame, location)
+            self.selected = CGRectContainsPoint(frame, location)
         }
     }
     
@@ -186,7 +186,7 @@ extension Button
                 touchUpInsideEventHandler!()
             }
             
-            self.isSelected = false
+            self.selected = false
         }
     }
     
@@ -195,7 +195,7 @@ extension Button
     {
         if isEnabled
         {
-            self.isSelected = false
+            self.selected = false
         }
     }
 }

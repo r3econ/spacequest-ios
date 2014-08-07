@@ -4,15 +4,9 @@ class BackgroundNode: SKEffectNode
 {
     var backgroundNode: SKSpriteNode
 
-    init(size: CGSize)
+    
+    init(size: CGSize, backgroundImageName: ImageName)
     {
-        var backgroundImageName = ImageName.GameBackgroundPad
-        
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone
-        {
-            backgroundImageName = ImageName.GameBackgroundPhone
-        }
-        
         backgroundNode = SKSpriteNode(imageNamed: backgroundImageName.toRaw())
         backgroundNode.size = size
         

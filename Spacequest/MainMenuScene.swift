@@ -15,16 +15,23 @@ class MainMenuScene: SKScene
     var titleNode: SKSpriteNode?
     var buttons: [Button]?
     var mainMenuSceneDelegate: MainMenuSceneDelegate?
+    var background: BackgroundNode?
 
     
     init(size: CGSize)
     {
         super.init(size: size)
-        
-        self.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
-        
+                
         configureTitle()
         configureButtons()
+        configureBackground()
+    }
+    
+    
+    func configureBackground()
+    {
+        background = BackgroundNode(size: self.size, backgroundImageName: ImageName.MenuBackgroundPhone)
+        background!.configureInScene(self)
     }
 }
 
@@ -38,46 +45,42 @@ extension MainMenuScene
     {
         // Resume button.
         resumeButton = Button(
-            normalImageNamed: "menu_button_normal",
-            selectedImageNamed: "menu_button_normal")
+            normalImageNamed: ImageName.MenuButtonResumeNormal.toRaw(),
+            selectedImageNamed: ImageName.MenuButtonResumeNormal.toRaw())
         
-        resumeButton!.font = UIFont(name: "GillSans", size: 24.0)
-        resumeButton!.title = NSLocalizedString("resume", comment: "")
         resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
         
         // Restart button.
         restartButton = Button(
-            normalImageNamed: "menu_button_normal",
-            selectedImageNamed: "menu_button_normal")
+            normalImageNamed: ImageName.MenuButtonRestartNormal.toRaw(),
+            selectedImageNamed: ImageName.MenuButtonRestartNormal.toRaw())
         
-        restartButton!.font = UIFont(name: "GillSans", size: 24.0)
-        restartButton!.title = NSLocalizedString("restart", comment: "")
         restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
 
         buttons = [resumeButton!, restartButton!]
-        let verticalPadding = 20.0
-        var totalButtonsHeight = 0.0
+        let horizontalPadding = 20.0
+        var totalButtonsWidth = 0.0
         
-        // Calculate total height of the buttons area.
+        // Calculate total width of the buttons area.
         for (index, button) in enumerate(buttons!)
         {
-            totalButtonsHeight += button.size.height
-            totalButtonsHeight += index != buttons!.count - 1 ? verticalPadding : 0.0
+            totalButtonsWidth += button.size.width
+            totalButtonsWidth += index != buttons!.count - 1 ? horizontalPadding : 0.0
         }
         
         // Calculate origin of first button.
-        var buttonOriginY = CGRectGetHeight(self.frame) / 2 + totalButtonsHeight / 2
+        var buttonOriginX = CGRectGetWidth(self.frame) / 2 + totalButtonsWidth / 2
         
         // Place buttons in the scene.
         for (index, button) in enumerate(buttons!)
         {
             button.position = CGPoint(
-                x: CGRectGetWidth(self.frame)/2,
-                y: buttonOriginY - button.size.height/2)
+                x: buttonOriginX - button.size.width/2,
+                y: button.size.height * 1.1)
             
             self.addChild(button)
             
-            buttonOriginY -= button.size.height + verticalPadding
+            buttonOriginX -= button.size.width + horizontalPadding
         }
     }
     

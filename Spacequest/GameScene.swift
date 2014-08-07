@@ -165,14 +165,8 @@ extension GameScene
     {
         joystick = Joystick(
             maximumRadius: 40.0,
-            stickImageNamed: "joystick_stick",
-            baseImageNamed: "joystick_base");
-        
-        /*
-        joystick!.position = CGPoint(
-            x: CGRectGetMaxX(joystick!.frame) + kHUDControlMargin,
-            y: CGRectGetHeight(joystick!.frame)/2 + kHUDControlMargin);
-        */
+            stickImageNamed: ImageName.JoystickStick.toRaw(),
+            baseImageNamed: ImageName.JoystickBase.toRaw());
         
         joystick!.position = CGPoint(
             x: joystick!.size.width,
@@ -193,8 +187,8 @@ extension GameScene
     func configureFireButton()
     {
         fireButton = Button(
-            normalImageNamed: "fire_button_normal",
-            selectedImageNamed: "fire_button_selected")
+            normalImageNamed: ImageName.FireButtonNormal.toRaw(),
+            selectedImageNamed: ImageName.FireButtonSelected.toRaw())
         
         fireButton!.position = CGPoint(
             x: CGRectGetWidth(self.frame) - CGRectGetWidth(fireButton!.frame) - kHUDControlMargin,
@@ -212,11 +206,11 @@ extension GameScene
     }
     
     
-    func configuremenuButton()
+    func configureMenuButton()
     {
         menuButton = Button(
-            normalImageNamed: "fire_button_normal",
-            selectedImageNamed: "fire_button_selected")
+            normalImageNamed: ImageName.ShowMenuButtonNormal.toRaw(),
+            selectedImageNamed: ImageName.ShowMenuButtonSelected.toRaw())
         
         menuButton!.position = CGPoint(
             x: CGRectGetWidth(self.frame) - CGRectGetWidth(menuButton!.frame)/2 - kHUDControlMargin,
@@ -242,7 +236,7 @@ extension GameScene
     
     func configureBackground()
     {
-        background = BackgroundNode(size: self.size)
+        background = BackgroundNode(size: self.size, backgroundImageName: ImageName.GameBackgroundPhone)
         background!.configureInScene(self)
     }
     
@@ -261,7 +255,7 @@ extension GameScene
         configureJoystick()
         configureFireButton()
         configureLifeIndicator()
-        configuremenuButton()
+        configureMenuButton()
     }
 }
 
