@@ -81,6 +81,11 @@ extension MainMenuScene
             self.addChild(button)
             
             buttonOriginX -= button.size.width + horizontalPadding
+            
+            let rotateAction = SKAction.rotateByAngle(M_PI/180 * 5, duration: 2.0)
+            let sequence = SKAction.sequence([rotateAction, rotateAction.reversedAction()])
+            
+            button.runAction(SKAction.repeatActionForever(sequence))
         }
     }
     
