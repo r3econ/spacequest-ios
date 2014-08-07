@@ -213,8 +213,8 @@ extension GameScene
             selectedImageNamed: ImageName.ShowMenuButtonSelected.toRaw())
         
         menuButton!.position = CGPoint(
-            x: CGRectGetWidth(self.frame) - CGRectGetWidth(menuButton!.frame)/2 - kHUDControlMargin,
-            y: CGRectGetHeight(self.frame) - CGRectGetHeight(menuButton!.frame)/2 - kHUDControlMargin);
+            x: CGRectGetWidth(self.frame) - CGRectGetWidth(menuButton!.frame)/2 - 2.0,
+            y: CGRectGetHeight(self.frame) - CGRectGetHeight(menuButton!.frame)/2);
         
         menuButton!.touchUpInsideEventHandler =
         {
