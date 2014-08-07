@@ -279,12 +279,22 @@ extension GameScene : SKPhysicsContactDelegate
         case .PlayerMissileEnemySpaceship:
             
             // Get the enemy node.
-            let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship ?
-                contact.bodyA.node as EnemySpaceship :
-                contact.bodyB.node as EnemySpaceship
+            var enemy: EnemySpaceship
+            var missile: Missile
+            
+            if contact.bodyA.node as? EnemySpaceship
+            {
+                enemy = contact.bodyA.node as EnemySpaceship
+                missile = contact.bodyB.node as Missile
+            }
+            else
+            {
+                enemy = contact.bodyB.node as EnemySpaceship
+                missile = contact.bodyA.node as Missile
+            }
 
             // Handle collision.
-            handlePlayerMissileEnemySpaceshipsCollision(enemy)
+            handleCollisionBetweenPlayerMissile(missile, enemySpaceships: enemy)
             
         case .PlayerSpaceshipEnemySpaceship:
             
@@ -294,17 +304,17 @@ extension GameScene : SKPhysicsContactDelegate
                 contact.bodyB.node as EnemySpaceship
             
             // Handle collision.
-            handlePlayerEnemySpaceshipsCollision(enemy)
+            handleCollisionBetweenPlayerSpaceship(playerSpaceship!, enemySpaceship: enemy)
             
         case .EnemyMissilePlayerSpaceship:
             
             // Get the enemy node.
-            let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship ?
-                contact.bodyA.node as EnemySpaceship :
-                contact.bodyB.node as EnemySpaceship
+            let missile: Missile = contact.bodyA.node as? Missile ?
+                contact.bodyA.node as Missile :
+                contact.bodyB.node as Missile
             
             // Handle collision.
-            handlePlayerSpaceshipEnemyMissileCollision(enemy)
+            handleCollisionBetweenPlayerSpaceship(playerSpaceship!, enemyMissile: missile)
         }
     }
     
@@ -364,19 +374,28 @@ extension GameScene
     /**
      Handle collision between player spaceship and the enemy spaceship.
     */
-    func handlePlayerEnemySpaceshipsCollision(enemy: EnemySpaceship!)
+    func handleCollisionBetweenPlayerSpaceship(
+        playerSpaceship: PlayerSpaceship,
+        enemySpaceship: EnemySpaceship!)
     {
-        destroyEnemy(enemy)
+        destroyEnemy(enemySpaceship)
     }
     
     
-    func handlePlayerMissileEnemySpaceshipsCollision(enemy: EnemySpaceship!)
+    func handleCollisionBetweenPlayerMissile(missile: Missile, enemySpaceships: EnemySpaceship)
     {
-        destroyEnemy(enemy)
+        destroyEnemy(enemySpaceships)
+        missile.removeFromParent()
     }
     
     
-    func handlePlayerSpaceshipEnemyMissileCollision(enemy: EnemySpaceship!)
+    func handleCollisionBetweenPlayerSpaceship(playerSpaceship: PlayerSpaceship, enemySpaceships: EnemySpaceship!)
+    {
+        
+    }
+    
+    
+    func handleCollisionBetweenPlayerSpaceship(playerSpaceship: PlayerSpaceship, enemyMissile: Missile)
     {
         
     }
