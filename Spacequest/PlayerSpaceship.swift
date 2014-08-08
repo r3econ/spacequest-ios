@@ -23,7 +23,6 @@ class PlayerSpaceship: Spaceship
 
         self.physicsBody.categoryBitMask = CategoryBitmask.PlayerSpaceship.toRaw()
         self.physicsBody.collisionBitMask =
-            CategoryBitmask.EnemySpaceship.toRaw() |
             CategoryBitmask.EnemyMissile.toRaw() |
             CategoryBitmask.ScreenBounds.toRaw()
         
