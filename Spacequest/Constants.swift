@@ -52,3 +52,17 @@ enum CollisionType
     case PlayerMissileEnemySpaceship
     case EnemyMissilePlayerSpaceship
 }
+
+
+enum ScoreValue: Int
+{
+    case PlayerMissileHitEnemySpaceship =  10
+    case PlayerSpaceshipHitEnemySpaceship =   0b10
+}
+
+
+enum HealthValue: Int
+{
+    case EnemyMissileHitPlayerSpaceship =  -10
+    case EnemySpaceshipHitPlayerSpaceship =  -20
+}

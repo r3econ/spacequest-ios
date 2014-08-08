@@ -398,6 +398,9 @@ extension GameScene
         enemySpaceship: EnemySpaceship!)
     {
         destroyEnemy(enemySpaceship)
+        
+        increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.toRaw())
+        decreasePlayerSpaceshipHealth(HealthValue.EnemySpaceshipHitPlayerSpaceship.toRaw())
     }
     
     
@@ -405,17 +408,61 @@ extension GameScene
     {
         destroyEnemy(enemySpaceships)
         missile.removeFromParent()
-    }
-    
-    
-    func handleCollisionBetweenPlayerSpaceship(playerSpaceship: PlayerSpaceship, enemySpaceships: EnemySpaceship!)
-    {
         
+        increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.toRaw())
     }
     
     
     func handleCollisionBetweenPlayerSpaceship(playerSpaceship: PlayerSpaceship, enemyMissile: Missile)
     {
         
+    }
+}
+
+
+/**
+Scores.
+*/
+extension GameScene
+{
+    func increaseScore(value: Int)
+    {
+        scoresNode!.value += value
+    }
+}
+
+
+/**
+Health.
+*/
+extension GameScene
+{
+    func increasePlayerSpaceshipHealth(value: Int)
+    {
+        playerSpaceship!.health += value;
+        
+        // Add a green color blend for a short moment to indicate the increase of health.
+        let colorizeAction = SKAction.colorizeWithColor(UIColor.greenColor(),
+            colorBlendFactor: 0.7,
+            duration: 0.2)
+        
+        let uncolorizeAction = SKAction.colorizeWithColorBlendFactor(0.0, duration: 0.2)
+        
+        playerSpaceship!.runAction(SKAction.sequence([colorizeAction, uncolorizeAction]))
+    }
+    
+    
+    func decreasePlayerSpaceshipHealth(value: Int)
+    {
+        playerSpaceship!.health -= value;
+        
+        // Add a red color blend for a short moment to indicate the decrease of health.
+        let colorizeAction = SKAction.colorizeWithColor(UIColor.redColor(),
+            colorBlendFactor: 0.7,
+            duration: 0.2)
+        let uncolorizeAction = SKAction.colorizeWithColorBlendFactor(0.0,
+            duration: 0.2)
+        
+        playerSpaceship!.runAction(SKAction.sequence([colorizeAction, uncolorizeAction]))
     }
 }
