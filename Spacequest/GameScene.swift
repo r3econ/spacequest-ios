@@ -18,6 +18,7 @@ class GameScene: SKScene
     var fireButton: Button?
     var menuButton: Button?
     var lifeIndicator: LifeIndicator?
+    var scoresNode: ScoresNode?
     var launchEnemyTimer: NSTimer?
     var gameSceneDelegate: GameSceneDelegate?
 
@@ -225,7 +226,7 @@ extension GameScene
                 return
         }
         
-        self.addChild(menuButton)
+        self.addChild(menuButton!)
     }
     
     
@@ -236,7 +237,18 @@ extension GameScene
             x: CGRectGetMaxX(joystick!.frame) + 2.5 * joystick!.joystickRadius,
             y: CGRectGetMinY(joystick!.frame) - joystick!.joystickRadius)
                 
-        self.addChild(lifeIndicator)
+        self.addChild(lifeIndicator!)
+    }
+    
+    
+    func configureScoresNode()
+    {
+        scoresNode = ScoresNode()
+        scoresNode!.position = CGPoint(
+            x: kHUDControlMargin/2,
+            y: CGRectGetHeight(self.frame) - 26)
+        
+        self.addChild(scoresNode!)
     }
     
     
@@ -262,6 +274,7 @@ extension GameScene
         configureFireButton()
         configureLifeIndicator()
         configureMenuButton()
+        configureScoresNode()
     }
 }
 
