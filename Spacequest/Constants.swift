@@ -5,7 +5,7 @@ enum ImageName: String
     case PlayerSpaceship = "player_spaceship"
     case EnemySpaceship = "enemy_spaceship"
     case Missile = "player_missile"
-    case Lifebar = "lifebar"
+    case LifeBall = "life_ball"
     case GameBackgroundPad = "game_background_ipad"
     case GameBackgroundPhone = "game_background_iphone"
     case MenuBackgroundPad = "menu_background_ipad"

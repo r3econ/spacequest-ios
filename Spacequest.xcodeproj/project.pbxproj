@@ -64,6 +64,8 @@
 		B5AEF0271993B64F004AA4E5 /* show_menu_button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF0231993B64F004AA4E5 /* show_menu_button_normal.png */; };
 		B5AEF0281993B64F004AA4E5 /* show_menu_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF0241993B64F004AA4E5 /* show_menu_button_selected@2x.png */; };
 		B5AEF0291993B64F004AA4E5 /* show_menu_button_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF0251993B64F004AA4E5 /* show_menu_button_normal@2x.png */; };
+		B5CACF2E1994D60B00DF18C0 /* life_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CACF2C1994D60B00DF18C0 /* life_ball.png */; };
+		B5CACF2F1994D60B00DF18C0 /* life_ball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CACF2D1994D60B00DF18C0 /* life_ball@2x.png */; };
 		B5CD264D1979438A00A98A95 /* LifeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD264C1979438A00A98A95 /* LifeIndicator.swift */; };
 		B5D80FEE19794FB800859CC0 /* joystick_stick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */; };
 		B5D80FEF19794FB800859CC0 /* joystick_base.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEB19794FB800859CC0 /* joystick_base.png */; };
@@ -129,6 +131,8 @@
 		B5AEF0231993B64F004AA4E5 /* show_menu_button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = show_menu_button_normal.png; sourceTree = "<group>"; };
 		B5AEF0241993B64F004AA4E5 /* show_menu_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show_menu_button_selected@2x.png"; sourceTree = "<group>"; };
 		B5AEF0251993B64F004AA4E5 /* show_menu_button_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show_menu_button_normal@2x.png"; sourceTree = "<group>"; };
+		B5CACF2C1994D60B00DF18C0 /* life_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = life_ball.png; sourceTree = "<group>"; };
+		B5CACF2D1994D60B00DF18C0 /* life_ball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "life_ball@2x.png"; sourceTree = "<group>"; };
 		B5CD264C1979438A00A98A95 /* LifeIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeIndicator.swift; sourceTree = "<group>"; };
 		B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "joystick_stick@2x.png"; sourceTree = "<group>"; };
 		B5D80FEB19794FB800859CC0 /* joystick_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick_base.png; sourceTree = "<group>"; };
@@ -208,6 +212,8 @@
 		B5972FE6197D3A170061D79C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B5CACF2C1994D60B00DF18C0 /* life_ball.png */,
+				B5CACF2D1994D60B00DF18C0 /* life_ball@2x.png */,
 				B5AEF0221993B64F004AA4E5 /* show_menu_button_selected.png */,
 				B5AEF0231993B64F004AA4E5 /* show_menu_button_normal.png */,
 				B5AEF0241993B64F004AA4E5 /* show_menu_button_selected@2x.png */,
@@ -479,7 +485,9 @@
 				B5AD30891979779A009769CB /* fire_button_normal.png in Resources */,
 				B5AEF01C19938718004AA4E5 /* menu_background_iphone.png in Resources */,
 				B5AEF02019938718004AA4E5 /* menu_button_resume_normal@2x.png in Resources */,
+				B5CACF2F1994D60B00DF18C0 /* life_ball@2x.png in Resources */,
 				B5972FE2197D23710061D79C /* player_missile.png in Resources */,
+				B5CACF2E1994D60B00DF18C0 /* life_ball.png in Resources */,
 				B5972FF0197D65D90061D79C /* spark.png in Resources */,
 				B5AD30881979779A009769CB /* fire_button_normal@2x.png in Resources */,
 				B5AEF01E19938718004AA4E5 /* menu_background_iphone@2x.png in Resources */,

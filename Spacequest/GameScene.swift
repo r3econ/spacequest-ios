@@ -17,6 +17,7 @@ class GameScene: SKScene
     var joystick: Joystick?
     var fireButton: Button?
     var menuButton: Button?
+    var lifeIndicator: LifeIndicator?
     var launchEnemyTimer: NSTimer?
     var gameSceneDelegate: GameSceneDelegate?
 
@@ -230,7 +231,12 @@ extension GameScene
     
     func configureLifeIndicator()
     {
-
+        lifeIndicator = LifeIndicator(texture: SKTexture(imageNamed: ImageName.LifeBall.toRaw()))
+        lifeIndicator!.position = CGPoint(
+            x: CGRectGetMaxX(joystick!.frame) + 2.5 * joystick!.joystickRadius,
+            y: CGRectGetMinY(joystick!.frame) - joystick!.joystickRadius)
+                
+        self.addChild(lifeIndicator)
     }
     
     
