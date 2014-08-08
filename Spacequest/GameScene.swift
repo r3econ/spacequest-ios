@@ -112,6 +112,8 @@ extension GameScene
     {
         var enemySpaceship = EnemySpaceship(lifePoints: 20)
         
+        enemySpaceship.didRunOutOfLifePointsEventHandler = enemyDidRunOutOfLifePointsEventHandler()
+        
         // Determine where to spawn the enemy along the Y axis.
         let minY = enemySpaceship.size.height;
         let maxY = CGRectGetHeight(self.frame) - enemySpaceship.size.height
@@ -316,7 +318,7 @@ extension GameScene : SKPhysicsContactDelegate
             }
 
             // Handle collision.
-            handleCollisionBetweenPlayerMissile(missile, enemySpaceships: enemy)
+            handleCollisionBetweenPlayerMissile(missile, enemySpaceship: enemy)
             
         case .PlayerSpaceshipEnemySpaceship:
             
@@ -373,26 +375,6 @@ Collision Handling.
 */
 extension GameScene
 {
-    func destroyEnemy(enemy: EnemySpaceship!)
-    {
-        let explosionEmitter = SKEmitterNode(fileNamed: "Explosion")
-        explosionEmitter.position.x = enemy.position.x - enemy.size.width/2
-        explosionEmitter.position.y = enemy.position.y
-        explosionEmitter.zPosition = enemy.zPosition + 1
-        
-        self.addChild(explosionEmitter)
-        
-        // Show the explosion.
-        explosionEmitter.runAction(SKAction.sequence([SKAction.waitForDuration(5), SKAction.removeFromParent()]))
-    
-        // Fade out the enemy and remove it.
-        enemy.runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.1), SKAction.removeFromParent()]))
-
-        // Play explosion sound.
-        scene.runAction(SKAction.playSoundFileNamed(SoundName.Explosion.toRaw(), waitForCompletion: false))
-    }
-    
-    
     /**
      Handle collision between player spaceship and the enemy spaceship.
     */
@@ -400,25 +382,32 @@ extension GameScene
         playerSpaceship: PlayerSpaceship,
         enemySpaceship: EnemySpaceship!)
     {
-        destroyEnemy(enemySpaceship)
-        
         increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.toRaw())
-        decreasePlayerSpaceshipLifePoints(HealthValue.EnemySpaceshipHitPlayerSpaceship.toRaw())
+        
+        decreasePlayerSpaceshipLifePoints(byValue: LifePointsValue.EnemySpaceshipHitPlayerSpaceship.toRaw())
+        
+        decreaseEnemySpaceshipLifePoints(
+            byValue: LifePointsValue.EnemySpaceshipHitPlayerSpaceship.toRaw(),
+            enemySpaceship: enemySpaceship)
     }
     
     
-    func handleCollisionBetweenPlayerMissile(missile: Missile, enemySpaceships: EnemySpaceship)
+    func handleCollisionBetweenPlayerMissile(missile: Missile, enemySpaceship: EnemySpaceship)
     {
-        destroyEnemy(enemySpaceships)
         missile.removeFromParent()
         
         increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.toRaw())
+        
+        decreaseEnemySpaceshipLifePoints(
+            byValue: LifePointsValue.PlayerMissileHitEnemySpaceship.toRaw(),
+            enemySpaceship: enemySpaceship)
+
     }
     
     
     func handleCollisionBetweenPlayerSpaceship(playerSpaceship: PlayerSpaceship, enemyMissile: Missile)
     {
-        
+        // Not supported.
     }
 }
 
@@ -436,13 +425,13 @@ extension GameScene
 
 
 /**
-Health.
+Life points handling.
 */
 extension GameScene
 {
-    func increasePlayerSpaceshipLifePoints(value: Int)
+    func increasePlayerSpaceshipLifePoints(#byValue: Int)
     {
-        playerSpaceship!.lifePoints += value
+        playerSpaceship!.lifePoints += byValue
         lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: true)
         
         // Add a green color blend for a short moment to indicate the increase of health.
@@ -456,9 +445,9 @@ extension GameScene
     }
     
     
-    func decreasePlayerSpaceshipLifePoints(value: Int)
+    func decreasePlayerSpaceshipLifePoints(#byValue: Int)
     {
-        playerSpaceship!.lifePoints += value
+        playerSpaceship!.lifePoints += byValue
         lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: true)
 
         // Add a red color blend for a short moment to indicate the decrease of health.
@@ -469,5 +458,67 @@ extension GameScene
             duration: 0.2)
         
         playerSpaceship!.runAction(SKAction.sequence([colorizeAction, uncolorizeAction]))
+    }
+    
+    
+    func decreaseEnemySpaceshipLifePoints(#byValue: Int, enemySpaceship: EnemySpaceship)
+    {
+        enemySpaceship.lifePoints += byValue
+        
+        // Add a red color blend for a short moment to indicate the decrease of health.
+        let colorizeAction = SKAction.colorizeWithColor(UIColor.redColor(),
+            colorBlendFactor: 0.7,
+            duration: 0.2)
+        let uncolorizeAction = SKAction.colorizeWithColorBlendFactor(0.0,
+            duration: 0.2)
+        
+        enemySpaceship.runAction(SKAction.sequence([colorizeAction, uncolorizeAction]))
+    }
+    
+    
+    func enemyDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler
+    {
+        let handler =
+        {
+            (object: AnyObject) -> () in
+            
+            let enemySpaceship = object as EnemySpaceship
+            
+            self.destroyEnemySpaceship(enemySpaceship)
+        }
+        
+        return handler
+    }
+    
+    
+    func playerDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler
+    {
+        let handler =
+        {
+            (object: AnyObject) -> () in
+            
+        }
+        
+        return handler
+    }
+    
+    
+    func destroyEnemySpaceship(enemy: EnemySpaceship!)
+    {
+        let explosionEmitter = SKEmitterNode(fileNamed: "Explosion")
+        explosionEmitter.position.x = enemy.position.x - enemy.size.width/2
+        explosionEmitter.position.y = enemy.position.y
+        explosionEmitter.zPosition = enemy.zPosition + 1
+        
+        self.addChild(explosionEmitter)
+        
+        // Show the explosion.
+        explosionEmitter.runAction(SKAction.sequence([SKAction.waitForDuration(5), SKAction.removeFromParent()]))
+        
+        // Fade out the enemy and remove it.
+        enemy.runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.1), SKAction.removeFromParent()]))
+        
+        // Play explosion sound.
+        scene.runAction(SKAction.playSoundFileNamed(SoundName.Explosion.toRaw(), waitForCompletion: false))
     }
 }

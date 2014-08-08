@@ -1,6 +1,6 @@
 import UIKit
 
-typealias DidRunOutOfLifePointsEventHandler = () -> ()
+typealias DidRunOutOfLifePointsEventHandler = (object: AnyObject) -> ()
 
 protocol LifePointsProtocol
 {

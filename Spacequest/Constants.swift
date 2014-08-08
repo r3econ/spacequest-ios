@@ -61,8 +61,9 @@ enum ScoreValue: Int
 }
 
 
-enum HealthValue: Int
+enum LifePointsValue: Int
 {
     case EnemyMissileHitPlayerSpaceship =  -10
     case EnemySpaceshipHitPlayerSpaceship =  -20
+    case PlayerMissileHitEnemySpaceship =  -25
 }
