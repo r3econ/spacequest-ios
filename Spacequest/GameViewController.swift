@@ -9,6 +9,8 @@ class GameViewController: UIViewController
 {
     var gameScene: GameScene?
     var mainMenuScene: MainMenuScene?
+    var gameOverScene: GameOverScene?
+    
     
     override func viewDidLoad()
     {
@@ -47,7 +49,7 @@ class GameViewController: UIViewController
 /**
  Scene handling.
 */
-extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
+extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOverSceneDelegate
 {
     func startNewGame(#animated: Bool)
     {
@@ -116,7 +118,22 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
     
     func showGameOverScene(#animated: Bool)
     {
+        let skView = self.view as SKView
         
+        gameOverScene = GameOverScene(size: skView.frame.size)
+        gameOverScene!.scaleMode = .AspectFill
+        gameOverScene!.gameOverSceneDelegate = self
+        
+        gameScene!.paused = true
+        
+        if animated
+        {
+            skView.presentScene(gameOverScene!, transition: SKTransition.crossFadeWithDuration(kSceneTransistionDuration))
+        }
+        else
+        {
+            skView.presentScene(gameOverScene!)
+        }
     }
     
     
@@ -141,6 +158,13 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
     
     
     func mainMenuSceneDidTapRestartButton(mainMenuScene: MainMenuScene)
+    {
+        startNewGame(animated: true)
+    }
+    
+    
+    // GameOverSceneDelegate
+    func gameOverSceneDidTapRestartButton(gameOverScene:GameOverScene)
     {
         startNewGame(animated: true)
     }

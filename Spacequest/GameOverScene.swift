@@ -1,26 +1,24 @@
 import SpriteKit
 
 
-protocol MainMenuSceneDelegate
+protocol GameOverSceneDelegate
 {
-    func mainMenuSceneDidTapResumeButton(mainMenuScene:MainMenuScene)
-    func mainMenuSceneDidTapRestartButton(mainMenuScene:MainMenuScene)
+    func gameOverSceneDidTapRestartButton(gameOverScene:GameOverScene)
 }
 
 
-class MainMenuScene: SKScene
+class GameOverScene: SKScene
 {
-    var resumeButton: Button?
     var restartButton: Button?
     var buttons: [Button]?
-    var mainMenuSceneDelegate: MainMenuSceneDelegate?
+    var gameOverSceneDelegate: GameOverSceneDelegate?
     var background: BackgroundNode?
-
+    
     
     init(size: CGSize)
     {
         super.init(size: size)
-                
+        
         configureButtons()
         configureBackground()
     }
@@ -35,27 +33,20 @@ class MainMenuScene: SKScene
 
 
 /**
- Buttons & Title.
+Buttons & Title.
 */
-extension MainMenuScene
-{
+extension GameOverScene
+    {
     func configureButtons()
     {
-        // Resume button.
-        resumeButton = Button(
-            normalImageNamed: ImageName.MenuButtonResumeNormal.toRaw(),
-            selectedImageNamed: ImageName.MenuButtonResumeNormal.toRaw())
-        
-        resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
-        
         // Restart button.
         restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.toRaw(),
             selectedImageNamed: ImageName.MenuButtonRestartNormal.toRaw())
         
         restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
-
-        buttons = [resumeButton!, restartButton!]
+        
+        buttons = [restartButton!]
         let horizontalPadding: CGFloat = 20.0
         var totalButtonsWidth: CGFloat = 0.0
         
@@ -88,27 +79,13 @@ extension MainMenuScene
     }
     
     
-    func resumeButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler
-    {
-        let handler =
-        {
-            () -> () in
-
-            self.mainMenuSceneDelegate?.mainMenuSceneDidTapResumeButton(self)
-            return
-        }
-       
-        return handler
-    }
-    
-    
     func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler
     {
         let handler =
         {
             () -> () in
             
-            self.mainMenuSceneDelegate?.mainMenuSceneDidTapRestartButton(self)
+            self.gameOverSceneDelegate?.gameOverSceneDidTapRestartButton(self)
             return
         }
         

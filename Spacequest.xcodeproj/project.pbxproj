@@ -68,6 +68,7 @@
 		B5CACF2F1994D60B00DF18C0 /* life_ball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CACF2D1994D60B00DF18C0 /* life_ball@2x.png */; };
 		B5CACF321994FA6100DF18C0 /* WawaSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B5CACF311994FA6100DF18C0 /* WawaSC-Regular.otf */; };
 		B5CACF351994FBE100DF18C0 /* ScoresNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CACF341994FBE100DF18C0 /* ScoresNode.swift */; };
+		B5CACF3719951DBD00DF18C0 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CACF3619951DBD00DF18C0 /* GameOverScene.swift */; };
 		B5CD264D1979438A00A98A95 /* LifeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD264C1979438A00A98A95 /* LifeIndicator.swift */; };
 		B5D80FEE19794FB800859CC0 /* joystick_stick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */; };
 		B5D80FEF19794FB800859CC0 /* joystick_base.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEB19794FB800859CC0 /* joystick_base.png */; };
@@ -137,6 +138,7 @@
 		B5CACF2D1994D60B00DF18C0 /* life_ball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "life_ball@2x.png"; sourceTree = "<group>"; };
 		B5CACF311994FA6100DF18C0 /* WawaSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WawaSC-Regular.otf"; sourceTree = "<group>"; };
 		B5CACF341994FBE100DF18C0 /* ScoresNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoresNode.swift; sourceTree = "<group>"; };
+		B5CACF3619951DBD00DF18C0 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		B5CD264C1979438A00A98A95 /* LifeIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeIndicator.swift; sourceTree = "<group>"; };
 		B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "joystick_stick@2x.png"; sourceTree = "<group>"; };
 		B5D80FEB19794FB800859CC0 /* joystick_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick_base.png; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				B5AA604F193FB48F00EB9920 /* GameScene.swift */,
 				B5A9050A198297AD00862E2C /* MainMenuScene.swift */,
+				B5CACF3619951DBD00DF18C0 /* GameOverScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 			files = (
 				B5AA6050193FB48F00EB9920 /* GameScene.swift in Sources */,
 				B5AA606E193FB82300EB9920 /* BackgroundNode.swift in Sources */,
+				B5CACF3719951DBD00DF18C0 /* GameOverScene.swift in Sources */,
 				B5AA6052193FB48F00EB9920 /* GameViewController.swift in Sources */,
 				B5AA6076193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */,
 				B5A9050B198297AD00862E2C /* MainMenuScene.swift in Sources */,
