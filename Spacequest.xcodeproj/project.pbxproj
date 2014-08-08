@@ -66,6 +66,7 @@
 		B5AEF0291993B64F004AA4E5 /* show_menu_button_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF0251993B64F004AA4E5 /* show_menu_button_normal@2x.png */; };
 		B5CACF2E1994D60B00DF18C0 /* life_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CACF2C1994D60B00DF18C0 /* life_ball.png */; };
 		B5CACF2F1994D60B00DF18C0 /* life_ball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CACF2D1994D60B00DF18C0 /* life_ball@2x.png */; };
+		B5CACF321994FA6100DF18C0 /* WawaSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B5CACF311994FA6100DF18C0 /* WawaSC-Regular.otf */; };
 		B5CD264D1979438A00A98A95 /* LifeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD264C1979438A00A98A95 /* LifeIndicator.swift */; };
 		B5D80FEE19794FB800859CC0 /* joystick_stick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */; };
 		B5D80FEF19794FB800859CC0 /* joystick_base.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEB19794FB800859CC0 /* joystick_base.png */; };
@@ -133,6 +134,7 @@
 		B5AEF0251993B64F004AA4E5 /* show_menu_button_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show_menu_button_normal@2x.png"; sourceTree = "<group>"; };
 		B5CACF2C1994D60B00DF18C0 /* life_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = life_ball.png; sourceTree = "<group>"; };
 		B5CACF2D1994D60B00DF18C0 /* life_ball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "life_ball@2x.png"; sourceTree = "<group>"; };
+		B5CACF311994FA6100DF18C0 /* WawaSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WawaSC-Regular.otf"; sourceTree = "<group>"; };
 		B5CD264C1979438A00A98A95 /* LifeIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeIndicator.swift; sourceTree = "<group>"; };
 		B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "joystick_stick@2x.png"; sourceTree = "<group>"; };
 		B5D80FEB19794FB800859CC0 /* joystick_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick_base.png; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 		B5AA6070193FB87B00EB9920 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B5CACF301994FA5600DF18C0 /* Fonts */,
 				B5972FEC197D65A10061D79C /* Emiters */,
 				B5972FE7197D3A210061D79C /* Sounds */,
 				B5972FE6197D3A170061D79C /* Images */,
@@ -368,6 +371,14 @@
 				B5AA607D193FCA8D00EB9920 /* Missile.swift */,
 			);
 			name = Missiles;
+			sourceTree = "<group>";
+		};
+		B5CACF301994FA5600DF18C0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B5CACF311994FA6100DF18C0 /* WawaSC-Regular.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		B5CD264A1979435000A98A95 /* Button */ = {
@@ -476,6 +487,7 @@
 				B511888A1942586A00FF8D13 /* enemy_spaceship.png in Resources */,
 				B5AEF02119938718004AA4E5 /* menu_button_restart_normal.png in Resources */,
 				B5AD308D19797806009769CB /* fire_button_selected.png in Resources */,
+				B5CACF321994FA6100DF18C0 /* WawaSC-Regular.otf in Resources */,
 				B5AEF0281993B64F004AA4E5 /* show_menu_button_selected@2x.png in Resources */,
 				B5AA6057193FB48F00EB9920 /* Images.xcassets in Resources */,
 				B5AA6055193FB48F00EB9920 /* Main.storyboard in Resources */,

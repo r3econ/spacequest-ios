@@ -23,6 +23,12 @@ enum ImageName: String
 }
 
 
+enum FontName: String
+{
+    case Wawati = "Wawati SC"
+}
+
+
 enum SoundName: String
 {
     case MissileLaunch = "missile_launch.wav"

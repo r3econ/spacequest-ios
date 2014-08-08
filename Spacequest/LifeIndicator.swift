@@ -13,7 +13,7 @@ class LifeIndicator: SKSpriteNode
             color: nil,
             size: texture.size())
         
-        titleLabelNode = SKLabelNode(fontNamed: "Futura-Medium")
+        titleLabelNode = SKLabelNode(fontNamed: FontName.Wawati.toRaw())
         titleLabelNode!.fontSize = 14.0
         titleLabelNode!.fontColor = UIColor(white: 1.0, alpha: 0.7)
         titleLabelNode!.horizontalAlignmentMode = .Center
