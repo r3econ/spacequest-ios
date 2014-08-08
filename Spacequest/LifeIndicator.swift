@@ -7,7 +7,7 @@ class LifeIndicator: SKSpriteNode
 
     init(texture: SKTexture!)
     {
-        value = 100
+        lifePoints = 100
         
         super.init(texture: texture,
             color: nil,
@@ -19,33 +19,55 @@ class LifeIndicator: SKSpriteNode
         titleLabelNode!.horizontalAlignmentMode = .Center
         titleLabelNode!.verticalAlignmentMode = .Center
 
-        update()
+        update(animated: false)
         
         self.addChild(titleLabelNode)
     }
     
-    var value: Int
+    var lifePoints: Int
     {
     
     didSet
     {
-        update()
+        update(animated: false)
     }
     
     }
     
     
-    func update()
+    func setLifePoints(points: Int, animated: Bool)
     {
-        titleLabelNode!.text = "\(value)"
+        lifePoints = points
+        
+        update(animated: animated)
+    }
+    
+    
+    func update(#animated: Bool)
+    {
+        titleLabelNode!.text = "\(lifePoints)"
         
         let blendColor = lifeBallColor()
-        let blendFactor = 0.9
+        let blendFactor = 1.0
         
-        self.color = blendColor
-        self.colorBlendFactor = blendFactor
-        titleLabelNode!.color = blendColor
-        titleLabelNode!.colorBlendFactor = blendFactor
+        if animated
+        {
+            let colorizeAction = SKAction.colorizeWithColor(blendColor, colorBlendFactor: blendFactor, duration: 0.2)
+            let scaleUpAction = SKAction.scaleBy(1.2, duration: 0.2)
+            let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleUpAction.reversedAction()])
+            
+            titleLabelNode!.color = blendColor
+            titleLabelNode!.colorBlendFactor = blendFactor
+            
+            self.runAction(SKAction.group([colorizeAction, scaleActionSequence]))
+        }
+        else
+        {
+            self.color = blendColor
+            self.colorBlendFactor = blendFactor
+            titleLabelNode!.color = blendColor
+            titleLabelNode!.colorBlendFactor = blendFactor
+        }
     }
     
     
@@ -57,9 +79,9 @@ class LifeIndicator: SKSpriteNode
         UIColor.greenColor().getRed(&fullBarColorR, green: &fullBarColorG, blue: &fullBarColorB, alpha: &fullBarColorAlpha)
         UIColor.redColor().getRed(&emptyBarColorR, green: &emptyBarColorG, blue: &emptyBarColorB, alpha: &emptyBarColorAlpha)
 
-        let resultColorR = emptyBarColorR + Double(value)/100 * (fullBarColorR - emptyBarColorR)
-        let resultColorG = emptyBarColorG + Double(value)/100 * (fullBarColorG - emptyBarColorG)
-        let resultColorB = emptyBarColorB + Double(value)/100 * (fullBarColorB - emptyBarColorB)
+        let resultColorR = emptyBarColorR + Double(lifePoints)/100 * (fullBarColorR - emptyBarColorR)
+        let resultColorG = emptyBarColorG + Double(lifePoints)/100 * (fullBarColorG - emptyBarColorG)
+        let resultColorB = emptyBarColorB + Double(lifePoints)/100 * (fullBarColorB - emptyBarColorB)
 
         return UIColor(red: resultColorR, green: resultColorG, blue: resultColorB, alpha: 1.0)
     }

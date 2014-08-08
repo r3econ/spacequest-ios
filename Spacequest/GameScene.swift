@@ -159,6 +159,7 @@ extension GameScene
             y: CGRectGetHeight(self.frame)/2 + 40.0);
         
         playerSpaceship!.health = 100
+        
         self.addChild(playerSpaceship)
     }
     
@@ -236,7 +237,9 @@ extension GameScene
         lifeIndicator!.position = CGPoint(
             x: CGRectGetMaxX(joystick!.frame) + 2.5 * joystick!.joystickRadius,
             y: CGRectGetMinY(joystick!.frame) - joystick!.joystickRadius)
-                
+
+        lifeIndicator!.setLifePoints(playerSpaceship!.health, animated: false)
+        
         self.addChild(lifeIndicator!)
     }
     
@@ -439,7 +442,8 @@ extension GameScene
 {
     func increasePlayerSpaceshipHealth(value: Int)
     {
-        playerSpaceship!.health += value;
+        playerSpaceship!.health += value
+        lifeIndicator!.setLifePoints(playerSpaceship!.health, animated: true)
         
         // Add a green color blend for a short moment to indicate the increase of health.
         let colorizeAction = SKAction.colorizeWithColor(UIColor.greenColor(),
@@ -454,8 +458,9 @@ extension GameScene
     
     func decreasePlayerSpaceshipHealth(value: Int)
     {
-        playerSpaceship!.health -= value;
-        
+        playerSpaceship!.health += value
+        lifeIndicator!.setLifePoints(playerSpaceship!.health, animated: true)
+
         // Add a red color blend for a short moment to indicate the decrease of health.
         let colorizeAction = SKAction.colorizeWithColor(UIColor.redColor(),
             colorBlendFactor: 0.7,
