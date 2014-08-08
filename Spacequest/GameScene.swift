@@ -110,7 +110,7 @@ extension GameScene
     
     func launchEnemySpaceship()
     {
-        var enemySpaceship = EnemySpaceship(health: 20)
+        var enemySpaceship = EnemySpaceship(lifePoints: 20)
         
         // Determine where to spawn the enemy along the Y axis.
         let minY = enemySpaceship.size.height;
@@ -158,7 +158,7 @@ extension GameScene
             x: playerSpaceship!.size.width/2 + 30.0,
             y: CGRectGetHeight(self.frame)/2 + 40.0);
         
-        playerSpaceship!.health = 100
+        playerSpaceship!.lifePoints = 100
         
         self.addChild(playerSpaceship)
     }
@@ -238,7 +238,7 @@ extension GameScene
             x: CGRectGetMaxX(joystick!.frame) + 2.5 * joystick!.joystickRadius,
             y: CGRectGetMinY(joystick!.frame) - joystick!.joystickRadius)
 
-        lifeIndicator!.setLifePoints(playerSpaceship!.health, animated: false)
+        lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: false)
         
         self.addChild(lifeIndicator!)
     }
@@ -403,7 +403,7 @@ extension GameScene
         destroyEnemy(enemySpaceship)
         
         increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.toRaw())
-        decreasePlayerSpaceshipHealth(HealthValue.EnemySpaceshipHitPlayerSpaceship.toRaw())
+        decreasePlayerSpaceshipLifePoints(HealthValue.EnemySpaceshipHitPlayerSpaceship.toRaw())
     }
     
     
@@ -440,10 +440,10 @@ Health.
 */
 extension GameScene
 {
-    func increasePlayerSpaceshipHealth(value: Int)
+    func increasePlayerSpaceshipLifePoints(value: Int)
     {
-        playerSpaceship!.health += value
-        lifeIndicator!.setLifePoints(playerSpaceship!.health, animated: true)
+        playerSpaceship!.lifePoints += value
+        lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: true)
         
         // Add a green color blend for a short moment to indicate the increase of health.
         let colorizeAction = SKAction.colorizeWithColor(UIColor.greenColor(),
@@ -456,10 +456,10 @@ extension GameScene
     }
     
     
-    func decreasePlayerSpaceshipHealth(value: Int)
+    func decreasePlayerSpaceshipLifePoints(value: Int)
     {
-        playerSpaceship!.health += value
-        lifeIndicator!.setLifePoints(playerSpaceship!.health, animated: true)
+        playerSpaceship!.lifePoints += value
+        lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: true)
 
         // Add a red color blend for a short moment to indicate the decrease of health.
         let colorizeAction = SKAction.colorizeWithColor(UIColor.redColor(),

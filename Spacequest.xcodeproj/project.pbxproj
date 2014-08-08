@@ -44,8 +44,8 @@
 		B5AA6073193FB9F200EB9920 /* Spaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6071193FB9F200EB9920 /* Spaceship.swift */; };
 		B5AA6076193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6075193FBA1400EB9920 /* PlayerSpaceship.swift */; };
 		B5AA6077193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6075193FBA1400EB9920 /* PlayerSpaceship.swift */; };
-		B5AA607A193FC34300EB9920 /* HealthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6079193FC34300EB9920 /* HealthProtocol.swift */; };
-		B5AA607B193FC34300EB9920 /* HealthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6079193FC34300EB9920 /* HealthProtocol.swift */; };
+		B5AA607A193FC34300EB9920 /* LifePointsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6079193FC34300EB9920 /* LifePointsProtocol.swift */; };
+		B5AA607B193FC34300EB9920 /* LifePointsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6079193FC34300EB9920 /* LifePointsProtocol.swift */; };
 		B5AA607E193FCA8D00EB9920 /* Missile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA607D193FCA8D00EB9920 /* Missile.swift */; };
 		B5AA607F193FCA8D00EB9920 /* Missile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA607D193FCA8D00EB9920 /* Missile.swift */; };
 		B5AD30881979779A009769CB /* fire_button_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AD30861979779A009769CB /* fire_button_normal@2x.png */; };
@@ -115,7 +115,7 @@
 		B5AA606D193FB82300EB9920 /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
 		B5AA6071193FB9F200EB9920 /* Spaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spaceship.swift; sourceTree = "<group>"; };
 		B5AA6075193FBA1400EB9920 /* PlayerSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSpaceship.swift; sourceTree = "<group>"; };
-		B5AA6079193FC34300EB9920 /* HealthProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthProtocol.swift; sourceTree = "<group>"; };
+		B5AA6079193FC34300EB9920 /* LifePointsProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifePointsProtocol.swift; sourceTree = "<group>"; };
 		B5AA607D193FCA8D00EB9920 /* Missile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Missile.swift; sourceTree = "<group>"; };
 		B5AD30861979779A009769CB /* fire_button_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fire_button_normal@2x.png"; sourceTree = "<group>"; };
 		B5AD30871979779A009769CB /* fire_button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire_button_normal.png; sourceTree = "<group>"; };
@@ -363,7 +363,7 @@
 		B5AA6078193FC31700EB9920 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				B5AA6079193FC34300EB9920 /* HealthProtocol.swift */,
+				B5AA6079193FC34300EB9920 /* LifePointsProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -551,7 +551,7 @@
 				B5AA6076193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */,
 				B5A9050B198297AD00862E2C /* MainMenuScene.swift in Sources */,
 				B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */,
-				B5AA607A193FC34300EB9920 /* HealthProtocol.swift in Sources */,
+				B5AA607A193FC34300EB9920 /* LifePointsProtocol.swift in Sources */,
 				B5175C4E1943A430005AECAA /* Joystick.swift in Sources */,
 				B5175C511943B51F005AECAA /* Button.swift in Sources */,
 				B5AA607E193FCA8D00EB9920 /* Missile.swift in Sources */,
@@ -569,7 +569,7 @@
 			files = (
 				B5175C4F1943A430005AECAA /* Joystick.swift in Sources */,
 				B5AA6073193FB9F200EB9920 /* Spaceship.swift in Sources */,
-				B5AA607B193FC34300EB9920 /* HealthProtocol.swift in Sources */,
+				B5AA607B193FC34300EB9920 /* LifePointsProtocol.swift in Sources */,
 				B5A9050C198297AD00862E2C /* MainMenuScene.swift in Sources */,
 				B53E78DC194105BA000CB230 /* Constants.swift in Sources */,
 				B5AA6077193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */,

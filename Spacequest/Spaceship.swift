@@ -1,7 +1,21 @@
 import SpriteKit
 
 
-class Spaceship: SKSpriteNode, HealthProtocol
+class Spaceship: SKSpriteNode, LifePointsProtocol
 {
-    var health: Int = 0
+    var didRunOutOfLifePointsEventHandler: DidRunOutOfLifePointsEventHandler? = nil
+    
+    var lifePoints: Int = 0
+    {
+    didSet
+    {
+        if lifePoints <= 0
+        {
+            if didRunOutOfLifePointsEventHandler
+            {
+                didRunOutOfLifePointsEventHandler!()
+            }
+        }
+    }
+    }
 }
