@@ -15,7 +15,7 @@ class GameViewController: UIViewController
         super.viewDidLoad()
         
         configureView()
-        startNewGame(false)
+        startNewGame(animated: false)
     }
     
     
@@ -49,7 +49,7 @@ class GameViewController: UIViewController
 */
 extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
 {
-    func startNewGame(animated: Bool)
+    func startNewGame(#animated: Bool)
     {
         let skView = self.view as SKView
         
@@ -68,7 +68,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
     }
     
     
-    func resumeGame(animated: Bool)
+    func resumeGame(#animated: Bool)
     {
         let skView = self.view as SKView
         
@@ -93,7 +93,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
     }
     
     
-    func showMainMenuScene(animated: Bool)
+    func showMainMenuScene(#animated: Bool)
     {
         let skView = self.view as SKView
         
@@ -114,29 +114,35 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
     }
     
     
-    func showGameOverScene(animated:Bool)
+    func showGameOverScene(#animated: Bool)
     {
         
     }
     
     
     // GameSceneDelegate
-    func gameSceneDidTapMainMenuButton(gameScene:GameScene)
+    func gameSceneDidTapMainMenuButton(gameScene: GameScene)
     {
-        showMainMenuScene(true)
+        showMainMenuScene(animated: true)
+    }
+    
+    
+    func gameScene(gameScene: GameScene, playerDidLoseWithScore: Int)
+    {
+        showGameOverScene(animated: true)
     }
     
     
     // MainMenuSceneDelegate
-    func mainMenuSceneDidTapResumeButton(mainMenuScene:MainMenuScene)
+    func mainMenuSceneDidTapResumeButton(mainMenuScene: MainMenuScene)
     {
-        resumeGame(true)
+        resumeGame(animated: true)
     }
     
     
-    func mainMenuSceneDidTapRestartButton(mainMenuScene:MainMenuScene)
+    func mainMenuSceneDidTapRestartButton(mainMenuScene: MainMenuScene)
     {
-        startNewGame(true)
+        startNewGame(animated: true)
     }
 }
 

@@ -4,6 +4,7 @@ import SpriteKit
 protocol GameSceneDelegate
 {
     func gameSceneDidTapMainMenuButton(gameScene:GameScene)
+    func gameScene(gameScene:GameScene, playerDidLoseWithScore: Int)
 }
 
 
@@ -161,6 +162,7 @@ extension GameScene
             y: CGRectGetHeight(self.frame)/2 + 40.0);
         
         playerSpaceship!.lifePoints = 100
+        playerSpaceship!.didRunOutOfLifePointsEventHandler = playerDidRunOutOfLifePointsEventHandler()
         
         self.addChild(playerSpaceship)
     }
@@ -484,7 +486,7 @@ extension GameScene
             
             let enemySpaceship = object as EnemySpaceship
             
-            self.destroyEnemySpaceship(enemySpaceship)
+            self.destroySpaceship(enemySpaceship)
         }
         
         return handler
@@ -497,18 +499,20 @@ extension GameScene
         {
             (object: AnyObject) -> () in
             
+            self.destroySpaceship(self.playerSpaceship)
+            self.gameSceneDelegate?.gameScene(self, playerDidLoseWithScore: self.scoresNode!.value)
         }
         
         return handler
     }
     
     
-    func destroyEnemySpaceship(enemy: EnemySpaceship!)
+    func destroySpaceship(spaceship: Spaceship!)
     {
         let explosionEmitter = SKEmitterNode(fileNamed: "Explosion")
-        explosionEmitter.position.x = enemy.position.x - enemy.size.width/2
-        explosionEmitter.position.y = enemy.position.y
-        explosionEmitter.zPosition = enemy.zPosition + 1
+        explosionEmitter.position.x = spaceship.position.x - spaceship.size.width/2
+        explosionEmitter.position.y = spaceship.position.y
+        explosionEmitter.zPosition = spaceship.zPosition + 1
         
         self.addChild(explosionEmitter)
         
@@ -516,7 +520,7 @@ extension GameScene
         explosionEmitter.runAction(SKAction.sequence([SKAction.waitForDuration(5), SKAction.removeFromParent()]))
         
         // Fade out the enemy and remove it.
-        enemy.runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.1), SKAction.removeFromParent()]))
+        spaceship.runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.1), SKAction.removeFromParent()]))
         
         // Play explosion sound.
         scene.runAction(SKAction.playSoundFileNamed(SoundName.Explosion.toRaw(), waitForCompletion: false))
