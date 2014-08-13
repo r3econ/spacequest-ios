@@ -28,7 +28,7 @@ class MainMenuScene: SKScene
     
     func configureBackground()
     {
-        background = BackgroundNode(size: self.size, backgroundImageName: ImageName.MenuBackgroundPhone)
+        background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.MenuBackgroundPhone)
         background!.configureInScene(self)
     }
 }

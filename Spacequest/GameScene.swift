@@ -261,7 +261,7 @@ extension GameScene
     
     func configureBackground()
     {
-        background = BackgroundNode(size: self.size, backgroundImageName: ImageName.GameBackgroundPhone)
+        background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.GameBackgroundPhone)
         background!.configureInScene(self)
     }
     
