@@ -38,8 +38,8 @@
 		B5AA6055193FB48F00EB9920 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5AA6053193FB48F00EB9920 /* Main.storyboard */; };
 		B5AA6057193FB48F00EB9920 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AA6056193FB48F00EB9920 /* Images.xcassets */; };
 		B5AA6063193FB48F00EB9920 /* SpacequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6062193FB48F00EB9920 /* SpacequestTests.swift */; };
-		B5AA606E193FB82300EB9920 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA606D193FB82300EB9920 /* BackgroundNode.swift */; };
-		B5AA606F193FB82300EB9920 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA606D193FB82300EB9920 /* BackgroundNode.swift */; };
+		B5AA606E193FB82300EB9920 /* ParallaxNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA606D193FB82300EB9920 /* ParallaxNode.swift */; };
+		B5AA606F193FB82300EB9920 /* ParallaxNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA606D193FB82300EB9920 /* ParallaxNode.swift */; };
 		B5AA6072193FB9F200EB9920 /* Spaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6071193FB9F200EB9920 /* Spaceship.swift */; };
 		B5AA6073193FB9F200EB9920 /* Spaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6071193FB9F200EB9920 /* Spaceship.swift */; };
 		B5AA6076193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6075193FBA1400EB9920 /* PlayerSpaceship.swift */; };
@@ -74,6 +74,7 @@
 		B5D80FEF19794FB800859CC0 /* joystick_base.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEB19794FB800859CC0 /* joystick_base.png */; };
 		B5D80FF019794FB800859CC0 /* joystick_base@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEC19794FB800859CC0 /* joystick_base@2x.png */; };
 		B5D80FF119794FB800859CC0 /* joystick_stick.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FED19794FB800859CC0 /* joystick_stick.png */; };
+		B5FA54F4199A5E32004F17B8 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA54F3199A5E32004F17B8 /* BackgroundNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,7 +114,7 @@
 		B5AA605C193FB48F00EB9920 /* SpacequestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpacequestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AA6061193FB48F00EB9920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5AA6062193FB48F00EB9920 /* SpacequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacequestTests.swift; sourceTree = "<group>"; };
-		B5AA606D193FB82300EB9920 /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
+		B5AA606D193FB82300EB9920 /* ParallaxNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxNode.swift; sourceTree = "<group>"; };
 		B5AA6071193FB9F200EB9920 /* Spaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spaceship.swift; sourceTree = "<group>"; };
 		B5AA6075193FBA1400EB9920 /* PlayerSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSpaceship.swift; sourceTree = "<group>"; };
 		B5AA6079193FC34300EB9920 /* LifePointsProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifePointsProtocol.swift; sourceTree = "<group>"; };
@@ -144,6 +145,7 @@
 		B5D80FEB19794FB800859CC0 /* joystick_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick_base.png; sourceTree = "<group>"; };
 		B5D80FEC19794FB800859CC0 /* joystick_base@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "joystick_base@2x.png"; sourceTree = "<group>"; };
 		B5D80FED19794FB800859CC0 /* joystick_stick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick_stick.png; sourceTree = "<group>"; };
+		B5FA54F3199A5E32004F17B8 /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +169,8 @@
 		B51188771942368F00FF8D13 /* Background */ = {
 			isa = PBXGroup;
 			children = (
-				B5AA606D193FB82300EB9920 /* BackgroundNode.swift */,
+				B5AA606D193FB82300EB9920 /* ParallaxNode.swift */,
+				B5FA54F3199A5E32004F17B8 /* BackgroundNode.swift */,
 			);
 			name = Background;
 			sourceTree = "<group>";
@@ -549,7 +552,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5AA6050193FB48F00EB9920 /* GameScene.swift in Sources */,
-				B5AA606E193FB82300EB9920 /* BackgroundNode.swift in Sources */,
+				B5AA606E193FB82300EB9920 /* ParallaxNode.swift in Sources */,
 				B5CACF3719951DBD00DF18C0 /* GameOverScene.swift in Sources */,
 				B5AA6052193FB48F00EB9920 /* GameViewController.swift in Sources */,
 				B5AA6076193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */,
@@ -563,6 +566,7 @@
 				B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */,
 				B5CD264D1979438A00A98A95 /* LifeIndicator.swift in Sources */,
 				B5AA6072193FB9F200EB9920 /* Spaceship.swift in Sources */,
+				B5FA54F4199A5E32004F17B8 /* BackgroundNode.swift in Sources */,
 				B53E78DB194105BA000CB230 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,7 +585,7 @@
 				B5AA6063193FB48F00EB9920 /* SpacequestTests.swift in Sources */,
 				B511887619422EF200FF8D13 /* EnemySpaceship.swift in Sources */,
 				B5AA607F193FCA8D00EB9920 /* Missile.swift in Sources */,
-				B5AA606F193FB82300EB9920 /* BackgroundNode.swift in Sources */,
+				B5AA606F193FB82300EB9920 /* ParallaxNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
