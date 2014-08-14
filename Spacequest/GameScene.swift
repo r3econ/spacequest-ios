@@ -262,7 +262,13 @@ extension GameScene
     func configureBackground()
     {
         background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.GameBackgroundPhone)
+                
+        background!.addLayer(
+            imageNames: ["Layer_0_0_iphone", "Layer_0_1_iphone"],//, "Layer_0_2_iphone", "Layer_0_3_iphone"],
+            speed: 100.0)
+        
         background!.configureInScene(self)
+        background!.startScrolling()
     }
     
     
