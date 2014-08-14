@@ -1,5 +1,6 @@
 import SpriteKit
 
+
 class ParallaxLayerAttributes: NSObject
 {
     var speed = 0.0
@@ -101,11 +102,23 @@ class ParallaxNode: SKEffectNode
                         x: -node.size.width,
                         y: 0.0)
                     
-                    let moveAction = SKAction.moveTo(destination, duration: moveDuration)
+                    let scrollAction = SKAction.moveTo(destination, duration: moveDuration)
+                    let repositionAction = SKAction.runBlock(
+                        {
+                            () -> () in
+                            
+                            self.repositionAndScrollNode(spriteNodes)
+                        })
                     
-                    node.runAction(moveAction)
+                    node.runAction(SKAction.sequence([scrollAction, repositionAction]))
                 }
             }
         }
+    }
+    
+    
+    func repositionAndScrollNodeInLayer(layer: [SKSpriteNode])
+    {
+
     }
 }
