@@ -6,7 +6,8 @@ class PlayerSpaceship: Spaceship
 {
     var engineBurstEmitter: SKEmitterNode?
     
-    init()
+    
+    override init()
     {
         let size = CGSize(width: 64, height: 50)
         

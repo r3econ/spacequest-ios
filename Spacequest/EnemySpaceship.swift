@@ -30,7 +30,7 @@ class EnemySpaceship: Spaceship
     
     func scheduleRandomMissileLaunch()
     {
-        if missileLaunchTimer
+        if missileLaunchTimer != nil
         {
             missileLaunchTimer!.invalidate()
         }
@@ -66,7 +66,7 @@ class EnemySpaceship: Spaceship
     
     deinit
     {
-        if missileLaunchTimer
+        if missileLaunchTimer != nil
         {
             missileLaunchTimer!.invalidate()
         }

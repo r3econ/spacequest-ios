@@ -3,7 +3,13 @@ import SpriteKit
 
 class Missile: SKSpriteNode
 {
-    init()
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    override init()
     {
         var size = CGSizeMake(10.0, 10.0)
         super.init(texture: SKTexture(imageNamed:ImageName.Missile.toRaw()),

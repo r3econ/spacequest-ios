@@ -15,7 +15,13 @@ class GameOverScene: SKScene
     var background: BackgroundNode?
     
     
-    init(size: CGSize)
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    override init(size: CGSize)
     {
         super.init(size: size)
         

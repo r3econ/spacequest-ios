@@ -3,7 +3,13 @@ import SpriteKit
 
 class ScoresNode: SKLabelNode
 {
-    init()
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    override init()
     {
         value = 0
         
@@ -18,7 +24,7 @@ class ScoresNode: SKLabelNode
     }
     
     
-    var value: Int
+    var value: Int = 0
     {
     
     didSet

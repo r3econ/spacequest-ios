@@ -5,6 +5,13 @@ class LifeIndicator: SKSpriteNode
 {
     var titleLabelNode: SKLabelNode?
 
+    
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+    }
+
+    
     init(texture: SKTexture!)
     {
         lifePoints = 100
@@ -24,7 +31,8 @@ class LifeIndicator: SKSpriteNode
         self.addChild(titleLabelNode)
     }
     
-    var lifePoints: Int
+    
+    var lifePoints: Int = 0
     {
     
     didSet
@@ -48,7 +56,7 @@ class LifeIndicator: SKSpriteNode
         titleLabelNode!.text = "\(lifePoints)"
         
         let blendColor = lifeBallColor()
-        let blendFactor = 1.0
+        let blendFactor: CGFloat = 1.0
         
         if animated
         {
@@ -73,15 +81,15 @@ class LifeIndicator: SKSpriteNode
     
     func lifeBallColor() -> UIColor
     {
-        var fullBarColorR = 0.0, fullBarColorG = 0.0, fullBarColorB = 0.0, fullBarColorAlpha  = 0.0
-        var emptyBarColorR = 0.0, emptyBarColorG = 0.0, emptyBarColorB = 0.0, emptyBarColorAlpha = 0.0
+        var fullBarColorR: CGFloat = 0.0, fullBarColorG: CGFloat = 0.0, fullBarColorB: CGFloat = 0.0, fullBarColorAlpha: CGFloat = 0.0
+        var emptyBarColorR: CGFloat = 0.0, emptyBarColorG: CGFloat = 0.0, emptyBarColorB: CGFloat = 0.0, emptyBarColorAlpha: CGFloat = 0.0
         
         UIColor.greenColor().getRed(&fullBarColorR, green: &fullBarColorG, blue: &fullBarColorB, alpha: &fullBarColorAlpha)
         UIColor.redColor().getRed(&emptyBarColorR, green: &emptyBarColorG, blue: &emptyBarColorB, alpha: &emptyBarColorAlpha)
 
-        let resultColorR = emptyBarColorR + Double(lifePoints)/100 * (fullBarColorR - emptyBarColorR)
-        let resultColorG = emptyBarColorG + Double(lifePoints)/100 * (fullBarColorG - emptyBarColorG)
-        let resultColorB = emptyBarColorB + Double(lifePoints)/100 * (fullBarColorB - emptyBarColorB)
+        let resultColorR = emptyBarColorR + CGFloat(lifePoints)/100 * (fullBarColorR - emptyBarColorR)
+        let resultColorG = emptyBarColorG + CGFloat(lifePoints)/100 * (fullBarColorG - emptyBarColorG)
+        let resultColorB = emptyBarColorB + CGFloat(lifePoints)/100 * (fullBarColorB - emptyBarColorB)
 
         return UIColor(red: resultColorR, green: resultColorG, blue: resultColorB, alpha: 1.0)
     }

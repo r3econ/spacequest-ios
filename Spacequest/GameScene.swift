@@ -8,7 +8,7 @@ protocol GameSceneDelegate
 }
 
 
-let kHUDControlMargin = 20.0
+let kHUDControlMargin: CGFloat = 20.0
 
 
 class GameScene: SKScene
@@ -23,7 +23,14 @@ class GameScene: SKScene
     var launchEnemyTimer: NSTimer?
     var gameSceneDelegate: GameSceneDelegate?
 
-    init(size: CGSize)
+    
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    override init(size: CGSize)
     {
         super.init(size: size)
 
@@ -79,7 +86,7 @@ extension GameScene
     
     func stopLaunchingEnemySpaceships()
     {
-        if launchEnemyTimer
+        if launchEnemyTimer != nil
         {
             launchEnemyTimer!.invalidate()
         }
@@ -301,7 +308,7 @@ extension GameScene : SKPhysicsContactDelegate
     {
         var collisionType: CollisionType? = collisionTypeWithContact(contact)
         
-        if !collisionType
+        if collisionType == nil
         {
             return
         }
@@ -314,7 +321,7 @@ extension GameScene : SKPhysicsContactDelegate
             var enemy: EnemySpaceship
             var missile: Missile
             
-            if contact.bodyA.node as? EnemySpaceship
+            if contact.bodyA.node as? EnemySpaceship != nil
             {
                 enemy = contact.bodyA.node as EnemySpaceship
                 missile = contact.bodyB.node as Missile
@@ -331,7 +338,7 @@ extension GameScene : SKPhysicsContactDelegate
         case .PlayerSpaceshipEnemySpaceship:
             
             // Get the enemy node.
-            let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship ?
+            let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship != nil ?
                 contact.bodyA.node as EnemySpaceship :
                 contact.bodyB.node as EnemySpaceship
             
@@ -341,7 +348,7 @@ extension GameScene : SKPhysicsContactDelegate
         case .EnemyMissilePlayerSpaceship:
             
             // Get the enemy node.
-            let missile: Missile = contact.bodyA.node as? Missile ?
+            let missile: Missile = contact.bodyA.node as? Missile != nil ?
                 contact.bodyA.node as Missile :
                 contact.bodyB.node as Missile
             

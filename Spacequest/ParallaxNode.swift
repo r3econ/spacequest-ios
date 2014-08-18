@@ -3,7 +3,7 @@ import SpriteKit
 
 class ParallaxLayerAttributes: NSObject
 {
-    var speed = 0.0
+    var speed : CGFloat = 0.0
     var imageNames: [String]
     
     init(imageNames: [String], speed: CGFloat = 0.0)
@@ -16,15 +16,21 @@ class ParallaxLayerAttributes: NSObject
 
 class ParallaxNode: SKEffectNode
 {
-    var staticBackgroundNode: SKSpriteNode
+    var staticBackgroundNode: SKSpriteNode?
     var layerNodes: [[SKSpriteNode]] = []
     var layerAttributes: [ParallaxLayerAttributes] = []
+    
+    
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+    }
     
     
     init(size: CGSize, staticBackgroundImageName: ImageName)
     {
         staticBackgroundNode = SKSpriteNode(imageNamed: staticBackgroundImageName.toRaw())
-        staticBackgroundNode.size = size
+        staticBackgroundNode!.size = size
         
         super.init()
         
@@ -97,17 +103,17 @@ class ParallaxNode: SKEffectNode
             {
                 for node in spriteNodes
                 {
-                    let moveDuration = (node.size.width + node.position.x) / speed
+                    let moveDuration = (node.size.width + node.position.x) / CGFloat(speed)
                     let destination = CGPoint(
                         x: -node.size.width,
                         y: 0.0)
                     
-                    let scrollAction = SKAction.moveTo(destination, duration: moveDuration)
+                    let scrollAction = SKAction.moveTo(destination, duration: NSTimeInterval(moveDuration))
                     let repositionAction = SKAction.runBlock(
                         {
                             () -> () in
                             
-                            self.repositionAndScrollNode(spriteNodes)
+                            self.repositionAndScrollNodeInLayer(spriteNodes)
                         })
                     
                     node.runAction(SKAction.sequence([scrollAction, repositionAction]))
