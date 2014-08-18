@@ -20,7 +20,6 @@ class ParallaxNode: SKEffectNode
     var layerNodes: [[SKSpriteNode]] = []
     var layerAttributes: [ParallaxLayerAttributes] = []
     
-    
     required init(coder aDecoder: NSCoder!)
     {
         super.init(coder: aDecoder)
@@ -97,34 +96,51 @@ class ParallaxNode: SKEffectNode
         for var index = 0; index < layerNodes.count; ++index
         {
             let speed = layerAttributes[index].speed
-            let spriteNodes = layerNodes[index]
+            let layer = layerNodes[index]
             
-            if speed != 0.0
+            for node in layer
             {
-                for node in spriteNodes
-                {
-                    let moveDuration = (node.size.width + node.position.x) / CGFloat(speed)
-                    let destination = CGPoint(
-                        x: -node.size.width,
-                        y: 0.0)
-                    
-                    let scrollAction = SKAction.moveTo(destination, duration: NSTimeInterval(moveDuration))
-                    let repositionAction = SKAction.runBlock(
-                        {
-                            () -> () in
-                            
-                            self.repositionAndScrollNodeInLayer(spriteNodes)
-                        })
-                    
-                    node.runAction(SKAction.sequence([scrollAction, repositionAction]))
-                }
+                scrollNode(node, inLayer: layer, shouldScheduleRepositioning: true)
             }
         }
     }
     
     
-    func repositionAndScrollNodeInLayer(layer: [SKSpriteNode])
+    func scrollNode(node: SKSpriteNode, inLayer:[SKSpriteNode], shouldScheduleRepositioning: Bool)
     {
-
+        let moveDuration = (node.size.width + node.position.x) / CGFloat(speed)
+        let destination = CGPoint(
+            x: -node.size.width,
+            y: 0.0)
+        
+        let scrollAction = SKAction.moveTo(destination, duration: NSTimeInterval(moveDuration))
+        
+        if shouldScheduleRepositioning
+        {
+            let completionAction = SKAction.runBlock(
+                {
+                    () -> () in
+                    
+                    self.repositionFirstNodeInLayer(inLayer)
+                    self.scrollNode(node, inLayer: inLayer, shouldScheduleRepositioning: true)
+            })
+            
+            node.runAction(SKAction.sequence([scrollAction, completionAction]))
+        }
+    }
+    
+    
+    func repositionFirstNodeInLayer(layer: [SKSpriteNode])
+    {
+        let firstNode: SKSpriteNode! = layer.first
+        let lastNode: SKSpriteNode! = layer.last
+        layer.append(firstNode)
+        
+        
+        // Move the first node to the end.
+        firstNode.position = CGPoint(
+            x: CGRectGetMaxX(lastNode.frame) + 5.0 + firstNode.size.width/2,
+            y: 0)
+        
     }
 }
