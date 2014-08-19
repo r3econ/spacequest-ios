@@ -137,7 +137,7 @@ extension Joystick
     
     func handleJoystickTranslationUpdate()
     {
-        if isTouchedDown != nil && updateHandler != nil
+        if isTouchedDown && updateHandler != nil
         {
             updateHandler!(currentJoystickTranslation)
         }
