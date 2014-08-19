@@ -69,7 +69,7 @@ class ParallaxNode: SKEffectNode
             if index == 0
             {
                 newSpriteNode.position = CGPoint(
-                    x:-100 + self.frame.size.width/2,
+                    x: self.frame.size.width/2,
                     y: 0)
             }
             // Place next image.
@@ -78,7 +78,7 @@ class ParallaxNode: SKEffectNode
                 let previousSpriteNode = spriteNodes[index - 1]
                 
                 newSpriteNode.position = CGPoint(
-                    x: CGRectGetMaxX(previousSpriteNode.frame) + 5.0 + newSpriteNode.size.width/2,
+                    x: CGRectGetMaxX(previousSpriteNode.frame) + newSpriteNode.size.width/2,
                     y: 0)
             }
             
@@ -140,7 +140,13 @@ class ParallaxNode: SKEffectNode
         
         // Move the first node to the end.
         firstNode.position = CGPoint(
-            x: CGRectGetMaxX(lastNode.frame) + 5.0 + firstNode.size.width/2,
+            x: CGRectGetMaxX(lastNode.frame) + firstNode.size.width/2,
             y: 0)
+    }
+    
+    
+    func update(currentTime: CFTimeInterval)
+    {
+        
     }
 }

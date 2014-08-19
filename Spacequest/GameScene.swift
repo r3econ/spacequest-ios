@@ -48,7 +48,11 @@ class GameScene: SKScene
    
     override func update(currentTime: CFTimeInterval)
     {
-
+        // Update the background.
+        if self.paused == false
+        {
+            background!.update(currentTime)
+        }
     }
     
     
@@ -269,10 +273,10 @@ extension GameScene
     func configureBackground()
     {
         background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.GameBackgroundPhone)
-                
+        
         background!.addLayer(
-            imageNames: ["Layer_0_0_iphone", "Layer_0_1_iphone"],//, "Layer_0_2_iphone", "Layer_0_3_iphone"],
-            speed: 100.0)
+            imageNames: ["Layer_0_0_iphone", "Layer_0_1_iphone"], //, "Layer_0_2_iphone", "Layer_0_3_iphone", "Layer_0_4_iphone"],
+            speed: 200.0)
         
         background!.configureInScene(self)
         background!.startScrolling()
