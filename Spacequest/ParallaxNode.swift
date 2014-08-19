@@ -96,19 +96,19 @@ class ParallaxNode: SKEffectNode
         for var index = 0; index < layerNodes.count; ++index
         {
             let speed = layerAttributes[index].speed
-            let layer = layerNodes[index]
+            var layer = layerNodes[index]
             
             for node in layer
             {
-                scrollNode(node, inLayer: layer, shouldScheduleRepositioning: true)
+                scrollNode(node, withSpeed: speed, inLayer: &layer, shouldScheduleRepositioning: true)
             }
         }
     }
     
     
-    func scrollNode(node: SKSpriteNode, inLayer:[SKSpriteNode], shouldScheduleRepositioning: Bool)
+    func scrollNode(node: SKSpriteNode, withSpeed: CGFloat, inout inLayer:[SKSpriteNode], shouldScheduleRepositioning: Bool)
     {
-        let moveDuration = (node.size.width + node.position.x) / CGFloat(speed)
+        let moveDuration = (node.size.width + node.position.x) / CGFloat(withSpeed)
         let destination = CGPoint(
             x: -node.size.width,
             y: 0.0)
@@ -121,8 +121,8 @@ class ParallaxNode: SKEffectNode
                 {
                     () -> () in
                     
-                    self.repositionFirstNodeInLayer(inLayer)
-                    self.scrollNode(node, inLayer: inLayer, shouldScheduleRepositioning: true)
+                    self.repositionFirstNodeInLayer(&inLayer)
+                    self.scrollNode(node, withSpeed: withSpeed, inLayer: &inLayer, shouldScheduleRepositioning: true)
             })
             
             node.runAction(SKAction.sequence([scrollAction, completionAction]))
@@ -130,17 +130,17 @@ class ParallaxNode: SKEffectNode
     }
     
     
-    func repositionFirstNodeInLayer(layer: [SKSpriteNode])
+    func repositionFirstNodeInLayer(inout layer: [SKSpriteNode])
     {
         let firstNode: SKSpriteNode! = layer.first
         let lastNode: SKSpriteNode! = layer.last
-        layer.append(firstNode)
         
+        layer.removeAtIndex(0)
+        layer.append(firstNode)
         
         // Move the first node to the end.
         firstNode.position = CGPoint(
             x: CGRectGetMaxX(lastNode.frame) + 5.0 + firstNode.size.width/2,
             y: 0)
-        
     }
 }
