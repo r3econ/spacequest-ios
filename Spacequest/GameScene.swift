@@ -279,7 +279,6 @@ extension GameScene
             speed: 200.0)
         
         background!.configureInScene(self)
-        background!.startScrolling()
     }
     
     
