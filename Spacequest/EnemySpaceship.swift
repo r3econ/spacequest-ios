@@ -6,12 +6,12 @@ class EnemySpaceship: Spaceship
     var missileLaunchTimer: NSTimer?
     
     
-    init(health: Int)
+    init(lifePoints: Int)
     {
         let size = CGSize(width: 36, height: 31)
         super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.toRaw()), color: nil, size: size)
         
-        self.health = health
+        self.lifePoints = lifePoints
         
         // Collisions.
         self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
@@ -30,7 +30,7 @@ class EnemySpaceship: Spaceship
     
     func scheduleRandomMissileLaunch()
     {
-        if missileLaunchTimer
+        if missileLaunchTimer != nil
         {
             missileLaunchTimer!.invalidate()
         }
@@ -66,7 +66,7 @@ class EnemySpaceship: Spaceship
     
     deinit
     {
-        if missileLaunchTimer
+        if missileLaunchTimer != nil
         {
             missileLaunchTimer!.invalidate()
         }

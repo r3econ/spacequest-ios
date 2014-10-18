@@ -9,13 +9,15 @@ class GameViewController: UIViewController
 {
     var gameScene: GameScene?
     var mainMenuScene: MainMenuScene?
+    var gameOverScene: GameOverScene?
+    
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         configureView()
-        startNewGame(false)
+        startNewGame(animated: false)
     }
     
     
@@ -47,9 +49,9 @@ class GameViewController: UIViewController
 /**
  Scene handling.
 */
-extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
+extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOverSceneDelegate
 {
-    func startNewGame(animated: Bool)
+    func startNewGame(#animated: Bool)
     {
         let skView = self.view as SKView
         
@@ -68,7 +70,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
     }
     
     
-    func resumeGame(animated: Bool)
+    func resumeGame(#animated: Bool)
     {
         let skView = self.view as SKView
         
@@ -93,7 +95,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
     }
     
     
-    func showMainMenuScene(animated: Bool)
+    func showMainMenuScene(#animated: Bool)
     {
         let skView = self.view as SKView
         
@@ -114,29 +116,57 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate
     }
     
     
-    func showGameOverScene(animated:Bool)
+    func showGameOverScene(#animated: Bool)
     {
+        let skView = self.view as SKView
         
+        gameOverScene = GameOverScene(size: skView.frame.size)
+        gameOverScene!.scaleMode = .AspectFill
+        gameOverScene!.gameOverSceneDelegate = self
+        
+        gameScene!.paused = true
+        
+        if animated
+        {
+            skView.presentScene(gameOverScene!, transition: SKTransition.crossFadeWithDuration(kSceneTransistionDuration))
+        }
+        else
+        {
+            skView.presentScene(gameOverScene!)
+        }
     }
     
     
     // GameSceneDelegate
-    func gameSceneDidTapMainMenuButton(gameScene:GameScene)
+    func gameSceneDidTapMainMenuButton(gameScene: GameScene)
     {
-        showMainMenuScene(true)
+        showMainMenuScene(animated: true)
+    }
+    
+    
+    func gameScene(gameScene: GameScene, playerDidLoseWithScore: Int)
+    {
+        showGameOverScene(animated: true)
     }
     
     
     // MainMenuSceneDelegate
-    func mainMenuSceneDidTapResumeButton(mainMenuScene:MainMenuScene)
+    func mainMenuSceneDidTapResumeButton(mainMenuScene: MainMenuScene)
     {
-        resumeGame(true)
+        resumeGame(animated: true)
     }
     
     
-    func mainMenuSceneDidTapRestartButton(mainMenuScene:MainMenuScene)
+    func mainMenuSceneDidTapRestartButton(mainMenuScene: MainMenuScene)
     {
-        startNewGame(true)
+        startNewGame(animated: true)
+    }
+    
+    
+    // GameOverSceneDelegate
+    func gameOverSceneDidTapRestartButton(gameOverScene:GameOverScene)
+    {
+        startNewGame(animated: true)
     }
 }
 

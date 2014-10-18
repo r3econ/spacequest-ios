@@ -11,14 +11,21 @@ class Button: SKSpriteNode
     var touchUpInsideEventHandler: TouchUpInsideEventHandler?
     var continousTouchDownEventHandler: ContinousTouchDownEventHandler?
     var touchDownEventHandler: TouchDownEventHandler?
-    var textureNormal: SKTexture
+    var textureNormal: SKTexture?
     var textureSelected: SKTexture?
     var textureDisabled: SKTexture?
     var titleLabelNode: SKLabelNode?
-    var isSelected: Bool
-    var isEnabled: Bool
+    var isSelected: Bool = false
+    var isEnabled: Bool = true
+    
     
     // Initializers.
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
     init(textureNormal: SKTexture!, textureSelected: SKTexture!, textureDisabled: SKTexture!)
     {
         self.textureNormal = textureNormal
@@ -60,7 +67,7 @@ class Button: SKSpriteNode
     {
     set
     {
-        if !titleLabelNode
+        if titleLabelNode == nil
         {
             titleLabelNode = SKLabelNode()
             titleLabelNode!.horizontalAlignmentMode = .Center
@@ -74,7 +81,7 @@ class Button: SKSpriteNode
     
     get
     {
-        if titleLabelNode
+        if titleLabelNode != nil
         {
             return titleLabelNode!.text
         }
@@ -88,7 +95,7 @@ class Button: SKSpriteNode
     {
     set
     {
-        if !titleLabelNode
+        if titleLabelNode == nil
         {
             titleLabelNode = SKLabelNode()
             titleLabelNode!.horizontalAlignmentMode = .Center
@@ -103,7 +110,7 @@ class Button: SKSpriteNode
     
     get
     {
-        if titleLabelNode
+        if titleLabelNode != nil
         {
             return UIFont(name: titleLabelNode!.fontName, size: titleLabelNode!.fontSize)
         }
@@ -155,7 +162,7 @@ extension Button
     {
         if self.isEnabled
         {
-            if touchDownEventHandler
+            if touchDownEventHandler != nil
             {
                 touchDownEventHandler!()
             }
@@ -181,7 +188,7 @@ extension Button
     {
         if isEnabled
         {
-            if touchUpInsideEventHandler
+            if touchUpInsideEventHandler != nil
             {
                 touchUpInsideEventHandler!()
             }

@@ -4,10 +4,11 @@ import SpriteKit
 protocol GameSceneDelegate
 {
     func gameSceneDidTapMainMenuButton(gameScene:GameScene)
+    func gameScene(gameScene:GameScene, playerDidLoseWithScore: Int)
 }
 
 
-let kHUDControlMargin = 20.0
+let kHUDControlMargin: CGFloat = 20.0
 
 
 class GameScene: SKScene
@@ -17,10 +18,19 @@ class GameScene: SKScene
     var joystick: Joystick?
     var fireButton: Button?
     var menuButton: Button?
+    var lifeIndicator: LifeIndicator?
+    var scoresNode: ScoresNode?
     var launchEnemyTimer: NSTimer?
     var gameSceneDelegate: GameSceneDelegate?
 
-    init(size: CGSize)
+    
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    override init(size: CGSize)
     {
         super.init(size: size)
 
@@ -38,7 +48,11 @@ class GameScene: SKScene
    
     override func update(currentTime: CFTimeInterval)
     {
-
+        // Update the background.
+        if self.paused == false
+        {
+            background!.update(currentTime)
+        }
     }
     
     
@@ -76,7 +90,7 @@ extension GameScene
     
     func stopLaunchingEnemySpaceships()
     {
-        if launchEnemyTimer
+        if launchEnemyTimer != nil
         {
             launchEnemyTimer!.invalidate()
         }
@@ -108,7 +122,9 @@ extension GameScene
     
     func launchEnemySpaceship()
     {
-        var enemySpaceship = EnemySpaceship(health: 20)
+        var enemySpaceship = EnemySpaceship(lifePoints: 20)
+        
+        enemySpaceship.didRunOutOfLifePointsEventHandler = enemyDidRunOutOfLifePointsEventHandler()
         
         // Determine where to spawn the enemy along the Y axis.
         let minY = enemySpaceship.size.height;
@@ -156,7 +172,9 @@ extension GameScene
             x: playerSpaceship!.size.width/2 + 30.0,
             y: CGRectGetHeight(self.frame)/2 + 40.0);
         
-        playerSpaceship!.health = 100
+        playerSpaceship!.lifePoints = 100
+        playerSpaceship!.didRunOutOfLifePointsEventHandler = playerDidRunOutOfLifePointsEventHandler()
+        
         self.addChild(playerSpaceship)
     }
     
@@ -224,19 +242,42 @@ extension GameScene
                 return
         }
         
-        self.addChild(menuButton)
+        self.addChild(menuButton!)
     }
     
     
     func configureLifeIndicator()
     {
+        lifeIndicator = LifeIndicator(texture: SKTexture(imageNamed: ImageName.LifeBall.toRaw()))
+        lifeIndicator!.position = CGPoint(
+            x: CGRectGetMaxX(joystick!.frame) + 2.5 * joystick!.joystickRadius,
+            y: CGRectGetMinY(joystick!.frame) - joystick!.joystickRadius)
 
+        lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: false)
+        
+        self.addChild(lifeIndicator!)
+    }
+    
+    
+    func configureScoresNode()
+    {
+        scoresNode = ScoresNode()
+        scoresNode!.position = CGPoint(
+            x: kHUDControlMargin/2,
+            y: CGRectGetHeight(self.frame) - 26)
+        
+        self.addChild(scoresNode!)
     }
     
     
     func configureBackground()
     {
-        background = BackgroundNode(size: self.size, backgroundImageName: ImageName.GameBackgroundPhone)
+        background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.GameBackgroundPhone)
+        
+        background!.addLayer(
+            imageNames: ["Layer_0_0_iphone", "Layer_0_1_iphone"], //, "Layer_0_2_iphone", "Layer_0_3_iphone", "Layer_0_4_iphone"],
+            speed: 200.0)
+        
         background!.configureInScene(self)
     }
     
@@ -256,6 +297,7 @@ extension GameScene
         configureFireButton()
         configureLifeIndicator()
         configureMenuButton()
+        configureScoresNode()
     }
 }
 
@@ -269,7 +311,7 @@ extension GameScene : SKPhysicsContactDelegate
     {
         var collisionType: CollisionType? = collisionTypeWithContact(contact)
         
-        if !collisionType
+        if collisionType == nil
         {
             return
         }
@@ -282,7 +324,7 @@ extension GameScene : SKPhysicsContactDelegate
             var enemy: EnemySpaceship
             var missile: Missile
             
-            if contact.bodyA.node as? EnemySpaceship
+            if contact.bodyA.node as? EnemySpaceship != nil
             {
                 enemy = contact.bodyA.node as EnemySpaceship
                 missile = contact.bodyB.node as Missile
@@ -294,12 +336,12 @@ extension GameScene : SKPhysicsContactDelegate
             }
 
             // Handle collision.
-            handleCollisionBetweenPlayerMissile(missile, enemySpaceships: enemy)
+            handleCollisionBetweenPlayerMissile(missile, enemySpaceship: enemy)
             
         case .PlayerSpaceshipEnemySpaceship:
             
             // Get the enemy node.
-            let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship ?
+            let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship != nil ?
                 contact.bodyA.node as EnemySpaceship :
                 contact.bodyB.node as EnemySpaceship
             
@@ -309,7 +351,7 @@ extension GameScene : SKPhysicsContactDelegate
         case .EnemyMissilePlayerSpaceship:
             
             // Get the enemy node.
-            let missile: Missile = contact.bodyA.node as? Missile ?
+            let missile: Missile = contact.bodyA.node as? Missile != nil ?
                 contact.bodyA.node as Missile :
                 contact.bodyB.node as Missile
             
@@ -351,26 +393,6 @@ Collision Handling.
 */
 extension GameScene
 {
-    func destroyEnemy(enemy: EnemySpaceship!)
-    {
-        let explosionEmitter = SKEmitterNode(fileNamed: "Explosion")
-        explosionEmitter.position.x = enemy.position.x - enemy.size.width/2
-        explosionEmitter.position.y = enemy.position.y
-        explosionEmitter.zPosition = enemy.zPosition + 1
-        
-        self.addChild(explosionEmitter)
-        
-        // Show the explosion.
-        explosionEmitter.runAction(SKAction.sequence([SKAction.waitForDuration(5), SKAction.removeFromParent()]))
-    
-        // Fade out the enemy and remove it.
-        enemy.runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.1), SKAction.removeFromParent()]))
-
-        // Play explosion sound.
-        scene.runAction(SKAction.playSoundFileNamed(SoundName.Explosion.toRaw(), waitForCompletion: false))
-    }
-    
-    
     /**
      Handle collision between player spaceship and the enemy spaceship.
     */
@@ -378,25 +400,145 @@ extension GameScene
         playerSpaceship: PlayerSpaceship,
         enemySpaceship: EnemySpaceship!)
     {
-        destroyEnemy(enemySpaceship)
-    }
-    
-    
-    func handleCollisionBetweenPlayerMissile(missile: Missile, enemySpaceships: EnemySpaceship)
-    {
-        destroyEnemy(enemySpaceships)
-        missile.removeFromParent()
-    }
-    
-    
-    func handleCollisionBetweenPlayerSpaceship(playerSpaceship: PlayerSpaceship, enemySpaceships: EnemySpaceship!)
-    {
+        increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.toRaw())
         
+        decreasePlayerSpaceshipLifePoints(byValue: LifePointsValue.EnemySpaceshipHitPlayerSpaceship.toRaw())
+        
+        decreaseEnemySpaceshipLifePoints(
+            byValue: LifePointsValue.EnemySpaceshipHitPlayerSpaceship.toRaw(),
+            enemySpaceship: enemySpaceship)
+    }
+    
+    
+    func handleCollisionBetweenPlayerMissile(missile: Missile, enemySpaceship: EnemySpaceship)
+    {
+        missile.removeFromParent()
+        
+        increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.toRaw())
+        
+        decreaseEnemySpaceshipLifePoints(
+            byValue: LifePointsValue.PlayerMissileHitEnemySpaceship.toRaw(),
+            enemySpaceship: enemySpaceship)
+
     }
     
     
     func handleCollisionBetweenPlayerSpaceship(playerSpaceship: PlayerSpaceship, enemyMissile: Missile)
     {
+        // Not supported.
+    }
+}
+
+
+/**
+Scores.
+*/
+extension GameScene
+{
+    func increaseScore(value: Int)
+    {
+        scoresNode!.value += value
+    }
+}
+
+
+/**
+Life points handling.
+*/
+extension GameScene
+{
+    func increasePlayerSpaceshipLifePoints(#byValue: Int)
+    {
+        playerSpaceship!.lifePoints += byValue
+        lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: true)
         
+        // Add a green color blend for a short moment to indicate the increase of health.
+        let colorizeAction = SKAction.colorizeWithColor(UIColor.greenColor(),
+            colorBlendFactor: 0.7,
+            duration: 0.2)
+        
+        let uncolorizeAction = SKAction.colorizeWithColorBlendFactor(0.0, duration: 0.2)
+        
+        playerSpaceship!.runAction(SKAction.sequence([colorizeAction, uncolorizeAction]))
+    }
+    
+    
+    func decreasePlayerSpaceshipLifePoints(#byValue: Int)
+    {
+        playerSpaceship!.lifePoints += byValue
+        lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: true)
+
+        // Add a red color blend for a short moment to indicate the decrease of health.
+        let colorizeAction = SKAction.colorizeWithColor(UIColor.redColor(),
+            colorBlendFactor: 0.7,
+            duration: 0.2)
+        let uncolorizeAction = SKAction.colorizeWithColorBlendFactor(0.0,
+            duration: 0.2)
+        
+        playerSpaceship!.runAction(SKAction.sequence([colorizeAction, uncolorizeAction]))
+    }
+    
+    
+    func decreaseEnemySpaceshipLifePoints(#byValue: Int, enemySpaceship: EnemySpaceship)
+    {
+        enemySpaceship.lifePoints += byValue
+        
+        // Add a red color blend for a short moment to indicate the decrease of health.
+        let colorizeAction = SKAction.colorizeWithColor(UIColor.redColor(),
+            colorBlendFactor: 0.7,
+            duration: 0.2)
+        let uncolorizeAction = SKAction.colorizeWithColorBlendFactor(0.0,
+            duration: 0.2)
+        
+        enemySpaceship.runAction(SKAction.sequence([colorizeAction, uncolorizeAction]))
+    }
+    
+    
+    func enemyDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler
+    {
+        let handler =
+        {
+            (object: AnyObject) -> () in
+            
+            let enemySpaceship = object as EnemySpaceship
+            
+            self.destroySpaceship(enemySpaceship)
+        }
+        
+        return handler
+    }
+    
+    
+    func playerDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler
+    {
+        let handler =
+        {
+            (object: AnyObject) -> () in
+            
+            self.destroySpaceship(self.playerSpaceship)
+            self.gameSceneDelegate?.gameScene(self, playerDidLoseWithScore: self.scoresNode!.value)
+        }
+        
+        return handler
+    }
+    
+    
+    func destroySpaceship(spaceship: Spaceship!)
+    {
+        let explosionEmitter = SKEmitterNode(fileNamed: "Explosion")
+        explosionEmitter.position.x = spaceship.position.x - spaceship.size.width/2
+        explosionEmitter.position.y = spaceship.position.y
+        explosionEmitter.zPosition = spaceship.zPosition + 1
+        
+        self.addChild(explosionEmitter)
+        
+        // Show the explosion.
+        explosionEmitter.runAction(SKAction.sequence([SKAction.waitForDuration(5), SKAction.removeFromParent()]))
+        
+        // Fade out the enemy and remove it.
+        spaceship.runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.1), SKAction.removeFromParent()]))
+        
+        // Play explosion sound.
+        scene.runAction(SKAction.playSoundFileNamed(SoundName.Explosion.toRaw(), waitForCompletion: false))
     }
 }

@@ -12,17 +12,21 @@ class MainMenuScene: SKScene
 {
     var resumeButton: Button?
     var restartButton: Button?
-    var titleNode: SKSpriteNode?
     var buttons: [Button]?
     var mainMenuSceneDelegate: MainMenuSceneDelegate?
     var background: BackgroundNode?
 
     
-    init(size: CGSize)
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    override init(size: CGSize)
     {
         super.init(size: size)
                 
-        configureTitle()
         configureButtons()
         configureBackground()
     }
@@ -30,7 +34,7 @@ class MainMenuScene: SKScene
     
     func configureBackground()
     {
-        background = BackgroundNode(size: self.size, backgroundImageName: ImageName.MenuBackgroundPhone)
+        background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.MenuBackgroundPhone)
         background!.configureInScene(self)
     }
 }
@@ -115,11 +119,5 @@ extension MainMenuScene
         }
         
         return handler
-    }
-    
-    
-    func configureTitle()
-    {
-        
     }
 }

@@ -6,7 +6,8 @@ class PlayerSpaceship: Spaceship
 {
     var engineBurstEmitter: SKEmitterNode?
     
-    init()
+    
+    override init()
     {
         let size = CGSize(width: 64, height: 50)
         
@@ -23,7 +24,6 @@ class PlayerSpaceship: Spaceship
 
         self.physicsBody.categoryBitMask = CategoryBitmask.PlayerSpaceship.toRaw()
         self.physicsBody.collisionBitMask =
-            CategoryBitmask.EnemySpaceship.toRaw() |
             CategoryBitmask.EnemyMissile.toRaw() |
             CategoryBitmask.ScreenBounds.toRaw()
         

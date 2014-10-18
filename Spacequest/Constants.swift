@@ -5,7 +5,7 @@ enum ImageName: String
     case PlayerSpaceship = "player_spaceship"
     case EnemySpaceship = "enemy_spaceship"
     case Missile = "player_missile"
-    case Lifebar = "lifebar"
+    case LifeBall = "life_ball"
     case GameBackgroundPad = "game_background_ipad"
     case GameBackgroundPhone = "game_background_iphone"
     case MenuBackgroundPad = "menu_background_ipad"
@@ -20,6 +20,12 @@ enum ImageName: String
     case ShowMenuButtonSelected = "show_menu_button_selected"
     case JoystickBase = "joystick_base"
     case JoystickStick = "joystick_stick"
+}
+
+
+enum FontName: String
+{
+    case Wawati = "Wawati SC"
 }
 
 
@@ -45,4 +51,19 @@ enum CollisionType
     case PlayerSpaceshipEnemySpaceship
     case PlayerMissileEnemySpaceship
     case EnemyMissilePlayerSpaceship
+}
+
+
+enum ScoreValue: Int
+{
+    case PlayerMissileHitEnemySpaceship =  10
+    case PlayerSpaceshipHitEnemySpaceship =   0b10
+}
+
+
+enum LifePointsValue: Int
+{
+    case EnemyMissileHitPlayerSpaceship =  -10
+    case EnemySpaceshipHitPlayerSpaceship =  -20
+    case PlayerMissileHitEnemySpaceship =  -25
 }

@@ -8,12 +8,19 @@ let kDefaultJoystickUpdateTimeInterval: NSTimeInterval = 1/40.0
 class Joystick: SKNode
 {
     var updateHandler: JoystickTranslationUpdateHandler?
-    var joystickRadius: CGFloat
-    var stickNode: SKSpriteNode
+    var joystickRadius: CGFloat = 0.0
+    var stickNode: SKSpriteNode?
     var baseNode: SKSpriteNode?
-    var isTouchedDown: Bool
-    var currentJoystickTranslation: CGPoint
+    var isTouchedDown: Bool = false
+    var currentJoystickTranslation: CGPoint = CGPointZero
     var updateTimer: NSTimer?
+    
+    
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+    }
+    
     
     init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String?)
     {
@@ -22,7 +29,7 @@ class Joystick: SKNode
         joystickRadius = maximumRadius
         stickNode = SKSpriteNode(imageNamed: stickImageNamed);
         
-        if baseImageNamed
+        if baseImageNamed != nil
         {
             baseNode = SKSpriteNode(imageNamed: baseImageNamed);
         }
@@ -39,13 +46,13 @@ class Joystick: SKNode
             repeats: true)
         
         // Configure and add stick & base nodes.
-        if baseNode
+        if baseNode != nil
         {
             baseNode!.position = CGPointZero
             self.addChild(baseNode);
         }
         
-        stickNode.position = CGPointZero
+        stickNode!.position = CGPointZero
         self.addChild(stickNode);
         
         userInteractionEnabled = true
@@ -57,8 +64,8 @@ class Joystick: SKNode
     get
     {
         return CGSize(
-            width: joystickRadius + stickNode.size.width/2,
-            height: joystickRadius + stickNode.size.height/2)
+            width: joystickRadius + stickNode!.size.width/2,
+            height: joystickRadius + stickNode!.size.height/2)
     }
     }
 }
@@ -124,13 +131,13 @@ extension Joystick
         currentJoystickTranslation.x = location.x/joystickRadius
         currentJoystickTranslation.y = location.y/joystickRadius
         
-        stickNode.position = location
+        stickNode!.position = location
     }
     
     
     func handleJoystickTranslationUpdate()
     {
-        if isTouchedDown && updateHandler
+        if isTouchedDown && updateHandler != nil
         {
             updateHandler!(currentJoystickTranslation)
         }
@@ -139,6 +146,6 @@ extension Joystick
     
     func reset()
     {
-        stickNode.position = CGPointZero
+        stickNode!.position = CGPointZero
     }
 }
