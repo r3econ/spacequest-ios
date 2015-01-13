@@ -16,7 +16,7 @@ class Joystick: SKNode
     var updateTimer: NSTimer?
     
     
-    required init(coder aDecoder: NSCoder!)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -31,7 +31,7 @@ class Joystick: SKNode
         
         if baseImageNamed != nil
         {
-            baseNode = SKSpriteNode(imageNamed: baseImageNamed);
+            baseNode = SKSpriteNode(imageNamed: baseImageNamed!);
         }
         
         super.init()
@@ -49,11 +49,11 @@ class Joystick: SKNode
         if baseNode != nil
         {
             baseNode!.position = CGPointZero
-            self.addChild(baseNode);
+            self.addChild(baseNode!);
         }
         
         stickNode!.position = CGPointZero
-        self.addChild(stickNode);
+        self.addChild(stickNode!);
         
         userInteractionEnabled = true
     }
@@ -76,11 +76,11 @@ class Joystick: SKNode
 */
 extension Joystick
 {
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
     {
         var touch : AnyObject! = touches.anyObject()
         
-        if touch
+        if (touch != nil)
         {
             isTouchedDown = true
             updateWithTouch(touch as UITouch)
@@ -88,11 +88,11 @@ extension Joystick
     }
     
     
-    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesMoved(touches: NSSet, withEvent event: UIEvent)
     {
         var touch : AnyObject! = touches.anyObject()
         
-        if touch
+        if (touch != nil)
         {
             isTouchedDown = true
             updateWithTouch(touch as UITouch)
@@ -100,14 +100,14 @@ extension Joystick
     }
     
     
-    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent)
     {
         isTouchedDown = false
         reset()
     }
     
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesCancelled(touches: NSSet, withEvent event: UIEvent)
     {
         isTouchedDown = false
         reset()

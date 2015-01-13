@@ -20,7 +20,7 @@ class Button: SKSpriteNode
     
     
     // Initializers.
-    required init(coder aDecoder: NSCoder!)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -73,10 +73,10 @@ class Button: SKSpriteNode
             titleLabelNode!.horizontalAlignmentMode = .Center
             titleLabelNode!.verticalAlignmentMode = .Center
             
-            self.addChild(titleLabelNode)
+            self.addChild(titleLabelNode!)
         }
         
-        titleLabelNode!.text = newValue
+        titleLabelNode!.text = newValue!
     }
     
     get
@@ -101,7 +101,7 @@ class Button: SKSpriteNode
             titleLabelNode!.horizontalAlignmentMode = .Center
             titleLabelNode!.verticalAlignmentMode = .Center
             
-            self.addChild(titleLabelNode)
+            self.addChild(titleLabelNode!)
         }
         
         titleLabelNode!.fontName = newValue!.fontName
@@ -158,7 +158,7 @@ Touches
 */
 extension Button
 {
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
     {
         if self.isEnabled
         {
@@ -172,7 +172,7 @@ extension Button
     }
     
     
-    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesMoved(touches: NSSet, withEvent event: UIEvent)
     {
         if isEnabled
         {
@@ -184,7 +184,7 @@ extension Button
     }
     
     
-    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent)
     {
         if isEnabled
         {
@@ -198,7 +198,7 @@ extension Button
     }
     
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesCancelled(touches: NSSet, withEvent event: UIEvent)
     {
         if isEnabled
         {

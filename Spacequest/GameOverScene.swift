@@ -15,7 +15,7 @@ class GameOverScene: SKScene
     var background: BackgroundNode?
     
     
-    required init(coder aDecoder: NSCoder!)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -47,8 +47,8 @@ extension GameOverScene
     {
         // Restart button.
         restartButton = Button(
-            normalImageNamed: ImageName.MenuButtonRestartNormal.toRaw(),
-            selectedImageNamed: ImageName.MenuButtonRestartNormal.toRaw())
+            normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
+            selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
         
         restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
         

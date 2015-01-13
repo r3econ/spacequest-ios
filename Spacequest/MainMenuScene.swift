@@ -17,7 +17,7 @@ class MainMenuScene: SKScene
     var background: BackgroundNode?
 
     
-    required init(coder aDecoder: NSCoder!)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -49,15 +49,15 @@ extension MainMenuScene
     {
         // Resume button.
         resumeButton = Button(
-            normalImageNamed: ImageName.MenuButtonResumeNormal.toRaw(),
-            selectedImageNamed: ImageName.MenuButtonResumeNormal.toRaw())
+            normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
+            selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
         
         resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
         
         // Restart button.
         restartButton = Button(
-            normalImageNamed: ImageName.MenuButtonRestartNormal.toRaw(),
-            selectedImageNamed: ImageName.MenuButtonRestartNormal.toRaw())
+            normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
+            selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
         
         restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
 

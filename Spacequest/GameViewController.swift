@@ -29,7 +29,7 @@ class GameViewController: UIViewController
     
     override func supportedInterfaceOrientations() -> Int
     {
-        return Int(UIInterfaceOrientationMask.Landscape.toRaw())
+        return Int(UIInterfaceOrientationMask.Landscape.rawValue)
     }
 
     

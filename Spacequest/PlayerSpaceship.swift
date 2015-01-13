@@ -11,7 +11,7 @@ class PlayerSpaceship: Spaceship
     {
         let size = CGSize(width: 64, height: 50)
         
-        super.init(texture: SKTexture(imageNamed: ImageName.PlayerSpaceship.toRaw()),
+        super.init(texture: SKTexture(imageNamed: ImageName.PlayerSpaceship.rawValue),
             color: nil,
             size: size)
 
@@ -19,17 +19,17 @@ class PlayerSpaceship: Spaceship
         
         // Collisions.
         self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-        self.physicsBody.usesPreciseCollisionDetection = true
-        self.physicsBody.allowsRotation = false
+        self.physicsBody!.usesPreciseCollisionDetection = true
+        self.physicsBody!.allowsRotation = false
 
-        self.physicsBody.categoryBitMask = CategoryBitmask.PlayerSpaceship.toRaw()
-        self.physicsBody.collisionBitMask =
-            CategoryBitmask.EnemyMissile.toRaw() |
-            CategoryBitmask.ScreenBounds.toRaw()
+        self.physicsBody!.categoryBitMask = CategoryBitmask.PlayerSpaceship.rawValue
+        self.physicsBody!.collisionBitMask =
+            CategoryBitmask.EnemyMissile.rawValue |
+            CategoryBitmask.ScreenBounds.rawValue
         
-        self.physicsBody.contactTestBitMask =
-            CategoryBitmask.EnemySpaceship.toRaw() |
-            CategoryBitmask.EnemyMissile.toRaw()
+        self.physicsBody!.contactTestBitMask =
+            CategoryBitmask.EnemySpaceship.rawValue |
+            CategoryBitmask.EnemyMissile.rawValue
         
         configureEngineBurstEmitter()
     }
@@ -40,7 +40,7 @@ class PlayerSpaceship: Spaceship
         engineBurstEmitter = SKEmitterNode(fileNamed: "PlayerSpaceshipEngineBurst")
         engineBurstEmitter!.position = CGPoint(x: -self.size.width/2 - 5.0, y: 0.0)
         
-        self.addChild(engineBurstEmitter)
+        self.addChild(engineBurstEmitter!)
     }
     
     
@@ -51,17 +51,17 @@ class PlayerSpaceship: Spaceship
         missile.position = CGPoint(x: CGRectGetMaxX(self.frame) + 10.0, y: position.y)
         missile.zPosition = self.zPosition - 1
     
-        scene.addChild(missile)
+        scene!.addChild(missile)
         
         var velocity: CGFloat = 600.0
-        var moveDuration = scene.size.width / velocity
-        var missileEndPosition = CGPoint(x: position.x + scene.size.width, y: position.y)
+        var moveDuration = scene!.size.width / velocity
+        var missileEndPosition = CGPoint(x: position.x + scene!.size.width, y: position.y)
         
         var moveAction = SKAction.moveTo(missileEndPosition, duration: NSTimeInterval(moveDuration))
         var removeAction = SKAction.removeFromParent()
         
         missile.runAction(SKAction.sequence([moveAction, removeAction]))
         
-        scene.runAction(SKAction.playSoundFileNamed(SoundName.MissileLaunch.toRaw(), waitForCompletion: false))
+        scene!.runAction(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
     }
 }

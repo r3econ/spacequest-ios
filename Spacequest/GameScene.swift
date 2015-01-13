@@ -24,7 +24,7 @@ class GameScene: SKScene
     var gameSceneDelegate: GameSceneDelegate?
 
     
-    required init(coder aDecoder: NSCoder!)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -159,8 +159,8 @@ extension GameScene
         self.physicsWorld.contactDelegate = self;
         
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-        self.physicsBody.categoryBitMask = CategoryBitmask.ScreenBounds.toRaw()
-        self.physicsBody.collisionBitMask = CategoryBitmask.PlayerSpaceship.toRaw()
+        self.physicsBody!.categoryBitMask = CategoryBitmask.ScreenBounds.rawValue
+        self.physicsBody!.collisionBitMask = CategoryBitmask.PlayerSpaceship.rawValue
     }
     
     
@@ -175,7 +175,7 @@ extension GameScene
         playerSpaceship!.lifePoints = 100
         playerSpaceship!.didRunOutOfLifePointsEventHandler = playerDidRunOutOfLifePointsEventHandler()
         
-        self.addChild(playerSpaceship)
+        self.addChild(playerSpaceship!)
     }
     
     
@@ -183,8 +183,8 @@ extension GameScene
     {
         joystick = Joystick(
             maximumRadius: 40.0,
-            stickImageNamed: ImageName.JoystickStick.toRaw(),
-            baseImageNamed: ImageName.JoystickBase.toRaw());
+            stickImageNamed: ImageName.JoystickStick.rawValue,
+            baseImageNamed: ImageName.JoystickBase.rawValue);
         
         joystick!.position = CGPoint(
             x: joystick!.size.width,
@@ -205,8 +205,8 @@ extension GameScene
     func configureFireButton()
     {
         fireButton = Button(
-            normalImageNamed: ImageName.FireButtonNormal.toRaw(),
-            selectedImageNamed: ImageName.FireButtonSelected.toRaw())
+            normalImageNamed: ImageName.FireButtonNormal.rawValue,
+            selectedImageNamed: ImageName.FireButtonSelected.rawValue)
         
         fireButton!.position = CGPoint(
             x: CGRectGetWidth(self.frame) - CGRectGetWidth(fireButton!.frame) - kHUDControlMargin,
@@ -227,8 +227,8 @@ extension GameScene
     func configureMenuButton()
     {
         menuButton = Button(
-            normalImageNamed: ImageName.ShowMenuButtonNormal.toRaw(),
-            selectedImageNamed: ImageName.ShowMenuButtonSelected.toRaw())
+            normalImageNamed: ImageName.ShowMenuButtonNormal.rawValue,
+            selectedImageNamed: ImageName.ShowMenuButtonSelected.rawValue)
         
         menuButton!.position = CGPoint(
             x: CGRectGetWidth(self.frame) - CGRectGetWidth(menuButton!.frame)/2 - 2.0,
@@ -248,7 +248,7 @@ extension GameScene
     
     func configureLifeIndicator()
     {
-        lifeIndicator = LifeIndicator(texture: SKTexture(imageNamed: ImageName.LifeBall.toRaw()))
+        lifeIndicator = LifeIndicator(texture: SKTexture(imageNamed: ImageName.LifeBall.rawValue))
         lifeIndicator!.position = CGPoint(
             x: CGRectGetMaxX(joystick!.frame) + 2.5 * joystick!.joystickRadius,
             y: CGRectGetMinY(joystick!.frame) - joystick!.joystickRadius)
@@ -361,10 +361,10 @@ extension GameScene : SKPhysicsContactDelegate
     }
     
     
-    func collisionTypeWithContact(contact: SKPhysicsContact!) -> (collisionType: CollisionType?)
+    func collisionTypeWithContact(contact: SKPhysicsContact!) -> (CollisionType?)
     {
-        let categoryBitmaskBodyA = CategoryBitmask.fromRaw(contact.bodyA.categoryBitMask)
-        let categoryBitmaskBodyB = CategoryBitmask.fromRaw(contact.bodyB.categoryBitMask)
+        let categoryBitmaskBodyA = CategoryBitmask(rawValue: contact.bodyA.categoryBitMask)
+        let categoryBitmaskBodyB = CategoryBitmask(rawValue: contact.bodyB.categoryBitMask)
 
         // Player missile - enemy spaceship.
         if categoryBitmaskBodyA == CategoryBitmask.EnemySpaceship &&
@@ -400,12 +400,12 @@ extension GameScene
         playerSpaceship: PlayerSpaceship,
         enemySpaceship: EnemySpaceship!)
     {
-        increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.toRaw())
+        increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.rawValue)
         
-        decreasePlayerSpaceshipLifePoints(byValue: LifePointsValue.EnemySpaceshipHitPlayerSpaceship.toRaw())
+        decreasePlayerSpaceshipLifePoints(byValue: LifePointsValue.EnemySpaceshipHitPlayerSpaceship.rawValue)
         
         decreaseEnemySpaceshipLifePoints(
-            byValue: LifePointsValue.EnemySpaceshipHitPlayerSpaceship.toRaw(),
+            byValue: LifePointsValue.EnemySpaceshipHitPlayerSpaceship.rawValue,
             enemySpaceship: enemySpaceship)
     }
     
@@ -414,10 +414,10 @@ extension GameScene
     {
         missile.removeFromParent()
         
-        increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.toRaw())
+        increaseScore(ScoreValue.PlayerMissileHitEnemySpaceship.rawValue)
         
         decreaseEnemySpaceshipLifePoints(
-            byValue: LifePointsValue.PlayerMissileHitEnemySpaceship.toRaw(),
+            byValue: LifePointsValue.PlayerMissileHitEnemySpaceship.rawValue,
             enemySpaceship: enemySpaceship)
 
     }
@@ -539,6 +539,6 @@ extension GameScene
         spaceship.runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.1), SKAction.removeFromParent()]))
         
         // Play explosion sound.
-        scene.runAction(SKAction.playSoundFileNamed(SoundName.Explosion.toRaw(), waitForCompletion: false))
+        scene!.runAction(SKAction.playSoundFileNamed(SoundName.Explosion.rawValue, waitForCompletion: false))
     }
 }

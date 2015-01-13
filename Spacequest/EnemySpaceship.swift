@@ -9,22 +9,22 @@ class EnemySpaceship: Spaceship
     init(lifePoints: Int)
     {
         let size = CGSize(width: 36, height: 31)
-        super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.toRaw()), color: nil, size: size)
+        super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.rawValue), color: nil, size: size)
         
         self.lifePoints = lifePoints
         
         // Collisions.
         self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-        self.physicsBody.usesPreciseCollisionDetection = true
-        self.physicsBody.categoryBitMask = CategoryBitmask.EnemySpaceship.toRaw()
-        self.physicsBody.collisionBitMask =
-            CategoryBitmask.EnemySpaceship.toRaw() |
-            CategoryBitmask.PlayerMissile.toRaw() |
-            CategoryBitmask.PlayerSpaceship.toRaw()
+        self.physicsBody!.usesPreciseCollisionDetection = true
+        self.physicsBody!.categoryBitMask = CategoryBitmask.EnemySpaceship.rawValue
+        self.physicsBody!.collisionBitMask =
+            CategoryBitmask.EnemySpaceship.rawValue |
+            CategoryBitmask.PlayerMissile.rawValue |
+            CategoryBitmask.PlayerSpaceship.rawValue
         
-        self.physicsBody.contactTestBitMask =
-            CategoryBitmask.PlayerSpaceship.toRaw() |
-            CategoryBitmask.PlayerMissile.toRaw()
+        self.physicsBody!.contactTestBitMask =
+            CategoryBitmask.PlayerSpaceship.rawValue |
+            CategoryBitmask.PlayerMissile.rawValue
     }
     
     
@@ -49,18 +49,18 @@ class EnemySpaceship: Spaceship
         missile.position = position
         missile.zPosition = zPosition - 1
         
-        scene.addChild(missile)
+        scene!.addChild(missile)
         
         var velocity: CGFloat = 600.0
-        var moveDuration = scene.size.width / velocity
-        var missileEndPosition = CGPoint(x: -0.1 * scene.size.width, y: position.y)
+        var moveDuration = scene!.size.width / velocity
+        var missileEndPosition = CGPoint(x: -0.1 * scene!.size.width, y: position.y)
         
         var moveAction = SKAction.moveTo(missileEndPosition, duration: NSTimeInterval(moveDuration))
         var removeAction = SKAction.removeFromParent()
         
         missile.runAction(SKAction.sequence([moveAction, removeAction]))
         
-        scene.runAction(SKAction.playSoundFileNamed(SoundName.MissileLaunch.toRaw(), waitForCompletion: false))
+        scene!.runAction(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
     }
     
     

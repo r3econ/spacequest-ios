@@ -3,7 +3,7 @@ import SpriteKit
 
 class Missile: SKSpriteNode
 {
-    required init(coder aDecoder: NSCoder!)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -12,14 +12,14 @@ class Missile: SKSpriteNode
     override init()
     {
         var size = CGSizeMake(10.0, 10.0)
-        super.init(texture: SKTexture(imageNamed:ImageName.Missile.toRaw()),
+        super.init(texture: SKTexture(imageNamed:ImageName.Missile.rawValue),
             color: nil,
             size: size)
         
         name = NSStringFromClass(Missile.self)
 
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
-        physicsBody.usesPreciseCollisionDetection = true
+        physicsBody!.usesPreciseCollisionDetection = true
     }
     
     
@@ -27,8 +27,8 @@ class Missile: SKSpriteNode
     {
         var missile = Missile()
         
-        missile.physicsBody.categoryBitMask = CategoryBitmask.EnemyMissile.toRaw()
-        missile.physicsBody.contactTestBitMask = CategoryBitmask.PlayerSpaceship.toRaw()
+        missile.physicsBody!.categoryBitMask = CategoryBitmask.EnemyMissile.rawValue
+        missile.physicsBody!.contactTestBitMask = CategoryBitmask.PlayerSpaceship.rawValue
         
         return missile
     }
@@ -38,8 +38,8 @@ class Missile: SKSpriteNode
     {
         var missile = Missile()
         
-        missile.physicsBody.categoryBitMask = CategoryBitmask.PlayerMissile.toRaw()
-        missile.physicsBody.contactTestBitMask = CategoryBitmask.EnemySpaceship.toRaw()
+        missile.physicsBody!.categoryBitMask = CategoryBitmask.PlayerMissile.rawValue
+        missile.physicsBody!.contactTestBitMask = CategoryBitmask.EnemySpaceship.rawValue
         
         return missile
     }

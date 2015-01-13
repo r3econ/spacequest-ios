@@ -6,7 +6,7 @@ class LifeIndicator: SKSpriteNode
     var titleLabelNode: SKLabelNode?
 
     
-    required init(coder aDecoder: NSCoder!)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -20,7 +20,7 @@ class LifeIndicator: SKSpriteNode
             color: nil,
             size: texture.size())
         
-        titleLabelNode = SKLabelNode(fontNamed: FontName.Wawati.toRaw())
+        titleLabelNode = SKLabelNode(fontNamed: FontName.Wawati.rawValue)
         titleLabelNode!.fontSize = 14.0
         titleLabelNode!.fontColor = UIColor(white: 1.0, alpha: 0.7)
         titleLabelNode!.horizontalAlignmentMode = .Center
@@ -28,7 +28,7 @@ class LifeIndicator: SKSpriteNode
 
         update(animated: false)
         
-        self.addChild(titleLabelNode)
+        self.addChild(titleLabelNode!)
     }
     
     

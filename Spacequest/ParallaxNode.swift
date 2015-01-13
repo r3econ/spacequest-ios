@@ -20,7 +20,7 @@ class ParallaxNode: SKEffectNode
     var layerNodes: [[SKSpriteNode]] = []
     var layerAttributes: [ParallaxLayerAttributes] = []
     
-    required init(coder aDecoder: NSCoder!)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
     }
@@ -28,12 +28,12 @@ class ParallaxNode: SKEffectNode
     
     init(size: CGSize, staticBackgroundImageName: ImageName)
     {
-        staticBackgroundNode = SKSpriteNode(imageNamed: staticBackgroundImageName.toRaw())
+        staticBackgroundNode = SKSpriteNode(imageNamed: staticBackgroundImageName.rawValue)
         staticBackgroundNode!.size = size
         
         super.init()
         
-        self.addChild(staticBackgroundNode)
+        self.addChild(staticBackgroundNode!)
     }
     
     

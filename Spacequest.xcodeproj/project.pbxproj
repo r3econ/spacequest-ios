@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF9C3E451A65713A001A4C4C /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA54F3199A5E32004F17B8 /* BackgroundNode.swift */; };
 		B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511887419422EF200FF8D13 /* EnemySpaceship.swift */; };
 		B511887619422EF200FF8D13 /* EnemySpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511887419422EF200FF8D13 /* EnemySpaceship.swift */; };
 		B5118882194253C600FF8D13 /* player_spaceship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118880194253C600FF8D13 /* player_spaceship@2x.png */; };
@@ -648,6 +649,7 @@
 				B5175C521943B51F005AECAA /* Button.swift in Sources */,
 				B5AA6063193FB48F00EB9920 /* SpacequestTests.swift in Sources */,
 				B511887619422EF200FF8D13 /* EnemySpaceship.swift in Sources */,
+				AF9C3E451A65713A001A4C4C /* BackgroundNode.swift in Sources */,
 				B5AA607F193FCA8D00EB9920 /* Missile.swift in Sources */,
 				B5AA606F193FB82300EB9920 /* ParallaxNode.swift in Sources */,
 			);
