@@ -14,6 +14,8 @@ enum ImageName: String
     case MenuButtonRestartSelected = "menu_button_restart_selected"
     case MenuButtonResumeNormal = "menu_button_resume_normal"
     case MenuButtonResumeSelected = "menu_button_resume_selected"
+    case MenuButtonInfoNormal = "menu_button_info_normal"
+    case MenuButtonInfoSelected = "menu_button_info_selected"
     case FireButtonNormal = "fire_button_normal"
     case FireButtonSelected = "fire_button_selected"
     case ShowMenuButtonNormal = "show_menu_button_normal"

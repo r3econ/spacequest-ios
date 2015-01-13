@@ -10,6 +10,7 @@ protocol MainMenuSceneDelegate
 
 class MainMenuScene: SKScene
 {
+    var infoButton: Button?
     var resumeButton: Button?
     var restartButton: Button?
     var buttons: [Button]?
@@ -47,20 +48,31 @@ extension MainMenuScene
 {
     func configureButtons()
     {
+        // Info button.
+        infoButton = Button(
+            normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
+            selectedImageNamed: ImageName.MenuButtonInfoSelected.rawValue)
+        
+        infoButton!.position = CGPoint(
+            x: scene!.size.width - 20,
+            y: scene!.size.height - 20)
+        
+        self.addChild(infoButton!)
+
         // Resume button.
         resumeButton = Button(
             normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
-            selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
+            selectedImageNamed: ImageName.MenuButtonResumeSelected.rawValue)
         
         resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
         
         // Restart button.
         restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
-            selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
+            selectedImageNamed: ImageName.MenuButtonRestartSelected.rawValue)
         
         restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
-
+        
         buttons = [resumeButton!, restartButton!]
         let horizontalPadding: CGFloat = 20.0
         var totalButtonsWidth: CGFloat = 0.0
