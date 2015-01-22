@@ -1,6 +1,24 @@
 import SpriteKit
 
 
+extension Array
+{
+    func find(includedElement: T -> Bool) -> Int?
+    {
+        for (idx, element) in enumerate(self)
+        {
+            if includedElement(element)
+            {
+                return idx
+            }
+        }
+        
+        return nil
+    }
+}
+
+
+
 class ParallaxLayerAttributes: NSObject
 {
     var speed : CGFloat = 0.0
@@ -91,61 +109,56 @@ class ParallaxNode: SKEffectNode
     }
     
     
-    func repositionFirstNodeInLayer(inout layer: [SKSpriteNode])
-    {
-        let firstNode: SKSpriteNode! = layer.first
-        let lastNode: SKSpriteNode! = layer.last
-        
-        let newPosition = CGPoint(
-            x: CGRectGetMaxX(lastNode.frame) + firstNode.size.width/2,
-            y: 0)
-
-        println("New position: \(newPosition)")
-        
-        // Move the first node to the end.
-        firstNode.position = newPosition;
-        
-        layer.removeAtIndex(0)
-        layer.append(firstNode)
-    }
-    
-    
     func update(currentTime: CFTimeInterval)
     {
         for var i = 0; i < layerNodes.count; ++i
         {
             let speed = layerAttributes[i].speed
             var layer = layerNodes[i]
-            var shouldRepositionFirstNode = false
             
             for var j = 0; j < layer.count; ++j
             {
                 let node = layer[j]
                 
                 // Move the node left.
-                node.position.x -= 40
+                node.position.x -= speed
                 
-                // Check if the first node should be repositioned.
+                // Check if the node should be repositioned.
+                let terminalPosition = CGPoint(
+                    x: -node.size.width,
+                    y: 0.0)
                 
-                if j == 0
+                if node.position.x <= terminalPosition.x
                 {
-                    let terminalPosition = CGPoint(
-                        x: -node.size.width,
-                        y: 0.0)
-                    
-                    if node.position.x <= terminalPosition.x
-                    {
-                        // Mark the first node for repositioning.
-                        shouldRepositionFirstNode = true
-                    }
+                    // Reposition the node.
+                    reposition(node, inLayer: &layer)
+                    break
                 }
-            }
-            
-            // Reposition first node if needed.
-            if shouldRepositionFirstNode
-            {
-                repositionFirstNodeInLayer(&layer)
+                
             }
         }
+    }
+    
+    
+    func reposition(node: SKSpriteNode, inout inLayer: [SKSpriteNode])
+    {
+        let currentNodeIndex = inLayer.find{ $0 == node }!
+        var previouslyMovedNodeIndex = currentNodeIndex + inLayer.count - 1
+        
+        if previouslyMovedNodeIndex >= inLayer.count
+        {
+            previouslyMovedNodeIndex -= inLayer.count
+        }
+        
+        let previouslyMovedNode: SKSpriteNode! = inLayer[previouslyMovedNodeIndex]
+        
+        let newPosition = CGPoint(
+            x: CGRectGetMaxX(previouslyMovedNode.frame) + node.size.width/2,
+            y: 0)
+        
+        println("New position: \(newPosition)")
+        
+        // Move the first node to the end.
+        node.position = newPosition;
     }
 }
