@@ -6,12 +6,23 @@ class PlayerSpaceship: Spaceship
 {
     var engineBurstEmitter: SKEmitterNode?
     
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+    }
     
-    override init()
+    
+    required init(texture: SKTexture!, color: UIColor!, size: CGSize)
+    {
+        super.init(texture: texture, color: color, size: size)
+    }
+    
+    
+    convenience init()
     {
         let size = CGSize(width: 64, height: 50)
         
-        super.init(texture: SKTexture(imageNamed: ImageName.PlayerSpaceship.rawValue),
+        self.init(texture: SKTexture(imageNamed: ImageName.PlayerSpaceship.rawValue),
             color: nil,
             size: size)
 

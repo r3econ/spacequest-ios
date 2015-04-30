@@ -18,4 +18,15 @@ class Spaceship: SKSpriteNode, LifePointsProtocol
         }
     }
     }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    required override init(texture: SKTexture!, color: UIColor!, size: CGSize)
+    {
+        super.init(texture: texture, color: color, size: size)
+    }
 }

@@ -76,38 +76,38 @@ class Joystick: SKNode
 */
 extension Joystick
 {
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
-        var touch : AnyObject! = touches.anyObject()
+        var touch : AnyObject! = touches.first
         
         if (touch != nil)
         {
             isTouchedDown = true
-            updateWithTouch(touch as UITouch)
+            updateWithTouch(touch as! UITouch)
         }
     }
     
     
-    override func touchesMoved(touches: NSSet, withEvent event: UIEvent)
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent)
     {
-        var touch : AnyObject! = touches.anyObject()
+        var touch : AnyObject! = touches.first
         
         if (touch != nil)
         {
             isTouchedDown = true
-            updateWithTouch(touch as UITouch)
+            updateWithTouch(touch as! UITouch)
         }
     }
     
     
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent)
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent)
     {
         isTouchedDown = false
         reset()
     }
     
     
-    override func touchesCancelled(touches: NSSet, withEvent event: UIEvent)
+    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent)
     {
         isTouchedDown = false
         reset()

@@ -275,8 +275,8 @@ extension GameScene
         background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.GameBackgroundPhone)
         
         background!.addLayer(
-            imageNames: ["Layer_0_0_iphone", "Layer_0_1_iphone"], //, "Layer_0_2_iphone", "Layer_0_3_iphone", "Layer_0_4_iphone"],
-            speed: 20.0)
+            imageNames: ["Layer_0_0_iphone", "Layer_0_1_iphone", "Layer_0_2_iphone"],//, "Layer_0_3_iphone"],//, "Layer_0_4_iphone"],
+            speed: 2.0)
         
         background!.configureInScene(self)
     }
@@ -307,7 +307,7 @@ extension GameScene
 */
 extension GameScene : SKPhysicsContactDelegate
 {
-    func didBeginContact(contact: SKPhysicsContact!)
+    func didBeginContact(contact: SKPhysicsContact)
     {
         var collisionType: CollisionType? = collisionTypeWithContact(contact)
         
@@ -326,13 +326,13 @@ extension GameScene : SKPhysicsContactDelegate
             
             if contact.bodyA.node as? EnemySpaceship != nil
             {
-                enemy = contact.bodyA.node as EnemySpaceship
-                missile = contact.bodyB.node as Missile
+                enemy = contact.bodyA.node as! EnemySpaceship
+                missile = contact.bodyB.node as! Missile
             }
             else
             {
-                enemy = contact.bodyB.node as EnemySpaceship
-                missile = contact.bodyA.node as Missile
+                enemy = contact.bodyB.node as! EnemySpaceship
+                missile = contact.bodyA.node as! Missile
             }
 
             // Handle collision.
@@ -342,8 +342,8 @@ extension GameScene : SKPhysicsContactDelegate
             
             // Get the enemy node.
             let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship != nil ?
-                contact.bodyA.node as EnemySpaceship :
-                contact.bodyB.node as EnemySpaceship
+                contact.bodyA.node as! EnemySpaceship :
+                contact.bodyB.node as! EnemySpaceship
             
             // Handle collision.
             handleCollisionBetweenPlayerSpaceship(playerSpaceship!, enemySpaceship: enemy)
@@ -352,8 +352,8 @@ extension GameScene : SKPhysicsContactDelegate
             
             // Get the enemy node.
             let missile: Missile = contact.bodyA.node as? Missile != nil ?
-                contact.bodyA.node as Missile :
-                contact.bodyB.node as Missile
+                contact.bodyA.node as! Missile :
+                contact.bodyB.node as! Missile
             
             // Handle collision.
             handleCollisionBetweenPlayerSpaceship(playerSpaceship!, enemyMissile: missile)
@@ -500,7 +500,7 @@ extension GameScene
         {
             (object: AnyObject) -> () in
             
-            let enemySpaceship = object as EnemySpaceship
+            let enemySpaceship = object as! EnemySpaceship
             
             self.destroySpaceship(enemySpaceship)
         }

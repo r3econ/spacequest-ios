@@ -9,10 +9,16 @@ class Missile: SKSpriteNode
     }
     
     
-    override init()
+    required override init(texture: SKTexture!, color: UIColor!, size: CGSize)
+    {
+        super.init(texture: texture, color: color, size: size)
+    }
+    
+    
+    convenience init()
     {
         var size = CGSizeMake(10.0, 10.0)
-        super.init(texture: SKTexture(imageNamed:ImageName.Missile.rawValue),
+        self.init(texture: SKTexture(imageNamed:ImageName.Missile.rawValue),
             color: nil,
             size: size)
         

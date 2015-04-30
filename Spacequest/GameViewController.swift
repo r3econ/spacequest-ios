@@ -53,7 +53,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
 {
     func startNewGame(#animated: Bool)
     {
-        let skView = self.view as SKView
+        let skView = self.view as! SKView
         
         gameScene = GameScene(size: skView.frame.size)
         gameScene!.scaleMode = .AspectFill
@@ -72,7 +72,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     
     func resumeGame(#animated: Bool)
     {
-        let skView = self.view as SKView
+        let skView = self.view as! SKView
         
         if animated
         {
@@ -97,7 +97,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     
     func showMainMenuScene(#animated: Bool)
     {
-        let skView = self.view as SKView
+        let skView = self.view as! SKView
         
         mainMenuScene = MainMenuScene(size: skView.frame.size)
         mainMenuScene!.scaleMode = .AspectFill
@@ -118,7 +118,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     
     func showGameOverScene(#animated: Bool)
     {
-        let skView = self.view as SKView
+        let skView = self.view as! SKView
         
         gameOverScene = GameOverScene(size: skView.frame.size)
         gameOverScene!.scaleMode = .AspectFill
@@ -178,7 +178,7 @@ extension GameViewController
 {
     func configureView()
     {
-        let skView = self.view as SKView
+        let skView = self.view as! SKView
         
         skView.ignoresSiblingOrder = true
         

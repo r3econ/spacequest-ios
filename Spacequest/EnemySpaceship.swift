@@ -6,6 +6,18 @@ class EnemySpaceship: Spaceship
     var missileLaunchTimer: NSTimer?
     
     
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    required init(texture: SKTexture!, color: UIColor!, size: CGSize)
+    {
+        super.init(texture: texture, color: color, size: size)
+    }
+    
+    
     init(lifePoints: Int)
     {
         let size = CGSize(width: 36, height: 31)
