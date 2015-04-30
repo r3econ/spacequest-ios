@@ -275,8 +275,8 @@ extension GameScene
         background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.GameBackgroundPhone)
         
         background!.addLayer(
-            imageNames: ["Layer_0_0_iphone", "Layer_0_1_iphone", "Layer_0_2_iphone"],//, "Layer_0_3_iphone"],//, "Layer_0_4_iphone"],
-            speed: 2.0)
+            imageNames: ["Layer_0_0_iphone", "Layer_0_1_iphone", "Layer_0_2_iphone", "Layer_0_3_iphone", "Layer_0_4_iphone"],
+            speed: 0.5)
         
         background!.configureInScene(self)
     }

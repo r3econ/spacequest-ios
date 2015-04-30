@@ -57,9 +57,9 @@ class ParallaxNode: SKEffectNode
     
     func addLayer(#imageNames: [String], speed: CGFloat = 0.0)
     {
-        let layer = ParallaxLayerAttributes(imageNames: imageNames, speed: speed)
+        let layerAttributes = ParallaxLayerAttributes(imageNames: imageNames, speed: speed)
         
-        configureLayerNodes(layer)
+        configureLayerNodes(layerAttributes)
     }
     
     
@@ -101,7 +101,12 @@ class ParallaxNode: SKEffectNode
             }
             
             spriteNodes.append(newSpriteNode)
-            self.addChild(newSpriteNode)
+            
+            // Only add first two nodes.
+            if (index == 0) || (index == 1)
+            {
+                self.addChild(newSpriteNode)
+            }
         }
         
         layerNodes.append(spriteNodes)
@@ -140,25 +145,52 @@ class ParallaxNode: SKEffectNode
     }
     
     
-    func reposition(node: SKSpriteNode, inout inLayer: [SKSpriteNode])
+    func reposition(nodeToReposition: SKSpriteNode, inout inLayer: [SKSpriteNode])
     {
-        let currentNodeIndex = inLayer.find{ $0 == node }!
-        var previouslyMovedNodeIndex = currentNodeIndex + inLayer.count - 1
+        // Calculate index of the node that we're gonna reposition.
+        // Now it's on the left on the screen.
+        let nodeToRepositionIndex = inLayer.find{ $0 == nodeToReposition }!
         
-        if previouslyMovedNodeIndex >= inLayer.count
+        // Calculate index of the currently last node in the queue to show.
+        // This node is now on the right on the screen.
+        var lastNodeIndex = nodeToRepositionIndex + inLayer.count - 1
+        
+        if lastNodeIndex >= inLayer.count
         {
-            previouslyMovedNodeIndex -= inLayer.count
+            lastNodeIndex -= inLayer.count
         }
         
-        let previouslyMovedNode: SKSpriteNode! = inLayer[previouslyMovedNodeIndex]
+        // Calculate index of the the node that is going to appear from the right.
+        var appearingNodeIndex = nodeToRepositionIndex + 2
+        
+        if appearingNodeIndex >= inLayer.count
+        {
+            appearingNodeIndex -= inLayer.count
+        }
+        
+        //println("Current node idx: \(nodeToRepositionIndex), Last: \(lastNodeIndex)")
+
+        let lastNode: SKSpriteNode! = inLayer[lastNodeIndex]
+        let appearingNode: SKSpriteNode! = inLayer[appearingNodeIndex]
         
         let newPosition = CGPoint(
-            x: CGRectGetMaxX(previouslyMovedNode.frame) + node.size.width/2,
+            x: CGRectGetMaxX(lastNode.frame) + nodeToReposition.size.width/2,
             y: 0)
         
-        println("New position: \(newPosition)")
+        //println("New position: \(newPosition)")
+        
+        // Remove the moved node from the screen.
+        if nodeToReposition !== appearingNode
+        {
+            nodeToReposition.removeFromParent()
+        }
+        
+        if appearingNode!.parent == nil
+        {
+            self.addChild(appearingNode)
+        }
         
         // Move the first node to the end.
-        node.position = newPosition;
+        nodeToReposition.position = newPosition;
     }
 }
