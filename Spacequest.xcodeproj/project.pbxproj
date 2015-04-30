@@ -7,15 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		86A8AB981AF2520000705022 /* Images.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 86A8AB971AF2520000705022 /* Images.atlas */; };
 		B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511887419422EF200FF8D13 /* EnemySpaceship.swift */; };
+		B5118882194253C600FF8D13 /* player_spaceship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118880194253C600FF8D13 /* player_spaceship@2x.png */; };
+		B5118884194253C600FF8D13 /* player_spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118881194253C600FF8D13 /* player_spaceship.png */; };
+		B51188881942586A00FF8D13 /* enemy_spaceship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B51188861942586A00FF8D13 /* enemy_spaceship@2x.png */; };
+		B511888A1942586A00FF8D13 /* enemy_spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = B51188871942586A00FF8D13 /* enemy_spaceship.png */; };
 		B5175C4E1943A430005AECAA /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5175C4D1943A430005AECAA /* Joystick.swift */; };
 		B5175C511943B51F005AECAA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5175C501943B51F005AECAA /* Button.swift */; };
 		B53E78DB194105BA000CB230 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E78DA194105BA000CB230 /* Constants.swift */; };
 		B5828640197D71EA006D4E4E /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = B582863F197D71EA006D4E4E /* Explosion.sks */; };
 		B59322B1197D788F002D51AC /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59322B0197D788F002D51AC /* explosion.wav */; };
+		B5972FE2197D23710061D79C /* player_missile.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE0197D23710061D79C /* player_missile.png */; };
+		B5972FE3197D23710061D79C /* player_missile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE1197D23710061D79C /* player_missile@2x.png */; };
 		B5972FE5197D3A150061D79C /* missile_launch.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5972FE4197D3A150061D79C /* missile_launch.wav */; };
 		B5972FEF197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */; };
+		B5972FF0197D65D90061D79C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B5972FEE197D65D90061D79C /* spark.png */; };
 		B5A9050B198297AD00862E2C /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A9050A198297AD00862E2C /* MainMenuScene.swift */; };
 		B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604B193FB48F00EB9920 /* AppDelegate.swift */; };
 		B5AA6050193FB48F00EB9920 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA604F193FB48F00EB9920 /* GameScene.swift */; };
@@ -27,23 +33,61 @@
 		B5AA6076193FBA1400EB9920 /* PlayerSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6075193FBA1400EB9920 /* PlayerSpaceship.swift */; };
 		B5AA607A193FC34300EB9920 /* LifePointsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA6079193FC34300EB9920 /* LifePointsProtocol.swift */; };
 		B5AA607E193FCA8D00EB9920 /* Missile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AA607D193FCA8D00EB9920 /* Missile.swift */; };
+		B5AD30881979779A009769CB /* fire_button_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AD30861979779A009769CB /* fire_button_normal@2x.png */; };
+		B5AD30891979779A009769CB /* fire_button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AD30871979779A009769CB /* fire_button_normal.png */; };
+		B5AD308C19797806009769CB /* fire_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AD308A19797806009769CB /* fire_button_selected@2x.png */; };
+		B5AD308D19797806009769CB /* fire_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AD308B19797806009769CB /* fire_button_selected.png */; };
+		B5AEF01419927959004AA4E5 /* game_background_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF01219927959004AA4E5 /* game_background_iphone.png */; };
+		B5AEF01519927959004AA4E5 /* game_background_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF01319927959004AA4E5 /* game_background_iphone@2x.png */; };
+		B5AEF01C19938718004AA4E5 /* menu_background_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF01619938718004AA4E5 /* menu_background_iphone.png */; };
+		B5AEF01D19938718004AA4E5 /* menu_button_restart_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF01719938718004AA4E5 /* menu_button_restart_normal@2x.png */; };
+		B5AEF01E19938718004AA4E5 /* menu_background_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF01819938718004AA4E5 /* menu_background_iphone@2x.png */; };
+		B5AEF01F19938718004AA4E5 /* menu_button_resume_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF01919938718004AA4E5 /* menu_button_resume_normal.png */; };
+		B5AEF02019938718004AA4E5 /* menu_button_resume_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF01A19938718004AA4E5 /* menu_button_resume_normal@2x.png */; };
+		B5AEF02119938718004AA4E5 /* menu_button_restart_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF01B19938718004AA4E5 /* menu_button_restart_normal.png */; };
+		B5AEF0261993B64F004AA4E5 /* show_menu_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF0221993B64F004AA4E5 /* show_menu_button_selected.png */; };
+		B5AEF0271993B64F004AA4E5 /* show_menu_button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF0231993B64F004AA4E5 /* show_menu_button_normal.png */; };
+		B5AEF0281993B64F004AA4E5 /* show_menu_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF0241993B64F004AA4E5 /* show_menu_button_selected@2x.png */; };
+		B5AEF0291993B64F004AA4E5 /* show_menu_button_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AEF0251993B64F004AA4E5 /* show_menu_button_normal@2x.png */; };
+		B5C4838D19A385C800B2E557 /* Layer_0_0_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5C4838819A385C800B2E557 /* Layer_0_0_iphone.png */; };
+		B5C4838E19A385C800B2E557 /* Layer_0_1_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5C4838919A385C800B2E557 /* Layer_0_1_iphone.png */; };
+		B5C4838F19A385C800B2E557 /* Layer_0_2_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5C4838A19A385C800B2E557 /* Layer_0_2_iphone.png */; };
+		B5C4839019A385C800B2E557 /* Layer_0_3_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5C4838B19A385C800B2E557 /* Layer_0_3_iphone.png */; };
+		B5C4839119A385C800B2E557 /* Layer_0_4_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B5C4838C19A385C800B2E557 /* Layer_0_4_iphone.png */; };
+		B5CACF2E1994D60B00DF18C0 /* life_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CACF2C1994D60B00DF18C0 /* life_ball.png */; };
+		B5CACF2F1994D60B00DF18C0 /* life_ball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CACF2D1994D60B00DF18C0 /* life_ball@2x.png */; };
 		B5CACF321994FA6100DF18C0 /* WawaSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B5CACF311994FA6100DF18C0 /* WawaSC-Regular.otf */; };
 		B5CACF351994FBE100DF18C0 /* ScoresNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CACF341994FBE100DF18C0 /* ScoresNode.swift */; };
 		B5CACF3719951DBD00DF18C0 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CACF3619951DBD00DF18C0 /* GameOverScene.swift */; };
 		B5CD264D1979438A00A98A95 /* LifeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD264C1979438A00A98A95 /* LifeIndicator.swift */; };
+		B5D80FEE19794FB800859CC0 /* joystick_stick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */; };
+		B5D80FEF19794FB800859CC0 /* joystick_base.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEB19794FB800859CC0 /* joystick_base.png */; };
+		B5D80FF019794FB800859CC0 /* joystick_base@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FEC19794FB800859CC0 /* joystick_base@2x.png */; };
+		B5D80FF119794FB800859CC0 /* joystick_stick.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D80FED19794FB800859CC0 /* joystick_stick.png */; };
 		B5FA54F4199A5E32004F17B8 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA54F3199A5E32004F17B8 /* BackgroundNode.swift */; };
+		B5FA5505199B95B8004F17B8 /* Layer_0_0_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5FA5500199B95B8004F17B8 /* Layer_0_0_iphone@2x.png */; };
+		B5FA5506199B95B8004F17B8 /* Layer_0_1_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5FA5501199B95B8004F17B8 /* Layer_0_1_iphone@2x.png */; };
+		B5FA5507199B95B8004F17B8 /* Layer_0_2_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5FA5502199B95B8004F17B8 /* Layer_0_2_iphone@2x.png */; };
+		B5FA5508199B95B8004F17B8 /* Layer_0_3_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5FA5503199B95B8004F17B8 /* Layer_0_3_iphone@2x.png */; };
+		B5FA5509199B95B8004F17B8 /* Layer_0_4_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5FA5504199B95B8004F17B8 /* Layer_0_4_iphone@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		86A8AB971AF2520000705022 /* Images.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Images.atlas; sourceTree = "<group>"; };
 		B511887419422EF200FF8D13 /* EnemySpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemySpaceship.swift; sourceTree = "<group>"; };
+		B5118880194253C600FF8D13 /* player_spaceship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_spaceship@2x.png"; sourceTree = "<group>"; };
+		B5118881194253C600FF8D13 /* player_spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_spaceship.png; sourceTree = "<group>"; };
+		B51188861942586A00FF8D13 /* enemy_spaceship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy_spaceship@2x.png"; sourceTree = "<group>"; };
+		B51188871942586A00FF8D13 /* enemy_spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_spaceship.png; sourceTree = "<group>"; };
 		B5175C4D1943A430005AECAA /* Joystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		B5175C501943B51F005AECAA /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		B53E78DA194105BA000CB230 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B582863F197D71EA006D4E4E /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		B59322B0197D788F002D51AC /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
+		B5972FE0197D23710061D79C /* player_missile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_missile.png; sourceTree = "<group>"; };
+		B5972FE1197D23710061D79C /* player_missile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_missile@2x.png"; sourceTree = "<group>"; };
 		B5972FE4197D3A150061D79C /* missile_launch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = missile_launch.wav; sourceTree = "<group>"; };
 		B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerSpaceshipEngineBurst.sks; sourceTree = "<group>"; };
+		B5972FEE197D65D90061D79C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		B5A9050A198297AD00862E2C /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		B5AA6046193FB48F00EB9920 /* Spacequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spacequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AA604A193FB48F00EB9920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,11 +103,43 @@
 		B5AA6075193FBA1400EB9920 /* PlayerSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSpaceship.swift; sourceTree = "<group>"; };
 		B5AA6079193FC34300EB9920 /* LifePointsProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifePointsProtocol.swift; sourceTree = "<group>"; };
 		B5AA607D193FCA8D00EB9920 /* Missile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Missile.swift; sourceTree = "<group>"; };
+		B5AD30861979779A009769CB /* fire_button_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fire_button_normal@2x.png"; sourceTree = "<group>"; };
+		B5AD30871979779A009769CB /* fire_button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire_button_normal.png; sourceTree = "<group>"; };
+		B5AD308A19797806009769CB /* fire_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fire_button_selected@2x.png"; sourceTree = "<group>"; };
+		B5AD308B19797806009769CB /* fire_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire_button_selected.png; sourceTree = "<group>"; };
+		B5AEF01219927959004AA4E5 /* game_background_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_background_iphone.png; sourceTree = "<group>"; };
+		B5AEF01319927959004AA4E5 /* game_background_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "game_background_iphone@2x.png"; sourceTree = "<group>"; };
+		B5AEF01619938718004AA4E5 /* menu_background_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_background_iphone.png; sourceTree = "<group>"; };
+		B5AEF01719938718004AA4E5 /* menu_button_restart_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_button_restart_normal@2x.png"; sourceTree = "<group>"; };
+		B5AEF01819938718004AA4E5 /* menu_background_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_background_iphone@2x.png"; sourceTree = "<group>"; };
+		B5AEF01919938718004AA4E5 /* menu_button_resume_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button_resume_normal.png; sourceTree = "<group>"; };
+		B5AEF01A19938718004AA4E5 /* menu_button_resume_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_button_resume_normal@2x.png"; sourceTree = "<group>"; };
+		B5AEF01B19938718004AA4E5 /* menu_button_restart_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button_restart_normal.png; sourceTree = "<group>"; };
+		B5AEF0221993B64F004AA4E5 /* show_menu_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = show_menu_button_selected.png; sourceTree = "<group>"; };
+		B5AEF0231993B64F004AA4E5 /* show_menu_button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = show_menu_button_normal.png; sourceTree = "<group>"; };
+		B5AEF0241993B64F004AA4E5 /* show_menu_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show_menu_button_selected@2x.png"; sourceTree = "<group>"; };
+		B5AEF0251993B64F004AA4E5 /* show_menu_button_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show_menu_button_normal@2x.png"; sourceTree = "<group>"; };
+		B5C4838819A385C800B2E557 /* Layer_0_0_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Layer_0_0_iphone.png; sourceTree = "<group>"; };
+		B5C4838919A385C800B2E557 /* Layer_0_1_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Layer_0_1_iphone.png; sourceTree = "<group>"; };
+		B5C4838A19A385C800B2E557 /* Layer_0_2_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Layer_0_2_iphone.png; sourceTree = "<group>"; };
+		B5C4838B19A385C800B2E557 /* Layer_0_3_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Layer_0_3_iphone.png; sourceTree = "<group>"; };
+		B5C4838C19A385C800B2E557 /* Layer_0_4_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Layer_0_4_iphone.png; sourceTree = "<group>"; };
+		B5CACF2C1994D60B00DF18C0 /* life_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = life_ball.png; sourceTree = "<group>"; };
+		B5CACF2D1994D60B00DF18C0 /* life_ball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "life_ball@2x.png"; sourceTree = "<group>"; };
 		B5CACF311994FA6100DF18C0 /* WawaSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WawaSC-Regular.otf"; sourceTree = "<group>"; };
 		B5CACF341994FBE100DF18C0 /* ScoresNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoresNode.swift; sourceTree = "<group>"; };
 		B5CACF3619951DBD00DF18C0 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		B5CD264C1979438A00A98A95 /* LifeIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeIndicator.swift; sourceTree = "<group>"; };
+		B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "joystick_stick@2x.png"; sourceTree = "<group>"; };
+		B5D80FEB19794FB800859CC0 /* joystick_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick_base.png; sourceTree = "<group>"; };
+		B5D80FEC19794FB800859CC0 /* joystick_base@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "joystick_base@2x.png"; sourceTree = "<group>"; };
+		B5D80FED19794FB800859CC0 /* joystick_stick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick_stick.png; sourceTree = "<group>"; };
 		B5FA54F3199A5E32004F17B8 /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
+		B5FA5500199B95B8004F17B8 /* Layer_0_0_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Layer_0_0_iphone@2x.png"; sourceTree = "<group>"; };
+		B5FA5501199B95B8004F17B8 /* Layer_0_1_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Layer_0_1_iphone@2x.png"; sourceTree = "<group>"; };
+		B5FA5502199B95B8004F17B8 /* Layer_0_2_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Layer_0_2_iphone@2x.png"; sourceTree = "<group>"; };
+		B5FA5503199B95B8004F17B8 /* Layer_0_3_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Layer_0_3_iphone@2x.png"; sourceTree = "<group>"; };
+		B5FA5504199B95B8004F17B8 /* Layer_0_4_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Layer_0_4_iphone@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +210,33 @@
 		B5972FE6197D3A170061D79C /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				86A8AB971AF2520000705022 /* Images.atlas */,
+				B5FA54FF199B947A004F17B8 /* Background */,
+				B5CACF2C1994D60B00DF18C0 /* life_ball.png */,
+				B5CACF2D1994D60B00DF18C0 /* life_ball@2x.png */,
+				B5AEF0221993B64F004AA4E5 /* show_menu_button_selected.png */,
+				B5AEF0231993B64F004AA4E5 /* show_menu_button_normal.png */,
+				B5AEF0241993B64F004AA4E5 /* show_menu_button_selected@2x.png */,
+				B5AEF0251993B64F004AA4E5 /* show_menu_button_normal@2x.png */,
+				B5972FE0197D23710061D79C /* player_missile.png */,
+				B5972FE1197D23710061D79C /* player_missile@2x.png */,
+				B5AEF01619938718004AA4E5 /* menu_background_iphone.png */,
+				B5AEF01719938718004AA4E5 /* menu_button_restart_normal@2x.png */,
+				B5AEF01819938718004AA4E5 /* menu_background_iphone@2x.png */,
+				B5AEF01919938718004AA4E5 /* menu_button_resume_normal.png */,
+				B5AEF01A19938718004AA4E5 /* menu_button_resume_normal@2x.png */,
+				B5AEF01B19938718004AA4E5 /* menu_button_restart_normal.png */,
+				B5AD308A19797806009769CB /* fire_button_selected@2x.png */,
+				B5AD308B19797806009769CB /* fire_button_selected.png */,
+				B5AD30861979779A009769CB /* fire_button_normal@2x.png */,
+				B5AD30871979779A009769CB /* fire_button_normal.png */,
+				B5D80FED19794FB800859CC0 /* joystick_stick.png */,
+				B5D80FEA19794FB800859CC0 /* joystick_stick@2x.png */,
+				B5D80FEB19794FB800859CC0 /* joystick_base.png */,
+				B5D80FEC19794FB800859CC0 /* joystick_base@2x.png */,
+				B51188861942586A00FF8D13 /* enemy_spaceship@2x.png */,
+				B51188871942586A00FF8D13 /* enemy_spaceship.png */,
+				B5118881194253C600FF8D13 /* player_spaceship.png */,
+				B5118880194253C600FF8D13 /* player_spaceship@2x.png */,
 				B5AA6056193FB48F00EB9920 /* Images.xcassets */,
 			);
 			name = Images;
@@ -153,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */,
+				B5972FEE197D65D90061D79C /* spark.png */,
 				B582863F197D71EA006D4E4E /* Explosion.sks */,
 			);
 			name = Emiters;
@@ -178,13 +281,13 @@
 		B5AA6048193FB48F00EB9920 /* Spacequest */ = {
 			isa = PBXGroup;
 			children = (
-				B5AA604B193FB48F00EB9920 /* AppDelegate.swift */,
 				B5118879194247EB00FF8D13 /* View Controllers */,
 				B5118878194247E400FF8D13 /* Scenes */,
 				B53E78D91941059A000CB230 /* Helpers */,
 				B5AA6078193FC31700EB9920 /* Protocols */,
 				B5AA6070193FB87B00EB9920 /* Resources */,
 				B5AA606C193FB51600EB9920 /* Nodes */,
+				B5AA604B193FB48F00EB9920 /* AppDelegate.swift */,
 				B5AA6053193FB48F00EB9920 /* Main.storyboard */,
 				B5AA6049193FB48F00EB9920 /* Supporting Files */,
 			);
@@ -264,6 +367,32 @@
 			name = Missiles;
 			sourceTree = "<group>";
 		};
+		B5C4839219A386D000B2E557 /* Static background */ = {
+			isa = PBXGroup;
+			children = (
+				B5AEF01219927959004AA4E5 /* game_background_iphone.png */,
+				B5AEF01319927959004AA4E5 /* game_background_iphone@2x.png */,
+			);
+			name = "Static background";
+			sourceTree = "<group>";
+		};
+		B5C4839319A386DB00B2E557 /* Layer 0 */ = {
+			isa = PBXGroup;
+			children = (
+				B5C4838819A385C800B2E557 /* Layer_0_0_iphone.png */,
+				B5C4838919A385C800B2E557 /* Layer_0_1_iphone.png */,
+				B5C4838A19A385C800B2E557 /* Layer_0_2_iphone.png */,
+				B5C4838B19A385C800B2E557 /* Layer_0_3_iphone.png */,
+				B5C4838C19A385C800B2E557 /* Layer_0_4_iphone.png */,
+				B5FA5500199B95B8004F17B8 /* Layer_0_0_iphone@2x.png */,
+				B5FA5501199B95B8004F17B8 /* Layer_0_1_iphone@2x.png */,
+				B5FA5502199B95B8004F17B8 /* Layer_0_2_iphone@2x.png */,
+				B5FA5503199B95B8004F17B8 /* Layer_0_3_iphone@2x.png */,
+				B5FA5504199B95B8004F17B8 /* Layer_0_4_iphone@2x.png */,
+			);
+			name = "Layer 0";
+			sourceTree = "<group>";
+		};
 		B5CACF301994FA5600DF18C0 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +423,15 @@
 				B5CD264C1979438A00A98A95 /* LifeIndicator.swift */,
 			);
 			name = "Life Indicator";
+			sourceTree = "<group>";
+		};
+		B5FA54FF199B947A004F17B8 /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				B5C4839319A386DB00B2E557 /* Layer 0 */,
+				B5C4839219A386D000B2E557 /* Static background */,
+			);
+			name = Background;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,14 +491,52 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86A8AB981AF2520000705022 /* Images.atlas in Resources */,
+				B5AEF01F19938718004AA4E5 /* menu_button_resume_normal.png in Resources */,
+				B5AEF01D19938718004AA4E5 /* menu_button_restart_normal@2x.png in Resources */,
+				B5AEF01419927959004AA4E5 /* game_background_iphone.png in Resources */,
+				B5C4838E19A385C800B2E557 /* Layer_0_1_iphone.png in Resources */,
+				B51188881942586A00FF8D13 /* enemy_spaceship@2x.png in Resources */,
+				B5972FE3197D23710061D79C /* player_missile@2x.png in Resources */,
+				B5AEF0271993B64F004AA4E5 /* show_menu_button_normal.png in Resources */,
+				B5118882194253C600FF8D13 /* player_spaceship@2x.png in Resources */,
+				B511888A1942586A00FF8D13 /* enemy_spaceship.png in Resources */,
+				B5FA5509199B95B8004F17B8 /* Layer_0_4_iphone@2x.png in Resources */,
+				B5AEF02119938718004AA4E5 /* menu_button_restart_normal.png in Resources */,
+				B5AD308D19797806009769CB /* fire_button_selected.png in Resources */,
 				B5CACF321994FA6100DF18C0 /* WawaSC-Regular.otf in Resources */,
+				B5AEF0281993B64F004AA4E5 /* show_menu_button_selected@2x.png in Resources */,
+				B5FA5508199B95B8004F17B8 /* Layer_0_3_iphone@2x.png in Resources */,
 				B5AA6057193FB48F00EB9920 /* Images.xcassets in Resources */,
 				B5AA6055193FB48F00EB9920 /* Main.storyboard in Resources */,
+				B5C4838D19A385C800B2E557 /* Layer_0_0_iphone.png in Resources */,
+				B5FA5505199B95B8004F17B8 /* Layer_0_0_iphone@2x.png in Resources */,
+				B5AEF0291993B64F004AA4E5 /* show_menu_button_normal@2x.png in Resources */,
+				B5D80FEE19794FB800859CC0 /* joystick_stick@2x.png in Resources */,
 				B5828640197D71EA006D4E4E /* Explosion.sks in Resources */,
+				B5C4839019A385C800B2E557 /* Layer_0_3_iphone.png in Resources */,
+				B5AD30891979779A009769CB /* fire_button_normal.png in Resources */,
+				B5AEF01C19938718004AA4E5 /* menu_background_iphone.png in Resources */,
+				B5AEF02019938718004AA4E5 /* menu_button_resume_normal@2x.png in Resources */,
+				B5CACF2F1994D60B00DF18C0 /* life_ball@2x.png in Resources */,
+				B5972FE2197D23710061D79C /* player_missile.png in Resources */,
+				B5CACF2E1994D60B00DF18C0 /* life_ball.png in Resources */,
+				B5972FF0197D65D90061D79C /* spark.png in Resources */,
+				B5AD30881979779A009769CB /* fire_button_normal@2x.png in Resources */,
+				B5AEF01E19938718004AA4E5 /* menu_background_iphone@2x.png in Resources */,
+				B5AEF0261993B64F004AA4E5 /* show_menu_button_selected.png in Resources */,
 				B5972FE5197D3A150061D79C /* missile_launch.wav in Resources */,
+				B5D80FF019794FB800859CC0 /* joystick_base@2x.png in Resources */,
 				B59322B1197D788F002D51AC /* explosion.wav in Resources */,
 				B5972FEF197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks in Resources */,
+				B5FA5506199B95B8004F17B8 /* Layer_0_1_iphone@2x.png in Resources */,
+				B5D80FEF19794FB800859CC0 /* joystick_base.png in Resources */,
+				B5D80FF119794FB800859CC0 /* joystick_stick.png in Resources */,
+				B5118884194253C600FF8D13 /* player_spaceship.png in Resources */,
+				B5FA5507199B95B8004F17B8 /* Layer_0_2_iphone@2x.png in Resources */,
+				B5AEF01519927959004AA4E5 /* game_background_iphone@2x.png in Resources */,
+				B5C4838F19A385C800B2E557 /* Layer_0_2_iphone.png in Resources */,
+				B5C4839119A385C800B2E557 /* Layer_0_4_iphone.png in Resources */,
+				B5AD308C19797806009769CB /* fire_button_selected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

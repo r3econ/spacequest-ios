@@ -17,12 +17,7 @@ class GameViewController: UIViewController
         super.viewDidLoad()
         
         configureView()
-        
-        SKTextureAtlas.preloadTextureAtlases([SKTextureAtlas(named: "Images")], withCompletionHandler:
-        { () -> Void in
-                
-                self.startNewGame(animated: false)
-        })
+        startNewGame(animated: false)
     }
     
     
