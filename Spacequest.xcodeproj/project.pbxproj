@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86B406B11AF27024009C868F /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B406B01AF27024009C868F /* MusicManager.swift */; };
 		B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511887419422EF200FF8D13 /* EnemySpaceship.swift */; };
 		B5118882194253C600FF8D13 /* player_spaceship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118880194253C600FF8D13 /* player_spaceship@2x.png */; };
 		B5118884194253C600FF8D13 /* player_spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118881194253C600FF8D13 /* player_spaceship.png */; };
@@ -73,6 +74,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		86B406B01AF27024009C868F /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		B511887419422EF200FF8D13 /* EnemySpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemySpaceship.swift; sourceTree = "<group>"; };
 		B5118880194253C600FF8D13 /* player_spaceship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_spaceship@2x.png"; sourceTree = "<group>"; };
 		B5118881194253C600FF8D13 /* player_spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_spaceship.png; sourceTree = "<group>"; };
@@ -153,6 +155,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86B406AF1AF2700D009C868F /* Music Manager */ = {
+			isa = PBXGroup;
+			children = (
+				86B406B01AF27024009C868F /* MusicManager.swift */,
+			);
+			name = "Music Manager";
+			sourceTree = "<group>";
+		};
 		B51188771942368F00FF8D13 /* Background */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +212,7 @@
 		B53E78D91941059A000CB230 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				86B406AF1AF2700D009C868F /* Music Manager */,
 				B53E78DA194105BA000CB230 /* Constants.swift */,
 			);
 			name = Helpers;
@@ -558,6 +569,7 @@
 				B5175C4E1943A430005AECAA /* Joystick.swift in Sources */,
 				B5175C511943B51F005AECAA /* Button.swift in Sources */,
 				B5AA607E193FCA8D00EB9920 /* Missile.swift in Sources */,
+				86B406B11AF27024009C868F /* MusicManager.swift in Sources */,
 				B5CACF351994FBE100DF18C0 /* ScoresNode.swift in Sources */,
 				B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */,
 				B5CD264D1979438A00A98A95 /* LifeIndicator.swift in Sources */,
