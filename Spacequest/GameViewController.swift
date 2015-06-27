@@ -163,6 +163,12 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     }
     
     
+    func mainMenuSceneDidTapInfoButton(mainMenuScene:MainMenuScene)
+    {
+        
+    }
+    
+    
     // GameOverSceneDelegate
     func gameOverSceneDidTapRestartButton(gameOverScene:GameOverScene)
     {

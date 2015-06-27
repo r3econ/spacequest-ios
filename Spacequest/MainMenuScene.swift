@@ -5,6 +5,7 @@ protocol MainMenuSceneDelegate
 {
     func mainMenuSceneDidTapResumeButton(mainMenuScene:MainMenuScene)
     func mainMenuSceneDidTapRestartButton(mainMenuScene:MainMenuScene)
+    func mainMenuSceneDidTapInfoButton(mainMenuScene:MainMenuScene)
 }
 
 
@@ -51,25 +52,27 @@ extension MainMenuScene
         // Info button.
         infoButton = Button(
             normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
-            selectedImageNamed: ImageName.MenuButtonInfoSelected.rawValue)
+            selectedImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
         
+        resumeButton!.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
+
         infoButton!.position = CGPoint(
-            x: scene!.size.width - 20,
-            y: scene!.size.height - 20)
+            x: scene!.size.width - 40.0,
+            y: scene!.size.height - 25.0)
         
         self.addChild(infoButton!)
 
         // Resume button.
         resumeButton = Button(
             normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
-            selectedImageNamed: ImageName.MenuButtonResumeSelected.rawValue)
+            selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
         
         resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
         
         // Restart button.
         restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
-            selectedImageNamed: ImageName.MenuButtonRestartSelected.rawValue)
+            selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
         
         restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
         
@@ -127,6 +130,20 @@ extension MainMenuScene
             () -> () in
             
             self.mainMenuSceneDelegate?.mainMenuSceneDidTapRestartButton(self)
+            return
+        }
+        
+        return handler
+    }
+    
+    
+    func infoButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler
+    {
+        let handler =
+        {
+            () -> () in
+            
+            self.mainMenuSceneDelegate?.mainMenuSceneDidTapInfoButton(self)
             return
         }
         

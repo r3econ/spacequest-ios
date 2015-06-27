@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		86B406B11AF27024009C868F /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B406B01AF27024009C868F /* MusicManager.swift */; };
+		86B406B61AF2B67C009C868F /* menu_button_info_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B406B41AF2B67C009C868F /* menu_button_info_normal@2x.png */; };
+		86B406B71AF2B67C009C868F /* menu_button_info_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B406B51AF2B67C009C868F /* menu_button_info_normal.png */; };
 		B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511887419422EF200FF8D13 /* EnemySpaceship.swift */; };
 		B5118882194253C600FF8D13 /* player_spaceship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118880194253C600FF8D13 /* player_spaceship@2x.png */; };
 		B5118884194253C600FF8D13 /* player_spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118881194253C600FF8D13 /* player_spaceship.png */; };
@@ -75,6 +77,8 @@
 
 /* Begin PBXFileReference section */
 		86B406B01AF27024009C868F /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
+		86B406B41AF2B67C009C868F /* menu_button_info_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_button_info_normal@2x.png"; sourceTree = "<group>"; };
+		86B406B51AF2B67C009C868F /* menu_button_info_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button_info_normal.png; sourceTree = "<group>"; };
 		B511887419422EF200FF8D13 /* EnemySpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemySpaceship.swift; sourceTree = "<group>"; };
 		B5118880194253C600FF8D13 /* player_spaceship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_spaceship@2x.png"; sourceTree = "<group>"; };
 		B5118881194253C600FF8D13 /* player_spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_spaceship.png; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 				B5AEF0251993B64F004AA4E5 /* show_menu_button_normal@2x.png */,
 				B5972FE0197D23710061D79C /* player_missile.png */,
 				B5972FE1197D23710061D79C /* player_missile@2x.png */,
+				86B406B41AF2B67C009C868F /* menu_button_info_normal@2x.png */,
+				86B406B51AF2B67C009C868F /* menu_button_info_normal.png */,
 				B5AEF01619938718004AA4E5 /* menu_background_iphone.png */,
 				B5AEF01719938718004AA4E5 /* menu_button_restart_normal@2x.png */,
 				B5AEF01819938718004AA4E5 /* menu_background_iphone@2x.png */,
@@ -502,6 +508,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86B406B61AF2B67C009C868F /* menu_button_info_normal@2x.png in Resources */,
 				B5AEF01F19938718004AA4E5 /* menu_button_resume_normal.png in Resources */,
 				B5AEF01D19938718004AA4E5 /* menu_button_restart_normal@2x.png in Resources */,
 				B5AEF01419927959004AA4E5 /* game_background_iphone.png in Resources */,
@@ -534,6 +541,7 @@
 				B5972FF0197D65D90061D79C /* spark.png in Resources */,
 				B5AD30881979779A009769CB /* fire_button_normal@2x.png in Resources */,
 				B5AEF01E19938718004AA4E5 /* menu_background_iphone@2x.png in Resources */,
+				86B406B71AF2B67C009C868F /* menu_button_info_normal.png in Resources */,
 				B5AEF0261993B64F004AA4E5 /* show_menu_button_selected.png in Resources */,
 				B5972FE5197D3A150061D79C /* missile_launch.wav in Resources */,
 				B5D80FF019794FB800859CC0 /* joystick_base@2x.png in Resources */,
