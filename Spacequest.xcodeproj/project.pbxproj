@@ -11,6 +11,7 @@
 		86B406B11AF27024009C868F /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B406B01AF27024009C868F /* MusicManager.swift */; };
 		86B406B61AF2B67C009C868F /* menu_button_info_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B406B41AF2B67C009C868F /* menu_button_info_normal@2x.png */; };
 		86B406B71AF2B67C009C868F /* menu_button_info_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B406B51AF2B67C009C868F /* menu_button_info_normal.png */; };
+		AFC536611B68C01F00A11383 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC536601B68C01F00A11383 /* AnalyticsManager.swift */; };
 		B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511887419422EF200FF8D13 /* EnemySpaceship.swift */; };
 		B5118882194253C600FF8D13 /* player_spaceship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118880194253C600FF8D13 /* player_spaceship@2x.png */; };
 		B5118884194253C600FF8D13 /* player_spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118881194253C600FF8D13 /* player_spaceship.png */; };
@@ -83,6 +84,8 @@
 		86B406B01AF27024009C868F /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		86B406B41AF2B67C009C868F /* menu_button_info_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_button_info_normal@2x.png"; sourceTree = "<group>"; };
 		86B406B51AF2B67C009C868F /* menu_button_info_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button_info_normal.png; sourceTree = "<group>"; };
+		AFC536601B68C01F00A11383 /* AnalyticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		AFC536621B68C1FF00A11383 /* Spacequest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spacequest-Bridging-Header.h"; sourceTree = "<group>"; };
 		B511887419422EF200FF8D13 /* EnemySpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemySpaceship.swift; sourceTree = "<group>"; };
 		B5118880194253C600FF8D13 /* player_spaceship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_spaceship@2x.png"; sourceTree = "<group>"; };
 		B5118881194253C600FF8D13 /* player_spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_spaceship.png; sourceTree = "<group>"; };
@@ -181,6 +184,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AFC5365F1B68BFF600A11383 /* Analytics Manager */ = {
+			isa = PBXGroup;
+			children = (
+				AFC536601B68C01F00A11383 /* AnalyticsManager.swift */,
+			);
+			name = "Analytics Manager";
+			sourceTree = "<group>";
+		};
 		B51188771942368F00FF8D13 /* Background */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +241,7 @@
 		B53E78D91941059A000CB230 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				AFC5365F1B68BFF600A11383 /* Analytics Manager */,
 				86B406AF1AF2700D009C868F /* Music Manager */,
 				B53E78DA194105BA000CB230 /* Constants.swift */,
 			);
@@ -330,6 +342,7 @@
 		B5AA6049193FB48F00EB9920 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AFC536621B68C1FF00A11383 /* Spacequest-Bridging-Header.h */,
 				B5AA604A193FB48F00EB9920 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -654,6 +667,7 @@
 				B5AA607E193FCA8D00EB9920 /* Missile.swift in Sources */,
 				86B406B11AF27024009C868F /* MusicManager.swift in Sources */,
 				B5CACF351994FBE100DF18C0 /* ScoresNode.swift in Sources */,
+				AFC536611B68C01F00A11383 /* AnalyticsManager.swift in Sources */,
 				B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */,
 				B5CD264D1979438A00A98A95 /* LifeIndicator.swift in Sources */,
 				B5AA6072193FB9F200EB9920 /* Spaceship.swift in Sources */,
@@ -764,6 +778,7 @@
 				INFOPLIST_FILE = Spacequest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Spacequest/Spacequest-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -777,6 +792,7 @@
 				INFOPLIST_FILE = Spacequest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Spacequest/Spacequest-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
