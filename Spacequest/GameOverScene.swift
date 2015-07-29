@@ -1,8 +1,8 @@
 import SpriteKit
 
 
-protocol GameOverSceneDelegate
-{
+protocol GameOverSceneDelegate {
+    
     func gameOverSceneDidTapRestartButton(gameOverScene:GameOverScene)
 }
 
@@ -15,14 +15,14 @@ class GameOverScene: SKScene
     var background: BackgroundNode?
     
     
-    required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
+        
         super.init(coder: aDecoder)
     }
     
     
-    override init(size: CGSize)
-    {
+    override init(size: CGSize) {
+        
         super.init(size: size)
         
         configureButtons()
@@ -30,10 +30,16 @@ class GameOverScene: SKScene
     }
     
     
-    func configureBackground()
-    {
+    func configureBackground() {
+        
         background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.MenuBackgroundPhone)
         background!.configureInScene(self)
+    }
+    
+    
+    override func didMoveToView(view: SKView) {
+        
+        AnalyticsManager.sharedInstance.trackScene("GameOverScene")
     }
 }
 
@@ -41,10 +47,11 @@ class GameOverScene: SKScene
 /**
 Buttons & Title.
 */
-extension GameOverScene
-    {
-    func configureButtons()
-    {
+extension GameOverScene {
+    
+    
+    func configureButtons() {
+        
         // Restart button.
         restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
@@ -57,8 +64,8 @@ extension GameOverScene
         var totalButtonsWidth: CGFloat = 0.0
         
         // Calculate total width of the buttons area.
-        for (index, button) in enumerate(buttons!)
-        {
+        for (index, button) in enumerate(buttons!) {
+            
             totalButtonsWidth += button.size.width
             totalButtonsWidth += index != buttons!.count - 1 ? horizontalPadding : 0.0
         }
@@ -67,8 +74,8 @@ extension GameOverScene
         var buttonOriginX = CGRectGetWidth(self.frame) / 2.0 + totalButtonsWidth / 2.0
         
         // Place buttons in the scene.
-        for (index, button) in enumerate(buttons!)
-        {
+        for (index, button) in enumerate(buttons!) {
+            
             button.position = CGPoint(
                 x: buttonOriginX - button.size.width/2,
                 y: button.size.height * 1.1)
@@ -85,10 +92,10 @@ extension GameOverScene
     }
     
     
-    func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler
-    {
-        let handler =
-        {
+    func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
+        
+        let handler = {
+            
             () -> () in
             
             self.gameOverSceneDelegate?.gameOverSceneDidTapRestartButton(self)

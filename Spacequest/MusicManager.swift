@@ -5,29 +5,61 @@ import AVFoundation
 private let _MusicManagerSharedInstance = MusicManager()
 
 
-class MusicManager: NSObject
-{
+class MusicManager: NSObject {
+    
     static let sharedInstance = MusicManager()
-    private var backgroundMusicAudioPlayer: AVAudioPlayer?
+    private var backgroundMusicPlayer: AVAudioPlayer?
     
     
-    func startPlayingBackgroundMusic()
-    {
-        var fileURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("background", ofType: "mp3")!)
+    override init() {
         
+        super.init()
+        
+        configureBackgroundMusicPlayer()
+    }
+}
+
+
+// MARK - Background Music
+
+extension MusicManager
+{
+    private func configureBackgroundMusicPlayer() {
+        
+        var fileURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("background", ofType: "mp3")!)
         var error: NSError?
         
-        backgroundMusicAudioPlayer = AVAudioPlayer(contentsOfURL: fileURL, error: &error)
+        backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: fileURL, error: &error)
+        backgroundMusicPlayer!.numberOfLoops = -1;
         
-        if (backgroundMusicAudioPlayer != nil)
+        if (backgroundMusicPlayer != nil)
         {
-            backgroundMusicAudioPlayer!.prepareToPlay()
-            backgroundMusicAudioPlayer!.play()
+            backgroundMusicPlayer!.prepareToPlay()
         }
+    }
+    
+    
+    func toggleBackgroundMusic() {
+    
+        if (backgroundMusicPlayer!.playing) {
+            
+            backgroundMusicPlayer!.pause()
+        }
+        else
+        {
+            backgroundMusicPlayer!.play()
+        }
+    }
+    
+    
+    func playBackgroundMusic() {
         
-        if error != nil
-        {
-            println(error)
-        }
+        backgroundMusicPlayer!.play()
+    }
+    
+    
+    func pauseBackgroundMusic() {
+        
+        backgroundMusicPlayer!.pause()
     }
 }

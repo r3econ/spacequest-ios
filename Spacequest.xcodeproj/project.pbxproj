@@ -12,6 +12,8 @@
 		86B406B61AF2B67C009C868F /* menu_button_info_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B406B41AF2B67C009C868F /* menu_button_info_normal@2x.png */; };
 		86B406B71AF2B67C009C868F /* menu_button_info_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B406B51AF2B67C009C868F /* menu_button_info_normal.png */; };
 		AFC536611B68C01F00A11383 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC536601B68C01F00A11383 /* AnalyticsManager.swift */; };
+		AFC536641B69036700A11383 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AFC536631B69036700A11383 /* background.mp3 */; };
+		AFC536661B69038A00A11383 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = AFC536651B69038A00A11383 /* license.txt */; };
 		B511887519422EF200FF8D13 /* EnemySpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511887419422EF200FF8D13 /* EnemySpaceship.swift */; };
 		B5118882194253C600FF8D13 /* player_spaceship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118880194253C600FF8D13 /* player_spaceship@2x.png */; };
 		B5118884194253C600FF8D13 /* player_spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = B5118881194253C600FF8D13 /* player_spaceship.png */; };
@@ -86,6 +88,8 @@
 		86B406B51AF2B67C009C868F /* menu_button_info_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button_info_normal.png; sourceTree = "<group>"; };
 		AFC536601B68C01F00A11383 /* AnalyticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		AFC536621B68C1FF00A11383 /* Spacequest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spacequest-Bridging-Header.h"; sourceTree = "<group>"; };
+		AFC536631B69036700A11383 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
+		AFC536651B69038A00A11383 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		B511887419422EF200FF8D13 /* EnemySpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemySpaceship.swift; sourceTree = "<group>"; };
 		B5118880194253C600FF8D13 /* player_spaceship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player_spaceship@2x.png"; sourceTree = "<group>"; };
 		B5118881194253C600FF8D13 /* player_spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_spaceship.png; sourceTree = "<group>"; };
@@ -288,8 +292,10 @@
 		B5972FE7197D3A210061D79C /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				AFC536631B69036700A11383 /* background.mp3 */,
 				B59322B0197D788F002D51AC /* explosion.wav */,
 				B5972FE4197D3A150061D79C /* missile_launch.wav */,
+				AFC536651B69038A00A11383 /* license.txt */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -564,6 +570,8 @@
 				B5CACF321994FA6100DF18C0 /* WawaSC-Regular.otf in Resources */,
 				B5AEF0281993B64F004AA4E5 /* show_menu_button_selected@2x.png in Resources */,
 				B5FA5508199B95B8004F17B8 /* Layer_0_3_iphone@2x.png in Resources */,
+				AFC536661B69038A00A11383 /* license.txt in Resources */,
+				AFC536641B69036700A11383 /* background.mp3 in Resources */,
 				B5AA6057193FB48F00EB9920 /* Images.xcassets in Resources */,
 				B5AA6055193FB48F00EB9920 /* Main.storyboard in Resources */,
 				B5C4838D19A385C800B2E557 /* Layer_0_0_iphone.png in Resources */,

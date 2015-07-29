@@ -13,8 +13,22 @@ class AnalyticsManager: NSObject
 {
     static let sharedInstance = AnalyticsManager()
 
-    func configureGoogleAnalytics()
-    {
+    override init() {
+        
+        super.init()
+        
+        configureGoogleAnalytics()
+    }
+}
+
+
+// MARK: - GoogleAnalytics
+
+extension AnalyticsManager {
+    
+    
+    private func configureGoogleAnalytics() {
+        
         GAI.sharedInstance().trackerWithTrackingId(kGoogleAnalyticsAppID)
         
         // Set app version.
@@ -24,19 +38,23 @@ class AnalyticsManager: NSObject
         
         GAI.sharedInstance().defaultTracker.set(kGAIAppVersion, value: String(format: "%@ (%@)", shortVersion, version))
     }
-}
-
-
-// MARK: - GoogleAnalytics
-
-
-extension AnalyticsManager
-{
-    func trackGAEvent(category: String, action: String, label: String, value: NSNumber)
-    {
-        let event = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value);
+    
+    
+    func trackGAEvent(category: String, action: String, label: String, value: NSNumber) {
+        
+        let event = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build();
         
         // Submit event to Google Analytics.
-        GAI.sharedInstance().defaultTracker.send(event.build())
+        GAI.sharedInstance().defaultTracker.send(event as [NSObject : AnyObject])
+    }
+    
+    
+    func trackScene(name: String) {
+        
+        GAI.sharedInstance().defaultTracker.set(kGAIScreenName, value: name)
+        
+        let event = GAIDictionaryBuilder.createScreenView().build()
+        
+        GAI.sharedInstance().defaultTracker.send(event as [NSObject : AnyObject])
     }
 }
