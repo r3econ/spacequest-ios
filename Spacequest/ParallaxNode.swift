@@ -3,9 +3,9 @@ import SpriteKit
 
 extension Array
 {
-    func find(includedElement: T -> Bool) -> Int?
+    func find(includedElement: Element -> Bool) -> Int?
     {
-        for (idx, element) in enumerate(self)
+        for (idx, element) in self.enumerate()
         {
             if includedElement(element)
             {
@@ -55,7 +55,7 @@ class ParallaxNode: SKEffectNode
     }
     
     
-    func addLayer(#imageNames: [String], speed: CGFloat = 0.0)
+    func addLayer(imageNames imageNames: [String], speed: CGFloat = 0.0)
     {
         let layerAttributes = ParallaxLayerAttributes(imageNames: imageNames, speed: speed)
         

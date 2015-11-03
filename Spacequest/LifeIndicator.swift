@@ -17,7 +17,7 @@ class LifeIndicator: SKSpriteNode
         lifePoints = 100
         
         super.init(texture: texture,
-            color: nil,
+            color: UIColor.brownColor(),
             size: texture.size())
         
         titleLabelNode = SKLabelNode(fontNamed: FontName.Wawati.rawValue)
@@ -51,7 +51,7 @@ class LifeIndicator: SKSpriteNode
     }
     
     
-    func update(#animated: Bool)
+    func update(animated animated: Bool)
     {
         titleLabelNode!.text = "\(lifePoints)"
         

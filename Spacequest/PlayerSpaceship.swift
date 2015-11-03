@@ -12,7 +12,7 @@ class PlayerSpaceship: Spaceship
     }
     
     
-    required init(texture: SKTexture!, color: UIColor!, size: CGSize)
+    required init(texture: SKTexture?, color: UIColor, size: CGSize)
     {
         super.init(texture: texture, color: color, size: size)
     }
@@ -23,7 +23,7 @@ class PlayerSpaceship: Spaceship
         let size = CGSize(width: 64, height: 50)
         
         self.init(texture: SKTexture(imageNamed: ImageName.PlayerSpaceship.rawValue),
-            color: nil,
+            color: UIColor.brownColor(),
             size: size)
 
         name = NSStringFromClass(PlayerSpaceship.self)
@@ -57,19 +57,19 @@ class PlayerSpaceship: Spaceship
     
     func launchMissile()
     {
-        var missile = Missile.playerMissile()
+        let missile = Missile.playerMissile()
         
         missile.position = CGPoint(x: CGRectGetMaxX(self.frame) + 10.0, y: position.y)
         missile.zPosition = self.zPosition - 1
     
         scene!.addChild(missile)
         
-        var velocity: CGFloat = 600.0
-        var moveDuration = scene!.size.width / velocity
-        var missileEndPosition = CGPoint(x: position.x + scene!.size.width, y: position.y)
+        let velocity: CGFloat = 600.0
+        let moveDuration = scene!.size.width / velocity
+        let missileEndPosition = CGPoint(x: position.x + scene!.size.width, y: position.y)
         
-        var moveAction = SKAction.moveTo(missileEndPosition, duration: NSTimeInterval(moveDuration))
-        var removeAction = SKAction.removeFromParent()
+        let moveAction = SKAction.moveTo(missileEndPosition, duration: NSTimeInterval(moveDuration))
+        let removeAction = SKAction.removeFromParent()
         
         missile.runAction(SKAction.sequence([moveAction, removeAction]))
         

@@ -26,10 +26,15 @@ extension MusicManager
 {
     private func configureBackgroundMusicPlayer() {
         
-        var fileURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("background", ofType: "mp3")!)
+        let fileURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("background", ofType: "mp3")!)
         var error: NSError?
         
-        backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: fileURL, error: &error)
+        do {
+            backgroundMusicPlayer = try AVAudioPlayer(contentsOfURL: fileURL)
+        } catch let error1 as NSError {
+            error = error1
+            backgroundMusicPlayer = nil
+        }
         backgroundMusicPlayer!.numberOfLoops = -1;
         
         if (backgroundMusicPlayer != nil)

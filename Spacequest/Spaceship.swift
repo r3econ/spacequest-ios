@@ -25,7 +25,7 @@ class Spaceship: SKSpriteNode, LifePointsProtocol
     }
     
     
-    required override init(texture: SKTexture!, color: UIColor!, size: CGSize)
+    required override init(texture: SKTexture?, color: UIColor, size: CGSize)
     {
         super.init(texture: texture, color: color, size: size)
     }

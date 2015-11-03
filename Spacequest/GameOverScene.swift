@@ -64,7 +64,7 @@ extension GameOverScene {
         var totalButtonsWidth: CGFloat = 0.0
         
         // Calculate total width of the buttons area.
-        for (index, button) in enumerate(buttons!) {
+        for (index, button) in (buttons!).enumerate() {
             
             totalButtonsWidth += button.size.width
             totalButtonsWidth += index != buttons!.count - 1 ? horizontalPadding : 0.0
@@ -74,7 +74,7 @@ extension GameOverScene {
         var buttonOriginX = CGRectGetWidth(self.frame) / 2.0 + totalButtonsWidth / 2.0
         
         // Place buttons in the scene.
-        for (index, button) in enumerate(buttons!) {
+        for (index, button) in (buttons!).enumerate() {
             
             button.position = CGPoint(
                 x: buttonOriginX - button.size.width/2,

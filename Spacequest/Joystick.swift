@@ -76,9 +76,9 @@ class Joystick: SKNode
 */
 extension Joystick
 {
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
-        var touch : AnyObject! = touches.first
+        let touch : AnyObject! = touches.first
         
         if (touch != nil)
         {
@@ -88,9 +88,9 @@ extension Joystick
     }
     
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent)
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
-        var touch : AnyObject! = touches.first
+        let touch : AnyObject! = touches.first
         
         if (touch != nil)
         {
@@ -100,14 +100,14 @@ extension Joystick
     }
     
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent)
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         isTouchedDown = false
         reset()
     }
     
     
-    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent)
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?)
     {
         isTouchedDown = false
         reset()
@@ -121,7 +121,7 @@ extension Joystick
         
         if distance >= joystickRadius
         {
-            var normalizedTranslationVector = CGPoint(x: location.x / distance, y: location.y / distance)
+            let normalizedTranslationVector = CGPoint(x: location.x / distance, y: location.y / distance)
             
             location = CGPoint(x: normalizedTranslationVector.x * joystickRadius,
                 y: normalizedTranslationVector.y * joystickRadius)

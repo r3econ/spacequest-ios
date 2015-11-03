@@ -9,7 +9,7 @@ class Missile: SKSpriteNode
     }
     
     
-    required override init(texture: SKTexture!, color: UIColor!, size: CGSize)
+    required override init(texture: SKTexture?, color: UIColor, size: CGSize)
     {
         super.init(texture: texture, color: color, size: size)
     }
@@ -19,7 +19,7 @@ class Missile: SKSpriteNode
     {
         var size = CGSizeMake(10.0, 10.0)
         self.init(texture: SKTexture(imageNamed:ImageName.Missile.rawValue),
-            color: nil,
+            color: UIColor.brownColor(),
             size: size)
         
         name = NSStringFromClass(Missile.self)
@@ -31,7 +31,7 @@ class Missile: SKSpriteNode
     
     class func enemyMissile() -> Missile
     {
-        var missile = Missile()
+        let missile = Missile()
         
         missile.physicsBody!.categoryBitMask = CategoryBitmask.EnemyMissile.rawValue
         missile.physicsBody!.contactTestBitMask = CategoryBitmask.PlayerSpaceship.rawValue
@@ -42,7 +42,7 @@ class Missile: SKSpriteNode
     
     class func playerMissile() -> Missile
     {
-        var missile = Missile()
+        let missile = Missile()
         
         missile.physicsBody!.categoryBitMask = CategoryBitmask.PlayerMissile.rawValue
         missile.physicsBody!.contactTestBitMask = CategoryBitmask.EnemySpaceship.rawValue

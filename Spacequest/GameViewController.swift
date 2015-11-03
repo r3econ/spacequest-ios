@@ -29,9 +29,9 @@ class GameViewController: UIViewController {
     }
 
     
-    override func supportedInterfaceOrientations() -> Int {
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         
-        return Int(UIInterfaceOrientationMask.Landscape.rawValue)
+        return UIInterfaceOrientationMask.Landscape
     }
 
     
@@ -53,7 +53,7 @@ class GameViewController: UIViewController {
 */
 extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOverSceneDelegate {
     
-    func startNewGame(#animated: Bool) {
+    func startNewGame(animated animated: Bool) {
         let skView = self.view as! SKView
         
         gameScene = GameScene(size: skView.frame.size)
@@ -71,7 +71,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     }
     
     
-    func resumeGame(#animated: Bool) {
+    func resumeGame(animated animated: Bool) {
         
         let skView = self.view as! SKView
         
@@ -96,7 +96,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     }
     
     
-    func showMainMenuScene(#animated: Bool) {
+    func showMainMenuScene(animated animated: Bool) {
         
         let skView = self.view as! SKView
         
@@ -116,7 +116,7 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     }
     
     
-    func showGameOverScene(#animated: Bool) {
+    func showGameOverScene(animated animated: Bool) {
         
         let skView = self.view as! SKView
         

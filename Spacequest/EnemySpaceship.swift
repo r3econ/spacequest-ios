@@ -12,7 +12,7 @@ class EnemySpaceship: Spaceship
     }
     
     
-    required init(texture: SKTexture!, color: UIColor!, size: CGSize)
+    required init(texture: SKTexture?, color: UIColor, size: CGSize)
     {
         super.init(texture: texture, color: color, size: size)
     }
@@ -21,7 +21,7 @@ class EnemySpaceship: Spaceship
     init(lifePoints: Int)
     {
         let size = CGSize(width: 36, height: 31)
-        super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.rawValue), color: nil, size: size)
+        super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.rawValue), color: UIColor.brownColor(), size: size)
         
         self.lifePoints = lifePoints
         
@@ -47,7 +47,7 @@ class EnemySpaceship: Spaceship
             missileLaunchTimer!.invalidate()
         }
         
-        var backoffTime = NSTimeInterval((arc4random() % 3) + 1)
+        let backoffTime = NSTimeInterval((arc4random() % 3) + 1)
 
 
         missileLaunchTimer = NSTimer(timeInterval: backoffTime, target: self, selector: "launchMissile", userInfo: nil, repeats: false)
@@ -56,19 +56,19 @@ class EnemySpaceship: Spaceship
     
     func launchMissile()
     {
-        var missile = Missile.enemyMissile()
+        let missile = Missile.enemyMissile()
         
         missile.position = position
         missile.zPosition = zPosition - 1
         
         scene!.addChild(missile)
         
-        var velocity: CGFloat = 600.0
-        var moveDuration = scene!.size.width / velocity
-        var missileEndPosition = CGPoint(x: -0.1 * scene!.size.width, y: position.y)
+        let velocity: CGFloat = 600.0
+        let moveDuration = scene!.size.width / velocity
+        let missileEndPosition = CGPoint(x: -0.1 * scene!.size.width, y: position.y)
         
-        var moveAction = SKAction.moveTo(missileEndPosition, duration: NSTimeInterval(moveDuration))
-        var removeAction = SKAction.removeFromParent()
+        let moveAction = SKAction.moveTo(missileEndPosition, duration: NSTimeInterval(moveDuration))
+        let removeAction = SKAction.removeFromParent()
         
         missile.runAction(SKAction.sequence([moveAction, removeAction]))
         

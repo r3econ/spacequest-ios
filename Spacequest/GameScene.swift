@@ -122,7 +122,7 @@ extension GameScene {
     
     func launchEnemySpaceship() {
         
-        var enemySpaceship = EnemySpaceship(lifePoints: 20)
+        let enemySpaceship = EnemySpaceship(lifePoints: 20)
         
         enemySpaceship.didRunOutOfLifePointsEventHandler = enemyDidRunOutOfLifePointsEventHandler()
         
@@ -192,7 +192,7 @@ extension GameScene {
         
         joystick!.updateHandler =
         {
-                (var translation: CGPoint) -> () in
+                (translation: CGPoint) -> () in
                 
                 self.updatePlayerSpaceshipPositionWithJoystickTranslation(translation);
         }
@@ -281,7 +281,7 @@ extension GameScene {
     }
     
     
-    func updatePlayerSpaceshipPositionWithJoystickTranslation(var translation: CGPoint) {
+    func updatePlayerSpaceshipPositionWithJoystickTranslation(translation: CGPoint) {
         
         let translationConstant: CGFloat = 10.0
         
@@ -306,7 +306,7 @@ extension GameScene {
 extension GameScene : SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
-        var collisionType: CollisionType? = collisionTypeWithContact(contact)
+        let collisionType: CollisionType? = collisionTypeWithContact(contact)
         
         if collisionType == nil {
             
@@ -443,7 +443,7 @@ extension GameScene {
 
 extension GameScene {
     
-    func increasePlayerSpaceshipLifePoints(#byValue: Int) {
+    func increasePlayerSpaceshipLifePoints(byValue byValue: Int) {
         
         playerSpaceship!.lifePoints += byValue
         lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: true)
@@ -459,7 +459,7 @@ extension GameScene {
     }
     
     
-    func decreasePlayerSpaceshipLifePoints(#byValue: Int) {
+    func decreasePlayerSpaceshipLifePoints(byValue byValue: Int) {
         
         playerSpaceship!.lifePoints += byValue
         lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: true)
@@ -475,7 +475,7 @@ extension GameScene {
     }
     
     
-    func decreaseEnemySpaceshipLifePoints(#byValue: Int, enemySpaceship: EnemySpaceship) {
+    func decreaseEnemySpaceshipLifePoints(byValue byValue: Int, enemySpaceship: EnemySpaceship) {
         
         enemySpaceship.lifePoints += byValue
         
@@ -522,14 +522,14 @@ extension GameScene {
     func destroySpaceship(spaceship: Spaceship!) {
         
         let explosionEmitter = SKEmitterNode(fileNamed: "Explosion")
-        explosionEmitter.position.x = spaceship.position.x - spaceship.size.width/2
-        explosionEmitter.position.y = spaceship.position.y
-        explosionEmitter.zPosition = spaceship.zPosition + 1
+        explosionEmitter!.position.x = spaceship.position.x - spaceship.size.width/2
+        explosionEmitter!.position.y = spaceship.position.y
+        explosionEmitter!.zPosition = spaceship.zPosition + 1
         
-        self.addChild(explosionEmitter)
+        self.addChild(explosionEmitter!)
         
         // Show the explosion.
-        explosionEmitter.runAction(SKAction.sequence([SKAction.waitForDuration(5), SKAction.removeFromParent()]))
+        explosionEmitter!.runAction(SKAction.sequence([SKAction.waitForDuration(5), SKAction.removeFromParent()]))
         
         // Fade out the enemy and remove it.
         spaceship.runAction(SKAction.sequence([SKAction.fadeOutWithDuration(0.1), SKAction.removeFromParent()]))
