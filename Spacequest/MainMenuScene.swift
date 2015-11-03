@@ -59,7 +59,7 @@ extension MainMenuScene
             normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
         
-        resumeButton!.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
+        infoButton!.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
 
         infoButton!.position = CGPoint(
             x: scene!.size.width - 40.0,
