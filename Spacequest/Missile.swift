@@ -17,7 +17,7 @@ class Missile: SKSpriteNode
     
     convenience init()
     {
-        var size = CGSizeMake(10.0, 10.0)
+        let size = CGSizeMake(10.0, 10.0)
         self.init(texture: SKTexture(imageNamed:ImageName.Missile.rawValue),
             color: UIColor.brownColor(),
             size: size)

@@ -443,7 +443,7 @@ extension GameScene {
 
 extension GameScene {
     
-    func increasePlayerSpaceshipLifePoints(byValue byValue: Int) {
+    func increasePlayerSpaceshipLifePoints(byValue: Int) {
         
         playerSpaceship!.lifePoints += byValue
         lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: true)

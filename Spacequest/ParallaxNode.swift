@@ -73,9 +73,7 @@ class ParallaxNode: SKEffectNode
     
     
     func configureLayerNodes(attributes: ParallaxLayerAttributes)
-    {
-        var position = CGPointZero
-        
+    {        
         var spriteNodes: [SKSpriteNode] = []
         
         for var index = 0; index < attributes.imageNames.count; ++index

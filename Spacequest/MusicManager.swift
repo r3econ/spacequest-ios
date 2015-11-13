@@ -34,6 +34,8 @@ extension MusicManager
         } catch let error1 as NSError {
             error = error1
             backgroundMusicPlayer = nil
+            
+            print(error?.localizedDescription)
         }
         backgroundMusicPlayer!.numberOfLoops = -1;
         

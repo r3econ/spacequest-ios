@@ -74,7 +74,7 @@ extension GameOverScene {
         var buttonOriginX = CGRectGetWidth(self.frame) / 2.0 + totalButtonsWidth / 2.0
         
         // Place buttons in the scene.
-        for (index, button) in (buttons!).enumerate() {
+        for (_, button) in (buttons!).enumerate() {
             
             button.position = CGPoint(
                 x: buttonOriginX - button.size.width/2,
