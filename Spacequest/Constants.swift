@@ -40,32 +40,32 @@ enum SoundName: String
 
 enum CategoryBitmask: UInt32
 {
-    case PlayerSpaceship =  0
-    case EnemySpaceship =   0b10
-    case PlayerMissile =    0b100
-    case EnemyMissile =     0b1000
-    case ScreenBounds =     0b10000
+    case playerSpaceship =  0
+    case enemySpaceship =   0b10
+    case playerMissile =    0b100
+    case enemyMissile =     0b1000
+    case screenBounds =     0b10000
 }
 
 
 enum CollisionType
 {
-    case PlayerSpaceshipEnemySpaceship
-    case PlayerMissileEnemySpaceship
-    case EnemyMissilePlayerSpaceship
+    case playerSpaceshipEnemySpaceship
+    case playerMissileEnemySpaceship
+    case enemyMissilePlayerSpaceship
 }
 
 
 enum ScoreValue: Int
 {
-    case PlayerMissileHitEnemySpaceship =  10
-    case PlayerSpaceshipHitEnemySpaceship =   0b10
+    case playerMissileHitEnemySpaceship =  10
+    case playerSpaceshipHitEnemySpaceship =   0b10
 }
 
 
 enum LifePointsValue: Int
 {
-    case EnemyMissileHitPlayerSpaceship =  -10
-    case EnemySpaceshipHitPlayerSpaceship =  -20
-    case PlayerMissileHitEnemySpaceship =  -25
+    case enemyMissileHitPlayerSpaceship =  -10
+    case enemySpaceshipHitPlayerSpaceship =  -20
+    case playerMissileHitEnemySpaceship =  -25
 }

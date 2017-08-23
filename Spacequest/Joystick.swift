@@ -2,7 +2,7 @@ import SpriteKit
 
 
 typealias JoystickTranslationUpdateHandler = (CGPoint) -> ()
-let kDefaultJoystickUpdateTimeInterval: NSTimeInterval = 1/40.0
+let kDefaultJoystickUpdateTimeInterval: TimeInterval = 1/40.0
 
 
 class Joystick: SKNode
@@ -12,8 +12,8 @@ class Joystick: SKNode
     var stickNode: SKSpriteNode?
     var baseNode: SKSpriteNode?
     var isTouchedDown: Bool = false
-    var currentJoystickTranslation: CGPoint = CGPointZero
-    var updateTimer: NSTimer?
+    var currentJoystickTranslation: CGPoint = CGPoint.zero
+    var updateTimer: Timer?
     
     
     required init?(coder aDecoder: NSCoder)
@@ -24,7 +24,7 @@ class Joystick: SKNode
     
     init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String?)
     {
-        currentJoystickTranslation = CGPointZero
+        currentJoystickTranslation = CGPoint.zero
         isTouchedDown = false
         joystickRadius = maximumRadius
         stickNode = SKSpriteNode(imageNamed: stickImageNamed);
@@ -38,24 +38,24 @@ class Joystick: SKNode
         
         // Create a timer that will call method that will notify about
         // Joystick movements.
-        updateTimer = NSTimer.scheduledTimerWithTimeInterval(
-            kDefaultJoystickUpdateTimeInterval,
+        updateTimer = Timer.scheduledTimer(
+            timeInterval: kDefaultJoystickUpdateTimeInterval,
             target: self,
-            selector: Selector("handleJoystickTranslationUpdate"),
+            selector: #selector(Joystick.handleJoystickTranslationUpdate),
             userInfo: nil,
             repeats: true)
         
         // Configure and add stick & base nodes.
         if baseNode != nil
         {
-            baseNode!.position = CGPointZero
+            baseNode!.position = CGPoint.zero
             self.addChild(baseNode!);
         }
         
-        stickNode!.position = CGPointZero
+        stickNode!.position = CGPoint.zero
         self.addChild(stickNode!);
         
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
     }
     
     
@@ -76,7 +76,7 @@ class Joystick: SKNode
 */
 extension Joystick
 {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         let touch : AnyObject! = touches.first
         
@@ -88,7 +88,7 @@ extension Joystick
     }
     
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         let touch : AnyObject! = touches.first
         
@@ -100,23 +100,23 @@ extension Joystick
     }
     
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         isTouchedDown = false
         reset()
     }
     
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?)
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         isTouchedDown = false
         reset()
     }
     
     
-    func updateWithTouch(touch: UITouch)
+    func updateWithTouch(_ touch: UITouch)
     {
-        var location = touch.locationInNode(self)
+        var location = touch.location(in: self)
         let distance = CGFloat(sqrt(pow(CDouble(location.x), 2) + pow(CDouble(location.y), 2)))
         
         if distance >= joystickRadius
@@ -146,6 +146,6 @@ extension Joystick
     
     func reset()
     {
-        stickNode!.position = CGPointZero
+        stickNode!.position = CGPoint.zero
     }
 }

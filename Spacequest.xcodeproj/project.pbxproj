@@ -538,6 +538,7 @@
 				TargetAttributes = {
 					B5AA6045193FB48E00EB9920 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -800,6 +801,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rafalsroka.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spacequest/Spacequest-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -816,6 +818,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rafalsroka.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spacequest/Spacequest-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

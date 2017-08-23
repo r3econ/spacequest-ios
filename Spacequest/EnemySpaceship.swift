@@ -3,7 +3,7 @@ import SpriteKit
 
 class EnemySpaceship: Spaceship
 {
-    var missileLaunchTimer: NSTimer?
+    var missileLaunchTimer: Timer?
     
     
     required init?(coder aDecoder: NSCoder)
@@ -21,22 +21,22 @@ class EnemySpaceship: Spaceship
     init(lifePoints: Int)
     {
         let size = CGSize(width: 36, height: 31)
-        super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.rawValue), color: UIColor.brownColor(), size: size)
+        super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.rawValue), color: UIColor.brown, size: size)
         
         self.lifePoints = lifePoints
         
         // Collisions.
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        self.physicsBody = SKPhysicsBody(rectangleOf: size)
         self.physicsBody!.usesPreciseCollisionDetection = true
-        self.physicsBody!.categoryBitMask = CategoryBitmask.EnemySpaceship.rawValue
+        self.physicsBody!.categoryBitMask = CategoryBitmask.enemySpaceship.rawValue
         self.physicsBody!.collisionBitMask =
-            CategoryBitmask.EnemySpaceship.rawValue |
-            CategoryBitmask.PlayerMissile.rawValue |
-            CategoryBitmask.PlayerSpaceship.rawValue
+            CategoryBitmask.enemySpaceship.rawValue |
+            CategoryBitmask.playerMissile.rawValue |
+            CategoryBitmask.playerSpaceship.rawValue
         
         self.physicsBody!.contactTestBitMask =
-            CategoryBitmask.PlayerSpaceship.rawValue |
-            CategoryBitmask.PlayerMissile.rawValue
+            CategoryBitmask.playerSpaceship.rawValue |
+            CategoryBitmask.playerMissile.rawValue
     }
     
     
@@ -47,10 +47,10 @@ class EnemySpaceship: Spaceship
             missileLaunchTimer!.invalidate()
         }
         
-        let backoffTime = NSTimeInterval((arc4random() % 3) + 1)
+        let backoffTime = TimeInterval((arc4random() % 3) + 1)
 
 
-        missileLaunchTimer = NSTimer(timeInterval: backoffTime, target: self, selector: "launchMissile", userInfo: nil, repeats: false)
+        missileLaunchTimer = Timer(timeInterval: backoffTime, target: self, selector: #selector(EnemySpaceship.launchMissile), userInfo: nil, repeats: false)
     }
     
     
@@ -67,12 +67,12 @@ class EnemySpaceship: Spaceship
         let moveDuration = scene!.size.width / velocity
         let missileEndPosition = CGPoint(x: -0.1 * scene!.size.width, y: position.y)
         
-        let moveAction = SKAction.moveTo(missileEndPosition, duration: NSTimeInterval(moveDuration))
+        let moveAction = SKAction.move(to: missileEndPosition, duration: TimeInterval(moveDuration))
         let removeAction = SKAction.removeFromParent()
         
-        missile.runAction(SKAction.sequence([moveAction, removeAction]))
+        missile.run(SKAction.sequence([moveAction, removeAction]))
         
-        scene!.runAction(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
+        scene!.run(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
     }
     
     

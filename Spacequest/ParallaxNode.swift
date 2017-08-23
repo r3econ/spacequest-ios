@@ -3,9 +3,9 @@ import SpriteKit
 
 extension Array
 {
-    func find(includedElement: Element -> Bool) -> Int?
+    func find(_ includedElement: (Element) -> Bool) -> Int?
     {
-        for (idx, element) in self.enumerate()
+        for (idx, element) in self.enumerated()
         {
             if includedElement(element)
             {
@@ -55,7 +55,7 @@ class ParallaxNode: SKEffectNode
     }
     
     
-    func addLayer(imageNames imageNames: [String], speed: CGFloat = 0.0)
+    func addLayer(imageNames: [String], speed: CGFloat = 0.0)
     {
         let layerAttributes = ParallaxLayerAttributes(imageNames: imageNames, speed: speed)
         
@@ -63,7 +63,7 @@ class ParallaxNode: SKEffectNode
     }
     
     
-    func configureInScene(scene: SKScene)
+    func configureInScene(_ scene: SKScene)
     {
         position = CGPoint(x: scene.size.width/2, y: scene.size.height/2)
         zPosition = -1000
@@ -72,11 +72,11 @@ class ParallaxNode: SKEffectNode
     }
     
     
-    func configureLayerNodes(attributes: ParallaxLayerAttributes)
+    func configureLayerNodes(_ attributes: ParallaxLayerAttributes)
     {        
         var spriteNodes: [SKSpriteNode] = []
         
-        for var index = 0; index < attributes.imageNames.count; ++index
+        for index in 0 ..< attributes.imageNames.count
         {
             let imageName = attributes.imageNames[index]
             let newSpriteNode = SKSpriteNode(imageNamed: imageName)
@@ -94,7 +94,7 @@ class ParallaxNode: SKEffectNode
                 let previousSpriteNode = spriteNodes[index - 1]
                 
                 newSpriteNode.position = CGPoint(
-                    x: CGRectGetMaxX(previousSpriteNode.frame) + newSpriteNode.size.width/2,
+                    x: previousSpriteNode.frame.maxX + newSpriteNode.size.width/2,
                     y: 0)
             }
             
@@ -112,14 +112,14 @@ class ParallaxNode: SKEffectNode
     }
     
     
-    func update(currentTime: CFTimeInterval)
+    func update(_ currentTime: CFTimeInterval)
     {
-        for var i = 0; i < layerNodes.count; ++i
+        for i in 0 ..< layerNodes.count
         {
             let speed = layerAttributes[i].speed
             var layer = layerNodes[i]
             
-            for var j = 0; j < layer.count; ++j
+            for j in 0 ..< layer.count
             {
                 let node = layer[j]
                 
@@ -143,7 +143,7 @@ class ParallaxNode: SKEffectNode
     }
     
     
-    func reposition(nodeToReposition: SKSpriteNode, inout inLayer: [SKSpriteNode])
+    func reposition(_ nodeToReposition: SKSpriteNode, inLayer: inout [SKSpriteNode])
     {
         // Calculate index of the node that we're gonna reposition.
         // Now it's on the left on the screen.
@@ -172,7 +172,7 @@ class ParallaxNode: SKEffectNode
         let appearingNode: SKSpriteNode! = inLayer[appearingNodeIndex]
         
         let newPosition = CGPoint(
-            x: CGRectGetMaxX(lastNode.frame) + nodeToReposition.size.width/2,
+            x: lastNode.frame.maxX + nodeToReposition.size.width/2,
             y: 0)
         
         //println("New position: \(newPosition)")

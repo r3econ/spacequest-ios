@@ -8,7 +8,7 @@ private let _MusicManagerSharedInstance = MusicManager()
 class MusicManager: NSObject {
     
     static let sharedInstance = MusicManager()
-    private var backgroundMusicPlayer: AVAudioPlayer?
+    fileprivate var backgroundMusicPlayer: AVAudioPlayer?
     
     
     override init() {
@@ -24,13 +24,13 @@ class MusicManager: NSObject {
 
 extension MusicManager
 {
-    private func configureBackgroundMusicPlayer() {
+    fileprivate func configureBackgroundMusicPlayer() {
         
-        let fileURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("background", ofType: "mp3")!)
+        let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "background", ofType: "mp3")!)
         var error: NSError?
         
         do {
-            backgroundMusicPlayer = try AVAudioPlayer(contentsOfURL: fileURL)
+            backgroundMusicPlayer = try AVAudioPlayer(contentsOf: fileURL)
         } catch let error1 as NSError {
             error = error1
             backgroundMusicPlayer = nil
@@ -48,7 +48,7 @@ extension MusicManager
     
     func toggleBackgroundMusic() {
     
-        if (backgroundMusicPlayer!.playing) {
+        if (backgroundMusicPlayer!.isPlaying) {
             
             backgroundMusicPlayer!.pause()
         }

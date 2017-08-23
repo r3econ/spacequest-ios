@@ -3,7 +3,7 @@ import SpriteKit
 
 protocol GameOverSceneDelegate {
     
-    func gameOverSceneDidTapRestartButton(gameOverScene:GameOverScene)
+    func gameOverSceneDidTapRestartButton(_ gameOverScene:GameOverScene)
 }
 
 
@@ -37,7 +37,7 @@ class GameOverScene: SKScene
     }
     
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         
         AnalyticsManager.sharedInstance.trackScene("GameOverScene")
     }
@@ -64,17 +64,17 @@ extension GameOverScene {
         var totalButtonsWidth: CGFloat = 0.0
         
         // Calculate total width of the buttons area.
-        for (index, button) in (buttons!).enumerate() {
+        for (index, button) in (buttons!).enumerated() {
             
             totalButtonsWidth += button.size.width
             totalButtonsWidth += index != buttons!.count - 1 ? horizontalPadding : 0.0
         }
         
         // Calculate origin of first button.
-        var buttonOriginX = CGRectGetWidth(self.frame) / 2.0 + totalButtonsWidth / 2.0
+        var buttonOriginX = self.frame.width / 2.0 + totalButtonsWidth / 2.0
         
         // Place buttons in the scene.
-        for (_, button) in (buttons!).enumerate() {
+        for (_, button) in (buttons!).enumerated() {
             
             button.position = CGPoint(
                 x: buttonOriginX - button.size.width/2,
@@ -84,10 +84,10 @@ extension GameOverScene {
             
             buttonOriginX -= button.size.width + horizontalPadding
             
-            let rotateAction = SKAction.rotateByAngle(CGFloat(M_PI/180.0 * 5.0), duration: 2.0)
-            let sequence = SKAction.sequence([rotateAction, rotateAction.reversedAction()])
+            let rotateAction = SKAction.rotate(byAngle: CGFloat(.pi/180.0 * 5.0), duration: 2.0)
+            let sequence = SKAction.sequence([rotateAction, rotateAction.reversed()])
             
-            button.runAction(SKAction.repeatActionForever(sequence))
+            button.run(SKAction.repeatForever(sequence))
         }
     }
     

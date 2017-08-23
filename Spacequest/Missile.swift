@@ -17,9 +17,9 @@ class Missile: SKSpriteNode
     
     convenience init()
     {
-        let size = CGSizeMake(10.0, 10.0)
+        let size = CGSize(width: 10.0, height: 10.0)
         self.init(texture: SKTexture(imageNamed:ImageName.Missile.rawValue),
-            color: UIColor.brownColor(),
+            color: UIColor.brown,
             size: size)
         
         name = NSStringFromClass(Missile.self)
@@ -33,8 +33,8 @@ class Missile: SKSpriteNode
     {
         let missile = Missile()
         
-        missile.physicsBody!.categoryBitMask = CategoryBitmask.EnemyMissile.rawValue
-        missile.physicsBody!.contactTestBitMask = CategoryBitmask.PlayerSpaceship.rawValue
+        missile.physicsBody!.categoryBitMask = CategoryBitmask.enemyMissile.rawValue
+        missile.physicsBody!.contactTestBitMask = CategoryBitmask.playerSpaceship.rawValue
         
         return missile
     }
@@ -44,8 +44,8 @@ class Missile: SKSpriteNode
     {
         let missile = Missile()
         
-        missile.physicsBody!.categoryBitMask = CategoryBitmask.PlayerMissile.rawValue
-        missile.physicsBody!.contactTestBitMask = CategoryBitmask.EnemySpaceship.rawValue
+        missile.physicsBody!.categoryBitMask = CategoryBitmask.playerMissile.rawValue
+        missile.physicsBody!.contactTestBitMask = CategoryBitmask.enemySpaceship.rawValue
         
         return missile
     }

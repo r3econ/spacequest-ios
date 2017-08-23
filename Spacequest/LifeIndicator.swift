@@ -17,14 +17,14 @@ class LifeIndicator: SKSpriteNode
         lifePoints = 100
         
         super.init(texture: texture,
-            color: UIColor.brownColor(),
+            color: UIColor.brown,
             size: texture.size())
         
         titleLabelNode = SKLabelNode(fontNamed: FontName.Wawati.rawValue)
         titleLabelNode!.fontSize = 14.0
         titleLabelNode!.fontColor = UIColor(white: 1.0, alpha: 0.7)
-        titleLabelNode!.horizontalAlignmentMode = .Center
-        titleLabelNode!.verticalAlignmentMode = .Center
+        titleLabelNode!.horizontalAlignmentMode = .center
+        titleLabelNode!.verticalAlignmentMode = .center
 
         update(animated: false)
         
@@ -43,7 +43,7 @@ class LifeIndicator: SKSpriteNode
     }
     
     
-    func setLifePoints(points: Int, animated: Bool)
+    func setLifePoints(_ points: Int, animated: Bool)
     {
         lifePoints = points
         
@@ -51,7 +51,7 @@ class LifeIndicator: SKSpriteNode
     }
     
     
-    func update(animated animated: Bool)
+    func update(animated: Bool)
     {
         titleLabelNode!.text = "\(lifePoints)"
         
@@ -60,14 +60,14 @@ class LifeIndicator: SKSpriteNode
         
         if animated
         {
-            let colorizeAction = SKAction.colorizeWithColor(blendColor, colorBlendFactor: blendFactor, duration: 0.2)
-            let scaleUpAction = SKAction.scaleBy(1.2, duration: 0.2)
-            let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleUpAction.reversedAction()])
+            let colorizeAction = SKAction.colorize(with: blendColor, colorBlendFactor: blendFactor, duration: 0.2)
+            let scaleUpAction = SKAction.scale(by: 1.2, duration: 0.2)
+            let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleUpAction.reversed()])
             
             titleLabelNode!.color = blendColor
             titleLabelNode!.colorBlendFactor = blendFactor
             
-            self.runAction(SKAction.group([colorizeAction, scaleActionSequence]))
+            self.run(SKAction.group([colorizeAction, scaleActionSequence]))
         }
         else
         {
@@ -84,8 +84,8 @@ class LifeIndicator: SKSpriteNode
         var fullBarColorR: CGFloat = 0.0, fullBarColorG: CGFloat = 0.0, fullBarColorB: CGFloat = 0.0, fullBarColorAlpha: CGFloat = 0.0
         var emptyBarColorR: CGFloat = 0.0, emptyBarColorG: CGFloat = 0.0, emptyBarColorB: CGFloat = 0.0, emptyBarColorAlpha: CGFloat = 0.0
         
-        UIColor.greenColor().getRed(&fullBarColorR, green: &fullBarColorG, blue: &fullBarColorB, alpha: &fullBarColorAlpha)
-        UIColor.redColor().getRed(&emptyBarColorR, green: &emptyBarColorG, blue: &emptyBarColorB, alpha: &emptyBarColorAlpha)
+        UIColor.green.getRed(&fullBarColorR, green: &fullBarColorG, blue: &fullBarColorB, alpha: &fullBarColorAlpha)
+        UIColor.red.getRed(&emptyBarColorR, green: &emptyBarColorG, blue: &emptyBarColorB, alpha: &emptyBarColorAlpha)
 
         let resultColorR = emptyBarColorR + CGFloat(lifePoints)/100 * (fullBarColorR - emptyBarColorR)
         let resultColorG = emptyBarColorG + CGFloat(lifePoints)/100 * (fullBarColorG - emptyBarColorG)

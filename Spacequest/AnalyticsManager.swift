@@ -27,34 +27,34 @@ class AnalyticsManager: NSObject
 extension AnalyticsManager {
     
     
-    private func configureGoogleAnalytics() {
+    fileprivate func configureGoogleAnalytics() {
         
-        GAI.sharedInstance().trackerWithTrackingId(kGoogleAnalyticsAppID)
+        GAI.sharedInstance().tracker(withTrackingId: kGoogleAnalyticsAppID)
         
         // Set app version.
-        let bundleInfo = NSBundle.mainBundle().infoDictionary as Dictionary!
-        let version = bundleInfo["CFBundleVersion"] as! String
-        let shortVersion = bundleInfo["CFBundleShortVersionString"] as! String
+        let bundleInfo = Bundle.main.infoDictionary as Dictionary!
+        let version = bundleInfo?["CFBundleVersion"] as! String
+        let shortVersion = bundleInfo?["CFBundleShortVersionString"] as! String
         
         GAI.sharedInstance().defaultTracker.set(kGAIAppVersion, value: String(format: "%@ (%@)", shortVersion, version))
     }
     
     
-    func trackGAEvent(category: String, action: String, label: String, value: NSNumber) {
+    func trackGAEvent(_ category: String, action: String, label: String, value: NSNumber) {
         
-        let event = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build();
+        let event = GAIDictionaryBuilder.createEvent(withCategory: category, action: action, label: label, value: value).build();
         
         // Submit event to Google Analytics.
-        GAI.sharedInstance().defaultTracker.send(event as [NSObject : AnyObject])
+        GAI.sharedInstance().defaultTracker.send(event as! [AnyHashable: Any])
     }
     
     
-    func trackScene(name: String) {
+    func trackScene(_ name: String) {
         
         GAI.sharedInstance().defaultTracker.set(kGAIScreenName, value: name)
         
         let event = GAIDictionaryBuilder.createScreenView().build()
         
-        GAI.sharedInstance().defaultTracker.send(event as [NSObject : AnyObject])
+        GAI.sharedInstance().defaultTracker.send(event as! [AnyHashable: Any])
     }
 }

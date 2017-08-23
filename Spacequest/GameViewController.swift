@@ -23,19 +23,19 @@ class GameViewController: UIViewController {
     }
     
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         
         return true
     }
 
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
         
-        return UIInterfaceOrientationMask.Landscape
+        return UIInterfaceOrientationMask.landscape
     }
 
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         
         return true
     }
@@ -53,16 +53,16 @@ class GameViewController: UIViewController {
 */
 extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOverSceneDelegate {
     
-    func startNewGame(animated animated: Bool) {
+    func startNewGame(animated: Bool) {
         let skView = self.view as! SKView
         
         gameScene = GameScene(size: skView.frame.size)
-        gameScene!.scaleMode = .AspectFill
+        gameScene!.scaleMode = .aspectFill
         gameScene!.gameSceneDelegate = self
         
         if animated {
             
-            skView.presentScene(gameScene!, transition: SKTransition.crossFadeWithDuration(kSceneTransistionDuration))
+            skView.presentScene(gameScene!, transition: SKTransition.crossFade(withDuration: kSceneTransistionDuration))
         }
         else {
             
@@ -71,21 +71,21 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     }
     
     
-    func resumeGame(animated animated: Bool) {
+    func resumeGame(animated: Bool) {
         
         let skView = self.view as! SKView
         
         if animated {
             
-            skView.presentScene(gameScene!, transition: SKTransition.crossFadeWithDuration(kSceneTransistionDuration))
+            skView.presentScene(gameScene!, transition: SKTransition.crossFade(withDuration: kSceneTransistionDuration))
             
             let delay = kSceneTransistionDuration * Double(NSEC_PER_SEC)
-            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
             
-            dispatch_after(time, dispatch_get_main_queue(),
-                {
+            DispatchQueue.main.asyncAfter(deadline: time,
+                execute: {
                     self.mainMenuScene!.removeFromParent()
-                    self.gameScene!.paused = false
+                    self.gameScene!.isPaused = false
                 })
         }
         else {
@@ -96,19 +96,19 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     }
     
     
-    func showMainMenuScene(animated animated: Bool) {
+    func showMainMenuScene(animated: Bool) {
         
         let skView = self.view as! SKView
         
         mainMenuScene = MainMenuScene(size: skView.frame.size)
-        mainMenuScene!.scaleMode = .AspectFill
+        mainMenuScene!.scaleMode = .aspectFill
         mainMenuScene!.mainMenuSceneDelegate = self
         
-        gameScene!.paused = true
+        gameScene!.isPaused = true
         
         if animated {
             
-            skView.presentScene(mainMenuScene!, transition: SKTransition.crossFadeWithDuration(kSceneTransistionDuration))
+            skView.presentScene(mainMenuScene!, transition: SKTransition.crossFade(withDuration: kSceneTransistionDuration))
         }
         else {
             skView.presentScene(mainMenuScene!)
@@ -116,19 +116,19 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     }
     
     
-    func showGameOverScene(animated animated: Bool) {
+    func showGameOverScene(animated: Bool) {
         
         let skView = self.view as! SKView
         
         gameOverScene = GameOverScene(size: skView.frame.size)
-        gameOverScene!.scaleMode = .AspectFill
+        gameOverScene!.scaleMode = .aspectFill
         gameOverScene!.gameOverSceneDelegate = self
         
-        gameScene!.paused = true
+        gameScene!.isPaused = true
         
         if animated
         {
-            skView.presentScene(gameOverScene!, transition: SKTransition.crossFadeWithDuration(kSceneTransistionDuration))
+            skView.presentScene(gameOverScene!, transition: SKTransition.crossFade(withDuration: kSceneTransistionDuration))
         }
         else
         {
@@ -138,38 +138,38 @@ extension GameViewController : GameSceneDelegate, MainMenuSceneDelegate, GameOve
     
     
     // GameSceneDelegate
-    func gameSceneDidTapMainMenuButton(gameScene: GameScene) {
+    func gameSceneDidTapMainMenuButton(_ gameScene: GameScene) {
         
         showMainMenuScene(animated: true)
     }
     
     
-    func gameScene(gameScene: GameScene, playerDidLoseWithScore: Int) {
+    func gameScene(_ gameScene: GameScene, playerDidLoseWithScore: Int) {
         
         showGameOverScene(animated: true)
     }
     
     
     // MainMenuSceneDelegate
-    func mainMenuSceneDidTapResumeButton(mainMenuScene: MainMenuScene) {
+    func mainMenuSceneDidTapResumeButton(_ mainMenuScene: MainMenuScene) {
         
         resumeGame(animated: true)
     }
     
     
-    func mainMenuSceneDidTapRestartButton(mainMenuScene: MainMenuScene) {
+    func mainMenuSceneDidTapRestartButton(_ mainMenuScene: MainMenuScene) {
         
         startNewGame(animated: true)
     }
     
     
-    func mainMenuSceneDidTapInfoButton(mainMenuScene:MainMenuScene) {
+    func mainMenuSceneDidTapInfoButton(_ mainMenuScene:MainMenuScene) {
         
     }
     
     
     // GameOverSceneDelegate
-    func gameOverSceneDidTapRestartButton(gameOverScene:GameOverScene) {
+    func gameOverSceneDidTapRestartButton(_ gameOverScene:GameOverScene) {
         
         startNewGame(animated: true)
     }

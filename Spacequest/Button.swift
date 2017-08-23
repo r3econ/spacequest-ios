@@ -35,11 +35,11 @@ class Button: SKSpriteNode
         self.isSelected = false
         
         super.init(texture: textureNormal,
-            color: UIColor.brownColor(),
+            color: UIColor.brown,
             size: textureNormal.size())
         
 
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
     }
     
     
@@ -72,8 +72,8 @@ class Button: SKSpriteNode
         if titleLabelNode == nil
         {
             titleLabelNode = SKLabelNode()
-            titleLabelNode!.horizontalAlignmentMode = .Center
-            titleLabelNode!.verticalAlignmentMode = .Center
+            titleLabelNode!.horizontalAlignmentMode = .center
+            titleLabelNode!.verticalAlignmentMode = .center
             
             self.addChild(titleLabelNode!)
         }
@@ -100,8 +100,8 @@ class Button: SKSpriteNode
         if titleLabelNode == nil
         {
             titleLabelNode = SKLabelNode()
-            titleLabelNode!.horizontalAlignmentMode = .Center
-            titleLabelNode!.verticalAlignmentMode = .Center
+            titleLabelNode!.horizontalAlignmentMode = .center
+            titleLabelNode!.verticalAlignmentMode = .center
             
             self.addChild(titleLabelNode!)
         }
@@ -160,7 +160,7 @@ Touches
 */
 extension Button
 {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         if self.isEnabled
         {
@@ -174,19 +174,19 @@ extension Button
     }
     
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         if isEnabled
         {
             let touch : AnyObject! = touches.first
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
-            self.selected = CGRectContainsPoint(frame, location)
+            self.selected = frame.contains(location)
         }
     }
     
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         if isEnabled
         {
@@ -200,7 +200,7 @@ extension Button
     }
     
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?)
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         if isEnabled
         {

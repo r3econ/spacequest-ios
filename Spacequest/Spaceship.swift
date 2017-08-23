@@ -13,7 +13,7 @@ class Spaceship: SKSpriteNode, LifePointsProtocol
         {
             if didRunOutOfLifePointsEventHandler != nil
             {
-                didRunOutOfLifePointsEventHandler!(object: self)
+                didRunOutOfLifePointsEventHandler!(self)
             }
         }
     }

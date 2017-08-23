@@ -18,7 +18,7 @@ class ScoresNode: SKLabelNode
         self.fontSize = 18.0
         self.fontColor = UIColor(white: 1, alpha: 0.7)
         self.fontName = FontName.Wawati.rawValue
-        self.horizontalAlignmentMode = .Left;
+        self.horizontalAlignmentMode = .left;
 
         update()
     }
