@@ -1,12 +1,10 @@
 import SpriteKit
 
-
 typealias JoystickTranslationUpdateHandler = (CGPoint) -> ()
 let kDefaultJoystickUpdateTimeInterval: TimeInterval = 1/40.0
 
-
-class Joystick: SKNode
-{
+class Joystick: SKNode {
+    
     var updateHandler: JoystickTranslationUpdateHandler?
     var joystickRadius: CGFloat = 0.0
     var stickNode: SKSpriteNode?
@@ -15,30 +13,27 @@ class Joystick: SKNode
     var currentJoystickTranslation: CGPoint = CGPoint.zero
     var updateTimer: Timer?
     
+    // MARK: - Initialization
     
-    required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    
-    init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String?)
-    {
-        currentJoystickTranslation = CGPoint.zero
-        isTouchedDown = false
-        joystickRadius = maximumRadius
-        stickNode = SKSpriteNode(imageNamed: stickImageNamed);
+    init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String?) {
+        self.currentJoystickTranslation = CGPoint.zero
+        self.isTouchedDown = false
+        self.joystickRadius = maximumRadius
+        self.stickNode = SKSpriteNode(imageNamed: stickImageNamed);
         
-        if baseImageNamed != nil
-        {
-            baseNode = SKSpriteNode(imageNamed: baseImageNamed!);
+        if baseImageNamed != nil {
+            self.baseNode = SKSpriteNode(imageNamed: baseImageNamed!);
         }
         
         super.init()
         
         // Create a timer that will call method that will notify about
         // Joystick movements.
-        updateTimer = Timer.scheduledTimer(
+        self.updateTimer = Timer.scheduledTimer(
             timeInterval: kDefaultJoystickUpdateTimeInterval,
             target: self,
             selector: #selector(Joystick.handleJoystickTranslationUpdate),
@@ -46,106 +41,84 @@ class Joystick: SKNode
             repeats: true)
         
         // Configure and add stick & base nodes.
-        if baseNode != nil
-        {
-            baseNode!.position = CGPoint.zero
+        if self.baseNode != nil {
+            self.baseNode!.position = CGPoint.zero
             self.addChild(baseNode!);
         }
         
-        stickNode!.position = CGPoint.zero
-        self.addChild(stickNode!);
+        self.stickNode!.position = CGPoint.zero
+        self.addChild(self.stickNode!);
         
-        isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = true
     }
     
+    var size: CGSize {
+        get {
+            return CGSize(width: self.joystickRadius + self.stickNode!.size.width/2,
+                          height: self.joystickRadius + self.stickNode!.size.height/2)
+        }
+    }
     
-    var size: CGSize
-    {
-    get
-    {
-        return CGSize(
-            width: joystickRadius + stickNode!.size.width/2,
-            height: joystickRadius + stickNode!.size.height/2)
-    }
-    }
 }
 
+// MARK: - Touches
 
-/**
- Touches
-*/
-extension Joystick
-{
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
+extension Joystick {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch : AnyObject! = touches.first
         
-        if (touch != nil)
-        {
-            isTouchedDown = true
+        if (touch != nil) {
+            self.isTouchedDown = true
             updateWithTouch(touch as! UITouch)
         }
     }
     
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch : AnyObject! = touches.first
         
-        if (touch != nil)
-        {
-            isTouchedDown = true
-            updateWithTouch(touch as! UITouch)
+        if (touch != nil) {
+            self.isTouchedDown = true
+            self.updateWithTouch(touch as! UITouch)
         }
     }
     
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
-        isTouchedDown = false
-        reset()
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.isTouchedDown = false
+        self.reset()
     }
     
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
-        isTouchedDown = false
-        reset()
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.isTouchedDown = false
+        self.reset()
     }
     
-    
-    func updateWithTouch(_ touch: UITouch)
-    {
+    func updateWithTouch(_ touch: UITouch) {
         var location = touch.location(in: self)
         let distance = CGFloat(sqrt(pow(CDouble(location.x), 2) + pow(CDouble(location.y), 2)))
         
-        if distance >= joystickRadius
-        {
+        if distance >= self.joystickRadius {
             let normalizedTranslationVector = CGPoint(x: location.x / distance, y: location.y / distance)
             
-            location = CGPoint(x: normalizedTranslationVector.x * joystickRadius,
-                y: normalizedTranslationVector.y * joystickRadius)
+            location = CGPoint(x: normalizedTranslationVector.x * self.joystickRadius,
+                               y: normalizedTranslationVector.y * self.joystickRadius)
         }
         
         // Calculate joystick translation.
-        currentJoystickTranslation.x = location.x/joystickRadius
-        currentJoystickTranslation.y = location.y/joystickRadius
+        self.currentJoystickTranslation.x = location.x/self.joystickRadius
+        self.currentJoystickTranslation.y = location.y/self.joystickRadius
         
-        stickNode!.position = location
+        self.stickNode!.position = location
     }
     
-    
-    func handleJoystickTranslationUpdate()
-    {
-        if isTouchedDown && updateHandler != nil
-        {
-            updateHandler!(currentJoystickTranslation)
+    func handleJoystickTranslationUpdate() {
+        if self.isTouchedDown && self.updateHandler != nil {
+            self.updateHandler!(self.currentJoystickTranslation)
         }
     }
     
-    
-    func reset()
-    {
-        stickNode!.position = CGPoint.zero
+    func reset() {
+        self.stickNode!.position = CGPoint.zero
     }
+    
 }

@@ -1,9 +1,9 @@
-import UIKit
 
 typealias DidRunOutOfLifePointsEventHandler = (_ object: AnyObject) -> ()
 
-protocol LifePointsProtocol
-{
+protocol LifePointsProtocol {
+    
     var lifePoints: Int { get set }
     var didRunOutOfLifePointsEventHandler: DidRunOutOfLifePointsEventHandler? { get set }
+    
 }

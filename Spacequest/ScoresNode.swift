@@ -1,42 +1,33 @@
 import SpriteKit
 
-
-class ScoresNode: SKLabelNode
-{
-    required init?(coder aDecoder: NSCoder)
-    {
+class ScoresNode: SKLabelNode {
+    
+    var value: Int = 0 {
+        didSet {
+            self.update()
+        }
+    }
+    // MARK: - Initialization
+    
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    
-    override init()
-    {
+    override init() {
         value = 0
         
         super.init()
-
+        
         self.fontSize = 18.0
         self.fontColor = UIColor(white: 1, alpha: 0.7)
         self.fontName = FontName.Wawati.rawValue
         self.horizontalAlignmentMode = .left;
-
-        update()
+        
+        self.update()
     }
+    // MARK: - Configuration
     
-    
-    var value: Int = 0
-    {
-    
-    didSet
-    {
-        update()
-    }
-    
-    }
-    
-    
-    func update()
-    {
+    func update() {
         self.text = "Score: \(value)"
     }
+    
 }

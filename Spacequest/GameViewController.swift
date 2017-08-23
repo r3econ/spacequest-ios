@@ -20,7 +20,6 @@ class GameViewController: UIViewController {
         // Start music
         self.toggleBackgroungMusic()
     }
-    
     // MARK: - Appearance
 
     override var shouldAutorotate : Bool {
@@ -56,7 +55,6 @@ extension GameViewController {
             skView.presentScene(gameScene!)
         }
     }
-    
     func resumeGame(animated: Bool) {
         let skView = self.view as! SKView
         
@@ -77,7 +75,6 @@ extension GameViewController {
             self.mainMenuScene!.removeFromParent()
         }
     }
-    
     func showMainMenuScene(animated: Bool) {
         let skView = self.view as! SKView
         
@@ -94,7 +91,6 @@ extension GameViewController {
             skView.presentScene(self.mainMenuScene!)
         }
     }
-    
     
     func showGameOverScene(animated: Bool) {
         let skView = self.view as! SKView
@@ -122,7 +118,6 @@ extension GameViewController : GameSceneDelegate {
     func gameSceneDidTapMainMenuButton(_ gameScene: GameScene) {
         self.showMainMenuScene(animated: true)
     }
-    
     func gameScene(_ gameScene: GameScene, playerDidLoseWithScore: Int) {
         self.showGameOverScene(animated: true)
     }
@@ -136,11 +131,9 @@ extension GameViewController : MainMenuSceneDelegate {
     func mainMenuSceneDidTapResumeButton(_ mainMenuScene: MainMenuScene) {
         self.resumeGame(animated: true)
     }
-    
     func mainMenuSceneDidTapRestartButton(_ mainMenuScene: MainMenuScene) {
         self.startNewGame(animated: true)
     }
-    
     func mainMenuSceneDidTapInfoButton(_ mainMenuScene:MainMenuScene) {
         
     }
@@ -170,7 +163,6 @@ extension GameViewController {
         skView.showsNodeCount = true
         //skView.showsPhysics = true
     }
-    
     func toggleBackgroungMusic() {
         MusicManager.sharedInstance.toggleBackgroundMusic()
     }

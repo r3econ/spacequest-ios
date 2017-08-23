@@ -1,7 +1,5 @@
 
-
-enum ImageName: String
-{
+enum ImageName: String {
     case PlayerSpaceship = "player_spaceship"
     case EnemySpaceship = "enemy_spaceship"
     case Missile = "player_missile"
@@ -24,22 +22,16 @@ enum ImageName: String
     case JoystickStick = "joystick_stick"
 }
 
-
-enum FontName: String
-{
+enum FontName: String {
     case Wawati = "Wawati SC"
 }
 
-
-enum SoundName: String
-{
+enum SoundName: String {
     case MissileLaunch = "missile_launch.wav"
     case Explosion = "explosion.wav"
 }
 
-
-enum CategoryBitmask: UInt32
-{
+enum CategoryBitmask: UInt32 {
     case playerSpaceship =  0
     case enemySpaceship =   0b10
     case playerMissile =    0b100
@@ -47,24 +39,18 @@ enum CategoryBitmask: UInt32
     case screenBounds =     0b10000
 }
 
-
-enum CollisionType
-{
+enum CollisionType {
     case playerSpaceshipEnemySpaceship
     case playerMissileEnemySpaceship
     case enemyMissilePlayerSpaceship
 }
 
-
-enum ScoreValue: Int
-{
+enum ScoreValue: Int {
     case playerMissileHitEnemySpaceship =  10
     case playerSpaceshipHitEnemySpaceship =   0b10
 }
 
-
-enum LifePointsValue: Int
-{
+enum LifePointsValue: Int {
     case enemyMissileHitPlayerSpaceship =  -10
     case enemySpaceshipHitPlayerSpaceship =  -20
     case playerMissileHitEnemySpaceship =  -25

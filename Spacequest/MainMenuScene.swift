@@ -3,9 +3,9 @@ import SpriteKit
 
 protocol MainMenuSceneDelegate {
     
-    func mainMenuSceneDidTapResumeButton(_ mainMenuScene:MainMenuScene)
-    func mainMenuSceneDidTapRestartButton(_ mainMenuScene:MainMenuScene)
-    func mainMenuSceneDidTapInfoButton(_ mainMenuScene:MainMenuScene)
+    func mainMenuSceneDidTapResumeButton(_ mainMenuScene: MainMenuScene)
+    func mainMenuSceneDidTapRestartButton(_ mainMenuScene: MainMenuScene)
+    func mainMenuSceneDidTapInfoButton(_ mainMenuScene: MainMenuScene)
 }
 
 
@@ -23,26 +23,22 @@ class MainMenuScene: SKScene {
         super.init(coder: aDecoder)
     }
     
-    
     override init(size: CGSize) {
         
         super.init(size: size)
                 
-        configureButtons()
-        configureBackground()
+        self.configureButtons()
+        self.configureBackground()
     }
     
-    
     override func didMove(to view: SKView) {
-        
         AnalyticsManager.sharedInstance.trackScene("MainMenuScene")
     }
     
-    
     func configureBackground() {
         
-        background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.MenuBackgroundPhone)
-        background!.configureInScene(self)
+        self.background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.MenuBackgroundPhone)
+        self.background!.configureInScene(self)
     }
 }
 
@@ -50,44 +46,43 @@ class MainMenuScene: SKScene {
 /**
  Buttons & Title.
 */
-extension MainMenuScene
-{
+extension MainMenuScene{
+
     func configureButtons() {
         
         // Info button.
-        infoButton = Button(
+        self.infoButton = Button(
             normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
         
-        infoButton!.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
+        self.infoButton!.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
 
-        infoButton!.position = CGPoint(
+        self.infoButton!.position = CGPoint(
             x: scene!.size.width - 40.0,
             y: scene!.size.height - 25.0)
         
         self.addChild(infoButton!)
 
         // Resume button.
-        resumeButton = Button(
+        self.resumeButton = Button(
             normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
         
-        resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
+        self.resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
         
         // Restart button.
-        restartButton = Button(
+        self.restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
         
-        restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
+        self.restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
         
-        buttons = [resumeButton!, restartButton!]
+        self.buttons = [self.resumeButton!, self.restartButton!]
         let horizontalPadding: CGFloat = 20.0
         var totalButtonsWidth: CGFloat = 0.0
         
         // Calculate total width of the buttons area.
-        for (index, button) in (buttons!).enumerated()
-        {
+        for (index, button) in (buttons!).enumerated() {
             totalButtonsWidth += button.size.width
             totalButtonsWidth += index != buttons!.count - 1 ? horizontalPadding : 0.0
         }
@@ -96,7 +91,7 @@ extension MainMenuScene
         var buttonOriginX = self.frame.width / 2.0 + totalButtonsWidth / 2.0
         
         // Place buttons in the scene.
-        for (_, button) in (buttons!).enumerated() {
+        for (_, button) in (self.buttons!).enumerated() {
 
             button.position = CGPoint(
                 x: buttonOriginX - button.size.width/2,
@@ -113,13 +108,8 @@ extension MainMenuScene
         }
     }
     
-    
     func resumeButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
-        
-        let handler =
-        {
-            () -> () in
-
+        let handler = { () -> () in
             self.mainMenuSceneDelegate?.mainMenuSceneDidTapResumeButton(self)
             return
         }
@@ -127,13 +117,8 @@ extension MainMenuScene
         return handler
     }
     
-    
     func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
-        
-        let handler = {
-            
-            () -> () in
-            
+        let handler = { () -> () in
             self.mainMenuSceneDelegate?.mainMenuSceneDidTapRestartButton(self)
             return
         }
@@ -141,11 +126,8 @@ extension MainMenuScene
         return handler
     }
     
-    
     func infoButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
-        
-        let handler = {
-            () -> () in
+        let handler = { () -> () in
             
             self.mainMenuSceneDelegate?.mainMenuSceneDidTapInfoButton(self)
             return
@@ -153,4 +135,5 @@ extension MainMenuScene
         
         return handler
     }
+    
 }

@@ -1,7 +1,5 @@
 import SpriteKit
 
-
-class BackgroundNode: ParallaxNode
-{
+class BackgroundNode: ParallaxNode {
    
 }

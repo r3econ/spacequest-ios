@@ -1,72 +1,60 @@
 import UIKit
 import AVFoundation
 
-
 private let _MusicManagerSharedInstance = MusicManager()
-
 
 class MusicManager: NSObject {
     
     static let sharedInstance = MusicManager()
     fileprivate var backgroundMusicPlayer: AVAudioPlayer?
     
-    
     override init() {
-        
         super.init()
         
-        configureBackgroundMusicPlayer()
+        self.configureBackgroundMusicPlayer()
     }
+    
 }
-
 
 // MARK - Background Music
 
-extension MusicManager
-{
+extension MusicManager{
+
     fileprivate func configureBackgroundMusicPlayer() {
         
         let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "background", ofType: "mp3")!)
         var error: NSError?
         
         do {
-            backgroundMusicPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            self.backgroundMusicPlayer = try AVAudioPlayer(contentsOf: fileURL)
         } catch let error1 as NSError {
             error = error1
-            backgroundMusicPlayer = nil
+            self.backgroundMusicPlayer = nil
             
             print(error?.localizedDescription)
         }
-        backgroundMusicPlayer!.numberOfLoops = -1;
+        self.backgroundMusicPlayer!.numberOfLoops = -1;
         
-        if (backgroundMusicPlayer != nil)
-        {
-            backgroundMusicPlayer!.prepareToPlay()
+        if (self.backgroundMusicPlayer != nil) {
+            self.backgroundMusicPlayer!.prepareToPlay()
         }
     }
-    
     
     func toggleBackgroundMusic() {
     
-        if (backgroundMusicPlayer!.isPlaying) {
-            
-            backgroundMusicPlayer!.pause()
+        if (self.backgroundMusicPlayer!.isPlaying) {
+            self.backgroundMusicPlayer!.pause()
         }
-        else
-        {
-            backgroundMusicPlayer!.play()
+        else {
+            self.backgroundMusicPlayer!.play()
         }
     }
-    
     
     func playBackgroundMusic() {
-        
-        backgroundMusicPlayer!.play()
+        self.backgroundMusicPlayer!.play()
     }
     
-    
     func pauseBackgroundMusic() {
-        
-        backgroundMusicPlayer!.pause()
+        self.backgroundMusicPlayer!.pause()
     }
 }

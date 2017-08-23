@@ -1,83 +1,66 @@
 import SpriteKit
 
-
-extension Array
-{
-    func find(_ includedElement: (Element) -> Bool) -> Int?
-    {
-        for (idx, element) in self.enumerated()
-        {
-            if includedElement(element)
-            {
+extension Array {
+    
+    func find(_ includedElement: (Element) -> Bool) -> Int? {
+        for (idx, element) in self.enumerated() {
+            if includedElement(element) {
                 return idx
             }
         }
         
         return nil
     }
+    
 }
 
-
-
-class ParallaxLayerAttributes: NSObject
-{
+class ParallaxLayerAttributes: NSObject {
     var speed : CGFloat = 0.0
     var imageNames: [String]
     
-    init(imageNames: [String], speed: CGFloat = 0.0)
-    {
+    init(imageNames: [String], speed: CGFloat = 0.0) {
         self.imageNames = imageNames
         self.speed = speed
     }
 }
 
 
-class ParallaxNode: SKEffectNode
-{
+class ParallaxNode: SKEffectNode {
+    
     var staticBackgroundNode: SKSpriteNode?
     var layerNodes: [[SKSpriteNode]] = []
     var layerAttributes: [ParallaxLayerAttributes] = []
     
-    required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    
-    init(size: CGSize, staticBackgroundImageName: ImageName)
-    {
-        staticBackgroundNode = SKSpriteNode(imageNamed: staticBackgroundImageName.rawValue)
-        staticBackgroundNode!.size = size
+    init(size: CGSize, staticBackgroundImageName: ImageName) {
+        self.staticBackgroundNode = SKSpriteNode(imageNamed: staticBackgroundImageName.rawValue)
+        self.staticBackgroundNode!.size = size
         
         super.init()
         
-        self.addChild(staticBackgroundNode!)
+        self.addChild(self.staticBackgroundNode!)
     }
     
-    
-    func addLayer(imageNames: [String], speed: CGFloat = 0.0)
-    {
+    func addLayer(imageNames: [String], speed: CGFloat = 0.0) {
         let layerAttributes = ParallaxLayerAttributes(imageNames: imageNames, speed: speed)
         
         configureLayerNodes(layerAttributes)
     }
     
-    
-    func configureInScene(_ scene: SKScene)
-    {
-        position = CGPoint(x: scene.size.width/2, y: scene.size.height/2)
-        zPosition = -1000
+    func configureInScene(_ scene: SKScene) {
+        self.position = CGPoint(x: scene.size.width/2, y: scene.size.height/2)
+        self.zPosition = -1000
         
         scene.addChild(self)
     }
     
-    
-    func configureLayerNodes(_ attributes: ParallaxLayerAttributes)
-    {        
+    func configureLayerNodes(_ attributes: ParallaxLayerAttributes) {        
         var spriteNodes: [SKSpriteNode] = []
         
-        for index in 0 ..< attributes.imageNames.count
-        {
+        for index in 0 ..< attributes.imageNames.count {
             let imageName = attributes.imageNames[index]
             let newSpriteNode = SKSpriteNode(imageNamed: imageName)
             
@@ -107,17 +90,14 @@ class ParallaxNode: SKEffectNode
             }
         }
         
-        layerNodes.append(spriteNodes)
-        layerAttributes.append(attributes)
+        self.layerNodes.append(spriteNodes)
+        self.layerAttributes.append(attributes)
     }
     
-    
-    func update(_ currentTime: CFTimeInterval)
-    {
-        for i in 0 ..< layerNodes.count
-        {
-            let speed = layerAttributes[i].speed
-            var layer = layerNodes[i]
+    func update(_ currentTime: CFTimeInterval) {
+        for i in 0 ..< self.layerNodes.count {
+            let speed = self.layerAttributes[i].speed
+            var layer = self.layerNodes[i]
             
             for j in 0 ..< layer.count
             {
@@ -142,9 +122,7 @@ class ParallaxNode: SKEffectNode
         }
     }
     
-    
-    func reposition(_ nodeToReposition: SKSpriteNode, inLayer: inout [SKSpriteNode])
-    {
+    func reposition(_ nodeToReposition: SKSpriteNode, inLayer: inout [SKSpriteNode]) {
         // Calculate index of the node that we're gonna reposition.
         // Now it's on the left on the screen.
         let nodeToRepositionIndex = inLayer.find{ $0 == nodeToReposition }!
@@ -153,16 +131,14 @@ class ParallaxNode: SKEffectNode
         // This node is now on the right on the screen.
         var lastNodeIndex = nodeToRepositionIndex + inLayer.count - 1
         
-        if lastNodeIndex >= inLayer.count
-        {
+        if lastNodeIndex >= inLayer.count {
             lastNodeIndex -= inLayer.count
         }
         
         // Calculate index of the the node that is going to appear from the right.
         var appearingNodeIndex = nodeToRepositionIndex + 2
         
-        if appearingNodeIndex >= inLayer.count
-        {
+        if appearingNodeIndex >= inLayer.count {
             appearingNodeIndex -= inLayer.count
         }
         
@@ -178,17 +154,16 @@ class ParallaxNode: SKEffectNode
         //println("New position: \(newPosition)")
         
         // Remove the moved node from the screen.
-        if nodeToReposition !== appearingNode
-        {
+        if nodeToReposition !== appearingNode {
             nodeToReposition.removeFromParent()
         }
         
-        if appearingNode!.parent == nil
-        {
+        if appearingNode!.parent == nil {
             self.addChild(appearingNode)
         }
         
         // Move the first node to the end.
         nodeToReposition.position = newPosition;
     }
+    
 }
