@@ -8,8 +8,6 @@ class GameViewController: UIViewController {
     }
     
     var gameScene: GameScene?
-    var mainMenuScene: MainMenuScene?
-    var gameOverScene: GameOverScene?
     
     // MARK: - View lifecycle
     
@@ -42,7 +40,7 @@ class GameViewController: UIViewController {
 
 extension GameViewController {
     
-    fileprivate func startNewGame(animated: Bool) {
+    fileprivate func startNewGame(animated: Bool = false) {
         // Recreate game scene
         self.gameScene = GameScene(size: self.view.frame.size)
         self.gameScene!.scaleMode = .aspectFill
@@ -51,7 +49,7 @@ extension GameViewController {
         self.showScene(self.gameScene!, animated: animated)
     }
     
-    fileprivate func resumeGame(animated: Bool) {
+    fileprivate func resumeGame(animated: Bool = false, completion:(()->())? = nil) {
         let skView = self.view as! SKView
         
         if animated {
@@ -64,42 +62,46 @@ extension GameViewController {
             let time = DispatchTime.now() + delay / Double(NSEC_PER_SEC)
             
             DispatchQueue.main.asyncAfter(deadline: time, execute: { [weak self] in
-                guard let weakSelf = self else { return }
+                self?.gameScene!.isPaused = false
                 
-                weakSelf.mainMenuScene!.removeFromParent()
-                weakSelf.gameScene!.isPaused = false
+                // Call completion handler
+                completion?()
             })
         }
         else {
+            // Remove the menu scene and unpause the game scene after it was shown
             skView.presentScene(self.gameScene!)
-            self.mainMenuScene!.removeFromParent()
+            self.gameScene!.isPaused = false
+
+            // Call completion handler
+            completion?()
         }
     }
     
     fileprivate func showMainMenuScene(animated: Bool) {
         // Create main menu scene
-        self.mainMenuScene = MainMenuScene(size: self.view.frame.size)
-        self.mainMenuScene!.scaleMode = .aspectFill
-        self.mainMenuScene!.mainMenuSceneDelegate = self
+        let scene = MainMenuScene(size: self.view.frame.size)
+        scene.scaleMode = .aspectFill
+        scene.mainMenuSceneDelegate = self
         
         // Pause the game
         self.gameScene!.isPaused = true
         
         // Show it
-        self.showScene(self.mainMenuScene!, animated: animated)
+        self.showScene(scene, animated: animated)
     }
     
     fileprivate func showGameOverScene(animated: Bool) {
         // Create game over scene
-        self.gameOverScene = GameOverScene(size: self.view.frame.size)
-        self.gameOverScene!.scaleMode = .aspectFill
-        self.gameOverScene!.gameOverSceneDelegate = self
+        let scene = GameOverScene(size: self.view.frame.size)
+        scene.scaleMode = .aspectFill
+        scene.gameOverSceneDelegate = self
         
         // Pause the game
         self.gameScene!.isPaused = true
         
         // Show it
-        self.showScene(self.gameOverScene!, animated: animated)
+        self.showScene(scene, animated: animated)
     }
 
     fileprivate func showScene(_ scene: SKScene, animated: Bool) {
@@ -136,7 +138,10 @@ extension GameViewController : GameSceneDelegate {
 extension GameViewController : MainMenuSceneDelegate {
     
     func mainMenuSceneDidTapResumeButton(_ mainMenuScene: MainMenuScene) {
-        self.resumeGame(animated: true)
+        self.resumeGame(animated: true) {
+            // Remove main menu scene when game is resumed
+            mainMenuScene.removeFromParent()
+        }
     }
     
     func mainMenuSceneDidTapRestartButton(_ mainMenuScene: MainMenuScene) {
@@ -153,7 +158,9 @@ extension GameViewController : MainMenuSceneDelegate {
 
 extension GameViewController : GameOverSceneDelegate {
     
-    func gameOverSceneDidTapRestartButton(_ gameOverScene:GameOverScene) {
+    func gameOverSceneDidTapRestartButton(_ gameOverScene: GameOverScene) {
+        // TODO: Remove game over scene here
+        
         self.startNewGame(animated: true)
     }
     
