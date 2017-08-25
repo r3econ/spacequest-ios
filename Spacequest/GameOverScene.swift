@@ -1,16 +1,18 @@
 import SpriteKit
 
-protocol GameOverSceneDelegate {
+protocol GameOverSceneDelegate: class {
     func gameOverSceneDidTapRestartButton(_ gameOverScene: GameOverScene)
 }
 
 class GameOverScene: SKScene{
 
-    var restartButton: Button?
-    var buttons: [Button]?
-    var gameOverSceneDelegate: GameOverSceneDelegate?
-    var background: BackgroundNode?
-    
+    fileprivate var restartButton: Button?
+    fileprivate var buttons: [Button]?
+    fileprivate var background: BackgroundNode?
+    weak var gameOverSceneDelegate: GameOverSceneDelegate?
+
+    // MARK: - Initialization
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -28,14 +30,19 @@ class GameOverScene: SKScene{
     }
     
     override func didMove(to view: SKView) {
+        super.didMove(to: view)
+
+        // Track event
         AnalyticsManager.sharedInstance.trackScene("GameOverScene")
     }
     
 }
 
+// MARK: - Configuration
+
 extension GameOverScene {
     
-    func configureButtons() {
+    fileprivate func configureButtons() {
         // Restart button
         self.restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,

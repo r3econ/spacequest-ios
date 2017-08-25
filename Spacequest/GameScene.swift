@@ -1,7 +1,6 @@
 import SpriteKit
 
-protocol GameSceneDelegate {
-    
+protocol GameSceneDelegate: class {
     func gameSceneDidTapMainMenuButton(_ gameScene: GameScene)
     func gameScene(_ gameScene:GameScene, playerDidLoseWithScore: Int)
 }
@@ -10,75 +9,77 @@ let kHUDControlMargin: CGFloat = 20.0
 
 class GameScene: SKScene{
 
-    var background: BackgroundNode?
-    var playerSpaceship: PlayerSpaceship?
-    var joystick: Joystick?
-    var fireButton: Button?
-    var menuButton: Button?
-    var lifeIndicator: LifeIndicator?
-    var scoresNode: ScoresNode?
-    var launchEnemyTimer: Timer?
-    var gameSceneDelegate: GameSceneDelegate?
+    fileprivate var background: BackgroundNode?
+    fileprivate var playerSpaceship: PlayerSpaceship?
+    fileprivate var joystick: Joystick?
+    fileprivate var fireButton: Button?
+    fileprivate var menuButton: Button?
+    fileprivate let lifeIndicator = LifeIndicator(texture: SKTexture(imageNamed: ImageName.LifeBall.rawValue))
+    fileprivate let scoresNode = ScoresNode()
+    fileprivate var launchEnemyTimer: Timer?
+    weak var gameSceneDelegate: GameSceneDelegate?
+
+    // MARK: - Initialization
 
     required init?(coder aDecoder: NSCoder) {
-        
         super.init(coder: aDecoder)
     }
     
     override init(size: CGSize) {
-        
         super.init(size: size)
 
-        configureBackground()
-        configurePlayerSpaceship()
-        configurePhysics()
-        configureHUD()
+        self.configureBackground()
+        self.configurePlayerSpaceship()
+        self.configurePhysics()
+        self.configureHUD()
     }
     
     override func didMove(to view: SKView) {
-        
+        super.didMove(to: view)
+
+        // Track event
         AnalyticsManager.sharedInstance.trackScene("GameScene")
     }
    
     override func update(_ currentTime: TimeInterval) {
         // Update the background.
         if self.isPaused == false {
-            background!.update(currentTime)
+            self.background!.update(currentTime)
         }
     }
     
     override var isPaused: Bool {
-    didSet {
-        // Control launching of the enemies.
-        if isPaused != oldValue {
-            if isPaused {
-                stopLaunchingEnemySpaceships()
-            }
-            else {
-                startLaunchingEnemySpaceships()
+        didSet {
+            // Control launching of the enemies.
+            if self.isPaused != oldValue {
+                if self.isPaused {
+                    self.stopLaunchingEnemySpaceships()
+                }
+                else {
+                    self.startLaunchingEnemySpaceships()
+                }
             }
         }
     }
-    }
+    
 }
 
-
-// MARK: - Managing enemies.
+// MARK: - Managing enemies
 
 extension GameScene {
     
-    func startLaunchingEnemySpaceships() {
+    fileprivate func startLaunchingEnemySpaceships() {
         self.scheduleEnemySpaceshipLaunch()
     }
     
-    func stopLaunchingEnemySpaceships() {
+    fileprivate func stopLaunchingEnemySpaceships() {
         
         if self.launchEnemyTimer != nil {
             self.launchEnemyTimer!.invalidate()
         }
     }
     
-    func scheduleEnemySpaceshipLaunch() {
+    fileprivate func scheduleEnemySpaceshipLaunch() {
         let randomTimeInterval = TimeInterval(arc4random_uniform(3) + 1)
 
         self.launchEnemyTimer = Timer.scheduledTimer(
@@ -89,7 +90,7 @@ extension GameScene {
             repeats: false)
     }
     
-    func launchEnemyTimerFireMethod() {
+    @objc fileprivate func launchEnemyTimerFireMethod() {
         // Launch an enemy.
         self.launchEnemySpaceship()
         
@@ -97,7 +98,7 @@ extension GameScene {
         self.scheduleEnemySpaceshipLaunch()
     }
     
-    func launchEnemySpaceship() {
+    fileprivate func launchEnemySpaceship() {
         let enemySpaceship = EnemySpaceship(lifePoints: 20)
         
         enemySpaceship.didRunOutOfLifePointsEventHandler = enemyDidRunOutOfLifePointsEventHandler()
@@ -121,14 +122,14 @@ extension GameScene {
         
         enemySpaceship.run(SKAction.sequence([moveAction, SKAction.removeFromParent()]))
     }
+    
 }
 
-
-// MARK: - Configuration.
+// MARK: - Configuration
 
 extension GameScene {
     
-    func configurePhysics() {
+    fileprivate func configurePhysics() {
         self.physicsWorld.gravity = CGVector(dx: 0,dy: 0);
         self.physicsWorld.contactDelegate = self;
         
@@ -137,7 +138,7 @@ extension GameScene {
         self.physicsBody!.collisionBitMask = CategoryBitmask.playerSpaceship.rawValue
     }
     
-    func configurePlayerSpaceship() {
+    fileprivate func configurePlayerSpaceship() {
         self.playerSpaceship = PlayerSpaceship()
         
         self.playerSpaceship!.position = CGPoint(
@@ -147,10 +148,10 @@ extension GameScene {
         self.playerSpaceship!.lifePoints = 100
         self.playerSpaceship!.didRunOutOfLifePointsEventHandler = self.playerDidRunOutOfLifePointsEventHandler()
         
-        self.addChild(playerSpaceship!)
+        self.addChild(self.playerSpaceship!)
     }
     
-    func configureJoystick() {
+    fileprivate func configureJoystick() {
         self.joystick = Joystick(
             maximumRadius: 40.0,
             stickImageNamed: ImageName.JoystickStick.rawValue,
@@ -168,7 +169,7 @@ extension GameScene {
         self.addChild(self.joystick!)
     }
     
-    func configureFireButton() {
+    fileprivate func configureFireButton() {
         self.fireButton = Button(
             normalImageNamed: ImageName.FireButtonNormal.rawValue,
             selectedImageNamed: ImageName.FireButtonSelected.rawValue)
@@ -188,7 +189,7 @@ extension GameScene {
         self.addChild(self.fireButton!)
     }
     
-    func configureMenuButton() {
+    fileprivate func configureMenuButton() {
         self.menuButton = Button(
             normalImageNamed: ImageName.ShowMenuButtonNormal.rawValue,
             selectedImageNamed: ImageName.ShowMenuButtonSelected.rawValue)
@@ -208,27 +209,22 @@ extension GameScene {
         self.addChild(self.menuButton!)
     }
     
-    func configureLifeIndicator() {
-        self.lifeIndicator = LifeIndicator(texture: SKTexture(imageNamed: ImageName.LifeBall.rawValue))
-        self.lifeIndicator!.position = CGPoint(
+    fileprivate func configureLifeIndicator() {
+        self.lifeIndicator.position = CGPoint(
             x: self.joystick!.frame.maxX + 2.5 * self.joystick!.joystickRadius,
             y: self.joystick!.frame.minY - self.joystick!.joystickRadius)
 
-        self.lifeIndicator!.setLifePoints(playerSpaceship!.lifePoints, animated: false)
+        self.lifeIndicator.setLifePoints(self.playerSpaceship!.lifePoints, animated: false)
         
-        self.addChild(lifeIndicator!)
+        self.addChild(self.lifeIndicator)
     }
     
-    func configureScoresNode() {
-        self.scoresNode = ScoresNode()
-        self.scoresNode!.position = CGPoint(
-            x: kHUDControlMargin/2,
-            y: self.frame.height - 26)
-        
-        self.addChild(scoresNode!)
+    fileprivate func configureScoresNode() {
+        self.scoresNode.position = CGPoint(x: kHUDControlMargin/2, y: self.frame.height - 26)
+        self.addChild(self.scoresNode)
     }
     
-    func configureBackground() {
+    fileprivate func configureBackground() {
         self.background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.GameBackgroundPhone)
         
         self.background!.addLayer(
@@ -238,20 +234,21 @@ extension GameScene {
         self.background!.configureInScene(self)
     }
     
-    func updatePlayerSpaceshipPositionWithJoystickTranslation(_ translation: CGPoint) {
+    fileprivate func updatePlayerSpaceshipPositionWithJoystickTranslation(_ translation: CGPoint) {
         let translationConstant: CGFloat = 10.0
         
         self.playerSpaceship!.position.x += translationConstant * translation.x
         self.playerSpaceship!.position.y += translationConstant * translation.y
     }
     
-    func configureHUD() {
+    fileprivate func configureHUD() {
         self.configureJoystick()
         self.configureFireButton()
         self.configureLifeIndicator()
         self.configureMenuButton()
         self.configureScoresNode()
     }
+    
 }
 
 
@@ -339,14 +336,12 @@ extension GameScene : SKPhysicsContactDelegate {
 }
 
 
-// MARK: - Collision Handling.
+// MARK: - Collision Handling
 
 extension GameScene{
 
-    /**
-     Handle collision between player spaceship and the enemy spaceship.
-    */
-    func handleCollisionBetweenPlayerSpaceship(
+    /// Handle collision between player spaceship and the enemy spaceship.
+    fileprivate func handleCollisionBetweenPlayerSpaceship(
         _ playerSpaceship: PlayerSpaceship,
         enemySpaceship: EnemySpaceship!) {
             
@@ -359,7 +354,7 @@ extension GameScene{
             enemySpaceship: enemySpaceship)
     }
     
-    func handleCollisionBetweenPlayerMissile(_ missile: Missile, enemySpaceship: EnemySpaceship) {
+    fileprivate func handleCollisionBetweenPlayerMissile(_ missile: Missile, enemySpaceship: EnemySpaceship) {
         missile.removeFromParent()
         
         self.increaseScore(ScoreValue.playerMissileHitEnemySpaceship.rawValue)
@@ -370,7 +365,7 @@ extension GameScene{
 
     }
     
-    func handleCollisionBetweenPlayerSpaceship(_ playerSpaceship: PlayerSpaceship, enemyMissile: Missile) {
+    fileprivate func handleCollisionBetweenPlayerSpaceship(_ playerSpaceship: PlayerSpaceship, enemyMissile: Missile) {
         // Not supported.
     }
 }
@@ -381,8 +376,8 @@ extension GameScene{
 
 extension GameScene {
     
-    func increaseScore(_ value: Int) {
-        self.scoresNode!.value += value
+    fileprivate func increaseScore(_ value: Int) {
+        self.scoresNode.value += value
     }
     
 }
@@ -394,7 +389,7 @@ extension GameScene {
     
     func increasePlayerSpaceshipLifePoints(_ byValue: Int) {
         self.playerSpaceship!.lifePoints += byValue
-        self.lifeIndicator!.setLifePoints(self.playerSpaceship!.lifePoints, animated: true)
+        self.lifeIndicator.setLifePoints(self.playerSpaceship!.lifePoints, animated: true)
         
         // Add a green color blend for a short moment to indicate the increase of health.
         let colorizeAction = SKAction.colorize(with: UIColor.green,
@@ -408,7 +403,7 @@ extension GameScene {
     
     func decreasePlayerSpaceshipLifePoints(byValue: Int) {
         self.playerSpaceship!.lifePoints += byValue
-        self.lifeIndicator!.setLifePoints(self.playerSpaceship!.lifePoints, animated: true)
+        self.lifeIndicator.setLifePoints(self.playerSpaceship!.lifePoints, animated: true)
 
         // Add a red color blend for a short moment to indicate the decrease of health.
         let colorizeAction = SKAction.colorize(with: UIColor.red,
@@ -435,7 +430,6 @@ extension GameScene {
     
     func enemyDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
         let handler = { (object: AnyObject) -> () in
-            
             let enemySpaceship = object as! EnemySpaceship
             self.destroySpaceship(enemySpaceship)
         }
@@ -447,7 +441,7 @@ extension GameScene {
         let handler = { (object: AnyObject) -> () in
             
             self.destroySpaceship(self.playerSpaceship)
-            self.gameSceneDelegate?.gameScene(self, playerDidLoseWithScore: self.scoresNode!.value)
+            self.gameSceneDelegate?.gameScene(self, playerDidLoseWithScore: self.scoresNode.value)
         }
         
         return handler

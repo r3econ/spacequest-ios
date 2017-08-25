@@ -1,54 +1,59 @@
 import SpriteKit
 
-
-protocol MainMenuSceneDelegate {
+protocol MainMenuSceneDelegate: class {
     
     func mainMenuSceneDidTapResumeButton(_ mainMenuScene: MainMenuScene)
     func mainMenuSceneDidTapRestartButton(_ mainMenuScene: MainMenuScene)
     func mainMenuSceneDidTapInfoButton(_ mainMenuScene: MainMenuScene)
 }
 
-
 class MainMenuScene: SKScene {
     
-    var infoButton: Button?
-    var resumeButton: Button?
-    var restartButton: Button?
-    var buttons: [Button]?
-    var mainMenuSceneDelegate: MainMenuSceneDelegate?
-    var background: BackgroundNode?
+    fileprivate var infoButton: Button?
+    fileprivate var resumeButton: Button?
+    fileprivate var restartButton: Button?
+    fileprivate var buttons: [Button]?
+    fileprivate var background: BackgroundNode?
+    weak var mainMenuSceneDelegate: MainMenuSceneDelegate?
 
-    
+    // MARK: - Initialization
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
+        self.commonInit()
     }
     
     override init(size: CGSize) {
-        
         super.init(size: size)
-                
+        
+        self.commonInit()
+    }
+    
+    fileprivate func commonInit() {
         self.configureButtons()
         self.configureBackground()
     }
     
     override func didMove(to view: SKView) {
+        super.didMove(to: view)
+        
+        // Track event
         AnalyticsManager.sharedInstance.trackScene("MainMenuScene")
     }
     
-    func configureBackground() {
-        
+}
+
+// MARK: - Configuration
+
+extension MainMenuScene{
+
+    fileprivate func configureBackground() {
         self.background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.MenuBackgroundPhone)
         self.background!.configureInScene(self)
     }
-}
-
-
-/**
- Buttons & Title.
-*/
-extension MainMenuScene{
-
-    func configureButtons() {
+    
+    fileprivate func configureButtons() {
         
         // Info button.
         self.infoButton = Button(
@@ -61,7 +66,7 @@ extension MainMenuScene{
             x: scene!.size.width - 40.0,
             y: scene!.size.height - 25.0)
         
-        self.addChild(infoButton!)
+        self.addChild(self.infoButton!)
 
         // Resume button.
         self.resumeButton = Button(
@@ -92,7 +97,6 @@ extension MainMenuScene{
         
         // Place buttons in the scene.
         for (_, button) in (self.buttons!).enumerated() {
-
             button.position = CGPoint(
                 x: buttonOriginX - button.size.width/2,
                 y: button.size.height * 1.1)
@@ -101,39 +105,32 @@ extension MainMenuScene{
             
             buttonOriginX -= button.size.width + horizontalPadding
             
-            let rotateAction = SKAction.rotate(byAngle: CGFloat(M_PI/180.0 * 5.0), duration: 2.0)
+            let rotateAction = SKAction.rotate(byAngle: CGFloat(.pi/180.0 * 5.0), duration: 2.0)
             let sequence = SKAction.sequence([rotateAction, rotateAction.reversed()])
             
             button.run(SKAction.repeatForever(sequence))
         }
     }
     
-    func resumeButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
-        let handler = { () -> () in
+    fileprivate func resumeButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
+        return { () -> () in
             self.mainMenuSceneDelegate?.mainMenuSceneDidTapResumeButton(self)
             return
         }
-       
-        return handler
     }
     
-    func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
-        let handler = { () -> () in
+    fileprivate func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
+        return { () -> () in
             self.mainMenuSceneDelegate?.mainMenuSceneDidTapRestartButton(self)
             return
         }
-        
-        return handler
     }
     
-    func infoButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
-        let handler = { () -> () in
-            
+    fileprivate func infoButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
+        return { () -> () in
             self.mainMenuSceneDelegate?.mainMenuSceneDidTapInfoButton(self)
             return
         }
-        
-        return handler
     }
     
 }

@@ -3,16 +3,18 @@ import SpriteKit
 
 class PlayerSpaceship: Spaceship {
     
-    fileprivate var engineBurstEmitter: SKEmitterNode?
+    fileprivate let engineBurstEmitter = SKEmitterNode(fileNamed: "PlayerSpaceshipEngineBurst")!
     
     // MARK: - Initialization
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
     required init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
     }
+    
     convenience init() {
         let size = CGSize(width: 64, height: 50)
         
@@ -22,7 +24,7 @@ class PlayerSpaceship: Spaceship {
         
         self.name = NSStringFromClass(PlayerSpaceship.self)
         
-        // Collisions.
+        // Collisions
         self.physicsBody = SKPhysicsBody(rectangleOf: size)
         self.physicsBody!.usesPreciseCollisionDetection = true
         self.physicsBody!.allowsRotation = false
@@ -36,16 +38,11 @@ class PlayerSpaceship: Spaceship {
             CategoryBitmask.enemySpaceship.rawValue |
             CategoryBitmask.enemyMissile.rawValue
         
-        self.configureEngineBurstEmitter()
+        // Add engine burst
+        self.engineBurstEmitter.position = CGPoint(x: -self.size.width/2 - 5.0, y: 0.0)
+        self.addChild(self.engineBurstEmitter)
     }
-    // MARK: - Configuration
     
-    fileprivate func configureEngineBurstEmitter() {
-        self.engineBurstEmitter = SKEmitterNode(fileNamed: "PlayerSpaceshipEngineBurst")
-        self.engineBurstEmitter!.position = CGPoint(x: -self.size.width/2 - 5.0, y: 0.0)
-        
-        self.addChild(engineBurstEmitter!)
-    }
     // MARK: - Special actions
     
     func launchMissile() {

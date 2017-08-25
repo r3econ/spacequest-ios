@@ -9,9 +9,11 @@ class EnemySpaceship: Spaceship {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
     required init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
     }
+    
     init(lifePoints: Int) {
         let size = CGSize(width: 36, height: 31)
         super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.rawValue), color: UIColor.brown, size: size)
@@ -31,9 +33,11 @@ class EnemySpaceship: Spaceship {
             CategoryBitmask.playerSpaceship.rawValue |
             CategoryBitmask.playerMissile.rawValue
     }
+    
     deinit {
         self.missileLaunchTimer?.invalidate()
     }
+    
     // MARK: - Special actions
     
     func scheduleRandomMissileLaunch() {
@@ -42,16 +46,17 @@ class EnemySpaceship: Spaceship {
         let backoffTime = TimeInterval((arc4random() % 3) + 1)
         self.missileLaunchTimer = Timer(timeInterval: backoffTime, target: self, selector: #selector(EnemySpaceship.launchMissile), userInfo: nil, repeats: false)
     }
+    
     func launchMissile() {
         let missile = Missile.enemyMissile()
-        missile.position = position
-        missile.zPosition = zPosition - 1
+        missile.position = self.position
+        missile.zPosition = self.zPosition - 1
         
         self.scene!.addChild(missile)
         
         let velocity: CGFloat = 600.0
-        let moveDuration = scene!.size.width / velocity
-        let missileEndPosition = CGPoint(x: -0.1 * scene!.size.width, y: position.y)
+        let moveDuration = self.scene!.size.width / velocity
+        let missileEndPosition = CGPoint(x: -0.1 * self.scene!.size.width, y: self.position.y)
         
         let moveAction = SKAction.move(to: missileEndPosition, duration: TimeInterval(moveDuration))
         let removeAction = SKAction.removeFromParent()
