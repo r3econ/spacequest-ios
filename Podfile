@@ -5,6 +5,4 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Spacequest' do
 
-pod 'GoogleAnalytics', '~> 3.13'
-
 end
