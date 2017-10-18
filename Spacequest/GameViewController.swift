@@ -17,8 +17,8 @@ class GameViewController: UIViewController {
         self.configureView()
         self.startNewGame(animated: false)
         
-        // Start music
-        self.toggleBackgroungMusic()
+        // Start the background music
+        MusicManager.shared.playBackgroundMusic()
     }
     // MARK: - Appearance
 
@@ -180,10 +180,6 @@ extension GameViewController {
             skView.showsNodeCount = true
             skView.showsPhysics = true
         #endif
-    }
-    
-    fileprivate func toggleBackgroungMusic() {
-        MusicManager.sharedInstance.toggleBackgroundMusic()
     }
     
 }
