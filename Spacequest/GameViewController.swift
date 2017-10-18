@@ -20,6 +20,7 @@ class GameViewController: UIViewController {
         // Start the background music
         MusicManager.shared.playBackgroundMusic()
     }
+    
     // MARK: - Appearance
 
     override var shouldAutorotate : Bool {
