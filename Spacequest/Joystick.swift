@@ -111,7 +111,7 @@ extension Joystick {
         self.stickNode!.position = location
     }
     
-    func handleJoystickTranslationUpdate() {
+    @objc func handleJoystickTranslationUpdate() {
         if self.isTouchedDown && self.updateHandler != nil {
             self.updateHandler!(self.currentJoystickTranslation)
         }

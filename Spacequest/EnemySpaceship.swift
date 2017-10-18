@@ -47,7 +47,7 @@ class EnemySpaceship: Spaceship {
         self.missileLaunchTimer = Timer(timeInterval: backoffTime, target: self, selector: #selector(EnemySpaceship.launchMissile), userInfo: nil, repeats: false)
     }
     
-    func launchMissile() {
+    @objc func launchMissile() {
         let missile = Missile.enemyMissile()
         missile.position = self.position
         missile.zPosition = self.zPosition - 1
