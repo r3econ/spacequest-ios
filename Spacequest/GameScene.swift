@@ -36,7 +36,9 @@ class GameScene: SKScene{
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
-
+        // Enable multitouch
+        view.isMultipleTouchEnabled = true
+        
         // Track event
         AnalyticsManager.sharedInstance.trackScene("GameScene")
     }
