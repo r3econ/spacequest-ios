@@ -3,23 +3,24 @@ import SpriteKit
 class LifeIndicator: SKSpriteNode {
     
     fileprivate var titleLabelNode: SKLabelNode?
-    fileprivate var lifePoints: Int = 0 {
+    fileprivate var lifePoints: Int = 100 {
         didSet {
             update(animated: false)
         }
     }
+    
     // MARK: - Initialization
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
     init(texture: SKTexture!) {
-        self.lifePoints = 100
-        
         super.init(texture: texture,
                    color: UIColor.brown,
                    size: texture.size())
         
+        // Configure title
         self.titleLabelNode = SKLabelNode(fontNamed: FontName.Wawati.rawValue)
         self.titleLabelNode!.fontSize = 14.0
         self.titleLabelNode!.fontColor = UIColor(white: 1.0, alpha: 0.7)
@@ -30,6 +31,7 @@ class LifeIndicator: SKSpriteNode {
         
         self.addChild(titleLabelNode!)
     }
+    
     // MARK: - Configuration
     
     func setLifePoints(_ points: Int, animated: Bool) {
@@ -37,6 +39,7 @@ class LifeIndicator: SKSpriteNode {
         
         self.update(animated: animated)
     }
+    
     fileprivate func update(animated: Bool) {
         self.titleLabelNode!.text = "\(lifePoints)"
         
@@ -52,14 +55,14 @@ class LifeIndicator: SKSpriteNode {
             self.titleLabelNode!.colorBlendFactor = blendFactor
             
             self.run(SKAction.group([colorizeAction, scaleActionSequence]))
-        }
-        else {
+        } else {
             self.color = blendColor
             self.colorBlendFactor = blendFactor
             self.titleLabelNode!.color = blendColor
             self.titleLabelNode!.colorBlendFactor = blendFactor
         }
     }
+    
     fileprivate func lifeBallColor() -> UIColor {
         var fullBarColorR: CGFloat = 0.0, fullBarColorG: CGFloat = 0.0, fullBarColorB: CGFloat = 0.0, fullBarColorAlpha: CGFloat = 0.0
         var emptyBarColorR: CGFloat = 0.0, emptyBarColorG: CGFloat = 0.0, emptyBarColorB: CGFloat = 0.0, emptyBarColorAlpha: CGFloat = 0.0

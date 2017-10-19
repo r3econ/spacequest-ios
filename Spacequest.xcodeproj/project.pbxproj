@@ -179,14 +179,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		86B406AF1AF2700D009C868F /* Music Manager */ = {
-			isa = PBXGroup;
-			children = (
-				86B406B01AF27024009C868F /* MusicManager.swift */,
-			);
-			name = "Music Manager";
-			sourceTree = "<group>";
-		};
 		A93AC72ADD1570482CB4A265 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,14 +194,6 @@
 				B5AA6053193FB48F00EB9920 /* Main.storyboard */,
 			);
 			name = UI;
-			sourceTree = "<group>";
-		};
-		AFC5365F1B68BFF600A11383 /* Analytics Manager */ = {
-			isa = PBXGroup;
-			children = (
-				AFC536601B68C01F00A11383 /* AnalyticsManager.swift */,
-			);
-			name = "Analytics Manager";
 			sourceTree = "<group>";
 		};
 		B51188771942368F00FF8D13 /* Background */ = {
@@ -261,8 +245,8 @@
 		B53E78D91941059A000CB230 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				AFC5365F1B68BFF600A11383 /* Analytics Manager */,
-				86B406AF1AF2700D009C868F /* Music Manager */,
+				86B406B01AF27024009C868F /* MusicManager.swift */,
+				AFC536601B68C01F00A11383 /* AnalyticsManager.swift */,
 				B53E78DA194105BA000CB230 /* Constants.swift */,
 			);
 			name = Helpers;
