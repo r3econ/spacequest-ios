@@ -3,11 +3,11 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let sceneTransistionDuration: Double = 0.2
     }
     
-    var gameScene: GameScene?
+    private var gameScene: GameScene?
     
     // MARK: - View lifecycle
     
@@ -27,11 +27,13 @@ class GameViewController: UIViewController {
         return true
     }
 
+    // Make sure only the landscape mode is supported
     override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.landscape
     }
 
     override var prefersStatusBarHidden : Bool {
+        // Hide the status bar
         return true
     }
     
@@ -41,7 +43,7 @@ class GameViewController: UIViewController {
 
 extension GameViewController {
     
-    fileprivate func startNewGame(animated: Bool = false) {
+    private func startNewGame(animated: Bool = false) {
         // Recreate game scene
         self.gameScene = GameScene(size: self.view.frame.size)
         self.gameScene!.scaleMode = .aspectFill
@@ -50,7 +52,7 @@ extension GameViewController {
         self.showScene(self.gameScene!, animated: animated)
     }
     
-    fileprivate func resumeGame(animated: Bool = false, completion:(()->())? = nil) {
+    private func resumeGame(animated: Bool = false, completion:(()->())? = nil) {
         let skView = self.view as! SKView
         
         if animated {
@@ -79,7 +81,7 @@ extension GameViewController {
         }
     }
     
-    fileprivate func showMainMenuScene(animated: Bool) {
+    private func showMainMenuScene(animated: Bool) {
         // Create main menu scene
         let scene = MainMenuScene(size: self.view.frame.size)
         scene.scaleMode = .aspectFill
@@ -92,7 +94,7 @@ extension GameViewController {
         self.showScene(scene, animated: animated)
     }
     
-    fileprivate func showGameOverScene(animated: Bool) {
+    private func showGameOverScene(animated: Bool) {
         // Create game over scene
         let scene = GameOverScene(size: self.view.frame.size)
         scene.scaleMode = .aspectFill
@@ -105,13 +107,12 @@ extension GameViewController {
         self.showScene(scene, animated: animated)
     }
 
-    fileprivate func showScene(_ scene: SKScene, animated: Bool) {
+    private func showScene(_ scene: SKScene, animated: Bool) {
         let skView = self.view as! SKView
         
         if animated {
             skView.presentScene(scene, transition: SKTransition.crossFade(withDuration: Constants.sceneTransistionDuration))
-        }
-        else {
+        } else {
             skView.presentScene(scene)
         }
     }
@@ -161,7 +162,6 @@ extension GameViewController : GameOverSceneDelegate {
     
     func gameOverSceneDidTapRestartButton(_ gameOverScene: GameOverScene) {
         // TODO: Remove game over scene here
-        
         self.startNewGame(animated: true)
     }
     
@@ -171,7 +171,7 @@ extension GameViewController : GameOverSceneDelegate {
 
 extension GameViewController {
     
-    fileprivate func configureView() {
+    private func configureView() {
         let skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
         
