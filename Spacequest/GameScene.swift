@@ -294,27 +294,24 @@ extension GameScene : SKPhysicsContactDelegate {
     }
     
     private func collisionTypeWithContact(_ contact: SKPhysicsContact!) -> (CollisionType?) {
-        let categoryBitmaskBodyA = CategoryBitmask(rawValue: contact.bodyA.categoryBitMask)
-        let categoryBitmaskBodyB = CategoryBitmask(rawValue: contact.bodyB.categoryBitMask)
-        
-        // Player missile - enemy spaceship
-        if categoryBitmaskBodyA == CategoryBitmask.enemySpaceship &&
-            categoryBitmaskBodyB == CategoryBitmask.playerMissile ||
-            categoryBitmaskBodyB == CategoryBitmask.enemySpaceship &&
-            categoryBitmaskBodyA == CategoryBitmask.playerMissile {
-            
-            return CollisionType.playerMissileEnemySpaceship
-        }
-        // Player spaceship - enemy spaceship
-        else if categoryBitmaskBodyA == CategoryBitmask.enemySpaceship &&
-            categoryBitmaskBodyB == CategoryBitmask.playerSpaceship ||
-            categoryBitmaskBodyB == CategoryBitmask.enemySpaceship &&
-            categoryBitmaskBodyA == CategoryBitmask.playerSpaceship {
-            
-            return CollisionType.playerSpaceshipEnemySpaceship
+        guard
+            let categoryBitmaskBodyA = CategoryBitmask(rawValue: contact.bodyA.categoryBitMask),
+            let categoryBitmaskBodyB = CategoryBitmask(rawValue: contact.bodyB.categoryBitMask) else {
+                return nil
         }
         
-        return nil
+        switch (categoryBitmaskBodyA, categoryBitmaskBodyB) {
+            // Player missile - enemy spaceship
+        case (.enemySpaceship, .playerMissile), (.playerMissile, .enemySpaceship):
+            return .playerMissileEnemySpaceship
+            
+            // Player spaceship - enemy spaceship
+        case (.enemySpaceship, .playerSpaceship), (.playerSpaceship, .enemySpaceship):
+            return .playerSpaceshipEnemySpaceship
+            
+        default:
+            return nil
+        }
     }
     
 }
