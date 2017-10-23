@@ -123,12 +123,12 @@ extension GameViewController {
 
 extension GameViewController : GameSceneDelegate {
 
-    func gameSceneDidTapMainMenuButton(_ gameScene: GameScene) {
+    func didTapMainMenuButton(in gameScene: GameScene) {
         // Show initial, main menu scene
         self.showMainMenuScene(animated: true)
     }
     
-    func gameScene(_ gameScene: GameScene, playerDidLoseWithScore: Int) {
+    func playerDidLose(with score: Int, in gameScene:GameScene) {
         // Player lost, show game over scene
         self.showGameOverScene(animated: true)
     }

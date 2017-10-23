@@ -1,8 +1,8 @@
 import SpriteKit
 
 protocol GameSceneDelegate: class {
-    func gameSceneDidTapMainMenuButton(_ gameScene: GameScene)
-    func gameScene(_ gameScene:GameScene, playerDidLoseWithScore: Int)
+    func didTapMainMenuButton(in gameScene: GameScene)
+    func playerDidLose(with score: Int, in gameScene:GameScene)
 }
 
 let kHUDControlMargin: CGFloat = 20.0
@@ -200,12 +200,9 @@ extension GameScene {
             x: self.frame.width - self.menuButton!.frame.width/2 - 2.0,
             y: self.frame.height - self.menuButton!.frame.height/2);
         
-        self.menuButton!.touchUpInsideEventHandler = {
-            
-                () -> () in
-                
-                self.gameSceneDelegate?.gameSceneDidTapMainMenuButton(self)
-                return
+        self.menuButton!.touchUpInsideEventHandler = { () -> () in
+            self.gameSceneDelegate?.didTapMainMenuButton(in: self)
+            return
         }
         
         self.addChild(self.menuButton!)
@@ -441,9 +438,8 @@ extension GameScene {
     
     func playerDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
         let handler = { (object: AnyObject) -> () in
-            
             self.destroySpaceship(self.playerSpaceship)
-            self.gameSceneDelegate?.gameScene(self, playerDidLoseWithScore: self.scoresNode.value)
+            self.gameSceneDelegate?.playerDidLose(with: self.scoresNode.value, in: self)
         }
         
         return handler
