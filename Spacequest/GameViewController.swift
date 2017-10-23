@@ -128,7 +128,7 @@ extension GameViewController : GameSceneDelegate {
         self.showMainMenuScene(animated: true)
     }
     
-    func playerDidLose(with score: Int, in gameScene:GameScene) {
+    func playerDidLose(withScore score: Int, in gameScene:GameScene) {
         // Player lost, show game over scene
         self.showGameOverScene(animated: true)
     }

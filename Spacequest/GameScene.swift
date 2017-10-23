@@ -2,10 +2,10 @@ import SpriteKit
 
 protocol GameSceneDelegate: class {
     func didTapMainMenuButton(in gameScene: GameScene)
-    func playerDidLose(with score: Int, in gameScene:GameScene)
+    func playerDidLose(withScore score: Int, in gameScene:GameScene)
 }
 
-class GameScene: SKScene{
+class GameScene: SKScene {
     
     private struct Constants {
         static let hudControlMargin: CGFloat = 20.0
@@ -92,7 +92,6 @@ extension GameScene {
     
     private func scheduleEnemySpaceshipSpawn() {
         let randomTimeInterval = TimeInterval(arc4random_uniform(Constants.maxRandomTimeBetweenEnemySpawns) + 1)
-        
         self.spawnEnemyTimer = Timer.scheduledTimer(
             timeInterval: randomTimeInterval,
             target: self,
@@ -104,7 +103,6 @@ extension GameScene {
     @objc private func spawnEnemyTimerFireMethod() {
         // Spawn enemy spaceship
         self.spawnEnemySpaceship()
-        
         // Schedule spawn of the next one
         self.scheduleEnemySpaceshipSpawn()
     }
@@ -127,7 +125,7 @@ extension GameScene {
         // Add it to the scene
         self.addChild(enemySpaceship)
         
-        // Determine speed of the enemy.
+        // Determine speed of the enemy
         let moveAction = SKAction.moveTo(x: -enemySpaceship.size.width/2, duration: Constants.enemyFlightDuration)
         enemySpaceship.run(SKAction.sequence([moveAction, SKAction.removeFromParent()]))
     }
@@ -232,7 +230,6 @@ extension GameScene {
     
     private func updatePlayerSpaceshipPositionWithJoystickTranslation(_ translation: CGPoint) {
         let translationConstant: CGFloat = 10.0
-        
         self.playerSpaceship!.position.x += translationConstant * translation.x
         self.playerSpaceship!.position.y += translationConstant * translation.y
     }
@@ -300,7 +297,7 @@ extension GameScene : SKPhysicsContactDelegate {
         let categoryBitmaskBodyA = CategoryBitmask(rawValue: contact.bodyA.categoryBitMask)
         let categoryBitmaskBodyB = CategoryBitmask(rawValue: contact.bodyB.categoryBitMask)
         
-        // Player missile - enemy spaceship.
+        // Player missile - enemy spaceship
         if categoryBitmaskBodyA == CategoryBitmask.enemySpaceship &&
             categoryBitmaskBodyB == CategoryBitmask.playerMissile ||
             categoryBitmaskBodyB == CategoryBitmask.enemySpaceship &&
@@ -308,7 +305,7 @@ extension GameScene : SKPhysicsContactDelegate {
             
             return CollisionType.playerMissileEnemySpaceship
         }
-        // Player spaceship - enemy spaceship.
+        // Player spaceship - enemy spaceship
         else if categoryBitmaskBodyA == CategoryBitmask.enemySpaceship &&
             categoryBitmaskBodyB == CategoryBitmask.playerSpaceship ||
             categoryBitmaskBodyB == CategoryBitmask.enemySpaceship &&
@@ -319,44 +316,42 @@ extension GameScene : SKPhysicsContactDelegate {
         
         return nil
     }
+    
 }
 
-// MARK: - Collision Handling
+// MARK: - Collision handling
 
 extension GameScene {
     
-    /// Handle collision between player spaceship and the enemy spaceship.
+    /// Handle collision between player spaceship and the enemy spaceship
     private func handleCollision(between playerSpaceship: PlayerSpaceship, and enemySpaceship: EnemySpaceship!) {
-        
-        self.increaseScore(ScoreValue.playerMissileHitEnemySpaceship.rawValue)
-        
-        self.decreasePlayerSpaceshipLifePoints(byValue: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
-        
-        self.decreaseEnemySpaceshipLifePoints(
-            byValue: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue,
-            enemySpaceship: enemySpaceship)
+        // Update score
+        self.increaseScore(by: ScoreValue.playerMissileHitEnemySpaceship.rawValue)
+        // Update life points
+        self.decreasePlayerSpaceshipLifePoints(by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
+        self.decreaseLifePoints(of: enemySpaceship, by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
     }
     
     private func handleCollision(between playerMissile: Missile, and enemySpaceship: EnemySpaceship) {
+        // Remove missile
         playerMissile.removeFromParent()
-        
-        self.increaseScore(ScoreValue.playerMissileHitEnemySpaceship.rawValue)
-        
-        self.decreaseEnemySpaceshipLifePoints(
-            byValue: LifePointsValue.playerMissileHitEnemySpaceship.rawValue,
-            enemySpaceship: enemySpaceship)
+        // Update score
+        self.increaseScore(by: ScoreValue.playerMissileHitEnemySpaceship.rawValue)
+        // Update life points
+        self.decreaseLifePoints(of: enemySpaceship, by: LifePointsValue.playerMissileHitEnemySpaceship.rawValue)
     }
     
     private func handleCollision(between playerSpaceship: PlayerSpaceship, and enemyMissile: Missile) {
-        // Not supported.
+        // Not supported
     }
+    
 }
 
 // MARK: - Scores
 
 extension GameScene {
     
-    private func increaseScore(_ value: Int) {
+    private func increaseScore(by value: Int) {
         self.scoresNode.value += value
     }
     
@@ -366,11 +361,11 @@ extension GameScene {
 
 extension GameScene {
     
-    func increasePlayerSpaceshipLifePoints(_ byValue: Int) {
-        self.playerSpaceship!.lifePoints += byValue
+    private func increasePlayerSpaceshipLifePoints(by value: Int) {
+        self.playerSpaceship!.lifePoints += value
         self.lifeIndicator.setLifePoints(self.playerSpaceship!.lifePoints, animated: true)
         
-        // Add a green color blend for a short moment to indicate the increase of health.
+        // Add a green color blend for a short moment to indicate the increase of health
         let colorizeAction = SKAction.colorize(with: UIColor.green,
                                                colorBlendFactor: 0.7,
                                                duration: 0.2)
@@ -379,60 +374,54 @@ extension GameScene {
         self.playerSpaceship!.run(SKAction.sequence([colorizeAction, uncolorizeAction]))
     }
     
-    func decreasePlayerSpaceshipLifePoints(byValue: Int) {
-        self.playerSpaceship!.lifePoints += byValue
+    private func decreasePlayerSpaceshipLifePoints(by value: Int) {
+        self.playerSpaceship!.lifePoints += value
         self.lifeIndicator.setLifePoints(self.playerSpaceship!.lifePoints, animated: true)
         
-        // Add a red color blend for a short moment to indicate the decrease of health.
+        // Add a red color blend for a short moment to indicate the decrease of health
         let colorizeAction = SKAction.colorize(with: UIColor.red,
                                                colorBlendFactor: 0.7,
                                                duration: 0.2)
         let uncolorizeAction = SKAction.colorize(withColorBlendFactor: 0.0,
                                                  duration: 0.2)
-        
         self.playerSpaceship!.run(SKAction.sequence([colorizeAction, uncolorizeAction]))
     }
     
-    func decreaseEnemySpaceshipLifePoints(byValue: Int, enemySpaceship: EnemySpaceship) {
-        enemySpaceship.lifePoints += byValue
+    private func decreaseLifePoints(of enemySpaceship: EnemySpaceship, by value: Int) {
+        enemySpaceship.lifePoints += value
         
-        // Add a red color blend for a short moment to indicate the decrease of health.
+        // Add a red color blend for a short moment to indicate the decrease of health
         let colorizeAction = SKAction.colorize(with: UIColor.red,
                                                colorBlendFactor: 0.7,
                                                duration: 0.2)
         let uncolorizeAction = SKAction.colorize(withColorBlendFactor: 0.0,
                                                  duration: 0.2)
-        
         enemySpaceship.run(SKAction.sequence([colorizeAction, uncolorizeAction]))
     }
     
-    func enemyDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
-        let handler = { (object: AnyObject) -> () in
+    private func enemyDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
+        return { (object: AnyObject) -> () in
             let enemySpaceship = object as! EnemySpaceship
             self.destroySpaceship(enemySpaceship)
         }
-        
-        return handler
     }
     
-    func playerDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
-        let handler = { (object: AnyObject) -> () in
+    private func playerDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
+        return { (object: AnyObject) -> () in
             self.destroySpaceship(self.playerSpaceship)
-            self.gameSceneDelegate?.playerDidLose(with: self.scoresNode.value, in: self)
+            self.gameSceneDelegate?.playerDidLose(withScore: self.scoresNode.value, in: self)
         }
-        
-        return handler
     }
     
-    func destroySpaceship(_ spaceship: Spaceship!) {
+    private func destroySpaceship(_ spaceship: Spaceship!) {
+        // Create an explosion
         let explosionEmitter = SKEmitterNode(fileNamed: Constants.explosionEmmiterFileName)
+        // Position it
         explosionEmitter!.position.x = spaceship.position.x - spaceship.size.width/2
         explosionEmitter!.position.y = spaceship.position.y
         explosionEmitter!.zPosition = spaceship.zPosition + 1
-        
+        // Add it to the scene
         self.addChild(explosionEmitter!)
-        
-        // Show the explosion
         explosionEmitter!.run(SKAction.sequence([SKAction.wait(forDuration: 5), SKAction.removeFromParent()]))
         // Fade out the enemy and remove it
         spaceship.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.1), SKAction.removeFromParent()]))
