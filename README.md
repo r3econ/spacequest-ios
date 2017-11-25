@@ -9,6 +9,14 @@ Best game ever.
 - Swift
 - SpriteKit
 
+# Music
+
+### Background music loop
+```
+Title: Game Space Battle Loop
+Album: Corporate Uplifting Business Background Music
+Artists: Plastic3
+```
 # License
 This code is distributed under the terms and conditions of the [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/) license.
 
