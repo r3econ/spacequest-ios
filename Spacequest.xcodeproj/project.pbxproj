@@ -76,15 +76,12 @@
 		B5FA5507199B95B8004F17B8 /* Layer_0_2_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5FA5502199B95B8004F17B8 /* Layer_0_2_iphone@2x.png */; };
 		B5FA5508199B95B8004F17B8 /* Layer_0_3_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5FA5503199B95B8004F17B8 /* Layer_0_3_iphone@2x.png */; };
 		B5FA5509199B95B8004F17B8 /* Layer_0_4_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5FA5504199B95B8004F17B8 /* Layer_0_4_iphone@2x.png */; };
-		E3576AF6D2499C8AE7BD561E /* Pods_Spacequest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5AD71DA70CCFF557066AD35 /* Pods_Spacequest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		40108D86A4D762E163410262 /* Pods-Spacequest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spacequest.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spacequest/Pods-Spacequest.release.xcconfig"; sourceTree = "<group>"; };
 		86B406B01AF27024009C868F /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		86B406B41AF2B67C009C868F /* menu_button_info_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_button_info_normal@2x.png"; sourceTree = "<group>"; };
 		86B406B51AF2B67C009C868F /* menu_button_info_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button_info_normal.png; sourceTree = "<group>"; };
-		900707CF4C5B5B3EDC8FB486 /* Pods-Spacequest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spacequest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spacequest/Pods-Spacequest.debug.xcconfig"; sourceTree = "<group>"; };
 		AFC536601B68C01F00A11383 /* AnalyticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		AFC536621B68C1FF00A11383 /* Spacequest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spacequest-Bridging-Header.h"; sourceTree = "<group>"; };
 		AFC536631B69036700A11383 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
@@ -156,7 +153,6 @@
 		B5FA5502199B95B8004F17B8 /* Layer_0_2_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Layer_0_2_iphone@2x.png"; sourceTree = "<group>"; };
 		B5FA5503199B95B8004F17B8 /* Layer_0_3_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Layer_0_3_iphone@2x.png"; sourceTree = "<group>"; };
 		B5FA5504199B95B8004F17B8 /* Layer_0_4_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Layer_0_4_iphone@2x.png"; sourceTree = "<group>"; };
-		F5AD71DA70CCFF557066AD35 /* Pods_Spacequest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spacequest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +160,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3576AF6D2499C8AE7BD561E /* Pods_Spacequest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,18 +169,8 @@
 		13D7D5D10BFE79EED58C0EC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F5AD71DA70CCFF557066AD35 /* Pods_Spacequest.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A93AC72ADD1570482CB4A265 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				900707CF4C5B5B3EDC8FB486 /* Pods-Spacequest.debug.xcconfig */,
-				40108D86A4D762E163410262 /* Pods-Spacequest.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		AF4CF52A1BE8EAE800C948C1 /* UI */ = {
@@ -316,7 +301,6 @@
 				B5AA6048193FB48F00EB9920 /* Spacequest */,
 				B5AA605F193FB48F00EB9920 /* SpacequestTests */,
 				B5AA6047193FB48F00EB9920 /* Products */,
-				A93AC72ADD1570482CB4A265 /* Pods */,
 				13D7D5D10BFE79EED58C0EC1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -493,12 +477,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5AA6066193FB48F00EB9920 /* Build configuration list for PBXNativeTarget "Spacequest" */;
 			buildPhases = (
-				5A3CCD1CCCB8B6D3085B28F2 /* [CP] Check Pods Manifest.lock */,
 				B5AA6042193FB48E00EB9920 /* Sources */,
 				B5AA6043193FB48E00EB9920 /* Frameworks */,
 				B5AA6044193FB48E00EB9920 /* Resources */,
-				9E982D104EB701B185FDACFF /* [CP] Embed Pods Frameworks */,
-				0C2BE77AD5B0D5CE773F6FA5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -605,54 +586,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0C2BE77AD5B0D5CE773F6FA5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spacequest/Pods-Spacequest-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5A3CCD1CCCB8B6D3085B28F2 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9E982D104EB701B185FDACFF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spacequest/Pods-Spacequest-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B5AA6042193FB48E00EB9920 /* Sources */ = {
@@ -798,7 +731,6 @@
 		};
 		B5AA6067193FB48F00EB9920 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 900707CF4C5B5B3EDC8FB486 /* Pods-Spacequest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -821,7 +753,6 @@
 		};
 		B5AA6068193FB48F00EB9920 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40108D86A4D762E163410262 /* Pods-Spacequest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
