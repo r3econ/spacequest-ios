@@ -20,7 +20,7 @@ class LifeIndicator: SKSpriteNode {
     fileprivate var titleLabelNode: SKLabelNode?
     fileprivate var lifePoints: Int = 100 {
         didSet {
-            update(animated: false)
+            self.update(animated: false)
         }
     }
     

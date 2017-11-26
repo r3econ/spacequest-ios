@@ -191,11 +191,11 @@ extension GameViewController {
         skView.ignoresSiblingOrder = true
         
         // Enable debugging
-        #if DEBUG
+        //#if DEBUG
             skView.showsFPS = true
             skView.showsNodeCount = true
             skView.showsPhysics = true
-        #endif
+        //#endif
     }
     
 }

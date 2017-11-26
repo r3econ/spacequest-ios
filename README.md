@@ -10,7 +10,7 @@
 Full source code of a working `iOS` game. Yet another take on a space shooter game. The game falls into [Shoot 'em up](https://en.wikipedia.org/wiki/Shoot_%27em_up) video games genre. It is written in Swift and uses `SpriteKit`- graphics rendering and animation infrastructure built into `iOS`. All vector graphics and image assets created in `Inkscape` and `GIMP`.
 
 <p align="center">
-<img src="https://i.imgur.com/Fuc3d6U.png">
+<img src="https://i.imgur.com/w7PKnL1.png">
 </p>
 
 ### Some interesting problems covered in the project:

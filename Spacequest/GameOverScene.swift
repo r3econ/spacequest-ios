@@ -23,7 +23,7 @@ class GameOverScene: SKScene{
 
     fileprivate var restartButton: Button?
     fileprivate var buttons: [Button]?
-    fileprivate var background: BackgroundNode?
+    fileprivate var background: SKSpriteNode?
     weak var gameOverSceneDelegate: GameOverSceneDelegate?
 
     // MARK: - Initialization
@@ -40,8 +40,11 @@ class GameOverScene: SKScene{
     }
     
     func configureBackground() {
-        self.background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.MenuBackgroundPhone)
-        self.background!.configureInScene(self)
+        self.background = SKSpriteNode(imageNamed: ImageName.MenuBackgroundPhone.rawValue)
+        self.background!.size = self.size
+        self.background!.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        self.background!.zPosition = -1000
+        self.addChild(self.background!)
     }
     
     override func didMove(to view: SKView) {

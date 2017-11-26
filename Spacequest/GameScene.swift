@@ -36,7 +36,7 @@ class GameScene: SKScene {
     weak var gameSceneDelegate: GameSceneDelegate?
     
     // Nodes
-    private var background: BackgroundNode?
+    private var background: SKSpriteNode?
     private var playerSpaceship: PlayerSpaceship?
     private var joystick: Joystick?
     private var fireButton: Button?
@@ -56,6 +56,10 @@ class GameScene: SKScene {
     override init(size: CGSize) {
         super.init(size: size)
         
+        // Set scale mode
+        self.scaleMode = SKSceneScaleMode.resizeFill;
+
+        // Configure scene contents
         self.configureBackground()
         self.configurePlayerSpaceship()
         self.configurePhysics()
@@ -68,13 +72,6 @@ class GameScene: SKScene {
         view.isMultipleTouchEnabled = true
         // Track showing the scene
         AnalyticsManager.sharedInstance.trackScene("GameScene")
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Update the background
-        if self.isPaused == false {
-            self.background!.update(currentTime)
-        }
     }
     
     override var isPaused: Bool {
@@ -235,12 +232,21 @@ extension GameScene {
     }
     
     private func configureBackground() {
-        self.background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.GameBackgroundPhone)
-        self.background!.addLayer(
-            imageNames: ["Layer_0_0_iphone", "Layer_0_1_iphone", "Layer_0_2_iphone", "Layer_0_3_iphone", "Layer_0_4_iphone"],
-            speed: 0.5)
+        // Create background node
+        let background = SKSpriteNode(imageNamed: ImageName.GameBackgroundPhone.rawValue)
+        background.size = self.size
+        background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        background.zPosition = -1000
         
-        self.background!.configureInScene(self)
+        // Node with trees
+        let trees = SKSpriteNode(imageNamed: ImageName.BackgroundTrees.rawValue)
+        trees.anchorPoint = CGPoint(x: 0.0, y: 0.0)
+        trees.position = CGPoint(x: -self.size.width/2, y: -self.size.height/2)
+        background.addChild(trees)
+        
+        // Add background to the scene
+        self.addChild(background)
+        self.background = background
     }
     
     private func updatePlayerSpaceshipPositionWithJoystickTranslation(_ translation: CGPoint) {

@@ -20,6 +20,7 @@ enum ImageName: String {
     case LifeBall = "life_ball"
     case GameBackgroundPad = "game_background_ipad"
     case GameBackgroundPhone = "game_background_iphone"
+    case BackgroundTrees = "trees"
     case MenuBackgroundPad = "menu_background_ipad"
     case MenuBackgroundPhone = "menu_background_iphone"
     case MenuButtonRestartNormal = "menu_button_restart_normal"

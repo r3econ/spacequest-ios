@@ -28,7 +28,7 @@ class MainMenuScene: SKScene {
     fileprivate var resumeButton: Button?
     fileprivate var restartButton: Button?
     fileprivate var buttons: [Button]?
-    fileprivate var background: BackgroundNode?
+    fileprivate var background: SKSpriteNode?
     weak var mainMenuSceneDelegate: MainMenuSceneDelegate?
 
     // MARK: - Initialization
@@ -64,12 +64,14 @@ class MainMenuScene: SKScene {
 extension MainMenuScene{
 
     fileprivate func configureBackground() {
-        self.background = BackgroundNode(size: self.size, staticBackgroundImageName: ImageName.MenuBackgroundPhone)
-        self.background!.configureInScene(self)
+        self.background = SKSpriteNode(imageNamed: ImageName.MenuBackgroundPhone.rawValue)
+        self.background!.size = self.size
+        self.background!.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        self.background!.zPosition = -1000
+        self.addChild(self.background!)
     }
     
     fileprivate func configureButtons() {
-        
         // Info button.
         self.infoButton = Button(
             normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
