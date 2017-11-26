@@ -10,19 +10,25 @@
 Full source code of a working `iOS` game. Yet another take on a space shooter game. The game falls into [Shoot 'em up](https://en.wikipedia.org/wiki/Shoot_%27em_up) video games genre. It is written in Swift and uses `SpriteKit`- graphics rendering and animation infrastructure built into `iOS`. All vector graphics and image assets created in `Inkscape` and `GIMP`.
 
 <p align="center">
-<img src="https://i.imgur.com/w7PKnL1.png">
+<img src="https://thumbs.gfycat.com/PoshAlarmingFlyingsquirrel-size_restricted.gif">
 </p>
 
-### Some interesting problems covered in the project:
+### Interesting topics covered during the development:
 - Particle systems (e.g. jet engine burst in player's spaceship)
 - Collision detection
-- HUD, buttons + joystick
+- [HUD](https://en.wikipedia.org/wiki/HUD_(video_gaming)), buttons + joystick
 - Sound effects and background music
 
 # Technologies used
 - Swift (Xcode)
 - SpriteKit
 - Vector graphics (Inkscape, GIMP)
+
+
+<p align="center">
+<img src="https://i.imgur.com/w7PKnL1.png">
+</p>
+
 
 # What could be improved
 The app was created as a multi-weekend project long time ago. It is updated to run in the latest IDEs, but couple of things could be either added or improved. Not having time to do it is the problem.
