@@ -2,8 +2,16 @@
 [![License](https://img.shields.io/badge/license-GNU%20GPLv3-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
 
-# Spacequest
-Full source code of a working `iOS` game. Yet another take on a space shooter game. The game falls into [Shoot 'em up] (https://en.wikipedia.org/wiki/Shoot_%27em_up) video games genre. It is written in Swift and uses `SpriteKit`- graphics rendering and animation infrastructure built into `iOS`.
+<p align="center">
+<img src="https://i.imgur.com/IkQOLmG.png">
+</p>
+
+# Spacequest for iOS
+Full source code of a working `iOS` game. Yet another take on a space shooter game. The game falls into [Shoot 'em up](https://en.wikipedia.org/wiki/Shoot_%27em_up) video games genre. It is written in Swift and uses `SpriteKit`- graphics rendering and animation infrastructure built into `iOS`. All vector graphics and image assets created in `Inkscape` and `GIMP`.
+
+<p align="center">
+<img src="https://i.imgur.com/Fuc3d6U.png">
+</p>
 
 ### Some interesting problems covered in the project:
 - Particle systems (e.g. jet engine burst in player's spaceship)
@@ -12,8 +20,9 @@ Full source code of a working `iOS` game. Yet another take on a space shooter ga
 - Sound effects and background music
 
 # Technologies used
-- Swift
+- Swift (Xcode)
 - SpriteKit
+- Vector graphics (Inkscape, GIMP)
 
 # Acknowledgments
 
