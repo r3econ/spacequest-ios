@@ -67,7 +67,7 @@ extension MainMenuScene{
             normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
         
-        self.infoButton!.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
+        self.infoButton!.touchUpInsideEventHandler = self.infoButtonTouchUpInsideHandler()
 
         self.infoButton!.position = CGPoint(
             x: scene!.size.width - 40.0,
@@ -80,14 +80,14 @@ extension MainMenuScene{
             normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
         
-        self.resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
+        self.resumeButton!.touchUpInsideEventHandler = self.resumeButtonTouchUpInsideHandler()
         
         // Restart button.
         self.restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
         
-        self.restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
+        self.restartButton!.touchUpInsideEventHandler = self.restartButtonTouchUpInsideHandler()
         
         self.buttons = [self.resumeButton!, self.restartButton!]
         let horizontalPadding: CGFloat = 20.0

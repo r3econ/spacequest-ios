@@ -42,9 +42,13 @@ class GameOverScene: SKScene{
         AnalyticsManager.sharedInstance.trackScene("GameOverScene")
     }
     
-    // MARK: - Configuration
+}
 
-    func configureBackground() {
+// MARK: - Configuration
+
+extension GameOverScene {
+    
+    private func configureBackground() {
         self.background = SKSpriteNode(imageNamed: ImageName.MenuBackgroundPhone.rawValue)
         self.background!.size = self.size
         self.background!.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
@@ -52,19 +56,13 @@ class GameOverScene: SKScene{
         self.addChild(self.background!)
     }
     
-}
-
-// MARK: - Configuration
-
-extension GameOverScene {
-    
     private func configureButtons() {
         // Restart button
         self.restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
         
-        self.restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
+        self.restartButton!.touchUpInsideEventHandler = self.restartButtonTouchUpInsideHandler()
         
         self.buttons = [self.restartButton!]
         let horizontalPadding: CGFloat = 20.0
@@ -97,7 +95,7 @@ extension GameOverScene {
         }
     }
     
-    func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
+    private func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
         let handler = { () -> () in
             self.gameOverSceneDelegate?.gameOverSceneDidTapRestartButton(self)
             return

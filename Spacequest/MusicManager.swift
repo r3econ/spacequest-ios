@@ -47,18 +47,18 @@ extension MusicManager{
     
     func toggleBackgroundMusic() {
         if (self.backgroundMusicPlayer!.isPlaying) {
-            //self.backgroundMusicPlayer!.pause()
+            self.backgroundMusicPlayer!.pause()
         }
         else {
-            //self.backgroundMusicPlayer!.play()
+            self.backgroundMusicPlayer!.play()
         }
     }
     
     func playBackgroundMusic() {
-        //self.backgroundMusicPlayer!.play()
+        self.backgroundMusicPlayer!.play()
     }
     
     func pauseBackgroundMusic() {
-        //self.backgroundMusicPlayer!.pause()
+        self.backgroundMusicPlayer!.pause()
     }
 }

@@ -64,7 +64,7 @@ extension GameViewController {
         self.gameScene!.scaleMode = .aspectFill
         self.gameScene!.gameSceneDelegate = self
         
-        self.showScene(self.gameScene!, animated: animated)
+        self.show(self.gameScene!, animated: animated)
     }
     
     private func resumeGame(animated: Bool = false, completion:(()->())? = nil) {
@@ -106,7 +106,7 @@ extension GameViewController {
         self.gameScene!.isPaused = true
         
         // Show it
-        self.showScene(scene, animated: animated)
+        self.show(scene, animated: animated)
     }
     
     private func showGameOverScene(animated: Bool) {
@@ -119,10 +119,10 @@ extension GameViewController {
         self.gameScene!.isPaused = true
         
         // Show it
-        self.showScene(scene, animated: animated)
+        self.show(scene, animated: animated)
     }
 
-    private func showScene(_ scene: SKScene, animated: Bool) {
+    private func show(_ scene: SKScene, animated: Bool) {
         let skView = self.view as! SKView
         
         if animated {

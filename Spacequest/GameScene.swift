@@ -178,8 +178,8 @@ extension GameScene {
         self.joystick!.position = CGPoint(x: self.joystick!.size.width,
                                           y: self.joystick!.size.height)
         // Handler that gets called on joystick move
-        self.joystick!.updateHandler = { (translation: CGPoint) -> () in
-            self.updatePlayerSpaceshipPositionWithJoystickTranslation(translation)
+        self.joystick!.updateHandler = { (joystickTranslation: CGPoint) -> () in
+            self.updatePlayerSpaceshipPosition(with: joystickTranslation)
         }
         // Add it to the scene
         self.addChild(self.joystick!)
@@ -248,10 +248,10 @@ extension GameScene {
         self.background = background
     }
     
-    private func updatePlayerSpaceshipPositionWithJoystickTranslation(_ translation: CGPoint) {
+    private func updatePlayerSpaceshipPosition(with joystickTranslation: CGPoint) {
         let translationConstant: CGFloat = 10.0
-        self.playerSpaceship!.position.x += translationConstant * translation.x
-        self.playerSpaceship!.position.y += translationConstant * translation.y
+        self.playerSpaceship!.position.x += translationConstant * joystickTranslation.x
+        self.playerSpaceship!.position.y += translationConstant * joystickTranslation.y
     }
     
     private func configureHUD() {
@@ -271,7 +271,7 @@ extension GameScene : SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         // Get collision type
-        let collisionType: CollisionType? = self.collisionTypeWithContact(contact)
+        let collisionType: CollisionType? = self.collisionType(for: contact)
         guard collisionType != nil else {
             return
         }
@@ -313,7 +313,7 @@ extension GameScene : SKPhysicsContactDelegate {
         }
     }
     
-    private func collisionTypeWithContact(_ contact: SKPhysicsContact!) -> (CollisionType?) {
+    private func collisionType(for contact: SKPhysicsContact!) -> (CollisionType?) {
         guard
             let categoryBitmaskBodyA = CategoryBitmask(rawValue: contact.bodyA.categoryBitMask),
             let categoryBitmaskBodyB = CategoryBitmask(rawValue: contact.bodyB.categoryBitMask) else {
