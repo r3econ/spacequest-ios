@@ -27,6 +27,8 @@ Full source code of a working `iOS` game. Yet another take on a space shooter ga
 # What could be improved
 The app was created as a multi-weekend project long time ago. It is updated to run in the latest IDEs, but couple of things could be either added or improved. Not having time to do it is the problem.
 - Adding tests
+- iPad support and better support for iPhone X
+- Internationalization
 - Moving images and colors to asset catalogs
 - Adding more abstraction for constants (now constants are spread spread among multiple source files)
 - Improving enemy creation logic to make enemies spawn faster
