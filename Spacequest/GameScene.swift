@@ -47,25 +47,24 @@ class GameScene: SKScene {
     /// Timer used for spawning enemy spaceships
     private var spawnEnemyTimer: Timer?
     
-    // MARK: - Initialization
+    // MARK: - Scene lifecycle
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(size: CGSize) {
-        super.init(size: size)
+    override func sceneDidLoad() {
+        super.sceneDidLoad()
         
         // Set scale mode
         self.scaleMode = SKSceneScaleMode.resizeFill;
-
+        
         // Configure scene contents
         self.configureBackground()
         self.configurePlayerSpaceship()
         self.configurePhysics()
         self.configureHUD()
+        
+        // Start the fun
+        self.startSpawningEnemySpaceships()
     }
-    
+
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         // Enable multitouch

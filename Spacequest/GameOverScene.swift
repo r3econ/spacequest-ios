@@ -21,24 +21,29 @@ protocol GameOverSceneDelegate: class {
 
 class GameOverScene: SKScene{
 
-    fileprivate var restartButton: Button?
-    fileprivate var buttons: [Button]?
-    fileprivate var background: SKSpriteNode?
+    private var restartButton: Button?
+    private var buttons: [Button]?
+    private var background: SKSpriteNode?
     weak var gameOverSceneDelegate: GameOverSceneDelegate?
 
-    // MARK: - Initialization
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+    // MARK: - Scene lifecycle
     
-    override init(size: CGSize) {
-        super.init(size: size)
+    override func sceneDidLoad() {
+        super.sceneDidLoad()
         
         self.configureButtons()
         self.configureBackground()
     }
     
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
+        
+        // Track event
+        AnalyticsManager.sharedInstance.trackScene("GameOverScene")
+    }
+    
+    // MARK: - Configuration
+
     func configureBackground() {
         self.background = SKSpriteNode(imageNamed: ImageName.MenuBackgroundPhone.rawValue)
         self.background!.size = self.size
@@ -47,20 +52,13 @@ class GameOverScene: SKScene{
         self.addChild(self.background!)
     }
     
-    override func didMove(to view: SKView) {
-        super.didMove(to: view)
-
-        // Track event
-        AnalyticsManager.sharedInstance.trackScene("GameOverScene")
-    }
-    
 }
 
 // MARK: - Configuration
 
 extension GameOverScene {
     
-    fileprivate func configureButtons() {
+    private func configureButtons() {
         // Restart button
         self.restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,

@@ -19,7 +19,7 @@ import AVFoundation
 class MusicManager: NSObject {
     
     static let shared = MusicManager()
-    fileprivate var backgroundMusicPlayer: AVAudioPlayer!
+    private var backgroundMusicPlayer: AVAudioPlayer!
     
     override init() {
         super.init()
@@ -32,7 +32,7 @@ class MusicManager: NSObject {
 
 extension MusicManager{
 
-    fileprivate func configureBackgroundMusicPlayer() {
+    private func configureBackgroundMusicPlayer() {
         let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "background", ofType: "mp3")!)
         do {
             self.backgroundMusicPlayer = try AVAudioPlayer(contentsOf: fileURL)
