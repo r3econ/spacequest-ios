@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/r3econ/spacequest-ios.svg?branch=master)](https://travis-ci.org/r3econ/spacequest-ios) 
+[![CodeFactor](https://www.codefactor.io/repository/github/r3econ/spacequest-ios/badge)](https://www.codefactor.io/repository/github/r3econ/spacequest-ios)
 [![License](https://img.shields.io/badge/license-GNU%20GPLv3-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
+
 
 <p align="center">
 <img src="https://i.imgur.com/IkQOLmG.png">
