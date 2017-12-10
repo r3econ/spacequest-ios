@@ -2,7 +2,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/r3econ/spacequest-ios/badge)](https://www.codefactor.io/repository/github/r3econ/spacequest-ios)
 [![License](https://img.shields.io/badge/license-GNU%20GPLv3-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
-
+[![saythanks.io](https://img.shields.io/badge/saythanks.io-now-1EAEDB.svg)](https://saythanks.io/to/r3econ)
 
 <p align="center">
 <img src="https://i.imgur.com/IkQOLmG.png">
