@@ -99,7 +99,6 @@ extension GameViewController {
     private func showMainMenuScene(animated: Bool) {
         // Create main menu scene
         let scene = MainMenuScene(size: view.frame.size)
-        scene.scaleMode = .aspectFill
         scene.mainMenuSceneDelegate = self
         
         // Pause the game
@@ -112,7 +111,6 @@ extension GameViewController {
     private func showGameOverScene(animated: Bool) {
         // Create game over scene
         let scene = GameOverScene(size: view.frame.size)
-        scene.scaleMode = .aspectFill
         scene.gameOverSceneDelegate = self
         
         // Pause the game
@@ -122,9 +120,13 @@ extension GameViewController {
         show(scene, animated: animated)
     }
 
-    private func show(_ scene: SKScene, animated: Bool) {
-        let skView = view as! SKView
-        
+    private func show(_ scene: SKScene, scaleMode: SKSceneScaleMode = .aspectFill, animated: Bool = true) {
+        guard let skView = view as? SKView else {
+            preconditionFailure()
+        }
+
+        scene.scaleMode = .aspectFill
+
         if animated {
             skView.presentScene(scene, transition: SKTransition.crossFade(withDuration: Constants.sceneTransistionDuration))
         } else {

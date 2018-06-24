@@ -349,9 +349,9 @@ extension GameScene {
         // Update score
         increaseScore(by: ScoreValue.playerMissileHitEnemySpaceship.rawValue)
         // Update life points
-        decreasePlayerSpaceshipLifePoints(by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
-        decreaseLifePoints(of: enemySpaceship,
-                           by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
+        modifyPlayerSpaceshipLifePoints(by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
+        modifyLifePoints(of: enemySpaceship,
+                         by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
     }
     
     private func handleCollision(between playerMissile: Missile, and enemySpaceship: EnemySpaceship) {
@@ -360,8 +360,8 @@ extension GameScene {
         // Update score
         increaseScore(by: ScoreValue.playerMissileHitEnemySpaceship.rawValue)
         // Update life points
-        decreaseLifePoints(of: enemySpaceship,
-                           by: LifePointsValue.playerMissileHitEnemySpaceship.rawValue)
+        modifyLifePoints(of: enemySpaceship,
+                         by: LifePointsValue.playerMissileHitEnemySpaceship.rawValue)
     }
     
     private func handleCollision(between playerSpaceship: PlayerSpaceship, and enemyMissile: Missile) {
@@ -384,42 +384,30 @@ extension GameScene {
 
 extension GameScene {
     
-    private func increasePlayerSpaceshipLifePoints(by value: Int) {
+    private func modifyPlayerSpaceshipLifePoints(by value: Int) {
         playerSpaceship.lifePoints += value
         lifeIndicator.setLifePoints(playerSpaceship.lifePoints, animated: true)
         
-        // Add a green color blend for a short moment to indicate the increase of health
-        let colorizeAction = SKAction.colorize(with: UIColor.green,
-                                               colorBlendFactor: 0.7,
-                                               duration: 0.2)
-        let uncolorizeAction = SKAction.colorize(withColorBlendFactor: 0.0, duration: 0.2)
-        
-        playerSpaceship.run(SKAction.sequence([colorizeAction, uncolorizeAction]))
+        // Add a color blend for a short moment to indicate the change of health
+        let color: UIColor = value > 0 ? .green : .red
+        playerSpaceship.run(blendColorAction(with: color))
     }
     
-    private func decreasePlayerSpaceshipLifePoints(by value: Int) {
-        playerSpaceship.lifePoints += value
-        lifeIndicator.setLifePoints(playerSpaceship.lifePoints, animated: true)
-        
-        // Add a red color blend for a short moment to indicate the decrease of health
-        let colorizeAction = SKAction.colorize(with: UIColor.red,
-                                               colorBlendFactor: 0.7,
-                                               duration: 0.2)
-        let uncolorizeAction = SKAction.colorize(withColorBlendFactor: 0.0,
-                                                 duration: 0.2)
-        playerSpaceship.run(SKAction.sequence([colorizeAction, uncolorizeAction]))
-    }
-    
-    private func decreaseLifePoints(of enemySpaceship: EnemySpaceship, by value: Int) {
+    private func modifyLifePoints(of enemySpaceship: EnemySpaceship, by value: Int) {
         enemySpaceship.lifePoints += value
         
-        // Add a red color blend for a short moment to indicate the decrease of health
+        // Add a color blend for a short moment to indicate the change of health
+        let color: UIColor = value > 0 ? .green : .red
+        enemySpaceship.run(blendColorAction(with: color))
+    }
+    
+    private func blendColorAction(with color: UIColor) -> SKAction {
         let colorizeAction = SKAction.colorize(with: UIColor.red,
                                                colorBlendFactor: 0.7,
                                                duration: 0.2)
         let uncolorizeAction = SKAction.colorize(withColorBlendFactor: 0.0,
                                                  duration: 0.2)
-        enemySpaceship.run(SKAction.sequence([colorizeAction, uncolorizeAction]))
+        return SKAction.sequence([colorizeAction, uncolorizeAction])
     }
     
     private func enemyDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
