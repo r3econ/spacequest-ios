@@ -15,9 +15,9 @@
 
 import SpriteKit
 
-typealias TouchUpInsideEventHandler = () -> ()
-typealias TouchDownEventHandler = () -> ()
-typealias ContinousTouchDownEventHandler = () -> ()
+typealias TouchUpInsideEventHandler = () -> Void
+typealias TouchDownEventHandler = () -> Void
+typealias ContinousTouchDownEventHandler = () -> Void
 
 class Button: SKSpriteNode {
     

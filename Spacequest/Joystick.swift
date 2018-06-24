@@ -15,11 +15,11 @@
 
 import SpriteKit
 
-typealias JoystickTranslationUpdateHandler = (CGPoint) -> ()
-let kDefaultJoystickUpdateTimeInterval: TimeInterval = 1/40.0
+typealias JoystickTranslationUpdateHandler = (CGPoint) -> Void
 
 class Joystick: SKNode {
     
+    let joystickUpdateTimeInterval: TimeInterval! = 1/40.0
     var updateHandler: JoystickTranslationUpdateHandler?
     var joystickRadius: CGFloat = 0.0
     var stickNode: SKSpriteNode?
@@ -34,7 +34,11 @@ class Joystick: SKNode {
         super.init(coder: aDecoder)
     }
     
-    init(maximumRadius: CGFloat, stickImageNamed: String, baseImageNamed: String?) {
+    init(maximumRadius: CGFloat,
+         stickImageNamed: String,
+         baseImageNamed: String?,
+         joystickUpdateTimeInterval: TimeInterval = 1/40.0) {
+        
         currentJoystickTranslation = CGPoint.zero
         isTouchedDown = false
         joystickRadius = maximumRadius
@@ -49,7 +53,7 @@ class Joystick: SKNode {
         // Create a timer that will call method that will notify about
         // Joystick movements.
         updateTimer = Timer.scheduledTimer(
-            timeInterval: kDefaultJoystickUpdateTimeInterval,
+            timeInterval: joystickUpdateTimeInterval,
             target: self,
             selector: #selector(Joystick.handleJoystickTranslationUpdate),
             userInfo: nil,

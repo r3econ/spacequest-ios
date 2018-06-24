@@ -37,7 +37,7 @@ class GameScene: SKScene {
     
     // Nodes
     private var background: SKSpriteNode?
-    private var playerSpaceship: PlayerSpaceship?
+    private var playerSpaceship = PlayerSpaceship()
     private var joystick: Joystick?
     private var fireButton: Button?
     private var menuButton: Button?
@@ -131,7 +131,7 @@ extension GameScene {
         // Set position of the enemy to be slightly off-screen along the right edge,
         // and along a random position along the Y axis
         enemySpaceship.position = CGPoint(x: frame.size.width + enemySpaceship.size.width/2, y: CGFloat(randomY))
-        enemySpaceship.zPosition = playerSpaceship!.zPosition
+        enemySpaceship.zPosition = playerSpaceship.zPosition
         
         // Add it to the scene
         addChild(enemySpaceship)
@@ -149,7 +149,7 @@ extension GameScene {
     
     private func configurePhysics() {
         // Disable gravity
-        physicsWorld.gravity = CGVector(dx: 0,dy: 0)
+        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
         
         // Add boundaries
@@ -159,15 +159,14 @@ extension GameScene {
     }
     
     private func configurePlayerSpaceship() {
-        playerSpaceship = PlayerSpaceship()
         // Position
-        playerSpaceship!.position = CGPoint(x: playerSpaceship!.size.width/2 + 30.0,
-                                            y: frame.height/2 + 40.0)
+        playerSpaceship.position = CGPoint(x: playerSpaceship.size.width/2 + 30.0,
+                                           y: frame.height/2 + 40.0)
         // Life points
-        playerSpaceship!.lifePoints = 100
-        playerSpaceship!.didRunOutOfLifePointsEventHandler = playerDidRunOutOfLifePointsEventHandler()
+        playerSpaceship.lifePoints = 100
+        playerSpaceship.didRunOutOfLifePointsEventHandler = playerDidRunOutOfLifePointsEventHandler()
         // Add it to the scene
-        addChild(playerSpaceship!)
+        addChild(playerSpaceship)
     }
     
     private func configureJoystick() {
@@ -178,8 +177,8 @@ extension GameScene {
         joystick!.position = CGPoint(x: joystick!.size.width,
                                      y: joystick!.size.height)
         // Handler that gets called on joystick move
-        joystick!.updateHandler = { (joystickTranslation: CGPoint) -> () in
-            self.updatePlayerSpaceshipPosition(with: joystickTranslation)
+        joystick!.updateHandler = { [weak self] joystickTranslation in
+            self?.updatePlayerSpaceshipPosition(with: joystickTranslation)
         }
         // Add it to the scene
         addChild(joystick!)
@@ -191,9 +190,12 @@ extension GameScene {
         fireButton!.position = CGPoint(x: frame.width - fireButton!.frame.width - Constants.hudControlMargin,
                                        y: fireButton!.frame.height/2 + Constants.fireButtonBottomMargin)
         // Touch handler
-        fireButton!.touchUpInsideEventHandler = { () -> () in
-            self.playerSpaceship!.launchMissile()
-            return
+        fireButton!.touchUpInsideEventHandler = { [weak self] in
+            self?.playerSpaceship.launchMissile()
+        }
+        
+        fireButton!.touchUpInsideEventHandler = { [weak self] in
+            self?.playerSpaceship.launchMissile()
         }
         // Add it to the scene
         addChild(fireButton!)
@@ -205,9 +207,10 @@ extension GameScene {
         menuButton!.position = CGPoint(x: frame.width - menuButton!.frame.width/2 - 2.0,
                                        y: frame.height - menuButton!.frame.height/2)
         // Touch handler
-        menuButton!.touchUpInsideEventHandler = { () -> () in
-            self.gameSceneDelegate?.didTapMainMenuButton(in: self)
-            return
+        menuButton!.touchUpInsideEventHandler = { [weak self] in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.gameSceneDelegate?.didTapMainMenuButton(in: strongSelf)
         }
         // Add it to the scene
         addChild(menuButton!)
@@ -218,14 +221,15 @@ extension GameScene {
         lifeIndicator.position = CGPoint(x: joystick!.frame.maxX + 2.5 * joystick!.joystickRadius,
                                          y: joystick!.frame.minY - joystick!.joystickRadius)
         // Life points
-        lifeIndicator.setLifePoints(playerSpaceship!.lifePoints, animated: false)
+        lifeIndicator.setLifePoints(playerSpaceship.lifePoints, animated: false)
         // Add it to the scene
         addChild(lifeIndicator)
     }
     
     private func configureScoresNode() {
         // Position
-        scoresNode.position = CGPoint(x: Constants.hudControlMargin/2, y: frame.height - Constants.scoresNodeBottomMargin)
+        scoresNode.position = CGPoint(x: Constants.hudControlMargin/2,
+                                      y: frame.height - Constants.scoresNodeBottomMargin)
         // Add it to the scene
         addChild(scoresNode)
     }
@@ -250,8 +254,8 @@ extension GameScene {
     
     private func updatePlayerSpaceshipPosition(with joystickTranslation: CGPoint) {
         let translationConstant: CGFloat = 10.0
-        playerSpaceship!.position.x += translationConstant * joystickTranslation.x
-        playerSpaceship!.position.y += translationConstant * joystickTranslation.y
+        playerSpaceship.position.x += translationConstant * joystickTranslation.x
+        playerSpaceship.position.y += translationConstant * joystickTranslation.y
     }
     
     private func configureHUD() {
@@ -271,12 +275,11 @@ extension GameScene : SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         // Get collision type
-        let collisionType: CollisionType? = self.collisionType(for: contact)
-        guard collisionType != nil else {
+        guard let collisionType = self.collisionType(for: contact) else {
             return
         }
         
-        switch collisionType! {
+        switch collisionType {
         case .playerMissileEnemySpaceship:
             // Get the enemy node
             var enemy: EnemySpaceship
@@ -300,7 +303,7 @@ extension GameScene : SKPhysicsContactDelegate {
                 contact.bodyB.node as! EnemySpaceship
             
             // Handle collision
-            handleCollision(between: playerSpaceship!, and: enemy)
+            handleCollision(between: playerSpaceship, and: enemy)
             
         case .enemyMissilePlayerSpaceship:
             // Get the enemy node
@@ -309,11 +312,11 @@ extension GameScene : SKPhysicsContactDelegate {
                 contact.bodyB.node as! Missile
             
             // Handle collision
-            handleCollision(between: playerSpaceship!, and: missile)
+            handleCollision(between: playerSpaceship, and: missile)
         }
     }
     
-    private func collisionType(for contact: SKPhysicsContact!) -> (CollisionType?) {
+    private func collisionType(for contact: SKPhysicsContact!) -> CollisionType? {
         guard
             let categoryBitmaskBodyA = CategoryBitmask(rawValue: contact.bodyA.categoryBitMask),
             let categoryBitmaskBodyB = CategoryBitmask(rawValue: contact.bodyB.categoryBitMask) else {
@@ -346,7 +349,8 @@ extension GameScene {
         increaseScore(by: ScoreValue.playerMissileHitEnemySpaceship.rawValue)
         // Update life points
         decreasePlayerSpaceshipLifePoints(by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
-        decreaseLifePoints(of: enemySpaceship, by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
+        decreaseLifePoints(of: enemySpaceship,
+                           by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
     }
     
     private func handleCollision(between playerMissile: Missile, and enemySpaceship: EnemySpaceship) {
@@ -355,7 +359,8 @@ extension GameScene {
         // Update score
         increaseScore(by: ScoreValue.playerMissileHitEnemySpaceship.rawValue)
         // Update life points
-        decreaseLifePoints(of: enemySpaceship, by: LifePointsValue.playerMissileHitEnemySpaceship.rawValue)
+        decreaseLifePoints(of: enemySpaceship,
+                           by: LifePointsValue.playerMissileHitEnemySpaceship.rawValue)
     }
     
     private func handleCollision(between playerSpaceship: PlayerSpaceship, and enemyMissile: Missile) {
@@ -379,8 +384,8 @@ extension GameScene {
 extension GameScene {
     
     private func increasePlayerSpaceshipLifePoints(by value: Int) {
-        playerSpaceship!.lifePoints += value
-        lifeIndicator.setLifePoints(playerSpaceship!.lifePoints, animated: true)
+        playerSpaceship.lifePoints += value
+        lifeIndicator.setLifePoints(playerSpaceship.lifePoints, animated: true)
         
         // Add a green color blend for a short moment to indicate the increase of health
         let colorizeAction = SKAction.colorize(with: UIColor.green,
@@ -388,12 +393,12 @@ extension GameScene {
                                                duration: 0.2)
         let uncolorizeAction = SKAction.colorize(withColorBlendFactor: 0.0, duration: 0.2)
         
-        playerSpaceship!.run(SKAction.sequence([colorizeAction, uncolorizeAction]))
+        playerSpaceship.run(SKAction.sequence([colorizeAction, uncolorizeAction]))
     }
     
     private func decreasePlayerSpaceshipLifePoints(by value: Int) {
-        playerSpaceship!.lifePoints += value
-        lifeIndicator.setLifePoints(playerSpaceship!.lifePoints, animated: true)
+        playerSpaceship.lifePoints += value
+        lifeIndicator.setLifePoints(playerSpaceship.lifePoints, animated: true)
         
         // Add a red color blend for a short moment to indicate the decrease of health
         let colorizeAction = SKAction.colorize(with: UIColor.red,
@@ -401,7 +406,7 @@ extension GameScene {
                                                duration: 0.2)
         let uncolorizeAction = SKAction.colorize(withColorBlendFactor: 0.0,
                                                  duration: 0.2)
-        playerSpaceship!.run(SKAction.sequence([colorizeAction, uncolorizeAction]))
+        playerSpaceship.run(SKAction.sequence([colorizeAction, uncolorizeAction]))
     }
     
     private func decreaseLifePoints(of enemySpaceship: EnemySpaceship, by value: Int) {
@@ -417,16 +422,19 @@ extension GameScene {
     }
     
     private func enemyDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
-        return { (object: AnyObject) -> () in
+        return { [weak self] object in
             let enemySpaceship = object as! EnemySpaceship
-            self.destroySpaceship(enemySpaceship)
+            self?.destroySpaceship(enemySpaceship)
         }
     }
     
     private func playerDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
-        return { (object: AnyObject) -> () in
-            self.destroySpaceship(self.playerSpaceship)
-            self.gameSceneDelegate?.playerDidLose(withScore: self.scoresNode.value, in: self)
+        return { [weak self] _ in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.destroySpaceship(strongSelf.playerSpaceship)
+            strongSelf.gameSceneDelegate?.playerDidLose(withScore: strongSelf.scoresNode.value,
+                                                        in: strongSelf)
         }
     }
     

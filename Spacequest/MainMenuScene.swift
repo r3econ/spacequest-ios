@@ -120,23 +120,26 @@ extension MainMenuScene{
     }
     
     private func resumeButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
-        return { () -> () in
-            self.mainMenuSceneDelegate?.mainMenuSceneDidTapResumeButton(self)
-            return
+        return { [weak self] in
+            guard let strongSelf = self else { return }
+
+            strongSelf.mainMenuSceneDelegate?.mainMenuSceneDidTapResumeButton(strongSelf)
         }
     }
     
     private func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
-        return { () -> () in
-            self.mainMenuSceneDelegate?.mainMenuSceneDidTapRestartButton(self)
-            return
+        return { [weak self] in
+            guard let strongSelf = self else { return }
+
+            strongSelf.mainMenuSceneDelegate?.mainMenuSceneDidTapRestartButton(strongSelf)
         }
     }
     
     private func infoButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
-        return { () -> () in
-            self.mainMenuSceneDelegate?.mainMenuSceneDidTapInfoButton(self)
-            return
+        return { [weak self] in
+            guard let strongSelf = self else { return }
+
+            strongSelf.mainMenuSceneDelegate?.mainMenuSceneDidTapInfoButton(strongSelf)
         }
     }
     

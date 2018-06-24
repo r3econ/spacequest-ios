@@ -96,9 +96,10 @@ extension GameOverScene {
     }
     
     private func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
-        let handler = { () -> () in
-            self.gameOverSceneDelegate?.gameOverSceneDidTapRestartButton(self)
-            return
+        let handler = { [weak self] in
+            guard let strongSelf = self else { return }
+
+            strongSelf.gameOverSceneDelegate?.gameOverSceneDidTapRestartButton(strongSelf)
         }
         
         return handler
