@@ -19,7 +19,7 @@ class ScoresNode: SKLabelNode {
     
     var value: Int = 0 {
         didSet {
-            self.update()
+            update()
         }
     }
     
@@ -32,18 +32,18 @@ class ScoresNode: SKLabelNode {
     override init() {
         super.init()
         
-        self.fontSize = 18.0
-        self.fontColor = UIColor(white: 1, alpha: 0.7)
-        self.fontName = FontName.Wawati.rawValue
-        self.horizontalAlignmentMode = .left;
+        fontSize = 18.0
+        fontColor = UIColor(white: 1, alpha: 0.7)
+        fontName = FontName.Wawati.rawValue
+        horizontalAlignmentMode = .left;
         
-        self.update()
+        update()
     }
     
     // MARK: - Configuration
     
     func update() {
-        self.text = "Score: \(value)"
+        text = "Score: \(value)"
     }
     
 }

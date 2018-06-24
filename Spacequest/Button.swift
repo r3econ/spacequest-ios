@@ -41,48 +41,54 @@ class Button: SKSpriteNode {
         self.textureNormal = textureNormal
         self.textureSelected = textureSelected
         self.textureDisabled = textureDisabled
-        self.isEnabled = true
-        self.isSelected = false
+        isEnabled = true
+        isSelected = false
         
         super.init(texture: textureNormal,
             color: UIColor.brown,
             size: textureNormal.size())
         
-        self.isUserInteractionEnabled = true
+        isUserInteractionEnabled = true
     }
     
     convenience init(textureNormal: SKTexture, textureSelected: SKTexture!) {
-        self.init(textureNormal:textureNormal, textureSelected:textureSelected, textureDisabled:nil)
+        self.init(textureNormal:textureNormal,
+                  textureSelected:textureSelected,
+                  textureDisabled:nil)
     }
     
     convenience init(normalImageNamed: String, selectedImageNamed: String!, disabledImageNamed: String!) {
         let textureNormal = SKTexture(imageNamed: normalImageNamed)
         let textureSelected = SKTexture(imageNamed: selectedImageNamed)
         
-        self.init(textureNormal:textureNormal, textureSelected:textureSelected, textureDisabled:nil)
+        self.init(textureNormal:textureNormal,
+                  textureSelected:textureSelected,
+                  textureDisabled:nil)
     }
     
     convenience init(normalImageNamed: String, selectedImageNamed: String!) {
-        self.init(normalImageNamed: normalImageNamed, selectedImageNamed: selectedImageNamed, disabledImageNamed: nil)
+        self.init(normalImageNamed: normalImageNamed,
+                  selectedImageNamed: selectedImageNamed,
+                  disabledImageNamed: nil)
     }
     
     // MARK: - Properties
 
     var title: String? {
         set {
-            if self.titleLabelNode == nil {
-                self.titleLabelNode = SKLabelNode()
-                self.titleLabelNode!.horizontalAlignmentMode = .center
-                self.titleLabelNode!.verticalAlignmentMode = .center
+            if titleLabelNode == nil {
+                titleLabelNode = SKLabelNode()
+                titleLabelNode!.horizontalAlignmentMode = .center
+                titleLabelNode!.verticalAlignmentMode = .center
                 
-                self.addChild(self.titleLabelNode!)
+                addChild(titleLabelNode!)
             }
             
-            self.titleLabelNode!.text = newValue!
+            titleLabelNode!.text = newValue!
         }
         get {
-            if self.titleLabelNode != nil {
-                return self.titleLabelNode!.text
+            if titleLabelNode != nil {
+                return titleLabelNode!.text
             }
             
             return nil
@@ -91,20 +97,20 @@ class Button: SKSpriteNode {
     
     var font: UIFont? {
         set {
-            if self.titleLabelNode == nil {
-                self.titleLabelNode = SKLabelNode()
-                self.titleLabelNode!.horizontalAlignmentMode = .center
-                self.titleLabelNode!.verticalAlignmentMode = .center
+            if titleLabelNode == nil {
+                titleLabelNode = SKLabelNode()
+                titleLabelNode!.horizontalAlignmentMode = .center
+                titleLabelNode!.verticalAlignmentMode = .center
                 
-                self.addChild(titleLabelNode!)
+                addChild(titleLabelNode!)
             }
             
-            self.titleLabelNode!.fontName = newValue!.fontName
-            self.titleLabelNode!.fontSize = newValue!.pointSize
+            titleLabelNode!.fontName = newValue!.fontName
+            titleLabelNode!.fontSize = newValue!.pointSize
         }
         get {
-            if self.titleLabelNode != nil {
-                return UIFont(name: self.titleLabelNode!.fontName!, size: self.titleLabelNode!.fontSize)
+            if titleLabelNode != nil {
+                return UIFont(name: titleLabelNode!.fontName!, size: titleLabelNode!.fontSize)
             }
             
             return nil
@@ -113,21 +119,21 @@ class Button: SKSpriteNode {
     
     var selected: Bool {
         set {
-            self.isSelected = newValue
-            self.texture = newValue ? self.textureSelected : self.textureNormal
+            isSelected = newValue
+            texture = newValue ? textureSelected : textureNormal
         }
         get {
-            return self.isSelected
+            return isSelected
         }
     }
     
     var enabled: Bool {
         set {
-            self.isEnabled = newValue
-            self.texture = newValue ? self.textureNormal : self.textureDisabled
+            isEnabled = newValue
+            texture = newValue ? textureNormal : textureDisabled
         }
         get {
-            return self.isEnabled
+            return isEnabled
         }
     }
     
@@ -138,37 +144,37 @@ class Button: SKSpriteNode {
 extension Button {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if self.isEnabled {
-            if self.touchDownEventHandler != nil {
-                self.touchDownEventHandler!()
+        if isEnabled {
+            if touchDownEventHandler != nil {
+                touchDownEventHandler!()
             }
             
-            self.selected = true
+            selected = true
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if self.isEnabled {
+        if isEnabled {
             let touch : AnyObject! = touches.first
             let location = touch.location(in: self)
             
-            self.selected = frame.contains(location)
+            selected = frame.contains(location)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if self.isEnabled {
-            if self.touchUpInsideEventHandler != nil {
-                self.touchUpInsideEventHandler!()
+        if isEnabled {
+            if touchUpInsideEventHandler != nil {
+                touchUpInsideEventHandler!()
             }
             
-            self.selected = false
+            selected = false
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if self.isEnabled {
-            self.selected = false
+        if isEnabled {
+            selected = false
         }
     }
     

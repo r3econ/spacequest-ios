@@ -20,19 +20,19 @@ protocol GameOverSceneDelegate: class {
 }
 
 class GameOverScene: SKScene{
-
+    
     private var restartButton: Button?
     private var buttons: [Button]?
     private var background: SKSpriteNode?
     weak var gameOverSceneDelegate: GameOverSceneDelegate?
-
+    
     // MARK: - Scene lifecycle
     
     override func sceneDidLoad() {
         super.sceneDidLoad()
         
-        self.configureButtons()
-        self.configureBackground()
+        configureButtons()
+        configureBackground()
     }
     
     override func didMove(to view: SKView) {
@@ -49,42 +49,42 @@ class GameOverScene: SKScene{
 extension GameOverScene {
     
     private func configureBackground() {
-        self.background = SKSpriteNode(imageNamed: ImageName.MenuBackgroundPhone.rawValue)
-        self.background!.size = self.size
-        self.background!.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
-        self.background!.zPosition = -1000
-        self.addChild(self.background!)
+        background = SKSpriteNode(imageNamed: ImageName.MenuBackgroundPhone.rawValue)
+        background!.size = size
+        background!.position = CGPoint(x: size.width/2, y: size.height/2)
+        background!.zPosition = -1000
+        addChild(background!)
     }
     
     private func configureButtons() {
         // Restart button
-        self.restartButton = Button(
+        restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
         
-        self.restartButton!.touchUpInsideEventHandler = self.restartButtonTouchUpInsideHandler()
+        restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
         
-        self.buttons = [self.restartButton!]
+        buttons = [restartButton!]
         let horizontalPadding: CGFloat = 20.0
         var totalButtonsWidth: CGFloat = 0.0
         
         // Calculate total width of the buttons area.
-        for (index, button) in (self.buttons!).enumerated() {
+        for (index, button) in (buttons!).enumerated() {
             
             totalButtonsWidth += button.size.width
-            totalButtonsWidth += index != self.buttons!.count - 1 ? horizontalPadding : 0.0
+            totalButtonsWidth += index != buttons!.count - 1 ? horizontalPadding : 0.0
         }
         
         // Calculate origin of first button.
-        var buttonOriginX = self.frame.width / 2.0 + totalButtonsWidth / 2.0
+        var buttonOriginX = frame.width / 2.0 + totalButtonsWidth / 2.0
         
         // Place buttons in the scene.
-        for (_, button) in (self.buttons!).enumerated() {
+        for (_, button) in (buttons!).enumerated() {
             button.position = CGPoint(
                 x: buttonOriginX - button.size.width/2,
                 y: button.size.height * 1.1)
             
-            self.addChild(button)
+            addChild(button)
             
             buttonOriginX -= button.size.width + horizontalPadding
             

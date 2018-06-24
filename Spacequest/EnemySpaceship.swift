@@ -34,25 +34,25 @@ class EnemySpaceship: Spaceship {
         super.init(texture: SKTexture(imageNamed: ImageName.EnemySpaceship.rawValue), color: UIColor.brown, size: size)
         
         self.lifePoints = lifePoints
-        self.configureCollisions()
+        configureCollisions()
     }
     
     deinit {
-        self.missileLaunchTimer?.invalidate()
+        missileLaunchTimer?.invalidate()
     }
     
     // MARK: - Configuration
 
     fileprivate func configureCollisions() {
-        self.physicsBody = SKPhysicsBody(rectangleOf: size)
-        self.physicsBody!.usesPreciseCollisionDetection = true
-        self.physicsBody!.categoryBitMask = CategoryBitmask.enemySpaceship.rawValue
-        self.physicsBody!.collisionBitMask =
+        physicsBody = SKPhysicsBody(rectangleOf: size)
+        physicsBody!.usesPreciseCollisionDetection = true
+        physicsBody!.categoryBitMask = CategoryBitmask.enemySpaceship.rawValue
+        physicsBody!.collisionBitMask =
             CategoryBitmask.enemySpaceship.rawValue |
             CategoryBitmask.playerMissile.rawValue |
             CategoryBitmask.playerSpaceship.rawValue
         
-        self.physicsBody!.contactTestBitMask =
+        physicsBody!.contactTestBitMask =
             CategoryBitmask.playerSpaceship.rawValue |
             CategoryBitmask.playerMissile.rawValue
     }
@@ -60,33 +60,33 @@ class EnemySpaceship: Spaceship {
     // MARK: - Special actions
     
     func scheduleRandomMissileLaunch() {
-        self.missileLaunchTimer?.invalidate()
+        missileLaunchTimer?.invalidate()
         
         // Schedule missile launch with random delay
         let backoffTime = TimeInterval((arc4random() % 3) + 1)
-        self.missileLaunchTimer = Timer(timeInterval: backoffTime, target: self, selector: #selector(EnemySpaceship.launchMissile), userInfo: nil, repeats: false)
+        missileLaunchTimer = Timer(timeInterval: backoffTime, target: self, selector: #selector(EnemySpaceship.launchMissile), userInfo: nil, repeats: false)
     }
     
     @objc func launchMissile() {
         // Create a missile
         let missile = Missile.enemyMissile()
-        missile.position = self.position
-        missile.zPosition = self.zPosition - 1
+        missile.position = position
+        missile.zPosition = zPosition - 1
         
         // Place it in the scene
-        self.scene!.addChild(missile)
+        scene!.addChild(missile)
         
         // Make it move
         let velocity: CGFloat = 600.0
-        let moveDuration = self.scene!.size.width / velocity
-        let missileEndPosition = CGPoint(x: -0.1 * self.scene!.size.width, y: self.position.y)
+        let moveDuration = scene!.size.width / velocity
+        let missileEndPosition = CGPoint(x: -0.1 * scene!.size.width, y: position.y)
         
         let moveAction = SKAction.move(to: missileEndPosition, duration: TimeInterval(moveDuration))
         let removeAction = SKAction.removeFromParent()
         missile.run(SKAction.sequence([moveAction, removeAction]))
         
         // Play sound
-        self.scene!.run(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
+        scene!.run(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
     }
     
 }

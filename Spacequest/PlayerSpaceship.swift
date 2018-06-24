@@ -37,44 +37,44 @@ class PlayerSpaceship: Spaceship {
                   color: UIColor.brown,
                   size: size)
         
-        self.name = NSStringFromClass(PlayerSpaceship.self)
+        name = NSStringFromClass(PlayerSpaceship.self)
         
-        self.configureCollisions()
-        self.configureEngineBurst()
+        configureCollisions()
+        configureEngineBurst()
     }
     
     // MARK: - Configuration
-
+    
     fileprivate func configureCollisions() {
-        self.physicsBody = SKPhysicsBody(rectangleOf: size)
-        self.physicsBody!.usesPreciseCollisionDetection = true
-        self.physicsBody!.allowsRotation = false
+        physicsBody = SKPhysicsBody(rectangleOf: size)
+        physicsBody!.usesPreciseCollisionDetection = true
+        physicsBody!.allowsRotation = false
         
-        self.physicsBody!.categoryBitMask = CategoryBitmask.playerSpaceship.rawValue
-        self.physicsBody!.collisionBitMask =
+        physicsBody!.categoryBitMask = CategoryBitmask.playerSpaceship.rawValue
+        physicsBody!.collisionBitMask =
             CategoryBitmask.enemyMissile.rawValue |
             CategoryBitmask.screenBounds.rawValue
         
-        self.physicsBody!.contactTestBitMask =
+        physicsBody!.contactTestBitMask =
             CategoryBitmask.enemySpaceship.rawValue |
             CategoryBitmask.enemyMissile.rawValue
     }
     
     fileprivate func configureEngineBurst() {
-        self.engineBurstEmitter.position = CGPoint(x: -self.size.width/2 - 5.0, y: 0.0)
-        self.addChild(self.engineBurstEmitter)
+        engineBurstEmitter.position = CGPoint(x: -size.width/2 - 5.0, y: 0.0)
+        addChild(engineBurstEmitter)
     }
-
+    
     // MARK: - Special actions
     
     func launchMissile() {
         // Create a missile
         let missile = Missile.playerMissile()
-        missile.position = CGPoint(x: self.frame.maxX + 10.0, y: position.y)
-        missile.zPosition = self.zPosition - 1
+        missile.position = CGPoint(x: frame.maxX + 10.0, y: position.y)
+        missile.zPosition = zPosition - 1
         
         // Place it in the scene
-        self.scene!.addChild(missile)
+        scene!.addChild(missile)
         
         // Make it move
         let velocity: CGFloat = 600.0
@@ -86,7 +86,7 @@ class PlayerSpaceship: Spaceship {
         missile.run(SKAction.sequence([moveAction, removeAction]))
         
         // Play sound
-        self.scene!.run(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
+        scene!.run(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
     }
     
 }

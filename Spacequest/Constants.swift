@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// TODO: Migrate to image assets
 enum ImageName: String {
     case PlayerSpaceship = "player_spaceship"
     case EnemySpaceship = "enemy_spaceship"
@@ -61,12 +62,12 @@ enum CollisionType {
 }
 
 enum ScoreValue: Int {
-    case playerMissileHitEnemySpaceship =  10
-    case playerSpaceshipHitEnemySpaceship =   0b10
+    case playerMissileHitEnemySpaceship = 10
+    case playerSpaceshipHitEnemySpaceship = 0b10
 }
 
 enum LifePointsValue: Int {
-    case enemyMissileHitPlayerSpaceship =  -10
-    case enemySpaceshipHitPlayerSpaceship =  -20
-    case playerMissileHitEnemySpaceship =  -25
+    case enemyMissileHitPlayerSpaceship = -10
+    case enemySpaceshipHitPlayerSpaceship = -20
+    case playerMissileHitEnemySpaceship = -25
 }

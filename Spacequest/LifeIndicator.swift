@@ -20,7 +20,7 @@ class LifeIndicator: SKSpriteNode {
     fileprivate var titleLabelNode: SKLabelNode?
     fileprivate var lifePoints: Int = 100 {
         didSet {
-            self.update(animated: false)
+            update(animated: false)
         }
     }
     
@@ -36,27 +36,27 @@ class LifeIndicator: SKSpriteNode {
                    size: texture.size())
         
         // Configure title
-        self.titleLabelNode = SKLabelNode(fontNamed: FontName.Wawati.rawValue)
-        self.titleLabelNode!.fontSize = 14.0
-        self.titleLabelNode!.fontColor = UIColor(white: 1.0, alpha: 0.7)
-        self.titleLabelNode!.horizontalAlignmentMode = .center
-        self.titleLabelNode!.verticalAlignmentMode = .center
+        titleLabelNode = SKLabelNode(fontNamed: FontName.Wawati.rawValue)
+        titleLabelNode!.fontSize = 14.0
+        titleLabelNode!.fontColor = UIColor(white: 1.0, alpha: 0.7)
+        titleLabelNode!.horizontalAlignmentMode = .center
+        titleLabelNode!.verticalAlignmentMode = .center
         
-        self.update(animated: false)
+        update(animated: false)
         
-        self.addChild(titleLabelNode!)
+        addChild(titleLabelNode!)
     }
     
     // MARK: - Configuration
     
     func setLifePoints(_ points: Int, animated: Bool) {
-        self.lifePoints = points
+        lifePoints = points
         
-        self.update(animated: animated)
+        update(animated: animated)
     }
     
     fileprivate func update(animated: Bool) {
-        self.titleLabelNode!.text = "\(lifePoints)"
+        titleLabelNode!.text = "\(lifePoints)"
         
         let blendColor = lifeBallColor()
         let blendFactor: CGFloat = 1.0
@@ -66,15 +66,15 @@ class LifeIndicator: SKSpriteNode {
             let scaleUpAction = SKAction.scale(by: 1.2, duration: 0.2)
             let scaleActionSequence = SKAction.sequence([scaleUpAction, scaleUpAction.reversed()])
             
-            self.titleLabelNode!.color = blendColor
-            self.titleLabelNode!.colorBlendFactor = blendFactor
+            titleLabelNode!.color = blendColor
+            titleLabelNode!.colorBlendFactor = blendFactor
             
-            self.run(SKAction.group([colorizeAction, scaleActionSequence]))
+            run(SKAction.group([colorizeAction, scaleActionSequence]))
         } else {
-            self.color = blendColor
-            self.colorBlendFactor = blendFactor
-            self.titleLabelNode!.color = blendColor
-            self.titleLabelNode!.colorBlendFactor = blendFactor
+            color = blendColor
+            colorBlendFactor = blendFactor
+            titleLabelNode!.color = blendColor
+            titleLabelNode!.colorBlendFactor = blendFactor
         }
     }
     
@@ -85,9 +85,9 @@ class LifeIndicator: SKSpriteNode {
         UIColor.green.getRed(&fullBarColorR, green: &fullBarColorG, blue: &fullBarColorB, alpha: &fullBarColorAlpha)
         UIColor.red.getRed(&emptyBarColorR, green: &emptyBarColorG, blue: &emptyBarColorB, alpha: &emptyBarColorAlpha)
         
-        let resultColorR = emptyBarColorR + CGFloat(self.lifePoints)/100 * (fullBarColorR - emptyBarColorR)
-        let resultColorG = emptyBarColorG + CGFloat(self.lifePoints)/100 * (fullBarColorG - emptyBarColorG)
-        let resultColorB = emptyBarColorB + CGFloat(self.lifePoints)/100 * (fullBarColorB - emptyBarColorB)
+        let resultColorR = emptyBarColorR + CGFloat(lifePoints)/100 * (fullBarColorR - emptyBarColorR)
+        let resultColorG = emptyBarColorG + CGFloat(lifePoints)/100 * (fullBarColorG - emptyBarColorG)
+        let resultColorB = emptyBarColorB + CGFloat(lifePoints)/100 * (fullBarColorB - emptyBarColorB)
         
         return UIColor(red: resultColorR, green: resultColorG, blue: resultColorB, alpha: 1.0)
     }

@@ -30,14 +30,14 @@ class MainMenuScene: SKScene {
     private var buttons: [Button]?
     private var background: SKSpriteNode?
     weak var mainMenuSceneDelegate: MainMenuSceneDelegate?
-
+    
     // MARK: - Scene lifecycle
     
     override func sceneDidLoad() {
         super.sceneDidLoad()
         
-        self.configureButtons()
-        self.configureBackground()
+        configureButtons()
+        configureBackground()
     }
     
     override func didMove(to view: SKView) {
@@ -52,44 +52,44 @@ class MainMenuScene: SKScene {
 // MARK: - Configuration
 
 extension MainMenuScene{
-
+    
     private func configureBackground() {
-        self.background = SKSpriteNode(imageNamed: ImageName.MenuBackgroundPhone.rawValue)
-        self.background!.size = self.size
-        self.background!.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
-        self.background!.zPosition = -1000
-        self.addChild(self.background!)
+        background = SKSpriteNode(imageNamed: ImageName.MenuBackgroundPhone.rawValue)
+        background!.size = size
+        background!.position = CGPoint(x: size.width/2, y: size.height/2)
+        background!.zPosition = -1000
+        addChild(background!)
     }
     
     private func configureButtons() {
         // Info button.
-        self.infoButton = Button(
+        infoButton = Button(
             normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
         
-        self.infoButton!.touchUpInsideEventHandler = self.infoButtonTouchUpInsideHandler()
-
-        self.infoButton!.position = CGPoint(
+        infoButton!.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
+        
+        infoButton!.position = CGPoint(
             x: scene!.size.width - 40.0,
             y: scene!.size.height - 25.0)
         
-        self.addChild(self.infoButton!)
-
+        addChild(infoButton!)
+        
         // Resume button.
-        self.resumeButton = Button(
+        resumeButton = Button(
             normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
         
-        self.resumeButton!.touchUpInsideEventHandler = self.resumeButtonTouchUpInsideHandler()
+        resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
         
         // Restart button.
-        self.restartButton = Button(
+        restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
             selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
         
-        self.restartButton!.touchUpInsideEventHandler = self.restartButtonTouchUpInsideHandler()
+        restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
         
-        self.buttons = [self.resumeButton!, self.restartButton!]
+        buttons = [resumeButton!, restartButton!]
         let horizontalPadding: CGFloat = 20.0
         var totalButtonsWidth: CGFloat = 0.0
         
@@ -100,15 +100,15 @@ extension MainMenuScene{
         }
         
         // Calculate origin of first button.
-        var buttonOriginX = self.frame.width / 2.0 + totalButtonsWidth / 2.0
+        var buttonOriginX = frame.width / 2.0 + totalButtonsWidth / 2.0
         
         // Place buttons in the scene.
-        for (_, button) in (self.buttons!).enumerated() {
+        for (_, button) in (buttons!).enumerated() {
             button.position = CGPoint(
                 x: buttonOriginX - button.size.width/2,
                 y: button.size.height * 1.1)
             
-            self.addChild(button)
+            addChild(button)
             
             buttonOriginX -= button.size.width + horizontalPadding
             

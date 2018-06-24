@@ -182,20 +182,12 @@
 		B5175C4B1943A405005AECAA /* HUD */ = {
 			isa = PBXGroup;
 			children = (
-				B5CACF331994FBB600DF18C0 /* Scores */,
-				B5CD264B1979435900A98A95 /* Life Indicator */,
-				B5CD264A1979435000A98A95 /* Button */,
-				B5175C4C1943A410005AECAA /* Joystick */,
+				B5175C501943B51F005AECAA /* Button.swift */,
+				B5175C4D1943A430005AECAA /* Joystick.swift */,
+				B5CD264C1979438A00A98A95 /* LifeIndicator.swift */,
+				B5CACF341994FBE100DF18C0 /* ScoresNode.swift */,
 			);
 			name = HUD;
-			sourceTree = "<group>";
-		};
-		B5175C4C1943A410005AECAA /* Joystick */ = {
-			isa = PBXGroup;
-			children = (
-				B5175C4D1943A430005AECAA /* Joystick.swift */,
-			);
-			name = Joystick;
 			sourceTree = "<group>";
 		};
 		B53E78D91941059A000CB230 /* Helpers */ = {
@@ -397,30 +389,6 @@
 				B5CACF311994FA6100DF18C0 /* WawaSC-Regular.otf */,
 			);
 			name = Fonts;
-			sourceTree = "<group>";
-		};
-		B5CACF331994FBB600DF18C0 /* Scores */ = {
-			isa = PBXGroup;
-			children = (
-				B5CACF341994FBE100DF18C0 /* ScoresNode.swift */,
-			);
-			name = Scores;
-			sourceTree = "<group>";
-		};
-		B5CD264A1979435000A98A95 /* Button */ = {
-			isa = PBXGroup;
-			children = (
-				B5175C501943B51F005AECAA /* Button.swift */,
-			);
-			name = Button;
-			sourceTree = "<group>";
-		};
-		B5CD264B1979435900A98A95 /* Life Indicator */ = {
-			isa = PBXGroup;
-			children = (
-				B5CD264C1979438A00A98A95 /* LifeIndicator.swift */,
-			);
-			name = "Life Indicator";
 			sourceTree = "<group>";
 		};
 		B5FA54FF199B947A004F17B8 /* Background */ = {

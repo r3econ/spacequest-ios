@@ -23,7 +23,7 @@ class MusicManager: NSObject {
     
     override init() {
         super.init()
-        self.configureBackgroundMusicPlayer()
+        configureBackgroundMusicPlayer()
     }
     
 }
@@ -35,30 +35,30 @@ extension MusicManager{
     private func configureBackgroundMusicPlayer() {
         let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "background", ofType: "mp3")!)
         do {
-            self.backgroundMusicPlayer = try AVAudioPlayer(contentsOf: fileURL)
-            self.backgroundMusicPlayer.numberOfLoops = -1;
-            self.backgroundMusicPlayer.prepareToPlay()
+            backgroundMusicPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            backgroundMusicPlayer.numberOfLoops = -1;
+            backgroundMusicPlayer.prepareToPlay()
         } catch let error as NSError {
-            self.backgroundMusicPlayer = nil
+            backgroundMusicPlayer = nil
             
             print(error.localizedDescription)
         }
     }
     
     func toggleBackgroundMusic() {
-        if (self.backgroundMusicPlayer!.isPlaying) {
-            self.backgroundMusicPlayer!.pause()
+        if (backgroundMusicPlayer!.isPlaying) {
+            backgroundMusicPlayer!.pause()
         }
         else {
-            self.backgroundMusicPlayer!.play()
+            backgroundMusicPlayer!.play()
         }
     }
     
     func playBackgroundMusic() {
-        self.backgroundMusicPlayer!.play()
+        backgroundMusicPlayer!.play()
     }
     
     func pauseBackgroundMusic() {
-        self.backgroundMusicPlayer!.pause()
+        backgroundMusicPlayer!.pause()
     }
 }

@@ -33,8 +33,8 @@ class Spaceship: SKSpriteNode, LifePointsProtocol {
     
     var lifePoints: Int = 0 {
         didSet {
-            if self.lifePoints <= 0 {
-                self.didRunOutOfLifePointsEventHandler?(self)
+            if lifePoints <= 0 {
+                didRunOutOfLifePointsEventHandler?(self)
             }
         }
     }
