@@ -87,11 +87,11 @@ class Button: SKSpriteNode {
             titleLabelNode!.text = newValue!
         }
         get {
-            if titleLabelNode != nil {
-                return titleLabelNode!.text
+            guard let node = titleLabelNode else {
+                return nil
             }
             
-            return nil
+            return node.text
         }
     }
     
@@ -109,11 +109,11 @@ class Button: SKSpriteNode {
             titleLabelNode!.fontSize = newValue!.pointSize
         }
         get {
-            if titleLabelNode != nil {
-                return UIFont(name: titleLabelNode!.fontName!, size: titleLabelNode!.fontSize)
+            guard let node = titleLabelNode else {
+                return nil
             }
             
-            return nil
+            return UIFont(name: node.fontName!, size: node.fontSize)
         }
     }
     
@@ -144,38 +144,29 @@ class Button: SKSpriteNode {
 extension Button {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if isEnabled {
-            if touchDownEventHandler != nil {
-                touchDownEventHandler!()
-            }
-            
-            selected = true
-        }
+        guard isEnabled else { return }
+        
+        touchDownEventHandler?()
+        selected = true
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if isEnabled {
-            let touch : AnyObject! = touches.first
-            let location = touch.location(in: self)
-            
-            selected = frame.contains(location)
-        }
+        guard isEnabled, let touch = touches.first else { return }
+        
+        selected = frame.contains(touch.location(in: self))
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if isEnabled {
-            if touchUpInsideEventHandler != nil {
-                touchUpInsideEventHandler!()
-            }
-            
-            selected = false
-        }
+        guard isEnabled else { return }
+
+        touchUpInsideEventHandler?()
+        selected = false
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if isEnabled {
-            selected = false
-        }
+        guard isEnabled else { return }
+
+        selected = false
     }
     
 }

@@ -19,11 +19,10 @@ protocol GameOverSceneDelegate: class {
     func gameOverSceneDidTapRestartButton(_ gameOverScene: GameOverScene)
 }
 
-class GameOverScene: SKScene{
+class GameOverScene: MenuScene {
     
     private var restartButton: Button?
     private var buttons: [Button]?
-    private var background: SKSpriteNode?
     weak var gameOverSceneDelegate: GameOverSceneDelegate?
     
     // MARK: - Scene lifecycle
@@ -32,7 +31,6 @@ class GameOverScene: SKScene{
         super.sceneDidLoad()
         
         configureButtons()
-        configureBackground()
     }
     
     override func didMove(to view: SKView) {
@@ -42,19 +40,7 @@ class GameOverScene: SKScene{
         AnalyticsManager.sharedInstance.trackScene("GameOverScene")
     }
     
-}
-
-// MARK: - Configuration
-
-extension GameOverScene {
-    
-    private func configureBackground() {
-        background = SKSpriteNode(imageNamed: ImageName.MenuBackgroundPhone.rawValue)
-        background!.size = size
-        background!.position = CGPoint(x: size.width/2, y: size.height/2)
-        background!.zPosition = -1000
-        addChild(background!)
-    }
+    // MARK: - Configuration
     
     private func configureButtons() {
         // Restart button

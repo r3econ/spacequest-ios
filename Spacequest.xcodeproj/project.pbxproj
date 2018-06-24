@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		869213F920DFFD67009C3F60 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869213F820DFFD67009C3F60 /* MenuScene.swift */; };
 		869AA65A1FCB07B6006EA29F /* trees@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 869AA6581FCB07B6006EA29F /* trees@2x.png */; };
 		869AA65B1FCB07B6006EA29F /* trees.png in Resources */ = {isa = PBXBuildFile; fileRef = 869AA6591FCB07B6006EA29F /* trees.png */; };
 		86B406B11AF27024009C868F /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B406B01AF27024009C868F /* MusicManager.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		869213F820DFFD67009C3F60 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		869AA6581FCB07B6006EA29F /* trees@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trees@2x.png"; sourceTree = "<group>"; };
 		869AA6591FCB07B6006EA29F /* trees.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trees.png; sourceTree = "<group>"; };
 		86B406B01AF27024009C868F /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
@@ -153,6 +155,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		869213FA20E0019C009C3F60 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				B5CACF3619951DBD00DF18C0 /* GameOverScene.swift */,
+				B5A9050A198297AD00862E2C /* MainMenuScene.swift */,
+				869213F820DFFD67009C3F60 /* MenuScene.swift */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
 		AF4CF52A1BE8EAE800C948C1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,9 +176,8 @@
 		B5118878194247E400FF8D13 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				869213FA20E0019C009C3F60 /* Menu */,
 				B5AA604F193FB48F00EB9920 /* GameScene.swift */,
-				B5A9050A198297AD00862E2C /* MainMenuScene.swift */,
-				B5CACF3619951DBD00DF18C0 /* GameOverScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -522,6 +533,7 @@
 				B5AA604C193FB48F00EB9920 /* AppDelegate.swift in Sources */,
 				B5AA607A193FC34300EB9920 /* LifePointsProtocol.swift in Sources */,
 				B5175C4E1943A430005AECAA /* Joystick.swift in Sources */,
+				869213F920DFFD67009C3F60 /* MenuScene.swift in Sources */,
 				B5175C511943B51F005AECAA /* Button.swift in Sources */,
 				B5AA607E193FCA8D00EB9920 /* Missile.swift in Sources */,
 				86B406B11AF27024009C868F /* MusicManager.swift in Sources */,

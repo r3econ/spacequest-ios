@@ -22,13 +22,12 @@ protocol MainMenuSceneDelegate: class {
     func mainMenuSceneDidTapInfoButton(_ mainMenuScene: MainMenuScene)
 }
 
-class MainMenuScene: SKScene {
+class MainMenuScene: MenuScene {
     
     private var infoButton: Button?
     private var resumeButton: Button?
     private var restartButton: Button?
     private var buttons: [Button]?
-    private var background: SKSpriteNode?
     weak var mainMenuSceneDelegate: MainMenuSceneDelegate?
     
     // MARK: - Scene lifecycle
@@ -37,7 +36,6 @@ class MainMenuScene: SKScene {
         super.sceneDidLoad()
         
         configureButtons()
-        configureBackground()
     }
     
     override func didMove(to view: SKView) {
@@ -46,47 +44,26 @@ class MainMenuScene: SKScene {
         // Track event
         AnalyticsManager.sharedInstance.trackScene("MainMenuScene")
     }
-    
-}
 
-// MARK: - Configuration
+    // MARK: - Configuration
 
-extension MainMenuScene{
-    
-    private func configureBackground() {
-        background = SKSpriteNode(imageNamed: ImageName.MenuBackgroundPhone.rawValue)
-        background!.size = size
-        background!.position = CGPoint(x: size.width/2, y: size.height/2)
-        background!.zPosition = -1000
-        addChild(background!)
-    }
-    
     private func configureButtons() {
         // Info button.
-        infoButton = Button(
-            normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
-            selectedImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
-        
+        infoButton = Button(normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
+                            selectedImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
         infoButton!.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
-        
-        infoButton!.position = CGPoint(
-            x: scene!.size.width - 40.0,
-            y: scene!.size.height - 25.0)
-        
+        infoButton!.position = CGPoint(x: scene!.size.width - 40.0,
+                                       y: scene!.size.height - 25.0)
         addChild(infoButton!)
         
         // Resume button.
-        resumeButton = Button(
-            normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
-            selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
-        
+        resumeButton = Button(normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
+                              selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
         resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
         
         // Restart button.
-        restartButton = Button(
-            normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
-            selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
-        
+        restartButton = Button(normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
+                               selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
         restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
         
         buttons = [resumeButton!, restartButton!]
@@ -94,7 +71,7 @@ extension MainMenuScene{
         var totalButtonsWidth: CGFloat = 0.0
         
         // Calculate total width of the buttons area.
-        for (index, button) in (buttons!).enumerated() {
+        for (index, button) in buttons!.enumerated() {
             totalButtonsWidth += button.size.width
             totalButtonsWidth += index != buttons!.count - 1 ? horizontalPadding : 0.0
         }
@@ -103,18 +80,15 @@ extension MainMenuScene{
         var buttonOriginX = frame.width / 2.0 + totalButtonsWidth / 2.0
         
         // Place buttons in the scene.
-        for (_, button) in (buttons!).enumerated() {
-            button.position = CGPoint(
-                x: buttonOriginX - button.size.width/2,
-                y: button.size.height * 1.1)
-            
+        for (_, button) in buttons!.enumerated() {
+            button.position = CGPoint(x: buttonOriginX - button.size.width/2,
+                                      y: button.size.height * 1.1)
             addChild(button)
             
             buttonOriginX -= button.size.width + horizontalPadding
             
             let rotateAction = SKAction.rotate(byAngle: CGFloat(.pi/180.0 * 5.0), duration: 2.0)
             let sequence = SKAction.sequence([rotateAction, rotateAction.reversed()])
-            
             button.run(SKAction.repeatForever(sequence))
         }
     }
@@ -122,7 +96,7 @@ extension MainMenuScene{
     private func resumeButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
         return { [weak self] in
             guard let strongSelf = self else { return }
-
+            
             strongSelf.mainMenuSceneDelegate?.mainMenuSceneDidTapResumeButton(strongSelf)
         }
     }
@@ -130,7 +104,7 @@ extension MainMenuScene{
     private func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
         return { [weak self] in
             guard let strongSelf = self else { return }
-
+            
             strongSelf.mainMenuSceneDelegate?.mainMenuSceneDidTapRestartButton(strongSelf)
         }
     }
@@ -138,7 +112,7 @@ extension MainMenuScene{
     private func infoButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
         return { [weak self] in
             guard let strongSelf = self else { return }
-
+            
             strongSelf.mainMenuSceneDelegate?.mainMenuSceneDidTapInfoButton(strongSelf)
         }
     }

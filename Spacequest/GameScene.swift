@@ -275,17 +275,13 @@ extension GameScene : SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         // Get collision type
-        guard let collisionType = self.collisionType(for: contact) else {
-            return
-        }
+        guard let collisionType = self.collisionType(for: contact) else { return }
         
         switch collisionType {
         case .playerMissileEnemySpaceship:
-            // Get the enemy node
-            var enemy: EnemySpaceship
-            var missile: Missile
-            
-            if contact.bodyA.node as? EnemySpaceship != nil {
+
+            let enemy: EnemySpaceship; let missile: Missile
+            if contact.bodyA.node is EnemySpaceship {
                 enemy = contact.bodyA.node as! EnemySpaceship
                 missile = contact.bodyB.node as! Missile
             } else {
@@ -293,25 +289,28 @@ extension GameScene : SKPhysicsContactDelegate {
                 missile = contact.bodyA.node as! Missile
             }
             
-            // Handle collision
             handleCollision(between: missile, and: enemy)
             
         case .playerSpaceshipEnemySpaceship:
-            // Get the enemy node
-            let enemy: EnemySpaceship = contact.bodyA.node as? EnemySpaceship != nil ?
-                contact.bodyA.node as! EnemySpaceship :
-                contact.bodyB.node as! EnemySpaceship
             
-            // Handle collision
+            let enemy: EnemySpaceship
+            if contact.bodyA.node is EnemySpaceship {
+                enemy = contact.bodyA.node as! EnemySpaceship
+            } else {
+                enemy = contact.bodyB.node as! EnemySpaceship
+            }
+            
             handleCollision(between: playerSpaceship, and: enemy)
             
         case .enemyMissilePlayerSpaceship:
-            // Get the enemy node
-            let missile: Missile = contact.bodyA.node as? Missile != nil ?
-                contact.bodyA.node as! Missile :
-                contact.bodyB.node as! Missile
+
+            let missile: Missile
+            if contact.bodyA.node is Missile {
+                missile = contact.bodyA.node as! Missile
+            } else {
+                missile = contact.bodyB.node as! Missile
+            }
             
-            // Handle collision
             handleCollision(between: playerSpaceship, and: missile)
         }
     }
@@ -325,11 +324,13 @@ extension GameScene : SKPhysicsContactDelegate {
         
         switch (categoryBitmaskBodyA, categoryBitmaskBodyB) {
         // Player missile - enemy spaceship
-        case (.enemySpaceship, .playerMissile), (.playerMissile, .enemySpaceship):
+        case (.enemySpaceship, .playerMissile),
+             (.playerMissile, .enemySpaceship):
             return .playerMissileEnemySpaceship
             
         // Player spaceship - enemy spaceship
-        case (.enemySpaceship, .playerSpaceship), (.playerSpaceship, .enemySpaceship):
+        case (.enemySpaceship, .playerSpaceship),
+             (.playerSpaceship, .enemySpaceship):
             return .playerSpaceshipEnemySpaceship
             
         default:
