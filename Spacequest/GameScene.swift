@@ -15,7 +15,7 @@
 
 import SpriteKit
 
-protocol GameSceneDelegate: class {
+protocol GameSceneDelegate: AnyObject {
     func didTapMainMenuButton(in gameScene: GameScene)
     func playerDidLose(withScore score: Int, in gameScene:GameScene)
 }

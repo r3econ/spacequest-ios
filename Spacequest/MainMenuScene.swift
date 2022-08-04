@@ -15,7 +15,7 @@
 
 import SpriteKit
 
-protocol MainMenuSceneDelegate: class {
+protocol MainMenuSceneDelegate: AnyObject {
     
     func mainMenuSceneDidTapResumeButton(_ mainMenuScene: MainMenuScene)
     func mainMenuSceneDidTapRestartButton(_ mainMenuScene: MainMenuScene)
