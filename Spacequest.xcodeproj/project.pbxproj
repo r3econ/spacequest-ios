@@ -103,8 +103,6 @@
 		B5AA6051193FB48F00EB9920 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		B5AA6054193FB48F00EB9920 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5AA6056193FB48F00EB9920 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B5AA6061193FB48F00EB9920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5AA6062193FB48F00EB9920 /* SpacequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacequestTests.swift; sourceTree = "<group>"; };
 		B5AA6071193FB9F200EB9920 /* Spaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spaceship.swift; sourceTree = "<group>"; };
 		B5AA6075193FBA1400EB9920 /* PlayerSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSpaceship.swift; sourceTree = "<group>"; };
 		B5AA6079193FC34300EB9920 /* LifePointsProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifePointsProtocol.swift; sourceTree = "<group>"; };
@@ -273,7 +271,6 @@
 			isa = PBXGroup;
 			children = (
 				B5AA6048193FB48F00EB9920 /* Spacequest */,
-				B5AA605F193FB48F00EB9920 /* SpacequestTests */,
 				B5AA6047193FB48F00EB9920 /* Products */,
 				13D7D5D10BFE79EED58C0EC1 /* Frameworks */,
 			);
@@ -307,23 +304,6 @@
 			children = (
 				AFC536621B68C1FF00A11383 /* Spacequest-Bridging-Header.h */,
 				B5AA604A193FB48F00EB9920 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		B5AA605F193FB48F00EB9920 /* SpacequestTests */ = {
-			isa = PBXGroup;
-			children = (
-				B5AA6062193FB48F00EB9920 /* SpacequestTests.swift */,
-				B5AA6060193FB48F00EB9920 /* Supporting Files */,
-			);
-			path = SpacequestTests;
-			sourceTree = "<group>";
-		};
-		B5AA6060193FB48F00EB9920 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B5AA6061193FB48F00EB9920 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
