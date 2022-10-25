@@ -15,7 +15,7 @@
 
 import SpriteKit
 
-protocol GameOverSceneDelegate: class {
+protocol GameOverSceneDelegate: AnyObject {
     func gameOverSceneDidTapRestartButton(_ gameOverScene: GameOverScene)
 }
 
