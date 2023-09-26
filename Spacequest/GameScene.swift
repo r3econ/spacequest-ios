@@ -23,11 +23,13 @@ protocol GameSceneDelegate: AnyObject {
 class GameScene: SKScene {
     
     private struct Constants {
-        static let hudControlMargin: CGFloat = 20.0
         static let maxRandomTimeBetweenEnemySpawns: UInt32 = 3
-        static let scoresNodeBottomMargin: CGFloat = 26.0
+        static let scoresNodeLeftMargin: CGFloat = 60.0
+        static let scoresNodeTopMargin: CGFloat = 40.0
+        static let fireButtonRightMargin: CGFloat = 60.0
         static let fireButtonBottomMargin: CGFloat = 40.0
         static let joystickMaximumRadius: CGFloat = 40.0
+        static let joystickLeftMargin: CGFloat = 40.0
         static let initialEnemyLifePoints = 20
         static let enemyFlightDuration: TimeInterval = 4.0
         static let explosionEmmiterFileName = "Explosion"
@@ -174,20 +176,19 @@ extension GameScene {
                             stickImageNamed: ImageName.JoystickStick.rawValue,
                             baseImageNamed: ImageName.JoystickBase.rawValue)
         // Position
-        joystick!.position = CGPoint(x: joystick!.size.width,
+        joystick!.position = CGPoint(x: joystick!.size.width + Constants.joystickLeftMargin,
                                      y: joystick!.size.height)
         // Handler that gets called on joystick move
         joystick!.updateHandler = { [weak self] joystickTranslation in
             self?.updatePlayerSpaceshipPosition(with: joystickTranslation)
         }
-        // Add it to the scene
         addChild(joystick!)
     }
     
     private func configureFireButton() {
         fireButton = Button(normalImageNamed: ImageName.FireButtonNormal.rawValue,
                             selectedImageNamed: ImageName.FireButtonSelected.rawValue)
-        fireButton!.position = CGPoint(x: frame.width - fireButton!.frame.width - Constants.hudControlMargin,
+        fireButton!.position = CGPoint(x: frame.width - fireButton!.frame.width - Constants.fireButtonRightMargin,
                                        y: fireButton!.frame.height/2 + Constants.fireButtonBottomMargin)
         // Touch handler
         fireButton!.touchUpInsideEventHandler = { [weak self] in
@@ -197,7 +198,6 @@ extension GameScene {
         fireButton!.touchUpInsideEventHandler = { [weak self] in
             self?.playerSpaceship.launchMissile()
         }
-        // Add it to the scene
         addChild(fireButton!)
     }
     
@@ -212,7 +212,6 @@ extension GameScene {
             
             strongSelf.gameSceneDelegate?.didTapMainMenuButton(in: strongSelf)
         }
-        // Add it to the scene
         addChild(menuButton!)
     }
     
@@ -222,15 +221,12 @@ extension GameScene {
                                          y: joystick!.frame.minY - joystick!.joystickRadius)
         // Life points
         lifeIndicator.setLifePoints(playerSpaceship.lifePoints, animated: false)
-        // Add it to the scene
         addChild(lifeIndicator)
     }
     
     private func configureScoresNode() {
-        // Position
-        scoresNode.position = CGPoint(x: Constants.hudControlMargin/2,
-                                      y: frame.height - Constants.scoresNodeBottomMargin)
-        // Add it to the scene
+        scoresNode.position = CGPoint(x: Constants.scoresNodeLeftMargin,
+                                      y: frame.height - Constants.scoresNodeTopMargin)
         addChild(scoresNode)
     }
     
