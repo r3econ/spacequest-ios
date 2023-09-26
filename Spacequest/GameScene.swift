@@ -241,6 +241,7 @@ extension GameScene {
         let trees = SKSpriteNode(imageNamed: ImageName.BackgroundTrees.rawValue)
         trees.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         trees.position = CGPoint(x: -size.width/2, y: -size.height/2)
+        trees.zPosition = 1000
         backgroundNode.addChild(trees)
         
         // Add background to the scene
