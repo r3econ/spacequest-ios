@@ -30,6 +30,7 @@ class GameScene: SKScene {
         static let fireButtonBottomMargin: CGFloat = 40.0
         static let joystickMaximumRadius: CGFloat = 40.0
         static let joystickLeftMargin: CGFloat = 40.0
+        static let menuButtonMargin: CGFloat = 20.0
         static let initialEnemyLifePoints = 20
         static let enemyFlightDuration: TimeInterval = 4.0
         static let explosionEmmiterFileName = "Explosion"
@@ -204,8 +205,8 @@ extension GameScene {
     private func configureMenuButton() {
         menuButton = Button(normalImageNamed: ImageName.ShowMenuButtonNormal.rawValue,
                             selectedImageNamed: ImageName.ShowMenuButtonSelected.rawValue)
-        menuButton!.position = CGPoint(x: frame.width - menuButton!.frame.width/2 - 2.0,
-                                       y: frame.height - menuButton!.frame.height/2)
+        menuButton!.position = CGPoint(x: frame.width - menuButton!.frame.width/2 - Constants.menuButtonMargin,
+                                       y: frame.height - menuButton!.frame.height/2 - Constants.menuButtonMargin)
         // Touch handler
         menuButton!.touchUpInsideEventHandler = { [weak self] in
             guard let strongSelf = self else { return }
@@ -244,7 +245,6 @@ extension GameScene {
         trees.zPosition = 1000
         backgroundNode.addChild(trees)
         
-        // Add background to the scene
         addChild(backgroundNode)
         background = backgroundNode
     }
