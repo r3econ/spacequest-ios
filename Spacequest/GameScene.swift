@@ -23,7 +23,7 @@ protocol GameSceneDelegate: AnyObject {
 class GameScene: SKScene {
     
     private struct Constants {
-        static let maxRandomTimeBetweenEnemySpawns: UInt32 = 3
+        static let maxRandomTimeBetweenEnemySpawns: UInt32 = 1300
         static let scoresNodeLeftMargin: CGFloat = 60.0
         static let scoresNodeTopMargin: CGFloat = 40.0
         static let fireButtonRightMargin: CGFloat = 60.0
@@ -32,7 +32,7 @@ class GameScene: SKScene {
         static let joystickLeftMargin: CGFloat = 40.0
         static let menuButtonMargin: CGFloat = 20.0
         static let initialEnemyLifePoints = 20
-        static let enemyFlightDuration: TimeInterval = 4.0
+        static let enemyFlightDuration: TimeInterval = 2.0
         static let explosionEmmiterFileName = "Explosion"
     }
     
@@ -105,7 +105,7 @@ extension GameScene {
     }
     
     private func scheduleEnemySpaceshipSpawn() {
-        let randomTimeInterval = TimeInterval(arc4random_uniform(Constants.maxRandomTimeBetweenEnemySpawns) + 1)
+        let randomTimeInterval = TimeInterval(Double(arc4random_uniform(Constants.maxRandomTimeBetweenEnemySpawns) + 1)/1000.0)
         spawnEnemyTimer = Timer.scheduledTimer(
             timeInterval: randomTimeInterval,
             target: self,
