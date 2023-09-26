@@ -159,13 +159,13 @@ extension GameScene {
     }
     
     private func configurePlayerSpaceship() {
-        // Position
-        playerSpaceship.position = CGPoint(x: playerSpaceship.size.width/2 + 30.0,
+        // Start position
+        playerSpaceship.position = CGPoint(x: playerSpaceship.size.width/2 + 160.0,
                                            y: frame.height/2 + 40.0)
         // Life points
         playerSpaceship.lifePoints = 100
         playerSpaceship.didRunOutOfLifePointsEventHandler = playerDidRunOutOfLifePointsEventHandler()
-        // Add it to the scene
+
         addChild(playerSpaceship)
     }
     
