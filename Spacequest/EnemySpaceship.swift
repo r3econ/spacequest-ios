@@ -42,19 +42,19 @@ class EnemySpaceship: Spaceship {
     }
     
     // MARK: - Configuration
-
+    
     fileprivate func configureCollisions() {
         physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody!.usesPreciseCollisionDetection = true
         physicsBody!.categoryBitMask = CategoryBitmask.enemySpaceship.rawValue
         physicsBody!.collisionBitMask =
-            CategoryBitmask.enemySpaceship.rawValue |
-            CategoryBitmask.playerMissile.rawValue |
-            CategoryBitmask.playerSpaceship.rawValue
+        CategoryBitmask.enemySpaceship.rawValue |
+        CategoryBitmask.playerMissile.rawValue |
+        CategoryBitmask.playerSpaceship.rawValue
         
         physicsBody!.contactTestBitMask =
-            CategoryBitmask.playerSpaceship.rawValue |
-            CategoryBitmask.playerMissile.rawValue
+        CategoryBitmask.playerSpaceship.rawValue |
+        CategoryBitmask.playerMissile.rawValue
     }
     
     // MARK: - Special actions

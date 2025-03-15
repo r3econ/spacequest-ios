@@ -31,9 +31,10 @@ class MusicManager: NSObject {
 // MARK - Background Music
 
 extension MusicManager{
-
+    
     private func configureBackgroundMusicPlayer() {
-        let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "background", ofType: "mp3")!)
+        let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "background",
+                                                            ofType: "mp3")!)
         do {
             backgroundMusicPlayer = try AVAudioPlayer(contentsOf: fileURL)
             backgroundMusicPlayer.numberOfLoops = -1;

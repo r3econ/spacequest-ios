@@ -27,9 +27,9 @@ class AnalyticsManager: NSObject{
 }
 
 extension AnalyticsManager {
-    
+
     func trackScene(_ name: String) {
         // TODO: Implement tracking
     }
-    
+
 }

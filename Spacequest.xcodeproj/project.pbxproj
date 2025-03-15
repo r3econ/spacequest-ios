@@ -257,14 +257,14 @@
 			name = Sounds;
 			sourceTree = "<group>";
 		};
-		B5972FEC197D65A10061D79C /* Emiters */ = {
+		B5972FEC197D65A10061D79C /* Emitters */ = {
 			isa = PBXGroup;
 			children = (
-				B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */,
 				B5972FEE197D65D90061D79C /* spark.png */,
 				B582863F197D71EA006D4E4E /* Explosion.sks */,
+				B5972FED197D65D90061D79C /* PlayerSpaceshipEngineBurst.sks */,
 			);
-			name = Emiters;
+			name = Emitters;
 			sourceTree = "<group>";
 		};
 		B5AA603D193FB48E00EB9920 = {
@@ -323,7 +323,7 @@
 			children = (
 				AF4CF52A1BE8EAE800C948C1 /* UI */,
 				B5CACF301994FA5600DF18C0 /* Fonts */,
-				B5972FEC197D65A10061D79C /* Emiters */,
+				B5972FEC197D65A10061D79C /* Emitters */,
 				B5972FE7197D3A210061D79C /* Sounds */,
 				B5972FE6197D3A170061D79C /* Images */,
 			);
