@@ -7,7 +7,8 @@
 <img src="https://i.imgur.com/IkQOLmG.png">
 </p>
 
-# Spacequest for iOS (2014-2023, updated for iPhone 15)
+# Spacequest for iOS (2014-2026)
+
 Full source code of a working `iOS` game. Yet another take on a space shooter game. The game falls into [Shoot 'em up](https://en.wikipedia.org/wiki/Shoot_%27em_up) video games genre. It is written in Swift and uses `SpriteKit`- graphics rendering and animation infrastructure built into `iOS`. All vector graphics and image assets created in `Inkscape` and `GIMP`.
 
 https://github.com/r3econ/spacequest-ios/blob/master/demo.mov
@@ -53,4 +54,4 @@ Artists: Plastic3
 # License
 This code is distributed under the terms and conditions of the [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/) license.
 
-Copyright (c) 2014 - 2023 Rafał Sroka
+Copyright (c) 2014 - 2026 Rafał Sroka
