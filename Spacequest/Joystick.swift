@@ -85,21 +85,19 @@ class Joystick: SKNode {
 extension Joystick {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch : AnyObject! = touches.first
-
-        if (touch != nil) {
-            isTouchedDown = true
-            updateWithTouch(touch as! UITouch)
-        }
+        guard let touch = touches.first else { return }
+        isTouchedDown = true
+        updateWithTouch(touch)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch : AnyObject! = touches.first
-
-        if (touch != nil) {
-            isTouchedDown = true
-            updateWithTouch(touch as! UITouch)
-        }
+        guard let touch = touches.first else { return }
+        // isTouchedDown should already be true if touches are moving,
+        // but explicitly setting it or ensuring its state might be needed
+        // depending on desired logic if touches can somehow move without a prior began.
+        // For typical touch handling, it's fine as is.
+        isTouchedDown = true 
+        updateWithTouch(touch)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -114,7 +112,7 @@ extension Joystick {
 
     func updateWithTouch(_ touch: UITouch) {
         var location = touch.location(in: self)
-        let distance = CGFloat(sqrt(pow(CDouble(location.x), 2) + pow(CDouble(location.y), 2)))
+        let distance = hypot(location.x, location.y)
 
         if distance >= joystickRadius {
             let normalizedTranslationVector = CGPoint(x: location.x / distance,

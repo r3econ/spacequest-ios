@@ -113,7 +113,8 @@ class Button: SKSpriteNode {
                 return nil
             }
 
-            return UIFont(name: node.fontName!, size: node.fontSize)
+            guard let fontName = node.fontName, !fontName.isEmpty else { return nil }
+            return UIFont(name: fontName, size: node.fontSize)
         }
     }
 

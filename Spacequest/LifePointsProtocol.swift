@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-typealias DidRunOutOfLifePointsEventHandler = (_ object: AnyObject) -> ()
+typealias DidRunOutOfLifePointsEventHandler = (_ spaceship: Spaceship) -> ()
 
 protocol LifePointsProtocol {
     var lifePoints: Int { get set }

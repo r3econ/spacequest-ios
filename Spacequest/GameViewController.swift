@@ -69,40 +69,33 @@ class GameViewController: UIViewController {
 
     private func startNewGame(animated: Bool = false) {
         // Recreate game scene
-        gameScene = GameScene(size: view.frame.size)
-        gameScene!.scaleMode = .aspectFill
-        gameScene!.gameSceneDelegate = self
+        let newGameScene = GameScene(size: view.frame.size)
+        newGameScene.scaleMode = .aspectFill
+        newGameScene.gameSceneDelegate = self
+        self.gameScene = newGameScene
 
-        show(gameScene!, animated: animated)
+        show(newGameScene, animated: animated)
     }
 
-    private func resumeGame(animated: Bool = false,
-                            completion:(()->())? = nil) {
-        guard let skView = view as? SKView else {
-            preconditionFailure()
+    private func resumeGame(animated: Bool = false) async {
+        guard let skView = view as? SKView, let gameScene = self.gameScene else {
+            preconditionFailure("SKView or GameScene not available")
         }
 
         if animated {
             // Show game scene
-            skView.presentScene(gameScene!,
+            skView.presentScene(gameScene,
                                 transition: SKTransition.crossFade(withDuration: .sceneTransitionDuration))
-
-            // Remove the menu scene and unpause the game scene after it was shown
-            let delay = .sceneTransitionDuration * Double(NSEC_PER_SEC)
-            let time = DispatchTime.now() + delay / Double(NSEC_PER_SEC)
-
-            DispatchQueue.main.asyncAfter(deadline: time, execute: { [weak self] in
-                self?.gameScene!.isPaused = false
-
-                completion?()
-            })
+            
+            // Wait for the transition to complete, then unpause
+            let durationInNanoseconds = UInt64(Double.sceneTransitionDuration * 1_000_000_000)
+            try? await Task.sleep(nanoseconds: durationInNanoseconds)
+            self.gameScene?.isPaused = false
         }
         else {
             // Remove the menu scene and unpause the game scene after it was shown
-            skView.presentScene(gameScene!)
-            gameScene!.isPaused = false
-
-            completion?()
+            skView.presentScene(gameScene)
+            gameScene.isPaused = false
         }
     }
 
@@ -111,7 +104,7 @@ class GameViewController: UIViewController {
         scene.mainMenuSceneDelegate = self
 
         // Pause the game and show main menu
-        gameScene!.isPaused = true
+        gameScene?.isPaused = true
         show(scene, animated: animated)
     }
 
@@ -121,7 +114,7 @@ class GameViewController: UIViewController {
         scene.gameOverSceneDelegate = self
 
         // Pause the game and show game over
-        gameScene!.isPaused = true
+        gameScene?.isPaused = true
         show(scene, animated: animated)
     }
 
@@ -165,7 +158,8 @@ extension GameViewController: GameSceneDelegate {
 extension GameViewController: MainMenuSceneDelegate {
 
     func mainMenuSceneDidTapResumeButton(_ mainMenuScene: MainMenuScene) {
-        resumeGame(animated: true) {
+        Task {
+            await resumeGame(animated: true)
             // Remove main menu scene when game is resumed
             mainMenuScene.removeFromParent()
         }
