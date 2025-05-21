@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,7 +37,18 @@
 		B5CD264D1979438A00A98A95 /* LifeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CD264C1979438A00A98A95 /* LifeIndicator.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2FCFDF412DDE6B4500A72AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5AA603E193FB48E00EB9920 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5AA6045193FB48E00EB9920;
+			remoteInfo = Spacequest;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		2FCFDF3D2DDE6B4500A72AB0 /* SpacequestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpacequestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		869213F820DFFD67009C3F60 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		869AA6581FCB07B6006EA29F /* trees@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trees@2x.png"; sourceTree = "<group>"; };
 		869AA6591FCB07B6006EA29F /* trees.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trees.png; sourceTree = "<group>"; };
@@ -75,7 +86,18 @@
 		B5CD264C1979438A00A98A95 /* LifeIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2FCFDF3E2DDE6B4500A72AB0 /* SpacequestTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SpacequestTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		2FCFDF3A2DDE6B4500A72AB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5AA6043193FB48E00EB9920 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -183,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				B5AA6048193FB48F00EB9920 /* Spacequest */,
+				2FCFDF3E2DDE6B4500A72AB0 /* SpacequestTests */,
 				B5AA6047193FB48F00EB9920 /* Products */,
 				13D7D5D10BFE79EED58C0EC1 /* Frameworks */,
 			);
@@ -192,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				B5AA6046193FB48F00EB9920 /* Spacequest.app */,
+				2FCFDF3D2DDE6B4500A72AB0 /* SpacequestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -306,6 +330,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2FCFDF3C2DDE6B4500A72AB0 /* SpacequestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2FCFDF432DDE6B4500A72AB0 /* Build configuration list for PBXNativeTarget "SpacequestTests" */;
+			buildPhases = (
+				2FCFDF392DDE6B4500A72AB0 /* Sources */,
+				2FCFDF3A2DDE6B4500A72AB0 /* Frameworks */,
+				2FCFDF3B2DDE6B4500A72AB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2FCFDF422DDE6B4500A72AB0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2FCFDF3E2DDE6B4500A72AB0 /* SpacequestTests */,
+			);
+			name = SpacequestTests;
+			packageProductDependencies = (
+			);
+			productName = SpacequestTests;
+			productReference = 2FCFDF3D2DDE6B4500A72AB0 /* SpacequestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B5AA6045193FB48E00EB9920 /* Spacequest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5AA6066193FB48F00EB9920 /* Build configuration list for PBXNativeTarget "Spacequest" */;
@@ -331,10 +378,14 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftMigration = 0710;
-				LastSwiftUpdateCheck = 0710;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1620;
 				ORGANIZATIONNAME = "Rafal Sroka";
 				TargetAttributes = {
+					2FCFDF3C2DDE6B4500A72AB0 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = B5AA6045193FB48E00EB9920;
+					};
 					B5AA6045193FB48E00EB9920 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = EJCJ4S2GTE;
@@ -357,11 +408,19 @@
 			projectRoot = "";
 			targets = (
 				B5AA6045193FB48E00EB9920 /* Spacequest */,
+				2FCFDF3C2DDE6B4500A72AB0 /* SpacequestTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2FCFDF3B2DDE6B4500A72AB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5AA6044193FB48E00EB9920 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -382,6 +441,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2FCFDF392DDE6B4500A72AB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5AA6042193FB48E00EB9920 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -409,6 +475,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2FCFDF422DDE6B4500A72AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5AA6045193FB48E00EB9920 /* Spacequest */;
+			targetProxy = 2FCFDF412DDE6B4500A72AB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		B5AA6053193FB48F00EB9920 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -421,6 +495,66 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2FCFDF442DDE6B4500A72AB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "foo.bar-89375.SpacequestTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spacequest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Spacequest";
+			};
+			name = Debug;
+		};
+		2FCFDF452DDE6B4500A72AB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "foo.bar-89375.SpacequestTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spacequest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Spacequest";
+			};
+			name = Release;
+		};
 		B5AA6064193FB48F00EB9920 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -588,6 +722,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2FCFDF432DDE6B4500A72AB0 /* Build configuration list for PBXNativeTarget "SpacequestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FCFDF442DDE6B4500A72AB0 /* Debug */,
+				2FCFDF452DDE6B4500A72AB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B5AA6041193FB48E00EB9920 /* Build configuration list for PBXProject "Spacequest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
