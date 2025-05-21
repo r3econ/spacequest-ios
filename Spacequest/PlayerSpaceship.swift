@@ -23,29 +23,31 @@ class PlayerSpaceship: Spaceship {
     // MARK: - Initialization
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
-    required init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-    }
-
-    convenience init() {
-        let size = CGSize(width: 64, height: 50)
-
-        self.init(texture: SKTexture(imageNamed: ImageName.PlayerSpaceship.rawValue),
-                  color: UIColor.brown,
-                  size: size)
-
         guard let emitter = SKEmitterNode(fileNamed: "PlayerSpaceshipEngineBurst") else {
             preconditionFailure("Failed to load PlayerSpaceshipEngineBurst.sks")
         }
         self.engineBurstEmitter = emitter
-
-        name = NSStringFromClass(PlayerSpaceship.self)
-
+        super.init(coder: aDecoder)
         configureCollisions()
         configureEngineBurst()
+    }
+
+    required init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        guard let emitter = SKEmitterNode(fileNamed: "PlayerSpaceshipEngineBurst") else {
+            preconditionFailure("Failed to load PlayerSpaceshipEngineBurst.sks")
+        }
+        self.engineBurstEmitter = emitter
+        super.init(texture: texture, color: color, size: size)
+        configureCollisions()
+        configureEngineBurst()
+    }
+
+    convenience init() {
+        let size = CGSize(width: 64, height: 50)
+        self.init(texture: SKTexture(imageNamed: ImageName.PlayerSpaceship.rawValue),
+                  color: UIColor.brown,
+                  size: size)
+        name = NSStringFromClass(PlayerSpaceship.self)
     }
 
     // MARK: - Configuration
@@ -57,12 +59,12 @@ class PlayerSpaceship: Spaceship {
 
         physicsBody!.categoryBitMask = CategoryBitmask.playerSpaceship.rawValue
         physicsBody!.collisionBitMask =
-        CategoryBitmask.enemyMissile.rawValue |
-        CategoryBitmask.screenBounds.rawValue
+            CategoryBitmask.enemyMissile.rawValue |
+            CategoryBitmask.screenBounds.rawValue
 
         physicsBody!.contactTestBitMask =
-        CategoryBitmask.enemySpaceship.rawValue |
-        CategoryBitmask.enemyMissile.rawValue
+            CategoryBitmask.enemySpaceship.rawValue |
+            CategoryBitmask.enemyMissile.rawValue
     }
 
     private func configureEngineBurst() {
@@ -95,5 +97,4 @@ class PlayerSpaceship: Spaceship {
         // Play sound
         scene.run(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
     }
-
 }
