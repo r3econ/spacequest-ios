@@ -1,0 +1,8 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Build the Spacequest app"
+  lane :build do
+    gym(scheme: "Spacequest", xcargs: "CODE_SIGN_IDENTITY='' CODE_SIGNING_REQUIRED=NO")
+  end
+end

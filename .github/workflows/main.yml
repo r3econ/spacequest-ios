@@ -1,0 +1,20 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Ruby and Bundler
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7' # Specify a Ruby version compatible with Fastlane and your project
+        bundler-cache: true # Automatically runs bundle install and caches gems
+
+    - name: Build with Fastlane
+      run: bundle exec fastlane build
