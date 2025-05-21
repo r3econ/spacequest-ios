@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// TODO: Migrate to image assets
 enum ImageName: String {
     case PlayerSpaceship = "player_spaceship"
     case EnemySpaceship = "enemy_spaceship"

@@ -17,7 +17,7 @@ import SpriteKit
 
 class EnemySpaceship: Spaceship {
     
-    fileprivate var missileLaunchTimer: Timer?
+    private var missileLaunchTimer: Timer?
     
     // MARK: - Initialization
     
@@ -43,7 +43,7 @@ class EnemySpaceship: Spaceship {
     
     // MARK: - Configuration
     
-    fileprivate func configureCollisions() {
+    private func configureCollisions() {
         physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody!.usesPreciseCollisionDetection = true
         physicsBody!.categoryBitMask = CategoryBitmask.enemySpaceship.rawValue
@@ -63,30 +63,35 @@ class EnemySpaceship: Spaceship {
         missileLaunchTimer?.invalidate()
         
         // Schedule missile launch with random delay
-        let backoffTime = TimeInterval((arc4random() % 3) + 1)
+        let backoffTime = TimeInterval(Int.random(in: 1...3))
         missileLaunchTimer = Timer(timeInterval: backoffTime, target: self, selector: #selector(EnemySpaceship.launchMissile), userInfo: nil, repeats: false)
+        if let timer = missileLaunchTimer {
+            RunLoop.main.add(timer, forMode: RunLoop.Mode.common)
+        }
     }
     
     @objc func launchMissile() {
+        guard let scene = self.scene else { return }
+
         // Create a missile
         let missile = Missile.enemyMissile()
         missile.position = position
         missile.zPosition = zPosition - 1
         
         // Place it in the scene
-        scene!.addChild(missile)
+        scene.addChild(missile)
         
         // Make it move
         let velocity: CGFloat = 600.0
-        let moveDuration = scene!.size.width / velocity
-        let missileEndPosition = CGPoint(x: -0.1 * scene!.size.width, y: position.y)
+        let moveDuration = scene.size.width / velocity
+        let missileEndPosition = CGPoint(x: -0.1 * scene.size.width, y: position.y)
         
         let moveAction = SKAction.move(to: missileEndPosition, duration: TimeInterval(moveDuration))
         let removeAction = SKAction.removeFromParent()
         missile.run(SKAction.sequence([moveAction, removeAction]))
         
         // Play sound
-        scene!.run(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
+        scene.run(SKAction.playSoundFileNamed(SoundName.MissileLaunch.rawValue, waitForCompletion: false))
     }
     
 }

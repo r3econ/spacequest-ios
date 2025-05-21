@@ -105,7 +105,7 @@ extension GameScene {
     }
 
     private func scheduleEnemySpaceshipSpawn() {
-        let randomTimeInterval = TimeInterval(Double(arc4random_uniform(Constants.maxRandomTimeBetweenEnemySpawns) + 1)/1000.0)
+        let randomTimeInterval = TimeInterval(Double(UInt32.random(in: 1...Constants.maxRandomTimeBetweenEnemySpawns))/1000.0)
         spawnEnemyTimer = Timer.scheduledTimer(
             timeInterval: randomTimeInterval,
             target: self,
@@ -129,7 +129,7 @@ extension GameScene {
         let minY = enemySpaceship.size.height
         let maxY = frame.height - enemySpaceship.size.height
         let rangeY = maxY - minY
-        let randomY: UInt32 = arc4random_uniform(UInt32(rangeY)) + UInt32(minY)
+        let randomY = UInt32.random(in: UInt32(minY)..<(UInt32(minY) + UInt32(rangeY)))
 
         // Set position of the enemy to be slightly off-screen along the right edge,
         // and along a random position along the Y axis
@@ -175,53 +175,56 @@ extension GameScene {
     }
 
     private func configureJoystick() {
-        joystick = Joystick(maximumRadius: Constants.joystickMaximumRadius,
-                            stickImageNamed: ImageName.JoystickStick.rawValue,
-                            baseImageNamed: ImageName.JoystickBase.rawValue)
+        let newJoystick = Joystick(maximumRadius: Constants.joystickMaximumRadius,
+                                   stickImageNamed: ImageName.JoystickStick.rawValue,
+                                   baseImageNamed: ImageName.JoystickBase.rawValue)
         // Position
-        joystick!.position = CGPoint(x: joystick!.size.width + Constants.joystickLeftMargin,
-                                     y: joystick!.size.height)
+        newJoystick.position = CGPoint(x: newJoystick.size.width + Constants.joystickLeftMargin,
+                                       y: newJoystick.size.height)
         // Handler that gets called on joystick move
-        joystick!.updateHandler = { [weak self] joystickTranslation in
+        newJoystick.updateHandler = { [weak self] joystickTranslation in
             self?.updatePlayerSpaceshipPosition(with: joystickTranslation)
         }
-        addChild(joystick!)
+        self.joystick = newJoystick
+        addChild(newJoystick)
     }
 
     private func configureFireButton() {
-        fireButton = Button(normalImageNamed: ImageName.FireButtonNormal.rawValue,
-                            selectedImageNamed: ImageName.FireButtonSelected.rawValue)
-        fireButton!.position = CGPoint(x: frame.width - fireButton!.frame.width - Constants.fireButtonRightMargin,
-                                       y: fireButton!.frame.height/2 + Constants.fireButtonBottomMargin)
+        let newFireButton = Button(normalImageNamed: ImageName.FireButtonNormal.rawValue,
+                                   selectedImageNamed: ImageName.FireButtonSelected.rawValue)
+        newFireButton.position = CGPoint(x: frame.width - newFireButton.frame.width - Constants.fireButtonRightMargin,
+                                         y: newFireButton.frame.height/2 + Constants.fireButtonBottomMargin)
         // Touch handler
-        fireButton!.touchUpInsideEventHandler = { [weak self] in
+        newFireButton.touchUpInsideEventHandler = { [weak self] in
             self?.playerSpaceship.launchMissile()
         }
-
-        fireButton!.touchUpInsideEventHandler = { [weak self] in
-            self?.playerSpaceship.launchMissile()
-        }
-        addChild(fireButton!)
+        self.fireButton = newFireButton
+        addChild(newFireButton)
     }
 
     private func configureMenuButton() {
-        menuButton = Button(normalImageNamed: ImageName.ShowMenuButtonNormal.rawValue,
-                            selectedImageNamed: ImageName.ShowMenuButtonSelected.rawValue)
-        menuButton!.position = CGPoint(x: frame.width - menuButton!.frame.width/2 - Constants.menuButtonMargin,
-                                       y: frame.height - menuButton!.frame.height/2 - Constants.menuButtonMargin)
+        let newMenuButton = Button(normalImageNamed: ImageName.ShowMenuButtonNormal.rawValue,
+                                   selectedImageNamed: ImageName.ShowMenuButtonSelected.rawValue)
+        newMenuButton.position = CGPoint(x: frame.width - newMenuButton.frame.width/2 - Constants.menuButtonMargin,
+                                         y: frame.height - newMenuButton.frame.height/2 - Constants.menuButtonMargin)
         // Touch handler
-        menuButton!.touchUpInsideEventHandler = { [weak self] in
+        newMenuButton.touchUpInsideEventHandler = { [weak self] in
             guard let strongSelf = self else { return }
 
             strongSelf.gameSceneDelegate?.didTapMainMenuButton(in: strongSelf)
         }
-        addChild(menuButton!)
+        self.menuButton = newMenuButton
+        addChild(newMenuButton)
     }
 
     private func configureLifeIndicator() {
+        guard let joystick = self.joystick else {
+            print("Error: Joystick not initialized before configuring LifeIndicator.")
+            return
+        }
         // Position
-        lifeIndicator.position = CGPoint(x: joystick!.frame.maxX + 2.5 * joystick!.joystickRadius,
-                                         y: joystick!.frame.minY - joystick!.joystickRadius)
+        lifeIndicator.position = CGPoint(x: joystick.frame.maxX + 2.5 * joystick.joystickRadius,
+                                         y: joystick.frame.minY - joystick.joystickRadius)
         // Life points
         lifeIndicator.setLifePoints(playerSpaceship.lifePoints, animated: false)
         addChild(lifeIndicator)
@@ -278,43 +281,31 @@ extension GameScene : SKPhysicsContactDelegate {
 
         switch collisionType {
         case .playerMissileEnemySpaceship:
-
-            let enemy: EnemySpaceship; let missile: Missile
-            if contact.bodyA.node is EnemySpaceship {
-                enemy = contact.bodyA.node as! EnemySpaceship
-                missile = contact.bodyB.node as! Missile
-            } else {
-                enemy = contact.bodyB.node as! EnemySpaceship
-                missile = contact.bodyA.node as! Missile
-            }
-
+            guard let (missile, enemy) = getNodes(from: contact, typeA: Missile.self, typeB: EnemySpaceship.self) else { return }
             handleCollision(between: missile, and: enemy)
 
         case .playerSpaceshipEnemySpaceship:
-
-            let enemy: EnemySpaceship
-            if contact.bodyA.node is EnemySpaceship {
-                enemy = contact.bodyA.node as! EnemySpaceship
-            } else {
-                enemy = contact.bodyB.node as! EnemySpaceship
-            }
-
+            guard let (nodeA, nodeB) = getNodes(from: contact, typeA: PlayerSpaceship.self, typeB: EnemySpaceship.self) else { return }
+            let playerSpaceship = nodeA // Assuming playerSpaceship is always typeA if this case matches.
+            let enemy = nodeB
             handleCollision(between: playerSpaceship, and: enemy)
 
         case .enemyMissilePlayerSpaceship:
-
-            let missile: Missile
-            if contact.bodyA.node is Missile {
-                missile = contact.bodyA.node as! Missile
-            } else {
-                missile = contact.bodyB.node as! Missile
-            }
-
-            handleCollision(between: playerSpaceship, and: missile)
+            guard let (missile, player) = getNodes(from: contact, typeA: Missile.self, typeB: PlayerSpaceship.self) else { return }
+            handleCollision(between: player, and: missile)
         }
     }
 
-    private func collisionType(for contact: SKPhysicsContact!) -> CollisionType? {
+    private func getNodes<T: SKNode, U: SKNode>(from contact: SKPhysicsContact, typeA: T.Type, typeB: U.Type) -> (T, U)? {
+        if let nodeA = contact.bodyA.node as? T, let nodeB = contact.bodyB.node as? U {
+            return (nodeA, nodeB)
+        } else if let nodeA = contact.bodyB.node as? T, let nodeB = contact.bodyA.node as? U {
+            return (nodeA, nodeB)
+        }
+        return nil
+    }
+    
+    func collisionType(for contact: SKPhysicsContact!) -> CollisionType? { // Made internal
         guard
             let categoryBitmaskBodyA = CategoryBitmask(rawValue: contact.bodyA.categoryBitMask),
             let categoryBitmaskBodyB = CategoryBitmask(rawValue: contact.bodyB.categoryBitMask) else {
@@ -404,7 +395,7 @@ extension GameScene {
     }
 
     private func blendColorAction(with color: UIColor) -> SKAction {
-        let colorizeAction = SKAction.colorize(with: UIColor.red,
+        let colorizeAction = SKAction.colorize(with: .red,
                                                colorBlendFactor: 0.7,
                                                duration: 0.2)
         let uncolorizeAction = SKAction.colorize(withColorBlendFactor: 0.0,
@@ -413,17 +404,20 @@ extension GameScene {
     }
 
     private func enemyDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
-        return { [weak self] object in
-            let enemySpaceship = object as! EnemySpaceship
-            self?.destroySpaceship(enemySpaceship)
+        return { [weak self] spaceship in
+            // The spaceship parameter is already of type Spaceship.
+            // destroySpaceship expects a Spaceship, so no further cast is needed here
+            // unless specific EnemySpaceship properties were to be accessed.
+            self?.destroySpaceship(spaceship)
         }
     }
 
     private func playerDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
-        return { [weak self] _ in
+        return { [weak self] spaceship in
             guard let strongSelf = self else { return }
 
-            strongSelf.destroySpaceship(strongSelf.playerSpaceship)
+            // The `spaceship` parameter should be the playerSpaceship that ran out of life points.
+            strongSelf.destroySpaceship(spaceship)
             strongSelf.gameSceneDelegate?.playerDidLose(withScore: strongSelf.scoresNode.value,
                                                         in: strongSelf)
         }
@@ -431,20 +425,23 @@ extension GameScene {
 
     private func destroySpaceship(_ spaceship: Spaceship!) {
         // Create an explosion
-        let explosionEmitter = SKEmitterNode(fileNamed: Constants.explosionEmitterFileName)
-        // Position it
-        explosionEmitter!.position.x = spaceship.position.x - spaceship.size.width/2
-        explosionEmitter!.position.y = spaceship.position.y
-        explosionEmitter!.zPosition = spaceship.zPosition + 1
-        // Add it to the scene
-        addChild(explosionEmitter!)
-        explosionEmitter!.run(SKAction.sequence([SKAction.wait(forDuration: 5),
-                                                 SKAction.removeFromParent()]))
+        if let explosionEmitter = SKEmitterNode(fileNamed: Constants.explosionEmitterFileName) {
+            // Position it
+            explosionEmitter.position.x = spaceship.position.x - spaceship.size.width/2
+            explosionEmitter.position.y = spaceship.position.y
+            explosionEmitter.zPosition = spaceship.zPosition + 1
+            // Add it to the scene
+            addChild(explosionEmitter)
+            explosionEmitter.run(SKAction.sequence([SKAction.wait(forDuration: 5),
+                                                     SKAction.removeFromParent()]))
+        } else {
+            print("Warning: Could not load explosion particle effect: \(Constants.explosionEmitterFileName)")
+        }
         // Fade out the enemy and remove it
         spaceship.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.1),
                                          SKAction.removeFromParent()]))
         // Play explosion sound
-        scene!.run(SKAction.playSoundFileNamed(SoundName.Explosion.rawValue,
+        run(SKAction.playSoundFileNamed(SoundName.Explosion.rawValue,
                                                waitForCompletion: false))
     }
 
