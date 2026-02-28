@@ -127,9 +127,10 @@ extension Button {
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard isEnabled else { return }
-
-        touchUpInsideEventHandler?()
+        guard isEnabled, let touch = touches.first, let parent = parent else { return }
+        if contains(touch.location(in: parent)) {
+            touchUpInsideEventHandler?()
+        }
         isSelected = false
     }
 
