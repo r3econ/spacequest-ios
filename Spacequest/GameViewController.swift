@@ -172,7 +172,7 @@ extension GameViewController: MainMenuSceneDelegate {
     func mainMenuSceneDidTapInfoButton(_ mainMenuScene:MainMenuScene) {
         // Create a simple alert with copyright information
         let alertController = UIAlertController(title: "About",
-                                                message: "Copyright 2016 Rafał Sroka. All rights reserved.",
+                                                message: "Copyright 2016-2026 Rafał Sroka. All rights reserved.",
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
 
