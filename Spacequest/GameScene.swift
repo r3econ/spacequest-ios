@@ -287,7 +287,7 @@ extension GameScene : SKPhysicsContactDelegate {
         return nil
     }
     
-    func collisionType(for contact: SKPhysicsContact!) -> CollisionType? { // Made internal
+    private func collisionType(for contact: SKPhysicsContact!) -> CollisionType? {
         guard
             let categoryBitmaskBodyA = CategoryBitmask(rawValue: contact.bodyA.categoryBitMask),
             let categoryBitmaskBodyB = CategoryBitmask(rawValue: contact.bodyB.categoryBitMask) else {
