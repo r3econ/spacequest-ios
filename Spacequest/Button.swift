@@ -24,12 +24,10 @@ class Button: SKSpriteNode {
     var touchUpInsideEventHandler: TouchUpInsideEventHandler?
     var continuousTouchDownEventHandler: ContinuousTouchDownEventHandler?
     var touchDownEventHandler: TouchDownEventHandler?
-    var textureNormal: SKTexture?
-    var textureSelected: SKTexture?
-    var textureDisabled: SKTexture?
     var titleLabelNode: SKLabelNode?
-    var isSelected: Bool = false
-    var isEnabled: Bool = true
+    private let textureNormal: SKTexture
+    private let textureSelected: SKTexture?
+    private let textureDisabled: SKTexture?
 
     // MARK: - Initialization
 
@@ -37,107 +35,78 @@ class Button: SKSpriteNode {
         fatalError()
     }
 
-    init(textureNormal: SKTexture!, textureSelected: SKTexture!, textureDisabled: SKTexture!) {
+    init(textureNormal: SKTexture,
+         textureSelected: SKTexture? = nil,
+         textureDisabled: SKTexture? = nil) {
         self.textureNormal = textureNormal
         self.textureSelected = textureSelected
         self.textureDisabled = textureDisabled
-        isEnabled = true
-        isSelected = false
 
         super.init(texture: textureNormal,
-                   color: UIColor.brown,
+                   color: .clear,
                    size: textureNormal.size())
 
         isUserInteractionEnabled = true
     }
 
-    convenience init(textureNormal: SKTexture, textureSelected: SKTexture!) {
-        self.init(textureNormal:textureNormal,
-                  textureSelected:textureSelected,
-                  textureDisabled:nil)
-    }
-
-    convenience init(normalImageNamed: String, selectedImageNamed: String!, disabledImageNamed: String!) {
+    convenience init(normalImageNamed: String,
+                     selectedImageNamed: String? = nil,
+                     disabledImageNamed: String? = nil) {
         let textureNormal = SKTexture(imageNamed: normalImageNamed)
-        let textureSelected = SKTexture(imageNamed: selectedImageNamed)
 
-        self.init(textureNormal:textureNormal,
-                  textureSelected:textureSelected,
-                  textureDisabled:nil)
-    }
+        var textureSelected: SKTexture?
+        if let selectedImageNamed {
+            textureSelected = SKTexture(imageNamed: selectedImageNamed)
+        }
 
-    convenience init(normalImageNamed: String, selectedImageNamed: String!) {
-        self.init(normalImageNamed: normalImageNamed,
-                  selectedImageNamed: selectedImageNamed,
-                  disabledImageNamed: nil)
+        var textureDisabled: SKTexture?
+        if let disabledImageNamed {
+            textureDisabled = SKTexture(imageNamed: disabledImageNamed)
+        }
+
+        self.init(textureNormal: textureNormal,
+                  textureSelected: textureSelected,
+                  textureDisabled: textureDisabled)
     }
 
     // MARK: - Properties
 
     var title: String? {
-        set {
-            if titleLabelNode == nil {
-                titleLabelNode = SKLabelNode()
-                titleLabelNode!.horizontalAlignmentMode = .center
-                titleLabelNode!.verticalAlignmentMode = .center
-
-                addChild(titleLabelNode!)
-            }
-
-            titleLabelNode!.text = newValue!
-        }
-        get {
-            guard let node = titleLabelNode else {
-                return nil
-            }
-
-            return node.text
-        }
+        get { titleLabelNode?.text }
+        set { ensureTitleLabelNode().text = newValue }
     }
 
     var font: UIFont? {
-        set {
-            if titleLabelNode == nil {
-                titleLabelNode = SKLabelNode()
-                titleLabelNode!.horizontalAlignmentMode = .center
-                titleLabelNode!.verticalAlignmentMode = .center
-
-                addChild(titleLabelNode!)
-            }
-
-            titleLabelNode!.fontName = newValue!.fontName
-            titleLabelNode!.fontSize = newValue!.pointSize
-        }
         get {
-            guard let node = titleLabelNode else {
-                return nil
-            }
-
-            guard let fontName = node.fontName, !fontName.isEmpty else { return nil }
+            guard let node = titleLabelNode,
+                  let fontName = node.fontName,
+                  !fontName.isEmpty else { return nil }
             return UIFont(name: fontName, size: node.fontSize)
         }
-    }
-
-    var selected: Bool {
         set {
-            isSelected = newValue
-            texture = newValue ? textureSelected : textureNormal
-        }
-        get {
-            return isSelected
+            let label = ensureTitleLabelNode()
+            label.fontName = newValue?.fontName
+            label.fontSize = newValue?.pointSize ?? label.fontSize
         }
     }
 
-    var enabled: Bool {
-        set {
-            isEnabled = newValue
-            texture = newValue ? textureNormal : textureDisabled
-        }
-        get {
-            return isEnabled
-        }
+    var isSelected: Bool = false {
+        didSet { texture = isSelected ? textureSelected : textureNormal }
     }
 
+    var isEnabled: Bool = true {
+        didSet { texture = isEnabled ? textureNormal : textureDisabled }
+    }
+
+    private func ensureTitleLabelNode() -> SKLabelNode {
+        if let existing = titleLabelNode { return existing }
+        let label = SKLabelNode()
+        label.horizontalAlignmentMode = .center
+        label.verticalAlignmentMode = .center
+        addChild(label)
+        titleLabelNode = label
+        return label
+    }
 }
 
 // MARK: - Touches
@@ -148,26 +117,25 @@ extension Button {
         guard isEnabled else { return }
 
         touchDownEventHandler?()
-        selected = true
+        isSelected = true
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard isEnabled, let touch = touches.first else { return }
 
-        selected = frame.contains(touch.location(in: self))
+        isSelected = frame.contains(touch.location(in: self))
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard isEnabled else { return }
 
         touchUpInsideEventHandler?()
-        selected = false
+        isSelected = false
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard isEnabled else { return }
 
-        selected = false
+        isSelected = false
     }
-
 }
