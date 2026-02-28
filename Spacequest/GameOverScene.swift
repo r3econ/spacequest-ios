@@ -41,8 +41,7 @@ class GameOverScene: MenuScene {
 
     private func configureButtons() {
         let restartButton = Button(
-            normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
-            selectedImageNamed: ImageName.MenuButtonRestartSelected.rawValue)
+            normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
 
         restartButton.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
 

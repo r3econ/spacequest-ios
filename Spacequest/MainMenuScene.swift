@@ -43,19 +43,16 @@ class MainMenuScene: MenuScene {
     // MARK: - Configuration
 
     private func configureButtons() {
-        let infoButton = Button(normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
-                                selectedImageNamed: ImageName.MenuButtonInfoSelected.rawValue)
+        let infoButton = Button(normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
         infoButton.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
         infoButton.position = CGPoint(x: size.width - 40.0,
                                       y: size.height - 25.0)
         addChild(infoButton)
 
-        let resumeButton = Button(normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
-                                  selectedImageNamed: ImageName.MenuButtonResumeSelected.rawValue)
+        let resumeButton = Button(normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
         resumeButton.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
 
-        let restartButton = Button(normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
-                                   selectedImageNamed: ImageName.MenuButtonRestartSelected.rawValue)
+        let restartButton = Button(normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
         restartButton.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
 
         let buttons = [resumeButton, restartButton]

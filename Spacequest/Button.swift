@@ -39,8 +39,8 @@ class Button: SKSpriteNode {
          textureSelected: SKTexture? = nil,
          textureDisabled: SKTexture? = nil) {
         self.textureNormal = textureNormal
-        self.textureSelected = textureSelected
-        self.textureDisabled = textureDisabled
+        self.textureSelected = textureSelected ?? textureNormal
+        self.textureDisabled = textureDisabled ?? textureNormal
 
         super.init(texture: textureNormal,
                    color: .clear,
