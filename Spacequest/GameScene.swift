@@ -371,7 +371,7 @@ extension GameScene {
     }
 
     private func blendColorAction(with color: UIColor) -> SKAction {
-        let colorizeAction = SKAction.colorize(with: .red,
+        let colorizeAction = SKAction.colorize(with: color,
                                                colorBlendFactor: 0.7,
                                                duration: 0.2)
         let uncolorizeAction = SKAction.colorize(withColorBlendFactor: 0.0,
