@@ -28,7 +28,6 @@ class GameViewController: UIViewController {
         configureView()
         startNewGame(animated: false)
 
-        // Start the background music
         MusicManager.shared.playBackgroundMusic()
     }
 
@@ -44,7 +43,6 @@ class GameViewController: UIViewController {
     }
 
     override var prefersStatusBarHidden: Bool {
-        // Hide the status bar
         return true
     }
 
@@ -83,7 +81,6 @@ class GameViewController: UIViewController {
         }
 
         if animated {
-            // Show game scene
             skView.presentScene(gameScene,
                                 transition: SKTransition.crossFade(withDuration: .sceneTransitionDuration))
             
@@ -93,7 +90,6 @@ class GameViewController: UIViewController {
             self.gameScene?.isPaused = false
         }
         else {
-            // Remove the menu scene and unpause the game scene after it was shown
             skView.presentScene(gameScene)
             gameScene.isPaused = false
         }
@@ -103,17 +99,14 @@ class GameViewController: UIViewController {
         let scene = MainMenuScene(size: view.frame.size)
         scene.mainMenuSceneDelegate = self
 
-        // Pause the game and show main menu
         gameScene?.isPaused = true
         show(scene, animated: animated)
     }
 
     private func showGameOverScene(animated: Bool) {
-        // Create game over scene
         let scene = GameOverScene(size: view.frame.size)
         scene.gameOverSceneDelegate = self
 
-        // Pause the game and show game over
         gameScene?.isPaused = true
         show(scene, animated: animated)
     }
@@ -142,12 +135,10 @@ class GameViewController: UIViewController {
 extension GameViewController: GameSceneDelegate {
 
     func didTapMainMenuButton(in gameScene: GameScene) {
-        // Show initial, main menu scene
         showMainMenuScene(animated: true)
     }
 
     func playerDidLose(withScore score: Int, in gameScene:GameScene) {
-        // Player lost, show game over scene
         showGameOverScene(animated: true)
     }
 
@@ -175,8 +166,6 @@ extension GameViewController: MainMenuSceneDelegate {
                                                 message: "Copyright 2016-2026 Rafał Sroka. All rights reserved.",
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-
-        // Show it
         present(alertController, animated: true, completion: nil)
     }
 

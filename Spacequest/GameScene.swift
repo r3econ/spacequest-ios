@@ -38,7 +38,6 @@ class GameScene: SKScene {
 
     weak var gameSceneDelegate: GameSceneDelegate?
 
-    // Nodes
     private var background: SKSpriteNode?
     private var playerSpaceship = PlayerSpaceship()
     private var joystick: Joystick?
@@ -54,11 +53,8 @@ class GameScene: SKScene {
 
     override func sceneDidLoad() {
         super.sceneDidLoad()
-
-        // Set scale mode
         scaleMode = SKSceneScaleMode.resizeFill;
 
-        // Configure scene contents
         configureBackground()
         configurePlayerSpaceship()
         configurePhysics()
@@ -115,9 +111,7 @@ extension GameScene {
     }
 
     @objc private func spawnEnemyTimerFireMethod() {
-        // Spawn enemy spaceship
         spawnEnemySpaceship()
-        // Schedule spawn of the next one
         scheduleEnemySpaceshipSpawn()
     }
 
@@ -136,8 +130,6 @@ extension GameScene {
         enemySpaceship.position = CGPoint(x: frame.size.width + enemySpaceship.size.width/2,
                                           y: CGFloat(randomY))
         enemySpaceship.zPosition = playerSpaceship.zPosition
-
-        // Add it to the scene
         addChild(enemySpaceship)
 
         // Determine speed of the enemy
@@ -164,10 +156,8 @@ extension GameScene {
     }
 
     private func configurePlayerSpaceship() {
-        // Start position
         playerSpaceship.position = CGPoint(x: playerSpaceship.size.width/2 + 160.0,
                                            y: frame.height/2 + 40.0)
-        // Life points
         playerSpaceship.lifePoints = 100
         playerSpaceship.didRunOutOfLifePointsEventHandler = playerDidRunOutOfLifePointsEventHandler()
 
@@ -178,7 +168,6 @@ extension GameScene {
         let newJoystick = Joystick(maximumRadius: Constants.joystickMaximumRadius,
                                    stickImageNamed: ImageName.JoystickStick.rawValue,
                                    baseImageNamed: ImageName.JoystickBase.rawValue)
-        // Position
         newJoystick.position = CGPoint(x: newJoystick.size.width + Constants.joystickLeftMargin,
                                        y: newJoystick.size.height)
         // Handler that gets called on joystick move
@@ -194,7 +183,6 @@ extension GameScene {
                                    selectedImageNamed: ImageName.FireButtonSelected.rawValue)
         newFireButton.position = CGPoint(x: frame.width - newFireButton.frame.width - Constants.fireButtonRightMargin,
                                          y: newFireButton.frame.height/2 + Constants.fireButtonBottomMargin)
-        // Touch handler
         newFireButton.touchUpInsideEventHandler = { [weak self] in
             self?.playerSpaceship.launchMissile()
         }
@@ -207,7 +195,6 @@ extension GameScene {
                                    selectedImageNamed: ImageName.ShowMenuButtonSelected.rawValue)
         newMenuButton.position = CGPoint(x: frame.width - newMenuButton.frame.width/2 - Constants.menuButtonMargin,
                                          y: frame.height - newMenuButton.frame.height/2 - Constants.menuButtonMargin)
-        // Touch handler
         newMenuButton.touchUpInsideEventHandler = { [weak self] in
             guard let strongSelf = self else { return }
 
@@ -222,10 +209,8 @@ extension GameScene {
             print("Error: Joystick not initialized before configuring LifeIndicator.")
             return
         }
-        // Position
         lifeIndicator.position = CGPoint(x: joystick.frame.maxX + 2.5 * joystick.joystickRadius,
                                          y: joystick.frame.minY - joystick.joystickRadius)
-        // Life points
         lifeIndicator.setLifePoints(playerSpaceship.lifePoints, animated: false)
         addChild(lifeIndicator)
     }
@@ -237,13 +222,11 @@ extension GameScene {
     }
 
     private func configureBackground() {
-        // Create background node
         let backgroundNode = SKSpriteNode(imageNamed: ImageName.GameBackgroundPhone.rawValue)
         backgroundNode.size = size
         backgroundNode.position = CGPoint(x: size.width/2, y: size.height/2)
         backgroundNode.zPosition = -1000
 
-        // Node with trees
         let trees = SKSpriteNode(imageNamed: ImageName.BackgroundTrees.rawValue)
         trees.anchorPoint = CGPoint(x: 0.0, y: 0.0)
         trees.position = CGPoint(x: -size.width/2, y: -size.height/2)
@@ -276,7 +259,6 @@ extension GameScene {
 extension GameScene : SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
-        // Get collision type
         guard let collisionType = self.collisionType(for: contact) else { return }
 
         switch collisionType {
@@ -334,12 +316,9 @@ extension GameScene : SKPhysicsContactDelegate {
 
 extension GameScene {
 
-    /// Handle collision between player spaceship and the enemy spaceship
     private func handleCollision(between playerSpaceship: PlayerSpaceship,
                                  and enemySpaceship: EnemySpaceship!) {
-        // Update score
         increaseScore(by: ScoreValue.playerMissileHitEnemySpaceship.rawValue)
-        // Update life points
         modifyPlayerSpaceshipLifePoints(by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
         modifyLifePoints(of: enemySpaceship,
                          by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
@@ -347,11 +326,8 @@ extension GameScene {
 
     private func handleCollision(between playerMissile: Missile,
                                  and enemySpaceship: EnemySpaceship) {
-        // Remove missile
         playerMissile.removeFromParent()
-        // Update score
         increaseScore(by: ScoreValue.playerMissileHitEnemySpaceship.rawValue)
-        // Update life points
         modifyLifePoints(of: enemySpaceship,
                          by: LifePointsValue.playerMissileHitEnemySpaceship.rawValue)
     }
@@ -440,7 +416,6 @@ extension GameScene {
         // Fade out the enemy and remove it
         spaceship.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.1),
                                          SKAction.removeFromParent()]))
-        // Play explosion sound
         run(SKAction.playSoundFileNamed(SoundName.Explosion.rawValue,
                                                waitForCompletion: false))
     }
