@@ -21,8 +21,6 @@ protocol GameOverSceneDelegate: AnyObject {
 
 class GameOverScene: MenuScene {
 
-    private var restartButton: Button?
-    private var buttons: [Button]?
     weak var gameOverSceneDelegate: GameOverSceneDelegate?
 
     // MARK: - Scene lifecycle
@@ -42,27 +40,27 @@ class GameOverScene: MenuScene {
     // MARK: - Configuration
 
     private func configureButtons() {
-        restartButton = Button(
+        let restartButton = Button(
             normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
-            selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
+            selectedImageNamed: ImageName.MenuButtonRestartSelected.rawValue)
 
-        restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
+        restartButton.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
 
-        buttons = [restartButton!]
+        let buttons = [restartButton]
         let horizontalPadding: CGFloat = 20.0
         var totalButtonsWidth: CGFloat = 0.0
 
         // Calculate total width of the buttons area.
-        for (index, button) in (buttons!).enumerated() {
+        for (index, button) in (buttons).enumerated() {
 
             totalButtonsWidth += button.size.width
-            totalButtonsWidth += index != buttons!.count - 1 ? horizontalPadding : 0.0
+            totalButtonsWidth += index != buttons.count - 1 ? horizontalPadding : 0.0
         }
 
         var buttonOriginX = frame.width / 2.0 + totalButtonsWidth / 2.0
 
         // Place buttons in the scene.
-        for (_, button) in (buttons!).enumerated() {
+        for button in buttons {
             button.position = CGPoint(
                 x: buttonOriginX - button.size.width/2,
                 y: button.size.height * 1.1)
@@ -80,9 +78,9 @@ class GameOverScene: MenuScene {
 
     private func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
         let handler = { [weak self] in
-            guard let strongSelf = self else { return }
+            guard let self else { return }
 
-            strongSelf.gameOverSceneDelegate?.gameOverSceneDidTapRestartButton(strongSelf)
+            self.gameOverSceneDelegate?.gameOverSceneDidTapRestartButton(self)
         }
 
         return handler
