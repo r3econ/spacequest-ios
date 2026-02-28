@@ -15,7 +15,7 @@
 
 import SpriteKit
 
-protocol GameSceneDelegate: AnyObject {
+protocol GameDelegate: AnyObject {
     func didTapMainMenuButton(in gameScene: GameScene)
     func playerDidLose(withScore score: Int, in gameScene:GameScene)
 }
@@ -36,7 +36,7 @@ class GameScene: SKScene {
         static let explosionEmitterFileName = "Explosion"
     }
 
-    weak var gameSceneDelegate: GameSceneDelegate?
+    weak var gameDelegate: GameDelegate?
 
     private var background: SKSpriteNode?
     private var playerSpaceship = PlayerSpaceship()
@@ -196,9 +196,8 @@ extension GameScene {
         newMenuButton.position = CGPoint(x: frame.width - newMenuButton.frame.width/2 - Constants.menuButtonMargin,
                                          y: frame.height - newMenuButton.frame.height/2 - Constants.menuButtonMargin)
         newMenuButton.touchUpInsideEventHandler = { [weak self] in
-            guard let strongSelf = self else { return }
-
-            strongSelf.gameSceneDelegate?.didTapMainMenuButton(in: strongSelf)
+            guard let self else { return }
+            self.gameDelegate?.didTapMainMenuButton(in: self)
         }
         self.menuButton = newMenuButton
         addChild(newMenuButton)
@@ -390,12 +389,12 @@ extension GameScene {
 
     private func playerDidRunOutOfLifePointsEventHandler() -> DidRunOutOfLifePointsEventHandler {
         return { [weak self] spaceship in
-            guard let strongSelf = self else { return }
+            guard let self else { return }
 
             // The `spaceship` parameter should be the playerSpaceship that ran out of life points.
-            strongSelf.destroySpaceship(spaceship)
-            strongSelf.gameSceneDelegate?.playerDidLose(withScore: strongSelf.scoresNode.value,
-                                                        in: strongSelf)
+            self.destroySpaceship(spaceship)
+            self.gameDelegate?.playerDidLose(withScore: self.scoresNode.value,
+                                             in: self)
         }
     }
 

@@ -69,7 +69,7 @@ class GameViewController: UIViewController {
         // Recreate game scene
         let newGameScene = GameScene(size: view.frame.size)
         newGameScene.scaleMode = .aspectFill
-        newGameScene.gameSceneDelegate = self
+        newGameScene.gameDelegate = self
         self.gameScene = newGameScene
 
         show(newGameScene, animated: animated)
@@ -132,7 +132,7 @@ class GameViewController: UIViewController {
 
 // MARK: - GameSceneDelegate
 
-extension GameViewController: GameSceneDelegate {
+extension GameViewController: GameDelegate {
 
     func didTapMainMenuButton(in gameScene: GameScene) {
         showMainMenuScene(animated: true)
@@ -141,7 +141,6 @@ extension GameViewController: GameSceneDelegate {
     func playerDidLose(withScore score: Int, in gameScene:GameScene) {
         showGameOverScene(animated: true)
     }
-
 }
 
 // MARK: - MainMenuSceneDelegate
@@ -179,7 +178,6 @@ extension GameViewController: GameOverSceneDelegate {
         // TODO: Remove game over scene here
         startNewGame(animated: true)
     }
-
 }
 
 private extension Double {
