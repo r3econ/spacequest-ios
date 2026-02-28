@@ -399,7 +399,7 @@ extension GameScene {
         }
     }
 
-    private func destroySpaceship(_ spaceship: Spaceship!) {
+    private func destroySpaceship(_ spaceship: Spaceship) {
         // Create an explosion
         if let explosionEmitter = SKEmitterNode(fileNamed: Constants.explosionEmitterFileName) {
             // Position it
