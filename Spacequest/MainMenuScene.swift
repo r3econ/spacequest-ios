@@ -44,18 +44,18 @@ class MainMenuScene: MenuScene {
 
     private func configureButtons() {
         let infoButton = Button(normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
-                                selectedImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
+                                selectedImageNamed: ImageName.MenuButtonInfoSelected.rawValue)
         infoButton.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
-        infoButton.position = CGPoint(x: scene!.size.width - 40.0,
-                                      y: scene!.size.height - 25.0)
+        infoButton.position = CGPoint(x: size.width - 40.0,
+                                      y: size.height - 25.0)
         addChild(infoButton)
 
         let resumeButton = Button(normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
-                                  selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
+                                  selectedImageNamed: ImageName.MenuButtonResumeSelected.rawValue)
         resumeButton.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
 
         let restartButton = Button(normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
-                                   selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
+                                   selectedImageNamed: ImageName.MenuButtonRestartSelected.rawValue)
         restartButton.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
 
         let buttons = [resumeButton, restartButton]
@@ -70,7 +70,7 @@ class MainMenuScene: MenuScene {
         var buttonOriginX = frame.width / 2.0 + totalButtonsWidth / 2.0
 
         // Place buttons in the scene.
-        for (_, button) in buttons.enumerated() {
+        for button in buttons {
             button.position = CGPoint(x: buttonOriginX - button.size.width/2,
                                       y: button.size.height * 1.1)
             addChild(button)
