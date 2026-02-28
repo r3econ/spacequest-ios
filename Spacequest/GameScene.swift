@@ -287,7 +287,7 @@ extension GameScene : SKPhysicsContactDelegate {
         return nil
     }
     
-    private func collisionType(for contact: SKPhysicsContact!) -> CollisionType? {
+    private func collisionType(for contact: SKPhysicsContact) -> CollisionType? {
         guard
             let categoryBitmaskBodyA = CategoryBitmask(rawValue: contact.bodyA.categoryBitMask),
             let categoryBitmaskBodyB = CategoryBitmask(rawValue: contact.bodyB.categoryBitMask) else {
@@ -317,7 +317,7 @@ extension GameScene : SKPhysicsContactDelegate {
 extension GameScene {
 
     private func handleCollision(between playerSpaceship: PlayerSpaceship,
-                                 and enemySpaceship: EnemySpaceship!) {
+                                 and enemySpaceship: EnemySpaceship) {
         increaseScore(by: ScoreValue.playerMissileHitEnemySpaceship.rawValue)
         modifyPlayerSpaceshipLifePoints(by: LifePointsValue.enemySpaceshipHitPlayerSpaceship.rawValue)
         modifyLifePoints(of: enemySpaceship,
