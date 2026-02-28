@@ -16,12 +16,11 @@
 import UIKit
 import Foundation
 
-class AnalyticsManager: NSObject{
+class AnalyticsManager {
 
     static let sharedInstance = AnalyticsManager()
 
-    override init() {
-        super.init()
+    init() {
         // Configure 3rd party SDKs here
     }
 }
@@ -31,5 +30,4 @@ extension AnalyticsManager {
     func trackScene(_ name: String) {
         // TODO: Implement tracking
     }
-
 }
