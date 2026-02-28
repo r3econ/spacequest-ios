@@ -17,21 +17,21 @@ import UIKit
 import AVFoundation
 
 class MusicManager: NSObject {
-    
+
     static let shared = MusicManager()
     private var backgroundMusicPlayer: AVAudioPlayer!
-    
+
     override init() {
         super.init()
         configureBackgroundMusicPlayer()
     }
-    
+
 }
 
 // MARK - Background Music
 
 extension MusicManager{
-    
+
     private func configureBackgroundMusicPlayer() {
         let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "background",
                                                             ofType: "mp3")!)
@@ -41,11 +41,11 @@ extension MusicManager{
             backgroundMusicPlayer.prepareToPlay()
         } catch let error as NSError {
             backgroundMusicPlayer = nil
-            
+
             print(error.localizedDescription)
         }
     }
-    
+
     func toggleBackgroundMusic() {
         if (backgroundMusicPlayer!.isPlaying) {
             backgroundMusicPlayer!.pause()
@@ -54,11 +54,11 @@ extension MusicManager{
             backgroundMusicPlayer!.play()
         }
     }
-    
+
     func playBackgroundMusic() {
         backgroundMusicPlayer!.play()
     }
-    
+
     func pauseBackgroundMusic() {
         backgroundMusicPlayer!.pause()
     }

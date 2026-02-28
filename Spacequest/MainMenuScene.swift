@@ -75,7 +75,6 @@ class MainMenuScene: MenuScene {
             totalButtonsWidth += index != buttons!.count - 1 ? horizontalPadding : 0.0
         }
 
-        // Calculate origin of first button.
         var buttonOriginX = frame.width / 2.0 + totalButtonsWidth / 2.0
 
         // Place buttons in the scene.
