@@ -24,10 +24,6 @@ protocol MainMenuSceneDelegate: AnyObject {
 
 class MainMenuScene: MenuScene {
 
-    private var infoButton: Button?
-    private var resumeButton: Button?
-    private var restartButton: Button?
-    private var buttons: [Button]?
     weak var mainMenuSceneDelegate: MainMenuSceneDelegate?
 
     // MARK: - Scene lifecycle
@@ -47,43 +43,39 @@ class MainMenuScene: MenuScene {
     // MARK: - Configuration
 
     private func configureButtons() {
-        // Info button.
-        infoButton = Button(normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
-                            selectedImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
-        infoButton!.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
-        infoButton!.position = CGPoint(x: scene!.size.width - 40.0,
-                                       y: scene!.size.height - 25.0)
-        addChild(infoButton!)
+        let infoButton = Button(normalImageNamed: ImageName.MenuButtonInfoNormal.rawValue,
+                                selectedImageNamed: ImageName.MenuButtonInfoNormal.rawValue)
+        infoButton.touchUpInsideEventHandler = infoButtonTouchUpInsideHandler()
+        infoButton.position = CGPoint(x: scene!.size.width - 40.0,
+                                      y: scene!.size.height - 25.0)
+        addChild(infoButton)
 
-        // Resume button.
-        resumeButton = Button(normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
-                              selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
-        resumeButton!.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
+        let resumeButton = Button(normalImageNamed: ImageName.MenuButtonResumeNormal.rawValue,
+                                  selectedImageNamed: ImageName.MenuButtonResumeNormal.rawValue)
+        resumeButton.touchUpInsideEventHandler = resumeButtonTouchUpInsideHandler()
 
-        // Restart button.
-        restartButton = Button(normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
-                               selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
-        restartButton!.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
+        let restartButton = Button(normalImageNamed: ImageName.MenuButtonRestartNormal.rawValue,
+                                   selectedImageNamed: ImageName.MenuButtonRestartNormal.rawValue)
+        restartButton.touchUpInsideEventHandler = restartButtonTouchUpInsideHandler()
 
-        buttons = [resumeButton!, restartButton!]
-        let horizontalPadding: CGFloat = 20.0
+        let buttons = [resumeButton, restartButton]
         var totalButtonsWidth: CGFloat = 0.0
 
         // Calculate total width of the buttons area.
-        for (index, button) in buttons!.enumerated() {
+        for (index, button) in buttons.enumerated() {
             totalButtonsWidth += button.size.width
-            totalButtonsWidth += index != buttons!.count - 1 ? horizontalPadding : 0.0
+            totalButtonsWidth += index != buttons.count - 1 ? .horizontalPadding : 0.0
         }
 
         var buttonOriginX = frame.width / 2.0 + totalButtonsWidth / 2.0
 
         // Place buttons in the scene.
-        for (_, button) in buttons!.enumerated() {
+        for (_, button) in buttons.enumerated() {
             button.position = CGPoint(x: buttonOriginX - button.size.width/2,
                                       y: button.size.height * 1.1)
             addChild(button)
 
-            buttonOriginX -= button.size.width + horizontalPadding
+            buttonOriginX -= button.size.width + .horizontalPadding
 
             let rotateAction = SKAction.rotate(byAngle: CGFloat(.pi/180.0 * 5.0), duration: 2.0)
             let sequence = SKAction.sequence([rotateAction, rotateAction.reversed()])
@@ -93,25 +85,28 @@ class MainMenuScene: MenuScene {
 
     private func resumeButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
         return { [weak self] in
-            guard let strongSelf = self else { return }
-
-            strongSelf.mainMenuSceneDelegate?.mainMenuSceneDidTapResumeButton(strongSelf)
+            guard let self else { return }
+            self.mainMenuSceneDelegate?.mainMenuSceneDidTapResumeButton(self)
         }
     }
 
     private func restartButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
         return { [weak self] in
-            guard let strongSelf = self else { return }
+            guard let self else { return }
 
-            strongSelf.mainMenuSceneDelegate?.mainMenuSceneDidTapRestartButton(strongSelf)
+            self.mainMenuSceneDelegate?.mainMenuSceneDidTapRestartButton(self)
         }
     }
 
     private func infoButtonTouchUpInsideHandler() -> TouchUpInsideEventHandler {
         return { [weak self] in
-            guard let strongSelf = self else { return }
+            guard let self else { return }
 
-            strongSelf.mainMenuSceneDelegate?.mainMenuSceneDidTapInfoButton(strongSelf)
+            self.mainMenuSceneDelegate?.mainMenuSceneDidTapInfoButton(self)
         }
     }
+}
+
+private extension CGFloat {
+    static let horizontalPadding: CGFloat = 20.0
 }
