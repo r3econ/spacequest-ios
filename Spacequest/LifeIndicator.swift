@@ -27,7 +27,7 @@ class LifeIndicator: SKSpriteNode {
     // MARK: - Initialization
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError()
     }
 
     init(texture: SKTexture!) {

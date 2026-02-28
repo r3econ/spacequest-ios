@@ -34,7 +34,7 @@ class Button: SKSpriteNode {
     // MARK: - Initialization
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError()
     }
 
     init(textureNormal: SKTexture!, textureSelected: SKTexture!, textureDisabled: SKTexture!) {
