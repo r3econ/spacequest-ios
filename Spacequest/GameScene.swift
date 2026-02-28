@@ -150,9 +150,10 @@ extension GameScene {
         physicsWorld.contactDelegate = self
 
         // Add boundaries
-        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-        physicsBody!.categoryBitMask = CategoryBitmask.screenBounds.rawValue
-        physicsBody!.collisionBitMask = CategoryBitmask.playerSpaceship.rawValue
+        let boundaryBody = SKPhysicsBody(edgeLoopFrom: frame)
+        boundaryBody.categoryBitMask = CategoryBitmask.screenBounds.rawValue
+        boundaryBody.collisionBitMask = CategoryBitmask.playerSpaceship.rawValue
+        physicsBody = boundaryBody
     }
 
     private func configurePlayerSpaceship() {
