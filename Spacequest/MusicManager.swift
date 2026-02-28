@@ -16,21 +16,19 @@
 import UIKit
 import AVFoundation
 
-class MusicManager: NSObject {
+class MusicManager {
 
     static let shared = MusicManager()
     private var backgroundMusicPlayer: AVAudioPlayer!
 
-    override init() {
-        super.init()
+    init() {
         configureBackgroundMusicPlayer()
     }
-
 }
 
 // MARK - Background Music
 
-extension MusicManager{
+extension MusicManager {
 
     private func configureBackgroundMusicPlayer() {
         let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "background",
