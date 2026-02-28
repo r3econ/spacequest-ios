@@ -24,11 +24,8 @@ class MusicManager {
     init() {
         configureBackgroundMusicPlayer()
     }
-}
 
-// MARK - Background Music
-
-extension MusicManager {
+    // MARK - Background Music
 
     private func configureBackgroundMusicPlayer() {
         let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "background",
