@@ -345,7 +345,6 @@ extension GameScene {
     private func increaseScore(by value: Int) {
         scoresNode.value += value
     }
-
 }
 
 // MARK: - Life points
@@ -418,5 +417,4 @@ extension GameScene {
         run(SKAction.playSoundFileNamed(SoundName.Explosion.rawValue,
                                                waitForCompletion: false))
     }
-
 }

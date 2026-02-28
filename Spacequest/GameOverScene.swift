@@ -87,5 +87,4 @@ class GameOverScene: MenuScene {
 
         return handler
     }
-
 }

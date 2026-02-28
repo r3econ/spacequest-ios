@@ -114,5 +114,4 @@ class MainMenuScene: MenuScene {
             strongSelf.mainMenuSceneDelegate?.mainMenuSceneDidTapInfoButton(strongSelf)
         }
     }
-
 }

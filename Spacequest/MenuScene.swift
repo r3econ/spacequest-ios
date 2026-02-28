@@ -37,5 +37,4 @@ class MenuScene: SKScene {
         background!.zPosition = -1000
         addChild(background!)
     }
-
 }
