@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016 Rafał Sroka
+// Copyright (c) Rafał Sroka
 //
 // Licensed under the GNU General Public License, Version 3.0 (the "License");
 // you may not use this file except in compliance with the License.
