@@ -1,57 +1,45 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/r3econ/spacequest-ios/badge)](https://www.codefactor.io/repository/github/r3econ/spacequest-ios)
 [![License](https://img.shields.io/badge/license-GNU%20GPLv3-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)
-[![saythanks.io](https://img.shields.io/badge/saythanks.io-now-1EAEDB.svg)](https://saythanks.io/to/r3econ)
 
 <p align="center">
-<img src="https://i.imgur.com/IkQOLmG.png">
+  <img src="https://i.imgur.com/IkQOLmG.png" alt="Spacequest gameplay screenshot">
 </p>
 
-# Spacequest for iOS (2014-2026)
+# Spacequest for iOS 🚀
 
-Full source code of a working `iOS` game. Yet another take on a space shooter game. The game falls into [Shoot 'em up](https://en.wikipedia.org/wiki/Shoot_%27em_up) video games genre. It is written in Swift and uses `SpriteKit`- graphics rendering and animation infrastructure built into `iOS`. All vector graphics and image assets created in `Inkscape` and `GIMP`.
+A side-scrolling shoot 'em up written in **Swift** with **SpriteKit**. Built across Swift versions (2014–present).
 
-https://github.com/r3econ/spacequest-ios/blob/master/demo.mov
+## Features
 
-### Interesting topics covered during the development:
-- Particle systems (e.g. jet engine burst in player's spaceship)
-- Collision detection
-- [HUD](https://en.wikipedia.org/wiki/HUD_(video_gaming)), buttons + joystick
-- Sound effects and background music
+- **Particle systems** — jet engine bursts on the player's ship, explosions, debris
+- **Collision detection** — per-frame hit testing between player, enemies, and projectiles
+- **Custom HUD** — virtual joystick for movement, action buttons, score display
+- **Sound effects** — firing, explosions, enemy hits, and a background music loop
+- **Hand-drawn art** — all vector graphics and image assets created in Inkscape and GIMP
 
-# Technologies used
-- Swift (Xcode)
-- SpriteKit
-- Vector graphics (Inkscape, GIMP)
+## Demo
 
+🎬 [Watch gameplay video](https://github.com/r3econ/spacequest-ios/blob/master/demo.mov)
 
 <p align="center">
-<img src="https://i.imgur.com/w7PKnL1.png">
+  <img src="https://i.imgur.com/w7PKnL1.png" alt="Spacequest gameplay screenshot 2">
 </p>
 
+## How to run
 
-# What could be improved
-The app was created as a multi-weekend project long time ago. It is updated to run in the latest IDEs, but couple of things could be either added or improved. Not having time to do it is the problem.
-- Adding tests
-- iPad support and better support for iPhone X
-- Internationalization
-- Moving images and colors to asset catalogs
-- Adding more abstraction for constants (now constants are spread spread among multiple source files)
-- Improving enemy creation logic to make enemies spawn faster
-- Adding new enemy types
-- More weapons
-- Scrolling background (parallax style)
+1. `git clone https://github.com/r3econ/spacequest-ios`
+2. Open `SpaceQuest.xcodeproj` in Xcode 15+
+3. Build and run (⌘R)
 
-# Acknowledgments
+## Built with
 
-### Background music loop
-```
-Title: Game Space Battle Loop
-Album: Corporate Uplifting Business Background Music
-Artists: Plastic3
-```
+- **Swift** (Xcode)
+- **SpriteKit** — Apple's 2D game framework
+- **Inkscape + GIMP** — vector art and raster editing
 
-# License
-This code is distributed under the terms and conditions of the [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/) license.
+## License
 
-Copyright (c) 2014 - 2026 Rafał Sroka
+This project is licensed under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html).
+
+Copyright © 2014–2026 Rafał Sroka
